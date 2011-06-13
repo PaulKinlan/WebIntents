@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <title>Register a service</title>
+  <script src="/lib/webintents.debug.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var regBtn = document.getElementById("register");
+      regBtn.addEventListener("click", function() {
+
+         window.navigator.intents.register("http://webintents.org/share", undefined, function() {
+           // This is a handler for return responses from the exectued actions. 
+         });
+      });
+    });
+  </script>
+  <body>
+    <button id="register">Register</button>
+  </body>
+</html>

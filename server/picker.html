@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Choose an activity</title>
+    <script src="webintents.js"></script>
+    <script src="controller.js"></script>
+    <script src="picker.js"></script>
+    <style>
+      body, h1, h2, ul, li {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        box-sizing: content-box;
+        height: 100%;
+        background-color: #e9eef2;
+      }
+
+      body {
+        box-sizing: content-box;
+        height: 100%;
+        font-family: Arial;
+        color: #6b5f6e;
+        background-color: #e9eef2;
+     }
+
+     ul {
+       border: solid 1px #ccc;
+     }
+
+     #header {
+       padding: 5px;
+       font-size: 12px;
+       background-image: -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          color-stop(0.09, #d5dde6),
+          color-stop(0.69, #cad3dd)
+        );
+
+        background-image: -moz-linear-gradient(
+          center bottom,
+          rgb(196,196,196) 9%,
+          rgb(237,232,233) 69%
+          );
+        border-bottom: solid 1px #888888;
+     }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <h2>Choose an activity</h2>
+      <p>Please choose the activity you wish to launch for this action.</p>
+      <div>View <a href="list.html" target="_blank">Registered Applications</a></div>
+    </div>
+    <ul id="actions">
+
+    </ul>
+  </body>
+</html>

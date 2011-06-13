@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="webintents.js"></script>
+    <script src="controller.js"></script>
+    <script>
+      window.addEventListener("load", function() {
+        var actions = Intents.getAllActions();
+         
+        for(var key in actions) {
+          var action = actions[key];
+          var root = IntentController.renderActionContainer(action, document.body);
+          
+          IntentController.renderActions(action.actions, undefined, root);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Intents</h1>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <title>Edit Link</title>
+  <script src="/lib/webintents.debug.js"></script>
+  <script>
+    window.navigator.intents.onActivity = function(intent) {
+      var output = document.getElementById("output");
+      output.innerText = intent.data.uris[0]; 
+      intent.postResult({ uris: ["http://kin.ly/A" ] } );
+    };
+  </script>
+  <body>
+    <h1>Kinlan's Link Shortener</h1>
+    <div id="output"></div>
+  </body>
+</html>

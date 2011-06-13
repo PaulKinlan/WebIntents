@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <title>Share Link</title>
+  <script src="/lib/webintents.debug.js"></script>
+  <script>
+    window.navigator.intents.onActivity = function(intent) {
+      var output = document.getElementById("output");
+      output.src = intent.data.images[0]; 
+      
+    };
+  </script>
+  <body>
+    <h1>Image Sharing app</h1>
+    <p>Imagine this is a page like twit pic or picplz.</p>
+    <img id="output" />
+  </body>
+</html>

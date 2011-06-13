@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <title>Share Link</title>
+  <script src="/lib/webintents.debug.js"></script>
+  <script>
+    window.navigator.intents.onActivity = function(intent) {
+      var output = document.getElementById("output");
+      output.innerText = intent.data.uris[0]; 
+    };
+  </script>
+  <body>
+    <h1>Link Sharing app</h1>
+    <p>Imagine this is a page like twitter or facebook or google buzz.</p>
+    <div id="output"></div>
+  </body>
+</html>

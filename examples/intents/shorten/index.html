@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Intent: Shorten</title>
+    <script src="/lib/webintents.debug.js"></script>
+    <intent 
+      action="http://webintents.org/shorten" 
+      type="text/uri-list" 
+      href="shorten.html" 
+      title="Kinlan's Link Shortener" />
+    <script>
+      window.addEventListener("load", function() {
+
+        var shareLink = document.getElementById("shortenLink");
+        shareLink.addEventListener("click", function() {
+          var url = document.getElementById("url").value;
+          
+          var intent = new Intent();
+          intent.action = "http://webintents.org/shorten";
+          intent.type = "text/uri-list";
+          intent.data = { uris : [ url ] };
+
+          window.navigator.intents.startActivity(intent, intentResponse);
+          return false;
+        });
+
+        var intentResponse = function (intentData) {
+          var output = document.getElementById("output");
+          output.innerText = intentData.data.uris[0];
+          focus();
+        };
+      });
+    </script>  
+    
+  </head>
+
+
+  <body>
+    <h2>This is an app that needs to share links</h2>
+    <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
+    <button id="shortenLink">Shorten link</button>
+    <h3>Response will appear here:</h3> 
+    <div id="output"></div>
+  </body>
+</html>

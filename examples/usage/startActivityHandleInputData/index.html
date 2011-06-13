@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <title>startActivity Handle Input Data</title>
+  <script src="/lib/webintents.debug.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var regBtn = document.getElementById("register");
+      regBtn.addEventListener("click", function() {
+        window.navigator.intents.register("http://webintents.org/share", undefined); 
+      });
+      
+      var startButton = document.getElementById("startActivity");
+      startButton.addEventListener("click", function() {
+        var intent = new Intent();
+        intent.action = "http://webintents.org/share";
+        intent.type = undefined;
+  
+        window.navigator.intents.startActivity(intent);
+      });
+
+      window.navigator.intents.onActivity = function(data) {
+        var output = document.getElementById("output");
+        output.innerText = JSON.stringify(data);
+      };
+    });
+  </script>
+  <body>
+    <button id="register">Click to Register Handler</button>
+    <button id="startActivity">Click to Start Activity</button>
+    <div id="output"></div>
+  </body>
+</html>

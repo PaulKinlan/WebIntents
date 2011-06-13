@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <title>Pick an Image</title>
+  <script src="/lib/webintents.debug.js"></script>
+  <script>
+    var intentToReturn;
+
+    window.navigator.intents.onActivity = function(intent) {
+      intentToReturn = intent; 
+    };
+
+    var getImageData = function(img) {
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height; 
+      var context = canvas.getContext("2d");
+
+      context.drawImage(img, 0, 0); 
+      return canvas.toDataURL("image/png");
+    };
+
+    var returnImage = function(e) {
+      if(!!intentToReturn) {
+        // Do some magic to return the raw data.
+        var data = { images : [ getImageData(e.target) ] }; 
+
+        intentToReturn.postResult(data);
+        setTimeout(function() { window.close();}, 500);
+      }
+   };
+
+   window.addEventListener("load", function() {
+     var img1 = document.getElementById("img1");
+     var img2 = document.getElementById("img2");
+     var img3 = document.getElementById("img3");
+
+     img1.addEventListener("click", returnImage);
+     img2.addEventListener("click", returnImage);
+     img3.addEventListener("click", returnImage);
+   });   
+
+  </script>
+  <body>
+    <h1>Kinlan's Cloud File Store</h1>
+    <p>Select a file for the app to use</p>
+    <img id="img1" src="images/kitten1.jpg">
+    <img id="img2" src="images/kitten2.jpg">
+    <img id="img3" src="images/kitten3.jpg">
+  </body>
+</html>
