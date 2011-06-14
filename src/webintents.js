@@ -1,4 +1,3 @@
-__WEBINTENTS_ROOT = "http://webintents.org/";
 (function() {
   var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";

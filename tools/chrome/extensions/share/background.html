@@ -1,0 +1,23 @@
+<!doctype html>
+<script src="webintents.js"></script>
+<script>
+  var clickHandler = function(info, tab) {
+    if(info.mediaType == "image" ||
+       info.mediaType == "video" ||
+       info.meditType == "audio") {
+       var intent = new Intent();
+       intent.action = "http://webintents.org/share";
+       intent.type = info.mediaType + "/*";
+       window.navigator.intents.startActivity(intent);
+       return;
+     }
+  };
+
+  chrome.contextMenus.create({
+    "title" : "Share",
+    "type" : "normal",
+    "contexts" : ["link", "image", "page", "video", "audio"],
+    "onclick" : clickHandler 
+  }); 
+
+</script>

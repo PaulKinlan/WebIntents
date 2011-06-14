@@ -1,12 +1,6 @@
+__WEBINTENTS_ROOT = "http://webintents.org/";
 (function() {
-  var server;
-  if(window.__WEBINTENTS_DEBUG__) {
-    server = __WEBINTENTS_DEBUG__; 
-  }
-  else {
-    server = "http://webintents.org/";
-  }
-
+  var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";
   var pickerSource = server + "picker.html";
   var iframe;

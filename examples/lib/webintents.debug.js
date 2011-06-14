@@ -1,13 +1,6 @@
-__WEBINTENTS_DEBUG__ = "http://0.0.0.0:8080/";
+__WEBINTENTS_ROOT = "http://0.0.0.0:8080/";
 (function() {
-  var server;
-  if(window.__WEBINTENTS_DEBUG__) {
-    server = __WEBINTENTS_DEBUG__; 
-  }
-  else {
-    server = "http://webintents.org/";
-  }
-
+  var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";
   var pickerSource = server + "picker.html";
   var iframe;
