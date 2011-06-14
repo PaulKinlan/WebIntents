@@ -7,7 +7,7 @@ tools: tools/chrome/extensions/share/webintents.js
 examples/lib/webintents.js: webintents.js
 	ln -f webintents.js examples/lib/webintents.js
 
-examples/lib/webintents.debug.js: webintents.debug.js 
+examples/lib/webintents.debug.js: webintents.debug.js
 	ln -f webintents.debug.js examples/lib/webintents.debug.js
 
 examples/lib/webintents.min.js: webintents.min.js
