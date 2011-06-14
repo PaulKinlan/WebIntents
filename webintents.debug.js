@@ -1,4 +1,4 @@
-__WEBINTENTS_ROOT = "http://0.0.0.0:8080/";
+__WEBINTENTS_ROOT = "http://" + document.location.host;
 (function() {
   var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";

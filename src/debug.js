@@ -1,1 +1,1 @@
-__WEBINTENTS_ROOT = "http://0.0.0.0:8080/";
+__WEBINTENTS_ROOT = "http://" + document.location.host;
