@@ -41,7 +41,7 @@ var IntentController = new (function() {
     actionLink.innerText = action.title;
     actionLink.addEventListener("click", launch(intent), false);
 
-    domain.innerText = action.domaini || "Unknown domain";
+    domain.innerText = action.domain || "Unknown domain";
     
     actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);
