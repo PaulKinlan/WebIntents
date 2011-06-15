@@ -95,7 +95,7 @@
     iframe.contentWindow.postMessage(
       {
         request: "register", 
-        intent: { action: action, type: type, url: url, title: title, icon: icon } 
+        intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host } 
       }, 
       "*");
   };
@@ -134,10 +134,28 @@
     var links = document.getElementsByTagName("link");
     var link;
     for(var i = 0; link = links[i]; i++) {
-      if(link.rel == "icon") {
-        return "";
+      if((link.rel == "icon" || link.rel == "shortcut") && !!link.href ) {
+        var url = link.href;
+        if(url.substring(0, 7) != "http://" && 
+          url.substring(0, 8) != "https://") {
+          if(url.substring(0,1) == "/") {
+            // absolute path
+            return document.location.origin + url;
+          }
+          else {
+            // relative path
+            path = document.location.href;
+            path = path.substring(0, path.lastIndexOf('/') + 1);
+            url = path + url;  
+          }
+        }
+        else {
+          return url;
+        }
       }
     }
+
+    return window.location.origin + "/favicon.ico";
   };
 
   var parseIntentsMetaData = function() {

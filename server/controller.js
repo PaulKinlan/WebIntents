@@ -31,13 +31,22 @@ var IntentController = new (function() {
   var renderAction = function(action, intent) {
     var actionElement = document.createElement("li");
     var actionLink = document.createElement("a");
+    var icon = document.createElement("img");
+    var domain = document.createElement("span");
+
+    icon.src = action.icon;
 
     actionLink.href = action.url;
     actionLink.target = "_blank";
     actionLink.innerText = action.title;
     actionLink.addEventListener("click", launch(intent), false);
 
+    domain.innerText = action.domaini || "Unknown domain";
+    
+    actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);
+    actionElement.appendChild(domain);
+
     return actionElement;
   };
 })();
