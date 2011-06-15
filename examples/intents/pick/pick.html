@@ -46,5 +46,24 @@
     <img id="img1" src="images/kitten1.jpg">
     <img id="img2" src="images/kitten2.jpg">
     <img id="img3" src="images/kitten3.jpg">
+    <h2>Code</h2>
+    <pre>window.navigator.intents.onActivity = function(intent) {
+  intentToReturn = intent; 
+};
+
+var getImageData = function(img) {
+  ...
+  return ......;
+};
+
+var returnImage = function(e) {
+  if(!!intentToReturn) {
+    // Do some magic to return the raw data.
+    var data = { images : [ getImageData(e.target) ] }; 
+  
+    intentToReturn.postResult(data);
+    setTimeout(function() { window.close();}, 500);
+  }
+};</pre>
   </body>
 </html>
