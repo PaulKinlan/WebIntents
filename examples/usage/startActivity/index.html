@@ -10,7 +10,7 @@
           // This is a handler for return responses from the exectued actions. 
           alert(data);
         });
-      });
+      }, false);
       
       var startButton = document.getElementById("startActivity");
       startButton.addEventListener("click", function() {
@@ -19,8 +19,8 @@
         intent.type = undefined;
   
         window.navigator.intents.startActivity(intent);
-      });
-    });
+      }, false);
+    }, false);
   </script>
   <body>
     <button id="register">Click to Register Handler</button>

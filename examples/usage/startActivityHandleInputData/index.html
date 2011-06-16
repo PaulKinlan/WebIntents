@@ -7,7 +7,7 @@
       var regBtn = document.getElementById("register");
       regBtn.addEventListener("click", function() {
         window.navigator.intents.register("http://webintents.org/share", undefined); 
-      });
+      }, false);
       
       var startButton = document.getElementById("startActivity");
       startButton.addEventListener("click", function() {
@@ -16,13 +16,13 @@
         intent.type = undefined;
   
         window.navigator.intents.startActivity(intent);
-      });
+      }, false);
 
       window.navigator.intents.onActivity = function(data) {
         var output = document.getElementById("output");
         output.innerText = JSON.stringify(data);
       };
-    });
+    }, false);
   </script>
   <body>
     <button id="register">Click to Register Handler</button>
