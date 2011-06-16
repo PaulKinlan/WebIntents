@@ -82,7 +82,7 @@
        url.substring(0, 8) != "https://") {
       if(url.substring(0,1) == "/") {
         // absolute path
-        url = document.location.origin;
+        url = document.location.origin + url;
       }
       else {
         // relative path
