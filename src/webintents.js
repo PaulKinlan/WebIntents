@@ -11,7 +11,13 @@
    * Starts an activity.
    */
   Intents.prototype.startActivity = function (intent, onResult) {
-    var w = window.open(pickerSource, "_blank", "width=300, height=300");
+    var winx = (document.all)?window.screenLeft:window.screenX;
+    var winy = (document.all)?window.screenTop:window.screenY;
+    var params = "directories=no,menubar=no,status=0,location=0,fullscreen=yes";
+    var w = window.open(pickerSource, "_blank", params);
+    w.resizeTo(300,300);
+    w.moveTo(winx + 40, document.body.offsetHeight + winy);
+
     var handler = new messageHandler(intent, onResult);
     window.addEventListener("message", handler.handler, false);
   };
