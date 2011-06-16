@@ -16,11 +16,16 @@
     window.addEventListener("message", handler.handler, false);
   };
 
+  var _str = function(obj) {
+    return JSON.stringify(obj);
+  }
+
   var messageHandler = function(intent, onResult) {
     var self = this;
     this.handler = function(e) {
-      if(e.data.request && 
-         e.data.request == "ready") {
+      var data = JSON.parse(e.data);
+      if(data.request && 
+         data.request == "ready") {
 
         var channel = new MessageChannel();
         var ports;
@@ -33,19 +38,20 @@
 
           channel.port1.start();
           channel.port1.addEventListener("message", function(evt) {
-            onResult(evt.data.intent);
+            var msgData = JSON.parse(evt.data);
+            onResult(msgData.intent);
             channel.port1.close();
             channel.port2.close();  
           });
-          
+
           iframe.contentWindow.postMessage(
-            { request: "registerReturn", intent: intent},
+            _str({ request: "registerReturn", intent: intent}),
             ports,
             "*"
           );
         }
         e.source.postMessage(
-          { request: "startActivity", intent: intent },
+          _str({ request: "startActivity", intent: intent }),
           [], "*"
         );
         // We really need to remove this message handler
@@ -58,11 +64,12 @@
     if(window.opener && window.opener.closed == false) {
       var channel = new MessageChannel();
       channel.port1.addEventListener("message", function(message) {
+        var data = JSON.parse(message.data);
         var intent = new Intent();
-        intent._id  = message.data.intent._id;
-        intent.action = message.data.intent.action;
-        intent.type = message.data.intent.type;
-        intent.data = message.data.intent.data;
+        intent._id  = data.intent._id;
+        intent.action = data.intent.action;
+        intent.type = data.intent.type;
+        intent.data = data.intent.data;
 
         // This will recieve the intent data.
         if(window.navigator.intents.onActivity) {
@@ -72,7 +79,7 @@
       channel.port1.start();
       channel.port2.start();
 
-      window.opener.postMessage({ request: "launched", name: window.name }, [channel.port2], "*");
+      window.opener.postMessage(_str({ request: "launched", name: window.name }), [channel.port2], "*");
     }
   }, false);
 
@@ -93,10 +100,10 @@
     }
 
     iframe.contentWindow.postMessage(
-      {
+      _str({
         request: "register", 
         intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host } 
-      }, 
+      }), 
       "*");
   };
 
@@ -122,10 +129,10 @@
       returnIntent.data = data;
     
       iframe.contentWindow.postMessage(
-        {
+        _str({
           request: "response",
           intent: returnIntent 
-        },
+        }),
         "*");
     };
   };
@@ -259,7 +266,7 @@
         
       }, false);
 
-      window.postMessage({request: "ready"},[channel.port2], server);
+      window.postMessage(_str({request: "ready"}),[channel.port2], server);
     }, false);
 
     window.addEventListener("submit", handleFormSubmit);

@@ -17,7 +17,7 @@
 
           window.navigator.intents.startActivity(intent);
           return false;
-        });
+        }, false);
 
 
         var shareImage = document.getElementById("shareImage");
@@ -37,7 +37,7 @@
             
           window.navigator.intents.startActivity(intent);
           return false;
-        });
+        }, false);
 
         imageList.addEventListener("change", function(e) { 
           // Get the data          
@@ -51,8 +51,8 @@
 
           reader.readAsDataURL(fileData);
 
-        });
-      });
+        }, false);
+      }, false);
 
     </script>  
     
