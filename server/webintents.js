@@ -1,4 +1,5 @@
-var id; 
+var id;
+var launchedWindow;
 var responseChannel = {};
 
 var Intents = new (function() {
@@ -68,14 +69,19 @@ window.addEventListener("message", function(e) {
     Intents.addAction(data.intent);
   }
   else if(data.request && data.request == "startActivity") {
-    // The Picker is open, tell it what it can do.
+    // The Picker is open, tell it what it can display.
+    console.log(data) 
     var actions = Intents.getActions(data.intent);
+
     var intentData = {
       id: data.intent._id,
       intent: data.intent,
       state: "startActivity",
       timestamp: timestamp,
     };
+
+    // Change the window name
+    window.name = "picker";
 
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
@@ -88,12 +94,12 @@ window.addEventListener("message", function(e) {
   }
   else if(data.request && data.request == "launched") {
     // The app has launched, send it the intent data.
-    var appPort = e.ports[0];
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
-    var message = JSON.stringify({intent: intent.intent});
-    appPort.postMessage(message, [], "*");
-    setTimeout(function() { window.close(); });
+    var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
+    launchedWindow.postMessage(message, "*");
+    localStorage.removeItem(launchId);
+    //setTimeout(function() { window.close(); });
   }
   else if(data.request && data.request == "response") {
     // an intent has completed, route it back to the parent. 

@@ -23,7 +23,7 @@ var IntentController = new (function() {
     return function(e) {
       e.preventDefault();
       var w = window.open(e.target.href, intent._id); 
-           
+      launchedWindow = w;           
       return false;
     };
   };
