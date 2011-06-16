@@ -23,8 +23,8 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
 
   var messageHandler = function(intent, onResult) {
     var self = this;
-    var data = JSON.parse(e.data);
     this.handler = function(e) {
+      var data = JSON.parse(e.data);
       if(data.request && 
          data.request == "ready") {
 
