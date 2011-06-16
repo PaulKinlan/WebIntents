@@ -195,6 +195,44 @@ else {
     }
   };
 
+  var handleFormSubmit = function(e) {
+    var form = e.target;
+
+    if(form.method.toLowerCase() == "intent") {
+      e.preventDefault();
+      var action = form.action;
+      var enctype = form.getAttribute("enctype");
+      var data = {};
+      var element;
+
+      for(var i = 0; element = form.elements[i]; i++) {
+        if(!!element.name) {
+          var name = element.name;
+          if(!!data[name]) {
+            // If the element make it an array
+            if(data[name] instanceof Array) 
+              data[name].push(element.value);
+            else {
+              var elements = [data[name]];
+              elements.push(element.value);
+              data[name] = elements;
+            }
+          }
+          else {
+            data[name] = element.value;
+          }
+        }
+
+      }
+
+      var intent = new Intent(action, enctype, data);
+       
+      window.navigator.intents.startActivity(intent);
+    
+      return false;
+    }
+  };
+
   var init = function () {
     window.Intent = Intent;
     window.navigator.intents = new Intents();
@@ -229,6 +267,8 @@ else {
 
       window.postMessage({request: "ready"},[channel.port2], server);
     }, false);
+
+    window.addEventListener("submit", handleFormSubmit);
   };
 
   init();
