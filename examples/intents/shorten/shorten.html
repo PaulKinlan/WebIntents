@@ -5,7 +5,7 @@
   <script>
     window.navigator.intents.onActivity = function(intent) {
       var output = document.getElementById("output");
-      output.innerText = intent.data.uris[0]; 
+      output.textContent = intent.data.uris[0]; 
       intent.postResult({ uris: ["http://kin.ly/A" ] } );
     };
   </script>

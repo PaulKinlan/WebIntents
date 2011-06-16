@@ -1,7 +1,7 @@
 var IntentController = new (function() { 
   this.renderActionContainer = function (action, root) {
     var header = document.createElement("h2");
-    header.innerText = action.key;
+    header.textContent = action.key;
     var collection = document.createElement("ul");
 
     root.appendChild(header);
@@ -23,7 +23,7 @@ var IntentController = new (function() {
     return function(e) {
       e.preventDefault();
       var w = window.open(e.target.href, intent._id); 
-      launchedWindow = w;           
+      launchedWindow = w; 
       return false;
     };
   };
@@ -38,10 +38,10 @@ var IntentController = new (function() {
 
     actionLink.href = action.url;
     actionLink.target = "_blank";
-    actionLink.innerText = action.title;
+    actionLink.textContent = action.title;
     actionLink.addEventListener("click", launch(intent), false);
 
-    domain.innerText = action.domain || "Unknown domain";
+    domain.textContent = action.domain || "Unknown domain";
     
     actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);

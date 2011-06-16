@@ -57,7 +57,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     }
   };
 
-  window.addEventListener("message", handler);
+  window.addEventListener("message", handler, false);
 
   var loadIntentData = function(data) {
     var intent = new Intent();
@@ -65,7 +65,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     intent.action = data.action;
     intent.type = data.type;
     intent.data = data.data;
-
+    console.log(intent)
     // This will recieve the intent data.
     if(window.navigator.intents.onActivity) {
       window.navigator.intents.onActivity(intent);
@@ -257,12 +257,14 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
       }
     }
 
-    window.addEventListener("DOMContentReady",function() {
+    window.addEventListener("load",function() {
       // The DOM is ready, tell the opener that we can are ready.
-      window.postMessage(_str({request: "ready"}), server);
+      if(window.opener) {
+        window.opener.postMessage(_str({request: "ready"}), server);
+      }
     }, false);
 
-    window.addEventListener("submit", handleFormSubmit);
+    window.addEventListener("submit", handleFormSubmit, false);
   };
 
   init();

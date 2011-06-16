@@ -1,6 +1,5 @@
 var id;
 var launchedWindow;
-var responseChannel = {};
 
 var Intents = new (function() {
  
@@ -70,7 +69,6 @@ window.addEventListener("message", function(e) {
   }
   else if(data.request && data.request == "startActivity") {
     // The Picker is open, tell it what it can display.
-    console.log(data) 
     var actions = Intents.getActions(data.intent);
 
     var intentData = {
@@ -86,20 +84,17 @@ window.addEventListener("message", function(e) {
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
   }
-  else if(data.request && data.request == "registerReturn") {
-    // This is the return channel back to the client app.
-    if(e.ports && e.ports.length > 0) {
-      responseChannel[data.intent._id] = e.ports[0];
-    }
-  }
   else if(data.request && data.request == "launched") {
     // The app has launched, send it the intent data.
+    console.log(data);
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
+    console.log(intent)
     var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
+    console.log(launchedWindow);
     launchedWindow.postMessage(message, "*");
     localStorage.removeItem(launchId);
-    //setTimeout(function() { window.close(); });
+    setTimeout(function() { window.close(); });
   }
   else if(data.request && data.request == "response") {
     // an intent has completed, route it back to the parent. 
@@ -120,15 +115,11 @@ window.addEventListener("storage", function(e) {
   var data = JSON.parse(e.newValue);
   if(data && data.intent && data.state == "response") {
     localStorage.removeItem[data.intent._id];
-    var channel = responseChannel[data.intent._id];
-    if(!!channel) {
-      var message = JSON.stringify({ intent: data.intent });
-      channel.postMessage(
-        message,
-        [],
-        "*");
-    }
+    var message = JSON.stringify({ intent: data.intent, request: "response" });
+    window.opener.postMessage(
+      message,
+      "*");
   }
-});
+}, false);
 
 
