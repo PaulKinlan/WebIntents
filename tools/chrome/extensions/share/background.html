@@ -1,6 +1,9 @@
 <!doctype html>
 <script src="webintents.js"></script>
 <script>
+
+  var tabPorts = {};
+
   var clickHandler = function(info, tab) {
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
@@ -8,10 +11,16 @@
        var intent = new Intent();
        intent.action = "http://webintents.org/share";
        intent.type = info.mediaType + "/*";
-       window.navigator.intents.startActivity(intent);
+       
+       tabPorts[tab.id].postMessage(intent);
+
        return;
      }
   };
+
+  chrome.extension.onConnect.addListener(function(e) {
+    tabPorts[e.sender.tab.id] = e;
+  });
 
   chrome.contextMenus.create({
     "title" : "Share",
