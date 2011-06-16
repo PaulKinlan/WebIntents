@@ -5,7 +5,10 @@
   <script>
     window.navigator.intents.onActivity = function(intent) {
       var output = document.getElementById("output");
-      output.innerText = intent.data.uris[0]; 
+      if(intent.data.uris instanceof Array)
+        output.innerText = intent.data.uris[0]; 
+      else
+        output.innerText = intent.data.uris;
     };
   </script>
   <body>
