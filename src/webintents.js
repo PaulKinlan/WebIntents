@@ -106,15 +106,6 @@
       "*");
   };
 
-  /*
-   * Service Registration mechanism.
-   *   action: The schema type that describes the action
-   *   onResult: The handler that will be called when an Activity is started with this app.
-   */
-  Intents.prototype.register = function (action, type) {
-    register(action, type, document.location.href, document.title, getFavIcon());
-  };
-
   var Intent = function(action, type, data) {
     var me = this;
     this.action = action;
