@@ -182,17 +182,23 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     }
   };
 
+  var parseIntentTag = function(intent) {
+    var title = intent.getAttribute("title");
+    var href = intent.getAttribute("href");
+    var action = intent.getAttribute("action");
+    var type = intent.getAttribute("type");
+    var icon = intent.getAttribute("icon") || getFavIcon();
+
+    if(!!action == false) return;
+
+    register(action, type, href, title, icon);
+  };
+
   var parseIntentsDocument = function() {
     var intents = document.getElementsByTagName("intent");
     var intent;
     for(var i = 0; intent = intents[i]; i++) {
-      var title = intent.getAttribute("title");
-      var href = intent.getAttribute("href");
-      var action = intent.getAttribute("action");
-      var type = intent.getAttribute("type");
-      var icon = intent.getAttribute("icon") || getFavIcon();
-
-      register(action, type, href, title, icon);
+      parseIntentTag(intent);
     }
   };
 
@@ -234,6 +240,12 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     }
   };
 
+  var onIntentDOMAdded = function(e) {
+    if(e.target.tagName == "INTENT") {
+      parseIntentTag(e.target) 
+    }
+  };
+
   var init = function () {
     window.Intent = Intent;
     window.navigator.intents = new Intents();
@@ -248,6 +260,8 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
         parseIntentsDocument();
         parseIntentsMetaData();
       }, false);
+
+      document.head.addEventListener("DOMNodeInserted", onIntentDOMAdded, false);
 
       if(document.body) {
         document.body.appendChild(iframe);
