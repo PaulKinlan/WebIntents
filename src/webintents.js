@@ -72,6 +72,9 @@
 
   // This is an app that has been launced via the picker. 
   if(window.opener && window.opener.closed == false) {
+    try {
+      window.opener.alert("hello");
+    }catch(e) {}
     window.opener.postMessage(
       _str({ request: "launched", name: window.name }), 
       "*");
@@ -259,12 +262,9 @@
       }
     }
 
-    window.addEventListener("load",function() {
-      // The DOM is ready, tell the opener that we can are ready.
-      if(window.opener) {
-        window.opener.postMessage(_str({request: "ready"}), server);
-      }
-    }, false);
+    if(window.opener) {
+      window.opener.postMessage(_str({request: "ready"}), server);
+    }
 
     window.addEventListener("submit", handleFormSubmit, false);
   };

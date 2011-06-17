@@ -3,11 +3,11 @@
   <title>Edit Link</title>
   <script src="/lib/webintents.debug.js"></script>
   <script>
-    window.navigator.onActivity = function(intent) {
+    window.addEventListener("load", function() {
       var output = document.getElementById("output");
       output.textContent = intent.data.uris[0]; 
       intent.postResult({ uris: ["http://kin.ly/A" ] } );
-    };
+    }, false);
   </script>
   <body>
     <h1>Kinlan's Link Shortener</h1>
