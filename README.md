@@ -6,15 +6,14 @@ Web Intents is a discovery mechanism and extremely light-weight RPC system betwe
 Usage
 =====
 
-
 Declaration
 -----------
 
 To register your service application to be able to handle image sharing simply declare an intent tag.
 
-    &lt;intent 
+    <intent 
       action="http://webintents.org/share"
-      type="image/*" /&gt;
+      type="image/*" />
 
 This will register the current page's ability to share images. 
 
