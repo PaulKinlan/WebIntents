@@ -12,15 +12,19 @@ Declaration
 
 To register your service application to be able to handle image sharing simply declare an intent tag.
 
-    <intent 
+    &lt;intent 
       action="http://webintents.org/share"
-      type="image/*" />
+      type="image/*" /&gt;
 
 This will register the current page's ability to share images. 
 
 To build a client application that can use the share functionality, it is as simple as using the following code: 
 
-    var intent = new Intent("http://webintents.org/share", "image/*", { uris["http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png"] });
+    var intent = new Intent(
+        "http://webintents.org/share", 
+        "image/*", 
+        { uris["http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png"] 
+    });
     window.navigator.startActivity(intent);
 
 You can even use a FORM so you don't have to do any coding.
