@@ -18,7 +18,6 @@ else {
   /*
    * Starts an activity.
    */
-
   Intents.prototype.startActivity = function (intent, onResult) {
     var id = "intent." + new Date().valueOf();
     var winx = (document.all)?window.screenLeft:window.screenX;
@@ -74,19 +73,18 @@ else {
     intent.type = data.type;
     intent.data = data.data;
     // This will recieve the intent data.
-    if(window.navigator.intents.onActivity) {
-      window.navigator.intents.onActivity(intent);
-    } 
+    window.intent = intent;
   };
 
-  window.addEventListener("load", function() {
-    // This is an app that has been launced via the picker. 
-    if(window.opener && window.opener.closed == false) {
-      window.opener.postMessage(
-        _str({ request: "launched", name: window.name }), 
-        "*");
-    }
-  }, false);
+  // This is an app that has been launced via the picker. 
+  if(window.opener && window.opener.closed == false) {
+    try {
+      window.opener.alert("hello");
+    }catch(e) {}
+    window.opener.postMessage(
+      _str({ request: "launched", name: window.name }), 
+      "*");
+  }
 
   var register = function(action, type, url, title, icon) {
     if(!!url == false) url = document.location.toString();
@@ -230,7 +228,7 @@ else {
 
       var intent = new Intent(action, enctype, data);
        
-      window.navigator.intents.startActivity(intent);
+      window.navigator.startActivity(intent);
     
       return false;
     }
@@ -243,8 +241,9 @@ else {
   };
 
   var init = function () {
+    var intents = new Intents();
     window.Intent = Intent;
-    window.navigator.intents = new Intents();
+    window.navigator.startActivity = intents.startActivity;
     
     if(!!window.postMessage) {
       // We can handle postMessage.
@@ -269,12 +268,9 @@ else {
       }
     }
 
-    window.addEventListener("load",function() {
-      // The DOM is ready, tell the opener that we can are ready.
-      if(window.opener) {
-        window.opener.postMessage(_str({request: "ready"}), server);
-      }
-    }, false);
+    if(window.opener) {
+      window.opener.postMessage(_str({request: "ready"}), server);
+    }
 
     window.addEventListener("submit", handleFormSubmit, false);
   };

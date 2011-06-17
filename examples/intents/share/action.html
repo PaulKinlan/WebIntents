@@ -15,7 +15,7 @@
           intent.type = "text/uri-list";
           intent.data = { uris : [ url ] };
 
-          window.navigator.intents.startActivity(intent);
+          window.navigator.startActivity(intent);
           return false;
         }, false);
 
@@ -35,7 +35,7 @@
           intent.type = "image/*";
           intent.data = { images : [ imageData ] };
             
-          window.navigator.intents.startActivity(intent);
+          window.navigator.startActivity(intent);
           return false;
         }, false);
 
@@ -70,7 +70,7 @@ intent.action = "http://webintents.org/share";
 intent.type = "text/uri-list";
 intent.data = { uris : [ url ] };
 
-window.navigator.intents.startActivity(intent);</pre>
+window.navigator.startActivity(intent);</pre>
     </section>
     <section>
       <h2>Share an image</h2>
@@ -82,7 +82,7 @@ intent.action = "http://webintents.org/share";
 intent.type = "image/*";
 intent.data = { images : [ imageData ] };
             
-window.navigator.intents.startActivity(intent);</pre>
+window.navigator.startActivity(intent);</pre>
       </section>
   </body>
 </html>

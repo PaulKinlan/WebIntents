@@ -3,13 +3,13 @@
   <title>Share Link</title>
   <script src="/lib/webintents.debug.js"></script>
   <script>
-    window.navigator.intents.onActivity = function(intent) {
+    window.addEventListener("load", function(e) {
       var output = document.getElementById("output");
       if(intent.data.uris instanceof Array)
         output.textContent = intent.data.uris[0]; 
       else
         output.textContent = intent.data.uris;
-    };
+    }, false);;
   </script>
   <body>
     <h1>Link Sharing app</h1>

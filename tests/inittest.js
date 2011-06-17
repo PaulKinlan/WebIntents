@@ -3,8 +3,8 @@ describe("Initialization tests", function() {
   
   });
 
-  it("should be on the navigator object", function() {
-    expect(window.navigator.intents).toBeDefined();
+  it("startActivity should be on the navigator object", function() {
+    expect(window.navigator.startActivity).toBeDefined();
   });
 
   it("should have a global Intent object", function() {

@@ -3,12 +3,6 @@
   <title>Pick an Image</title>
   <script src="/lib/webintents.debug.js"></script>
   <script>
-    var intentToReturn;
-
-    window.navigator.intents.onActivity = function(intent) {
-      intentToReturn = intent; 
-    };
-
     var getImageData = function(img) {
       var canvas = document.createElement("canvas");
       canvas.width = img.width;
@@ -20,11 +14,11 @@
     };
 
     var returnImage = function(e) {
-      if(!!intentToReturn) {
+      if(!!window.intent) {
         // Do some magic to return the raw data.
         var data = { images : [ getImageData(e.target) ] }; 
 
-        intentToReturn.postResult(data);
+        window.intent.postResult(data);
         setTimeout(function() { window.close();}, 500);
       }
    };
@@ -47,21 +41,17 @@
     <img id="img2" src="images/kitten2.jpg">
     <img id="img3" src="images/kitten3.jpg">
     <h2>Code</h2>
-    <pre>window.navigator.intents.onActivity = function(intent) {
-  intentToReturn = intent; 
-};
-
-var getImageData = function(img) {
+    <pre>var getImageData = function(img) {
   ...
   return ......;
 };
 
 var returnImage = function(e) {
-  if(!!intentToReturn) {
+  if(!!window.intent) {
     // Do some magic to return the raw data.
     var data = { images : [ getImageData(e.target) ] }; 
   
-    intentToReturn.postResult(data);
+    window.intent.postResult(data);
     setTimeout(function() { window.close();}, 500);
   }
 };</pre>

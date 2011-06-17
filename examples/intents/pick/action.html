@@ -11,7 +11,7 @@
           intent.action = "http://webintents.org/pick";
           intent.type = "image/*";
 
-          window.navigator.intents.startActivity(intent, intentResponse);
+          window.navigator.startActivity(intent, intentResponse);
 
           return false;
         });
@@ -35,7 +35,7 @@
 intent.action = "http://webintents.org/pick";
 intent.type = "image/*";
 
-window.navigator.intents.startActivity(intent, intentResponse);
+window.navigator.startActivity(intent, intentResponse);
 
 var intentResponse = function (intentData) {
   var output = document.getElementById("output");
