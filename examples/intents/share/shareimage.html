@@ -3,10 +3,9 @@
   <title>Share Link</title>
   <script src="/lib/webintents.debug.js"></script>
   <script>
-    window.navigator.onActivity = function(intent) {
+    window.addEventListener("load", function(e) {
       var output = document.getElementById("output");
       output.src = intent.data.images[0]; 
-      
     };
   </script>
   <body>
