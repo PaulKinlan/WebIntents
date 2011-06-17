@@ -1,5 +1,6 @@
 var id;
 var launchedWindow;
+var callbacks = {};
 
 var Intents = new (function() {
  
@@ -62,6 +63,7 @@ var Intents = new (function() {
 
 window.addEventListener("message", function(e) {
   var data = JSON.parse(e.data);
+  console.log(e.data);
   var timestamp = (new Date()).valueOf();
   
   if(data.request && data.request == "register") {
@@ -84,14 +86,14 @@ window.addEventListener("message", function(e) {
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
   }
+  else if(data.request && data.request == "registerCallback") {
+    callbacks[data.id] = {};
+  }
   else if(data.request && data.request == "launched") {
     // The app has launched, send it the intent data.
-    console.log(data);
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
-    console.log(intent)
     var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
-    console.log(launchedWindow);
     launchedWindow.postMessage(message, "*");
     localStorage.removeItem(launchId);
     setTimeout(function() { window.close(); });
@@ -102,6 +104,7 @@ window.addEventListener("message", function(e) {
     var intentData = {
       id: id,
       intent: data.intent,
+      "window": window.name,
       state: "response",
       timestamp: timestamp
     };
@@ -112,14 +115,14 @@ window.addEventListener("message", function(e) {
 window.addEventListener("storage", function(e) {
   // Intent messages are stored in localStorage as a synch mechanism.
   // This is a dirty hack.
-  var data = JSON.parse(e.newValue);
-  if(data && data.intent && data.state == "response") {
+  var vals = localStorage[e.key];
+  var data = JSON.parse(vals);
+  if(data && data.intent && data.state == "response" && callbacks[e.key]) {
+    console.log(data);
     localStorage.removeItem[data.intent._id];
     var message = JSON.stringify({ intent: data.intent, request: "response" });
-    window.opener.postMessage(
+    window.parent.postMessage(
       message,
       "*");
   }
 }, false);
-
-

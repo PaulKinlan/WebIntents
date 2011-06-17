@@ -30,6 +30,9 @@ else {
     intent._id = id;
     intents[id] = { intent: intent }; 
     if(onResult) {
+      iframe.contentWindow.postMessage(
+        _str({"request": "registerCallback", "id": id }), 
+        "*");
       intents[id].callback = onResult;
     }
   };
@@ -58,7 +61,8 @@ else {
     }
     else if(data.request &&
             data.request == "response") {
-      intents[data.request.id].callback(data.intent);
+      console.log("response1");
+      intents[data.intent._id].callback(data.intent);
     }
   };
 
