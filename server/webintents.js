@@ -63,7 +63,6 @@ var Intents = new (function() {
 
 window.addEventListener("message", function(e) {
   var data = JSON.parse(e.data);
-  console.log(e.data);
   var timestamp = (new Date()).valueOf();
   
   if(data.request && data.request == "register") {
@@ -118,7 +117,7 @@ window.addEventListener("storage", function(e) {
   var vals = localStorage[e.key];
   var data = JSON.parse(vals);
   if(data && data.intent && data.state == "response" && callbacks[e.key]) {
-    console.log(data);
+    delete callbacks[e.key];
     localStorage.removeItem[data.intent._id];
     var message = JSON.stringify({ intent: data.intent, request: "response" });
     window.parent.postMessage(

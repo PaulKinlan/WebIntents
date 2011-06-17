@@ -61,7 +61,6 @@ else {
     }
     else if(data.request &&
             data.request == "response") {
-      console.log("response1");
       intents[data.intent._id].callback(data.intent);
     }
   };
@@ -74,7 +73,6 @@ else {
     intent.action = data.action;
     intent.type = data.type;
     intent.data = data.data;
-    console.log(intent)
     // This will recieve the intent data.
     if(window.navigator.intents.onActivity) {
       window.navigator.intents.onActivity(intent);
