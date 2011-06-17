@@ -1,5 +1,6 @@
-var id; 
-var responseChannel = {};
+var id;
+var launchedWindow;
+var callbacks = {};
 
 var Intents = new (function() {
  
@@ -68,8 +69,9 @@ window.addEventListener("message", function(e) {
     Intents.addAction(data.intent);
   }
   else if(data.request && data.request == "startActivity") {
-    // The Picker is open, tell it what it can do.
+    // The Picker is open, tell it what it can display.
     var actions = Intents.getActions(data.intent);
+
     var intentData = {
       id: data.intent._id,
       intent: data.intent,
@@ -77,22 +79,22 @@ window.addEventListener("message", function(e) {
       timestamp: timestamp,
     };
 
+    // Change the window name
+    window.name = "picker";
+
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
   }
-  else if(data.request && data.request == "registerReturn") {
-    // This is the return channel back to the client app.
-    if(e.ports && e.ports.length > 0) {
-      responseChannel[data.intent._id] = e.ports[0];
-    }
+  else if(data.request && data.request == "registerCallback") {
+    callbacks[data.id] = {};
   }
   else if(data.request && data.request == "launched") {
     // The app has launched, send it the intent data.
-    var appPort = e.ports[0];
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
-    var message = JSON.stringify({intent: intent.intent});
-    appPort.postMessage(message, [], "*");
+    var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
+    launchedWindow.postMessage(message, "*");
+    localStorage.removeItem(launchId);
     setTimeout(function() { window.close(); });
   }
   else if(data.request && data.request == "response") {
@@ -101,6 +103,7 @@ window.addEventListener("message", function(e) {
     var intentData = {
       id: id,
       intent: data.intent,
+      "window": window.name,
       state: "response",
       timestamp: timestamp
     };
@@ -111,18 +114,14 @@ window.addEventListener("message", function(e) {
 window.addEventListener("storage", function(e) {
   // Intent messages are stored in localStorage as a synch mechanism.
   // This is a dirty hack.
-  var data = JSON.parse(e.newValue);
-  if(data && data.intent && data.state == "response") {
+  var vals = localStorage[e.key];
+  var data = JSON.parse(vals);
+  if(data && data.intent && data.state == "response" && callbacks[e.key]) {
+    delete callbacks[e.key];
     localStorage.removeItem[data.intent._id];
-    var channel = responseChannel[data.intent._id];
-    if(!!channel) {
-      var message = JSON.stringify({ intent: data.intent });
-      channel.postMessage(
-        message,
-        [],
-        "*");
-    }
+    var message = JSON.stringify({ intent: data.intent, request: "response" });
+    window.parent.postMessage(
+      message,
+      "*");
   }
-});
-
-
+}, false);

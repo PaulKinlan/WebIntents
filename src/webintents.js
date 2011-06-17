@@ -3,6 +3,8 @@
   var serverSource = server + "intents.html";
   var pickerSource = server + "picker.html";
   var iframe;
+  var channels = {};
+  var intents = {};
 
   var Intents = function() {
   };
@@ -10,82 +12,73 @@
   /*
    * Starts an activity.
    */
+
   Intents.prototype.startActivity = function (intent, onResult) {
+    var id = "intent." + new Date().valueOf();
     var winx = (document.all)?window.screenLeft:window.screenX;
     var winy = (document.all)?window.screenTop:window.screenY;
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=yes";
-    var w = window.open(pickerSource, "_blank", params);
+    var w = window.open(pickerSource, id, params);
     w.resizeTo(300,300);
     w.moveTo(winx + 40, document.body.offsetHeight + winy);
-
-    var handler = new messageHandler(intent, onResult);
-    window.addEventListener("message", handler.handler, false);
+    intent._id = id;
+    intents[id] = { intent: intent }; 
+    if(onResult) {
+      iframe.contentWindow.postMessage(
+        _str({"request": "registerCallback", "id": id }), 
+        "*");
+      intents[id].callback = onResult;
+    }
   };
 
   var _str = function(obj) {
     return JSON.stringify(obj);
   }
 
-  var messageHandler = function(intent, onResult) {
-    var self = this;
-    this.handler = function(e) {
-      var data = JSON.parse(e.data);
-      if(data.request && 
-         data.request == "ready") {
-
-        var channel = new MessageChannel();
-        var ports;
+  var handler = function(e) {
+    var data = JSON.parse(e.data);
+    if(data.request && 
+       data.request == "ready") {
+      // The picker is ready
+      var id = data.id;
+      var intent = intents[id];
       
-        var id = "intent." + new Date().valueOf();
-        intent._id = id;
-        //port1 will be our response message handler, only if there is a callback defined
-        if(onResult) {
-          ports = [channel.port2];
+      // Send the intent data to the app.
+      e.source.postMessage(
+        _str({ request: "startActivity", intent: intent.intent }),
+        "*"
+      );
+    }
+    else if(data.request &&
+            data.request == "intentData") {
+      loadIntentData(data.intent);
+    }
+    else if(data.request &&
+            data.request == "response") {
+      intents[data.intent._id].callback(data.intent);
+    }
+  };
 
-          channel.port1.start();
-          channel.port1.addEventListener("message", function(evt) {
-            var msgData = JSON.parse(evt.data);
-            onResult(msgData.intent);
-            channel.port1.close();
-            channel.port2.close();  
-          });
+  window.addEventListener("message", handler, false);
 
-          iframe.contentWindow.postMessage(
-            _str({ request: "registerReturn", intent: intent}),
-            ports,
-            "*"
-          );
-        }
-        e.source.postMessage(
-          _str({ request: "startActivity", intent: intent }),
-          [], "*"
-        );
-        // We really need to remove this message handler
-        window.removeEventListener("message", self.handler, false);
-      } 
-  }};
+  var loadIntentData = function(data) {
+    var intent = new Intent();
+    intent._id  = data._id;
+    intent.action = data.action;
+    intent.type = data.type;
+    intent.data = data.data;
+    // This will recieve the intent data.
+    if(window.navigator.intents.onActivity) {
+      window.navigator.intents.onActivity(intent);
+    } 
+  };
 
   window.addEventListener("load", function() {
     // This is an app that has been launced via the picker. 
     if(window.opener && window.opener.closed == false) {
-      var channel = new MessageChannel();
-      channel.port1.addEventListener("message", function(message) {
-        var data = JSON.parse(message.data);
-        var intent = new Intent();
-        intent._id  = data.intent._id;
-        intent.action = data.intent.action;
-        intent.type = data.intent.type;
-        intent.data = data.intent.data;
-
-        // This will recieve the intent data.
-        if(window.navigator.intents.onActivity) {
-          window.navigator.intents.onActivity(intent);
-        } 
-      }, false);
-      channel.port1.start();
-      channel.port2.start();
-
-      window.opener.postMessage(_str({ request: "launched", name: window.name }), [channel.port2], "*");
+      window.opener.postMessage(
+        _str({ request: "launched", name: window.name }), 
+        "*");
     }
   }, false);
 
@@ -188,17 +181,23 @@
     }
   };
 
+  var parseIntentTag = function(intent) {
+    var title = intent.getAttribute("title");
+    var href = intent.getAttribute("href");
+    var action = intent.getAttribute("action");
+    var type = intent.getAttribute("type");
+    var icon = intent.getAttribute("icon") || getFavIcon();
+
+    if(!!action == false) return;
+
+    register(action, type, href, title, icon);
+  };
+
   var parseIntentsDocument = function() {
     var intents = document.getElementsByTagName("intent");
     var intent;
     for(var i = 0; intent = intents[i]; i++) {
-      var title = intent.getAttribute("title");
-      var href = intent.getAttribute("href");
-      var action = intent.getAttribute("action");
-      var type = intent.getAttribute("type");
-      var icon = intent.getAttribute("icon") || getFavIcon();
-
-      register(action, type, href, title, icon);
+      parseIntentTag(intent);
     }
   };
 
@@ -240,6 +239,12 @@
     }
   };
 
+  var onIntentDOMAdded = function(e) {
+    if(e.target.tagName == "INTENT") {
+      parseIntentTag(e.target) 
+    }
+  };
+
   var init = function () {
     window.Intent = Intent;
     window.navigator.intents = new Intents();
@@ -255,6 +260,8 @@
         parseIntentsMetaData();
       }, false);
 
+      document.head.addEventListener("DOMNodeInserted", onIntentDOMAdded, false);
+
       if(document.body) {
         document.body.appendChild(iframe);
       }
@@ -265,17 +272,14 @@
       }
     }
 
-    window.addEventListener("DOMContentReady",function() {
+    window.addEventListener("load",function() {
       // The DOM is ready, tell the opener that we can are ready.
-      var channel = new MessageChannel();
-      channel.port1.addEventListener("message", function() {
-        
-      }, false);
-
-      window.postMessage(_str({request: "ready"}),[channel.port2], server);
+      if(window.opener) {
+        window.opener.postMessage(_str({request: "ready"}), server);
+      }
     }, false);
 
-    window.addEventListener("submit", handleFormSubmit);
+    window.addEventListener("submit", handleFormSubmit, false);
   };
 
   init();

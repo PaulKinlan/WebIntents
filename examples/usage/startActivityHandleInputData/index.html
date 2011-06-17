@@ -20,7 +20,7 @@
 
       window.navigator.intents.onActivity = function(data) {
         var output = document.getElementById("output");
-        output.innerText = JSON.stringify(data);
+        output.textContent = JSON.stringify(data);
       };
     }, false);
   </script>

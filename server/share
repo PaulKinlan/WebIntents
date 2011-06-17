@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Share</title>
+  </head>
+  <body>
+    <h1>Intent: Share - http://webintents.org/share</h1>
+    <p>
+      The share intent is designed to give applications the ability to offer a simple mechanism for sharing data from the current page.
+    </p>
+    <p>
+      An action that can handle share could be anything that the user has installed, including and not limited to Social Networks and Email services.
+    </p>
+    <p>
+      The "Share" protocol is intended to be a lightweight sharing facility.
+    </p>
+    <h2>Registration</h2>
+    <pre>&lt;intent
+  <a href="#action">action</a>="http://webintents.org/share" 
+  <a href="#type">type</a>="image/*" 
+  <a href="#href">href</a>="share.html"
+ /&gt;</pre>
+    <dl>
+      <dt id="action">action</dt>
+        <dd>Required. Must be http://webintents.org</dd>
+      <dt id="type">type</dt>
+        <dd>Optional. Types are a filter</dd> 
+      <dt id="href">href</dt>
+        <dd>Optional. If specified it will point to the action that is loaded when the user chooses the service.  If undefined, use the current page.</dd> 
+    </dl>
+    <h2>Invocation</h2>
+    <pre>var intent = new Intent("http://webintents.org/share");
+window.navigator.intents.startActivity(intent);</pre>
+    <h2>Data Formats</h2>
+    <dl id="dataformats">
+      <dt>image/*</dt>
+        <dd></dd>
+    </dl>
+  </body>
+</html>
