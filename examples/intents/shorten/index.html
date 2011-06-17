@@ -20,7 +20,7 @@
           intent.type = "text/uri-list";
           intent.data = { uris : [ url ] };
 
-          window.navigator.intents.startActivity(intent, intentResponse);
+          window.navigator.startActivity(intent, intentResponse);
           return false;
         }, false);
 

@@ -6,7 +6,7 @@
     document.addEventListener("DOMContentLoaded", function() {
       var regBtn = document.getElementById("register");
       regBtn.addEventListener("click", function() {
-        window.navigator.intents.register("http://webintents.org/share", undefined); 
+        window.navigator.register("http://webintents.org/share", undefined); 
       }, false);
       
       var startButton = document.getElementById("startActivity");
@@ -15,10 +15,10 @@
         intent.action = "http://webintents.org/share";
         intent.type = undefined;
   
-        window.navigator.intents.startActivity(intent);
+        window.navigator.startActivity(intent);
       }, false);
 
-      window.navigator.intents.onActivity = function(data) {
+      window.navigator.onActivity = function(data) {
         var output = document.getElementById("output");
         output.textContent = JSON.stringify(data);
       };

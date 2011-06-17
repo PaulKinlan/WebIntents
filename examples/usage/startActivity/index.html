@@ -6,7 +6,7 @@
     document.addEventListener("DOMContentLoaded", function() {
       var regBtn = document.getElementById("register");
       regBtn.addEventListener("click", function() {
-        window.navigator.intents.register("http://webintents.org/share", undefined, function(data) {
+        window.navigator.register("http://webintents.org/share", undefined, function(data) {
           // This is a handler for return responses from the exectued actions. 
           alert(data);
         });
@@ -18,7 +18,7 @@
         intent.action = "http://webintents.org/share";
         intent.type = undefined;
   
-        window.navigator.intents.startActivity(intent);
+        window.navigator.startActivity(intent);
       }, false);
     }, false);
   </script>

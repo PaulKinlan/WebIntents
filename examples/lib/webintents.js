@@ -69,8 +69,8 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     intent.type = data.type;
     intent.data = data.data;
     // This will recieve the intent data.
-    if(window.navigator.intents.onActivity) {
-      window.navigator.intents.onActivity(intent);
+    if(window.navigator.onActivity) {
+      window.navigator.onActivity(intent);
     } 
   };
 
@@ -225,7 +225,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
 
       var intent = new Intent(action, enctype, data);
        
-      window.navigator.intents.startActivity(intent);
+      window.navigator.startActivity(intent);
     
       return false;
     }
@@ -238,8 +238,9 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
   };
 
   var init = function () {
+    var intents = new Intents();
     window.Intent = Intent;
-    window.navigator.intents = new Intents();
+    window.navigator.startActivity = intents.startActivity;
     
     if(!!window.postMessage) {
       // We can handle postMessage.

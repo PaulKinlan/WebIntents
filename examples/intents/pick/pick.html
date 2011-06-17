@@ -5,7 +5,7 @@
   <script>
     var intentToReturn;
 
-    window.navigator.intents.onActivity = function(intent) {
+    window.navigator.onActivity = function(intent) {
       intentToReturn = intent; 
     };
 
@@ -47,7 +47,7 @@
     <img id="img2" src="images/kitten2.jpg">
     <img id="img3" src="images/kitten3.jpg">
     <h2>Code</h2>
-    <pre>window.navigator.intents.onActivity = function(intent) {
+    <pre>window.navigator.onActivity = function(intent) {
   intentToReturn = intent; 
 };
 
