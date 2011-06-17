@@ -17,6 +17,9 @@ To register your service application to be able to handle image sharing simply d
 
 This will register the current page's ability to share images. 
 
+Invocation
+----------
+
 To build a client application that can use the share functionality, it is as simple as using the following code: 
 
     var intent = new Intent(
