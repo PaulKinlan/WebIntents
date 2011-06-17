@@ -12,7 +12,6 @@
   /*
    * Starts an activity.
    */
-
   Intents.prototype.startActivity = function (intent, onResult) {
     var id = "intent." + new Date().valueOf();
     var winx = (document.all)?window.screenLeft:window.screenX;
@@ -68,19 +67,15 @@
     intent.type = data.type;
     intent.data = data.data;
     // This will recieve the intent data.
-    if(window.navigator.onActivity) {
-      window.navigator.onActivity(intent);
-    } 
+    window.intent = intent;
   };
 
-  window.addEventListener("load", function() {
-    // This is an app that has been launced via the picker. 
-    if(window.opener && window.opener.closed == false) {
-      window.opener.postMessage(
-        _str({ request: "launched", name: window.name }), 
-        "*");
-    }
-  }, false);
+  // This is an app that has been launced via the picker. 
+  if(window.opener && window.opener.closed == false) {
+    window.opener.postMessage(
+      _str({ request: "launched", name: window.name }), 
+      "*");
+  }
 
   var register = function(action, type, url, title, icon) {
     if(!!url == false) url = document.location.toString();
