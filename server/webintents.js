@@ -1,5 +1,4 @@
 var id;
-var launchedWindow;
 var callbacks = {};
 
 var Intents = new (function() {
@@ -93,10 +92,8 @@ window.addEventListener("message", function(e) {
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
     var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
-    try {
-      launchedWindow.intent = intent.intent;
-    }catch(e) {}
-    launchedWindow.postMessage(message, "*");
+    console.log(e.source);
+    e.source.postMessage(message, "*");
     localStorage.removeItem(launchId);
     setTimeout(function() { window.close(); });
   }
