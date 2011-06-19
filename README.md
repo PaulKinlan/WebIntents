@@ -47,6 +47,10 @@ When a service is invoked via startActivity, the "intent" object on window will 
 
 That's it.
 
+To send data back to the client that invoked it, it is as simple as calling postResult() on the intent.
+
+    window.intent.postResult({ data: "something cool" });
+
 Examples
 ========
 
