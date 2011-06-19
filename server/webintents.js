@@ -92,7 +92,6 @@ window.addEventListener("message", function(e) {
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
     var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
-    console.log(e.source);
     e.source.postMessage(message, "*");
     localStorage.removeItem(launchId);
     setTimeout(function() { window.close(); });

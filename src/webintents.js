@@ -34,11 +34,7 @@
     return JSON.stringify(obj);
   };
 
-  window.addEventListener("load", function(e) { console.log(e); }, false);
-
-
   var handler = function(e) {
-    console.log(e);
     var data = JSON.parse(e.data);
     if(data.request && 
        data.request == "ready") {
