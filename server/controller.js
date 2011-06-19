@@ -22,8 +22,8 @@ var IntentController = new (function() {
   var launch = function(intent) { 
     return function(e) {
       e.preventDefault();
-      var w = window.open(e.target.href, intent._id); 
-      launchedWindow = w; 
+      var intentStr = JSON.stringify(intent);
+      var w = window.open(e.target.href, intentStr); 
       return false;
     };
   };

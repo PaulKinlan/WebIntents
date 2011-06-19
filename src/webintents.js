@@ -32,9 +32,13 @@
 
   var _str = function(obj) {
     return JSON.stringify(obj);
-  }
+  };
+
+  window.addEventListener("load", function(e) { console.log(e); }, false);
+
 
   var handler = function(e) {
+    console.log(e);
     var data = JSON.parse(e.data);
     if(data.request && 
        data.request == "ready") {
@@ -70,16 +74,7 @@
     window.intent = intent;
   };
 
-  // This is an app that has been launced via the picker. 
-  if(window.opener && window.opener.closed == false) {
-    try {
-      window.opener.alert("hello");
-    }catch(e) {}
-    window.opener.postMessage(
-      _str({ request: "launched", name: window.name }), 
-      "*");
-  }
-
+  
   var register = function(action, type, url, title, icon) {
     if(!!url == false) url = document.location.toString();
     if(url.substring(0, 7) != "http://" && 
@@ -234,11 +229,31 @@
     }
   };
 
+  var getIntenData = function() {
+    if(window.opener && window.opener.closed == false) {
+      window.opener.postMessage(
+       _str({ request: "launched", name: window.name }), 
+       "*");
+    }
+  };
+
   var init = function () {
     var intents = new Intents();
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
-    
+
+    if(window.name) {
+      try {
+        window.intent = JSON.parse(window.name);  
+      } catch(ex) {
+        // If the window.name is not intent data, get it.
+        getIntentData();
+      }
+    }
+    else {
+      getIntentData();
+    }
+   
     if(!!window.postMessage) {
       // We can handle postMessage.
       iframe = document.createElement("iframe");
@@ -250,16 +265,9 @@
         parseIntentsMetaData();
       }, false);
 
+      // Listen to new "intent" nodes.
       document.head.addEventListener("DOMNodeInserted", onIntentDOMAdded, false);
-
-      if(document.body) {
-        document.body.appendChild(iframe);
-      }
-      else {
-        document.addEventListener("DOMContentLoaded", function() {
-          document.body.appendChild(iframe);
-        }, false);
-      }
+      document.head.appendChild(iframe);
     }
 
     if(window.opener) {
