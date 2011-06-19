@@ -230,7 +230,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     }
   };
 
-  var getIntenData = function() {
+  var getIntentData = function() {
     if(window.opener && window.opener.closed == false) {
       window.opener.postMessage(
        _str({ request: "launched", name: window.name }), 
