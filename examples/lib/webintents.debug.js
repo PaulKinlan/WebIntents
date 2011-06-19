@@ -250,7 +250,7 @@ else {
 
     if(window.name) {
       try {
-        window.intent = JSON.parse(window.name);  
+        loadIntentData(JSON.parse(window.name));  
       } catch(ex) {
         // If the window.name is not intent data, get it.
         getIntentData();
