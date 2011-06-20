@@ -1,6 +1,7 @@
-__WEBINTENTS_ROOT = "http://webintents.org/";
 (function() {
   if(!!window.Intent) return;
+
+  var __WEBINTENTS_ROOT = "http://webintents.org/";
  
   var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";

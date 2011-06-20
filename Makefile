@@ -20,7 +20,7 @@ webintents.js: ./src/release.js ./src/webintents.js
 	sed 's|// __WEBINTENTS_ROOT|$(RELEASE)|' < ./src/webintents.js > webintents.js
 
 webintents.debug.js: ./src/webintents.js ./src/debug.js 
-	sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' < ./src/webintents.js > webintents.js
+	sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' < ./src/webintents.js > webintents.debug.js
 
 webintents.min.js: webintents.js 
 	uglifyJs $^ > $@
