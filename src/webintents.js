@@ -1,5 +1,7 @@
 (function() {
   if(!!window.Intent) return;
+
+  // __WEBINTENTS_ROOT
  
   var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";
