@@ -24,6 +24,7 @@ var IntentController = new (function() {
       e.preventDefault();
       var intentStr = JSON.stringify(intent);
       var w = window.open(e.target.href, intentStr); 
+      window.close();
       return false;
     };
   };

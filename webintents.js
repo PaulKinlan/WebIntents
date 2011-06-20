@@ -29,7 +29,7 @@
     if(onResult) {
       iframe.contentWindow.postMessage(
         _str({"request": "registerCallback", "id": id }), 
-        "*");
+        source );
       intents[id].callback = onResult;
     }
   };
@@ -49,7 +49,7 @@
       // Send the intent data to the app.
       e.source.postMessage(
         _str({ request: "startActivity", intent: intent.intent }),
-        "*"
+        pickerSource 
       );
     }
     else if(data.request &&
@@ -95,7 +95,7 @@
         request: "register", 
         intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host } 
       }), 
-      "*");
+      serverSource);
   };
 
   var Intent = function(action, type, data) {
@@ -115,7 +115,7 @@
           request: "response",
           intent: returnIntent 
         }),
-        "*");
+        "http://webintents.org");
     };
   };
 
@@ -237,7 +237,7 @@
 
   var getIntentData = function() {
     if(window.opener && window.opener.closed == false) {
-      window.opener.postMessage(
+      iframe.contentWindow.postMessage(
        _str({ request: "launched", name: window.name }), 
        "*");
     }
@@ -250,9 +250,10 @@
 
     if(window.name) {
       try {
-        loadIntentData(JSON.parse(window.name));  
+        loadIntentData(JSON.parse(window.name));
+        window.name = "";
       } catch(ex) {
-        // If the window.name is not intent data, get it.
+        // If the window.name is not intent data, get it from the subsystem.
         getIntentData();
       }
     }

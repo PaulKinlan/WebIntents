@@ -24,7 +24,7 @@ var Intents = new (function() {
     var actions = JSON.parse(actionData);
     var action;
     var filteredActions = [];
-    // Find the actions that are of the correct type (or not).  Does not handle /*, yet
+    // Find the actions that are of the correct type (or not).  Does not handle *, yet
     for(var i = 0; action = actions[i]; i++) {
       if(intent.type == action.type || !!intent.type == false) {
         filteredActions.push(action);
@@ -92,7 +92,7 @@ window.addEventListener("message", function(e) {
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
     var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
-    e.source.postMessage(message, "*");
+    e.source.postMessage(message, e.origin);
     localStorage.removeItem(launchId);
     setTimeout(function() { window.close(); });
   }
@@ -121,6 +121,7 @@ window.addEventListener("storage", function(e) {
     var message = JSON.stringify({ intent: data.intent, request: "response" });
     window.parent.postMessage(
       message,
-      "*");
+      "*"  
+    );
   }
 }, false);
