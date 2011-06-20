@@ -116,6 +116,13 @@
     };
   };
 
+  Intent.SHARE = "http://webintents.org/share"; 
+  Intent.SEND = "http://webintents.org/send"; 
+  Intent.EDIT = "http://webintents.org/edit"; 
+  Intent.VIEW = "http://webintents.org/view"; 
+  Intent.PICK = "http://webintents.org/pick"; 
+
+
   var getFavIcon = function() {
     var links = document.getElementsByTagName("link");
     var link;

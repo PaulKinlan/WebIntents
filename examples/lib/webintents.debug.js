@@ -40,11 +40,7 @@ else {
     return JSON.stringify(obj);
   };
 
-  window.addEventListener("load", function(e) { console.log(e); }, false);
-
-
   var handler = function(e) {
-    console.log(e);
     var data = JSON.parse(e.data);
     if(data.request && 
        data.request == "ready") {
@@ -125,6 +121,13 @@ else {
         "*");
     };
   };
+
+  Intent.SHARE = "http://webintents.org/share"; 
+  Intent.SEND = "http://webintents.org/send"; 
+  Intent.EDIT = "http://webintents.org/edit"; 
+  Intent.VIEW = "http://webintents.org/view"; 
+  Intent.PICK = "http://webintents.org/pick"; 
+
 
   var getFavIcon = function() {
     var links = document.getElementsByTagName("link");
