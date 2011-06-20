@@ -1,0 +1,24 @@
+<html>
+  <script>
+    var openwin = function(newData) {
+      var dataStr = !!newData == false ? "1" : newData + newData ;
+      var w = window.open("test.html", dataStr);
+      var len = dataStr.length;
+      w.addEventListener("load", function(e) {
+        if(w.name.length == len) {
+          var li = document.createElement("li");
+          li.textContent = len;
+          var data = document.getElementById("data");
+          data.appendChild(li);
+          w.close(); 
+          openwin(dataStr);
+        }
+      }, false);
+    }; 
+  </script>
+  <p>Keeps opening windows until we hit the limit of what can be held in window.name</p>
+  <input type="button" onclick="openwin('1');" value="start">
+  <ul id="data">
+
+  </ul>
+</html>
