@@ -1,4 +1,6 @@
 (function() {
+  if(!!window.Intent) return;
+ 
   var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";
   var pickerSource = server + "picker.html";
@@ -69,7 +71,6 @@
     // This will recieve the intent data.
     window.intent = intent;
   };
-
   
   var register = function(action, type, url, title, icon) {
     if(!!url == false) url = document.location.toString();
