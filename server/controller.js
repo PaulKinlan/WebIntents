@@ -40,7 +40,7 @@ var IntentController = new (function() {
     actionLink.href = action.url;
     actionLink.target = "_blank";
     actionLink.textContent = action.title;
-    actionLink.addEventListener("click", launch(intent), false);
+    addEventListener(actionLink, "click", launch(intent), false);
 
     domain.textContent = action.domain || "Unknown domain";
     

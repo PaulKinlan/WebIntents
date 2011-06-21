@@ -1,11 +1,14 @@
 (function() {
   if(!!window.Intent) return;
 
-  if(!!window.addEventListener == false) {
-    window.addEventListener = function(type, func, capture) {
-      window.attachEvent("on" + type, func);
-    } 
-  }
+  var addEventListener = function(obj, type, func, capture) {
+    if(!!window.addEventListener) {
+      obj.addEventListener(type, func, capture);
+    }
+    else {
+      obj.attachEvent("on" + type, func);
+    }
+  };
 
   // __WEBINTENTS_ROOT
  
@@ -68,7 +71,7 @@
     }
   };
 
-  window.addEventListener("message", handler, false);
+  addEventListener(window, "message", handler, false);
 
   var loadIntentData = function(data) {
     var intent = new Intent();
@@ -273,13 +276,13 @@
       iframe.style.display = "none";
       iframe.src = serverSource;
 
-      iframe.addEventListener("load", function() {
+      addEventListener(iframe, "load", function() {
         parseIntentsDocument();
         parseIntentsMetaData();
       }, false);
 
       // Listen to new "intent" nodes.
-      document.head.addEventListener("DOMNodeInserted", onIntentDOMAdded, false);
+      addEventListener(document.head, "DOMNodeInserted", onIntentDOMAdded, false);
       document.head.appendChild(iframe);
     }
 
@@ -287,7 +290,7 @@
       window.opener.postMessage(_str({request: "ready"}), server);
     }
 
-    window.addEventListener("submit", handleFormSubmit, false);
+    addEventListener(window, "submit", handleFormSubmit, false);
   };
 
   init();
