@@ -4,7 +4,7 @@
   <script src="/lib/webintents.debug.js"></script>
   <script src="/lib/events.js"></script>
   <script>
-    window.addEventListener("load", function(e) {
+    attachEventListener(window, "load", function(e) {
       var output = document.getElementById("output");
       output.src = intent.data.images[0]; 
     };

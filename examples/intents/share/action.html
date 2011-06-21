@@ -5,10 +5,10 @@
     <script src="/lib/webintents.debug.js"></script>
     <script src="/lib/events.js"></script>
     <script>
-      window.addEventListener("load", function() {
+      attachEventListener(window, "load", function() {
 
         var shareLink = document.getElementById("shareLink");
-        shareLink.addEventListener("click", function() {
+        attachEventListener(shareLink, "click", function() {
           var url = document.getElementById("url").value;
           
           var intent = new Intent();
@@ -25,7 +25,7 @@
         var imageList = document.getElementById("imageList");
         var imageData;
 
-        shareImage.addEventListener("click", function(e) {
+        attachEventListener(shareImage, "click", function(e) {
           if(!!imageData == false) {
             alert("Please select a file");
             return false; 
@@ -40,7 +40,7 @@
           return false;
         }, false);
 
-        imageList.addEventListener("change", function(e) { 
+        attachEventListener(imageList, "change", function(e) { 
           // Get the data          
           var fileData = e.target.files[0];
           var reader = new FileReader();
