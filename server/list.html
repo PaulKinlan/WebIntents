@@ -4,7 +4,7 @@
     <script src="webintents.js"></script>
     <script src="controller.js"></script>
     <script>
-      window.addEventListener("load", function() {
+      attachEventListener(window, "load", function() {
         var actions = Intents.getAllActions();
          
         for(var key in actions) {
