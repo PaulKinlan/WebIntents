@@ -6,6 +6,7 @@ picker.html
 
 controller.js
 webintents.js
+webintents-server.js
 json2.js
 picker.js
 
