@@ -1,3 +1,6 @@
+RELEASE := $(shell cat ./src/release.js)
+DEBUG := $(shell cat ./src/debug.js)
+
 all: webintents.js webintents.min.js server/cache.manifest webintents.debug.js examples tools
 
 examples: examples/lib/webintents.js examples/lib/webintents.debug.js examples/lib/webintents.min.js
@@ -14,10 +17,10 @@ examples/lib/webintents.min.js: webintents.min.js
 	ln -f webintents.min.js examples/lib/webintents.min.js
 
 webintents.js: ./src/release.js ./src/webintents.js
-	cat ./src/release.js ./src/webintents.js > webintents.js
+	sed 's|// __WEBINTENTS_ROOT|$(RELEASE)|' < ./src/webintents.js > webintents.js
 
 webintents.debug.js: ./src/webintents.js ./src/debug.js 
-	cat ./src/debug.js ./src/webintents.js > webintents.debug.js
+	sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' < ./src/webintents.js > webintents.debug.js
 
 webintents.min.js: webintents.js 
 	uglifyJs $^ > $@

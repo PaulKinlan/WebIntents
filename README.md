@@ -25,8 +25,10 @@ To build a client application that can use the share functionality, it is as sim
     var intent = new Intent(
         "http://webintents.org/share", 
         "image/*", 
-        { uris["http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png"] 
-    });
+        { 
+          uris : ["http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png"] 
+        }
+    );
     window.navigator.startActivity(intent);
 
 You can even use a FORM so you don't have to do any coding.
@@ -36,6 +38,18 @@ You can even use a FORM so you don't have to do any coding.
        <input type="submit" />
     </form>
 
+Service
+-------
+
+When a service is invoked via startActivity, the "intent" object on window will be populated with the data provided by the client.
+
+    window.intent
+
+That's it.
+
+To send data back to the client that invoked it, it is as simple as calling postResult() on the intent.
+
+    window.intent.postResult({ data: "something cool" });
 
 Examples
 ========

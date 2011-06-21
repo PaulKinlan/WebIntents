@@ -1,5 +1,17 @@
-__WEBINTENTS_ROOT = "http://webintents.org/";
 (function() {
+  if(!!window.Intent) return;
+
+  var addEventListener = function(obj, type, func, capture) {
+    if(!!window.addEventListener) {
+      obj.addEventListener(type, func, capture);
+    }
+    else {
+      obj.attachEvent("on" + type, func);
+    }
+  };
+
+  var __WEBINTENTS_ROOT = "http://webintents.org/";
+ 
   var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";
   var pickerSource = server + "picker.html";
@@ -26,7 +38,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     if(onResult) {
       iframe.contentWindow.postMessage(
         _str({"request": "registerCallback", "id": id }), 
-        "*");
+        source );
       intents[id].callback = onResult;
     }
   };
@@ -35,11 +47,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     return JSON.stringify(obj);
   };
 
-  window.addEventListener("load", function(e) { console.log(e); }, false);
-
-
   var handler = function(e) {
-    console.log(e);
     var data = JSON.parse(e.data);
     if(data.request && 
        data.request == "ready") {
@@ -50,7 +58,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
       // Send the intent data to the app.
       e.source.postMessage(
         _str({ request: "startActivity", intent: intent.intent }),
-        "*"
+        pickerSource 
       );
     }
     else if(data.request &&
@@ -63,7 +71,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     }
   };
 
-  window.addEventListener("message", handler, false);
+  addEventListener(window, "message", handler, false);
 
   var loadIntentData = function(data) {
     var intent = new Intent();
@@ -74,7 +82,6 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
     // This will recieve the intent data.
     window.intent = intent;
   };
-
   
   var register = function(action, type, url, title, icon) {
     if(!!url == false) url = document.location.toString();
@@ -97,7 +104,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
         request: "register", 
         intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host } 
       }), 
-      "*");
+      serverSource);
   };
 
   var Intent = function(action, type, data) {
@@ -117,9 +124,16 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
           request: "response",
           intent: returnIntent 
         }),
-        "*");
+        "http://webintents.org");
     };
   };
+
+  Intent.SHARE = "http://webintents.org/share"; 
+  Intent.SEND = "http://webintents.org/send"; 
+  Intent.EDIT = "http://webintents.org/edit"; 
+  Intent.VIEW = "http://webintents.org/view"; 
+  Intent.PICK = "http://webintents.org/pick"; 
+
 
   var getFavIcon = function() {
     var links = document.getElementsByTagName("link");
@@ -232,7 +246,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
 
   var getIntentData = function() {
     if(window.opener && window.opener.closed == false) {
-      window.opener.postMessage(
+      iframe.contentWindow.postMessage(
        _str({ request: "launched", name: window.name }), 
        "*");
     }
@@ -245,9 +259,10 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
 
     if(window.name) {
       try {
-        loadIntentData(JSON.parse(window.name));  
+        loadIntentData(JSON.parse(window.name));
+        window.name = "";
       } catch(ex) {
-        // If the window.name is not intent data, get it.
+        // If the window.name is not intent data, get it from the subsystem.
         getIntentData();
       }
     }
@@ -261,13 +276,13 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
       iframe.style.display = "none";
       iframe.src = serverSource;
 
-      iframe.addEventListener("load", function() {
+      addEventListener(iframe, "load", function() {
         parseIntentsDocument();
         parseIntentsMetaData();
       }, false);
 
       // Listen to new "intent" nodes.
-      document.head.addEventListener("DOMNodeInserted", onIntentDOMAdded, false);
+      addEventListener(document.head, "DOMNodeInserted", onIntentDOMAdded, false);
       document.head.appendChild(iframe);
     }
 
@@ -275,7 +290,7 @@ __WEBINTENTS_ROOT = "http://webintents.org/";
       window.opener.postMessage(_str({request: "ready"}), server);
     }
 
-    window.addEventListener("submit", handleFormSubmit, false);
+    addEventListener(window, "submit", handleFormSubmit, false);
   };
 
   init();

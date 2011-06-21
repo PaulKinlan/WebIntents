@@ -1,6 +1,15 @@
 var id;
 var callbacks = {};
 
+var addEventListner = function(obj, type, func, capture) {
+  if(!!window.addEventListner) {
+    obj.addEventListener(type, func, capture):
+  }
+  else {
+    obj.attachEvent("on" + type, func);
+  }
+};
+
 var Intents = new (function() {
  
   this.getAllActions = function () {
@@ -24,7 +33,7 @@ var Intents = new (function() {
     var actions = JSON.parse(actionData);
     var action;
     var filteredActions = [];
-    // Find the actions that are of the correct type (or not).  Does not handle /*, yet
+    // Find the actions that are of the correct type (or not).  Does not handle *, yet
     for(var i = 0; action = actions[i]; i++) {
       if(intent.type == action.type || !!intent.type == false) {
         filteredActions.push(action);
@@ -60,7 +69,7 @@ var Intents = new (function() {
   };
 })();
 
-window.addEventListener("message", function(e) {
+addEventListener(window, "message", function(e) {
   var data = JSON.parse(e.data);
   var timestamp = (new Date()).valueOf();
   
@@ -92,8 +101,7 @@ window.addEventListener("message", function(e) {
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
     var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
-    console.log(e.source);
-    e.source.postMessage(message, "*");
+    e.source.postMessage(message, e.origin);
     localStorage.removeItem(launchId);
     setTimeout(function() { window.close(); });
   }
@@ -111,7 +119,7 @@ window.addEventListener("message", function(e) {
   }
 }, false);
 
-window.addEventListener("storage", function(e) {
+addEventListener(window, "storage", function(e) {
   // Intent messages are stored in localStorage as a synch mechanism.
   // This is a dirty hack.
   var vals = localStorage[e.key];
@@ -122,6 +130,7 @@ window.addEventListener("storage", function(e) {
     var message = JSON.stringify({ intent: data.intent, request: "response" });
     window.parent.postMessage(
       message,
-      "*");
+      "*"  
+    );
   }
 }, false);

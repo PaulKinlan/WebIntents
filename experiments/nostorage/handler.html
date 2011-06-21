@@ -1,0 +1,10 @@
+<html>
+  <script>
+    window.addEventListener("storage", function(e) {
+      var data = document.getElementById("data");
+      data.textContent = e.newvalue;
+    }, false); 
+  </script>
+  <p>Recieves a storage event</p>
+  <div id="data"></div>
+</html>

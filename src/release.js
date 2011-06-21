@@ -1,1 +1,1 @@
-__WEBINTENTS_ROOT = "http://webintents.org/";
+var __WEBINTENTS_ROOT = "http://webintents.org/";
