@@ -29,9 +29,18 @@ tools/chrome/extensions/share/webintents.js: webintents.js
 	ln -f webintents.js tools/chrome/extensions/share/webintents.js
 
 # Manifest depends on changes to other files, so include them in the dependency chain
-server/cache.manifest: server/cache.manifest.src server/picker.html server/picker.js server/webintents.js server/intents.html server/json2.js
+server/cache.manifest: server/cache.manifest.src server/picker.html server/picker.js server/webintents.js server/intents.html server/json2.js server/webintents-server.js server/webintents.min.js server/webintents.debug.js
 	cat server/cache.manifest.src >> server/cache.manifest
 	echo '#' `date` >> server/cache.manifest
 
-clean: webintents.js webintents.min.js webintents.debug.js server/cache.manifest examples/lib/webintents.debug.js examples/lib/webintents.min.js examples/lib/webintents.js
+server/webintents.js:  webintents.js
+	ln -f webintents.js server/webintents.js
+
+server/webintents.debug.js:  webintents.debug.js
+	ln -f webintents.debug.js server/webintents.debug.js
+
+server/webintents.min.js:  webintents.min.js
+	ln -f webintents.min.js server/webintents.min.js
+
+clean: webintents.js webintents.min.js webintents.debug.js server/cache.manifest examples/lib/webintents.debug.js examples/lib/webintents.min.js examples/lib/webintents.js server/webintents.js server/webintents.min.js server/webintents.debug.js
 	rm $^
