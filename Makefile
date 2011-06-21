@@ -16,11 +16,11 @@ examples/lib/webintents.debug.js: webintents.debug.js
 examples/lib/webintents.min.js: webintents.min.js
 	ln -f webintents.min.js examples/lib/webintents.min.js
 
-webintents.js: ./src/release.js ./src/webintents.js
-	sed 's|// __WEBINTENTS_ROOT|$(RELEASE)|' < ./src/webintents.js > webintents.js
+webintents.js: ./src/release.js ./src/webintents.js ./src/json2.js
+	cat ./src/webintents.js ./src/json2.js | sed 's|// __WEBINTENTS_ROOT|$(RELEASE)|' > webintents.js
 
-webintents.debug.js: ./src/webintents.js ./src/debug.js 
-	sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' < ./src/webintents.js > webintents.debug.js
+webintents.debug.js: ./src/webintents.js ./src/debug.js ./src/json2.js
+	cat ./src/webintents.js ./src/json2.js | sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' > webintents.debug.js
 
 webintents.min.js: webintents.js 
 	uglifyJs $^ > $@
