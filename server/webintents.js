@@ -1,7 +1,7 @@
 var id;
 var callbacks = {};
 
-var attachEventListener = function(obj, type, func, capture) {
+window.attachEventListener = function(obj, type, func, capture) {
   if(!!obj.addEventListener) {
     obj.addEventListener(type, func, capture);
   }
