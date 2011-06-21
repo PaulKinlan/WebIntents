@@ -1,0 +1,18 @@
+<html>
+  <script>
+    var fireEvent = function() {
+      var evt = document.createEvent("StorageEvent");
+      evt.initStorageEvent("storage", false, false, "key1","oldval", "newval", window.location.href, localStorage);
+      window.dispatchEvent(evt);
+    };
+  </script>
+  <p>Sends a storage event</p>
+  <a href="handler.html" target="_blank">Open this handler</a>
+  <input id="but" type="button" value="start">
+  <script>
+    var but = document.getElementById("but");
+    but.addEventListener("click", function() {
+      fireEvent();
+    }, false);
+  </script>
+</html>
