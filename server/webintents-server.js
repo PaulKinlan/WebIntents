@@ -69,34 +69,37 @@ var Intents = new (function() {
   };
 })();
 
-attachEventListener(window, "message", function(e) {
-  var data = JSON.parse(e.data);
-  var timestamp = (new Date()).valueOf();
-  
-  if(data.request && data.request == "register") {
+var MessageDispatcher = function() {
+
+  this.register = function(data, timestamp, e) {
     Intents.addAction(data.intent);
-  }
-  else if(data.request && data.request == "startActivity") {
-    // The Picker is open, tell it what it can display.
+  };
+
+  /*
+   * The system is starting an activity, save the intent data so we can get it back later.
+   */
+  this.beginStartActivity = function(data, timestamp, e) {
+    localStorage["beginStart" + data.intent._id] = JSON.stringify(data);
+  };
+
+  this.startActivity = function(data, timestamp, e) {
     var actions = Intents.getActions(data.intent);
 
     var intentData = {
       id: data.intent._id,
       intent: data.intent,
-      state: "startActivity",
-      timestamp: timestamp,
+      timestamp: timestamp
     };
-
-    // Change the window name
-    window.name = "picker";
 
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
-  }
-  else if(data.request && data.request == "registerCallback") {
+  };
+
+  this.registerCallback = function(data, timestamp, e) {
     callbacks[data.id] = {};
-  }
-  else if(data.request && data.request == "launched") {
+  };
+
+  this.launched = function(data, timestamp, e) {
     // The app has launched, send it the intent data.
     var launchId = data.name;
     var intent = JSON.parse(localStorage[launchId]);
@@ -104,33 +107,71 @@ attachEventListener(window, "message", function(e) {
     e.source.postMessage(message, e.origin);
     localStorage.removeItem(launchId);
     setTimeout(function() { window.close(); });
-  }
-  else if(data.request && data.request == "response") {
-    // an intent has completed, route it back to the parent. 
+  };
+  
+  /*
+   * The service has sent a response, route it back to the correct frame.
+   */
+  this.intentResponse = function(data, timestamp, e) {
     var id = data.intent._id;
     var intentData = {
-      id: id,
+      "request": "sendResponse",
       intent: data.intent,
-      "window": window.name,
-      state: "response",
       timestamp: timestamp
     };
     localStorage[id] = JSON.stringify(intentData);
-  }
-}, false);
+  };
 
-attachEventListener(window, "storage", function(e) {
-  // Intent messages are stored in localStorage as a synch mechanism.
-  // This is a dirty hack.
-  var vals = localStorage[e.key];
-  var data = JSON.parse(vals);
-  if(data && data.intent && data.state == "response" && callbacks[e.key]) {
-    delete callbacks[e.key];
+  /*
+   * The correct frame has recieved the reposen, route it back to the parent app.
+   */
+  this.sendResponse = function(data, timestamp, e) {
+    var vals = localStorage[e.key];
+    var data = JSON.parse(vals);
     localStorage.removeItem[data.intent._id];
     var message = JSON.stringify({ intent: data.intent, request: "response" });
     window.parent.postMessage(
       message,
       "*"  
     );
-  }
-}, false);
+
+  };
+};
+
+var MessageHandler = function() {
+  var dispatcher = new MessageDispatcher();
+  this.handler = function(e) {
+    console.log(e);
+    var data;
+    if(!!e.data) {
+      data = JSON.parse(e.data);
+    }
+    else {
+      var vals = localStorage[e.key];
+      try {
+        data = JSON.parse(vals);
+      } catch(ex) {
+        return;
+      }
+    }
+
+    if(data.origin && data.origin !== window.name) {
+      // If there is an intended origin, then enforce it
+      return;
+    }
+
+    var timestamp = (new Date()).valueOf();
+
+    if(dispatcher[data.request]) 
+      dispatcher[data.request](data, timestamp, e);
+  };
+}
+
+var msgHandler = new MessageHandler();; 
+
+attachEventListener(window, "message", msgHandler.handler, false); 
+attachEventListener(window, "storage", msgHandler.handler, false); 
+attachEventListener(window, "storage", function(e) {
+  // Intent messages are stored in localStorage as a synch mechanism.
+  // This is a dirty hack.
+  }, false);

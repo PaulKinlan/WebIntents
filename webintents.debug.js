@@ -27,18 +27,24 @@
    */
   Intents.prototype.startActivity = function (intent, onResult) {
     var id = "intent" + new Date().valueOf();
+    var windowid = "beginStart" + id;
     var winx = (document.all)?window.screenLeft:window.screenX;
     var winy = (document.all)?window.screenTop:window.screenY;
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=yes";
-    var w = window.open(pickerSource, id, params);
+    var w = window.open(pickerSource, windowid, params);
     w.resizeTo(300,300);
     w.moveTo(winx + 40, document.body.offsetHeight + winy);
     intent._id = id;
     intents[id] = { intent: intent }; 
+    
+    iframe.contentWindow.postMessage(
+      _str({"request": "beginStartActivity", "intent": intent}),
+      serverSource);
+
     if(onResult) {
       iframe.contentWindow.postMessage(
         _str({"request": "registerCallback", "id": id }), 
-        source );
+        serverSource );
       intents[id].callback = onResult;
     }
   };
@@ -121,10 +127,10 @@
     
       iframe.contentWindow.postMessage(
         _str({
-          request: "response",
+          request: "intentResponse",
           intent: returnIntent 
         }),
-        "http://webintents.org");
+        serverSource);
     };
   };
 
@@ -133,7 +139,6 @@
   Intent.EDIT = "http://webintents.org/edit"; 
   Intent.VIEW = "http://webintents.org/view"; 
   Intent.PICK = "http://webintents.org/pick"; 
-
 
   var getFavIcon = function() {
     var links = document.getElementsByTagName("link");
