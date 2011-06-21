@@ -5,7 +5,7 @@
     <script src="/lib/webintents.debug.js"></script>
     <script src="/lib/events.js"></script>
     <script>
-      window.addEventListener("load", function() {
+     attachEventListener(window, "load", function() {
         var pickImage = document.getElementById("pickImage");
         pickImage.addEventListener("click", function() {
           var intent = new Intent();

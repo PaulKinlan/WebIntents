@@ -24,14 +24,14 @@
       }
    };
 
-   window.addEventListener("load", function() {
+   attachEventListener("load", function() {
      var img1 = document.getElementById("img1");
      var img2 = document.getElementById("img2");
      var img3 = document.getElementById("img3");
 
-     img1.addEventListener("click", returnImage, false);
-     img2.addEventListener("click", returnImage, false);
-     img3.addEventListener("click", returnImage, false);
+     attachEventListener(img1, "click", returnImage, false);
+     attachEventListener(img2, "click", returnImage, false);
+     attachEventListener(img3, "click", returnImage, false);
    }, false);   
 
   </script>

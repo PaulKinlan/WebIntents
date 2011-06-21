@@ -4,13 +4,13 @@
   <script src="/lib/webintents.debug.js"></script>
   <script src="/lib/events.js"></script>
   <script>
-    window.addEventListener("load", function(e) {
+    attachEventListener(window, "load", function(e) {
       var output = document.getElementById("output");
       if(intent.data.uris instanceof Array)
         output.textContent = intent.data.uris[0]; 
       else
         output.textContent = intent.data.uris;
-    }, false);;
+    }, false);
   </script>
   <body>
     <h1>Link Sharing app</h1>
