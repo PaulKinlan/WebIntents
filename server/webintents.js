@@ -1,11 +1,11 @@
 var id;
 var callbacks = {};
 
-var addEventListener = function(obj, type, func, capture) {
-  if(!!window.addEventListener) {
-    obj.addEventListener(type, func, capture):
+var attachEventListener = function(obj, type, func, capture) {
+  if(!!obj.addEventListener) {
+    obj.addEventListener(type, func, capture);
   }
-  else {
+  else if(!!obj.attachEvent) {
     obj.attachEvent("on" + type, func);
   }
 };
@@ -69,7 +69,7 @@ var Intents = new (function() {
   };
 })();
 
-addEventListener(window, "message", function(e) {
+attachEventListener(window, "message", function(e) {
   var data = JSON.parse(e.data);
   var timestamp = (new Date()).valueOf();
   
@@ -119,7 +119,7 @@ addEventListener(window, "message", function(e) {
   }
 }, false);
 
-addEventListener(window, "storage", function(e) {
+attachEventListener(window, "storage", function(e) {
   // Intent messages are stored in localStorage as a synch mechanism.
   // This is a dirty hack.
   var vals = localStorage[e.key];
