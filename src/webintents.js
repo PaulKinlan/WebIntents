@@ -1,6 +1,12 @@
 (function() {
   if(!!window.Intent) return;
 
+  if(!!window.addEventListener == false) {
+    window.addEventListener = function(type, func, capture) {
+      window.attachEvent("on" + type, func);
+    } 
+  }
+
   // __WEBINTENTS_ROOT
  
   var server = __WEBINTENTS_ROOT; 

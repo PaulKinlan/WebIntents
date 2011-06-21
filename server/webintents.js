@@ -1,6 +1,12 @@
 var id;
 var callbacks = {};
 
+if(!!window.addEventListener == false) {
+  window.addEventListener = function(type, func) {
+    window.attachEvent("on" + type, func);
+  } 
+}
+
 var Intents = new (function() {
  
   this.getAllActions = function () {
