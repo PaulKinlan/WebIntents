@@ -26,7 +26,7 @@
    * Starts an activity.
    */
   Intents.prototype.startActivity = function (intent, onResult) {
-    var id = "intent." + new Date().valueOf();
+    var id = "intent" + new Date().valueOf();
     var winx = (document.all)?window.screenLeft:window.screenX;
     var winy = (document.all)?window.screenTop:window.screenY;
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=yes";
