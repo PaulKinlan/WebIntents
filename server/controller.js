@@ -30,7 +30,10 @@ var IntentController = new (function() {
 
   var launch = function(intent) { 
     return function(e) {
-      e.preventDefault();
+      if(!!e.preventDefault) 
+        e.preventDefault();
+      else
+        e.returnValue = false;
       var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
       var w = window.open(e.target.href, intentStr); 
       window.close();
