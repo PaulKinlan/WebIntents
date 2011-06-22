@@ -36,7 +36,7 @@
     intents[id] = { intent: intent }; 
     
     iframe.contentWindow.postMessage(
-      _str({"request": "beginStartActivity", "intent": intent, "origin": windowid}),
+      _str({"request": "beginStartActivity", "intent": intent}),
       serverSource);
 
     if(onResult) {
