@@ -90,6 +90,20 @@ var MessageDispatcher = function() {
 
   this.registerCallback = function(data, timestamp, e) {
     callbacks[data.id] = {};
+
+    if(!!window.onstorage == false) {
+      // We are going to have to set up something that polls.
+      var timer = setTimeout(function() {
+        var intentStr = localStorage[data.id];
+        if(!!intentStr) {
+          var intentObj = JSON.parse(intentStr);
+          if(intentObj.request == "sendResponse") {
+            window.postMessage(intentStr, "*");
+            clearTimeout(timer);
+          }
+        }
+      },1000);
+    }
   };
 
   /*
@@ -154,3 +168,8 @@ var msgHandler = new MessageHandler();;
 attachEventListener(window, "message", msgHandler.handler, false); 
 attachEventListener(window, "storage", msgHandler.handler, false); 
 attachEventListener(document, "storage", msgHandler.handler, false); 
+
+if(!!window.onstorage) {
+  // we don't have storage events, so lets poll.
+
+}
