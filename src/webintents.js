@@ -31,9 +31,7 @@
     var winx = (document.all)?window.screenLeft:window.screenX;
     var winy = (document.all)?window.screenTop:window.screenY;
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=yes";
-    var w = window.open(pickerSource, windowid, params);
-    w.resizeTo(300,300);
-    w.moveTo(winx + 40, document.body.offsetHeight + winy);
+
     intent._id = id;
     intents[id] = { intent: intent }; 
     
@@ -47,6 +45,10 @@
         serverSource );
       intents[id].callback = onResult;
     }
+
+    var w = window.open(pickerSource, windowid, params);
+    w.resizeTo(300,300);
+    w.moveTo(winx + 40, document.body.offsetHeight + winy);
   };
 
   var _str = function(obj) {
