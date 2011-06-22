@@ -289,8 +289,11 @@
       }, false);
 
       // Listen to new "intent" nodes.
-      addEventListener(document.head, "DOMNodeInserted", onIntentDOMAdded, false);
-      document.head.appendChild(iframe);
+      var heads = document.getElementsByTagName("HEAD");
+      if(heads.length > 0) {
+        addEventListener(heads, "DOMNodeInserted", onIntentDOMAdded, false);
+        heads.appendChild(iframe);
+      }
     }
 
     if(window.opener) {
