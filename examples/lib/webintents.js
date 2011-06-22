@@ -194,7 +194,10 @@
     var form = e.target;
 
     if(form.method.toLowerCase() == "intent") {
-      e.preventDefault();
+      if(!!e.preventDefault) 
+        e.preventDefault();
+      else
+        e.returnValue = false;
       var action = form.action;
       var enctype = form.getAttribute("enctype");
       var data = {};
