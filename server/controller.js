@@ -1,7 +1,16 @@
 var IntentController = new (function() { 
+  var setText = function(obj, text) {
+    if(!!obj.textContent) {
+      obj.textContent = text;
+    }
+    else {
+      obj.innerText = text; 
+    }
+  };
+
   this.renderActionContainer = function (action, root) {
     var header = document.createElement("h2");
-    header.textContent = action.key;
+    setText(header, action.key);
     var collection = document.createElement("ul");
 
     root.appendChild(header);
@@ -39,10 +48,10 @@ var IntentController = new (function() {
 
     actionLink.href = action.url;
     actionLink.target = "_blank";
-    actionLink.textContent = action.title;
+    setText(actionLink, action.title);
     attachEventListener(actionLink, "click", launch(intent), false);
 
-    domain.textContent = action.domain || "Unknown domain";
+    setText(domain, action.domain || "Unknown domain");
     
     actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);
