@@ -3,10 +3,11 @@
   <title>Edit Link</title>
   <script src="/lib/webintents.debug.js"></script>
   <script src="/lib/events.js"></script>
+  <script src="/lib/common.js"></script>
   <script>
     window.addEventListener("load", function() {
       var output = document.getElementById("output");
-      output.textContent = intent.data.uris[0]; 
+      setText(output, intent.data.uris[0]); 
       intent.postResult({ uris: ["http://kin.ly/A" ] } );
     }, false);
   </script>
