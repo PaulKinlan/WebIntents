@@ -5,7 +5,7 @@
   <script src="/lib/events.js"></script>
   <script src="/lib/common.js"></script>
   <script>
-    window.addEventListener("load", function() {
+    attachEventListener(window, "load", function() {
       var output = document.getElementById("output");
       setText(output, intent.data.uris[0]); 
       intent.postResult({ uris: ["http://kin.ly/A" ] } );

@@ -11,10 +11,10 @@
       href="shorten.html" 
       title="Kinlan's Link Shortener" />
     <script>
-      window.addEventListener("load", function() {
+      attachEventListener(window, "load", function() {
 
         var shareLink = document.getElementById("shortenLink");
-        shareLink.addEventListener("click", function() {
+        attachEventListener(shareLink, "click", function() {
           var url = document.getElementById("url").value;
           
           var intent = new Intent();
