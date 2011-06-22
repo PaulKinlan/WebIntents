@@ -19,6 +19,14 @@
   var channels = {};
   var intents = {};
 
+  var encodeNameTransport = function(data) {
+    return window.btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/=/g, "_");
+  };
+
+  var decodeNameTransport = function(str) {
+    return JSON.parse(window.atob(str.replace(/_/g, "=")));
+  };
+
   var Intents = function() {
   };
 
@@ -27,18 +35,13 @@
    */
   Intents.prototype.startActivity = function (intent, onResult) {
     var id = "intent" + new Date().valueOf();
-    var windowid = "beginStart" + id;
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no";
     
-    var w = window.open(pickerSource, windowid, params);
-
     intent._id = id;
     intents[id] = { intent: intent }; 
-    
-    iframe.contentWindow.postMessage(
-      _str({"request": "beginStartActivity", "intent": intent}),
-      serverSource);
 
+    var w = window.open(pickerSource, encodeNameTransport(intent), params);
+    
     if(onResult) {
       iframe.contentWindow.postMessage(
         _str({"request": "registerCallback", "id": id }), 

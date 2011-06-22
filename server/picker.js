@@ -1,10 +1,15 @@
-attachEventListener(window, "load", function() {
-  var obj = localStorage[window.name];
-  localStorage.removeItem(window.name);
+var decodeNameTransport = function(str) {
+  return JSON.parse(window.atob(str.replace(/_/g, "=")));
+};
 
-  var data = JSON.parse(obj);
+attachEventListener(window, "load", function() {
+  var intent = decodeNameTransport(window.name);   
+
+  data = {};
   data.request = "startActivity";
-  data.origin = window.name;  
+  data.origin = window.name;
+  data.intent = intent;
+
   // Send a message to itself, mainly for webkit. 
   window.postMessage(JSON.stringify(data), "*");
 
