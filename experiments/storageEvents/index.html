@@ -1,0 +1,18 @@
+<html>
+  <script>
+    window.addEventListener("storage", function(e) {
+      var data = document.getElementById("data");
+      data.textContent = e.key;
+    }, false); 
+  </script>
+  <p>Recieves a storage event</p>
+  <button id="test"></button>
+  <div id="data"></div>
+  <script>
+    var test = document.getElementById("test");
+    test.addEventListener("click", function() {
+      var d = new Date().valueOf();
+      localStorage[d] = d;
+    });
+  </script>
+</html>

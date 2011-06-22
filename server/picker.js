@@ -1,4 +1,11 @@
 attachEventListener(window, "load", function() {
-  // Tell the opener that we are ready for business
-  window.opener.postMessage(JSON.stringify({ "request": "ready", "id": window.name }), "*"); 
+  console.log(window.name); 
+  var obj = localStorage[window.name];
+  localStorage.removeItem(window.name);
+
+  var data = JSON.parse(obj);
+  data.request = "startActivity";
+  data.origin = window.name;  
+  // Send a message to itself, mainly for webkit. 
+  window.postMessage(JSON.stringify(data), "*");
 }, false);
