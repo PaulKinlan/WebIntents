@@ -28,9 +28,9 @@
   Intents.prototype.startActivity = function (intent, onResult) {
     var id = "intent" + new Date().valueOf();
     var windowid = "beginStart" + id;
-    var winx = (document.all)?window.screenLeft:window.screenX;
-    var winy = (document.all)?window.screenTop:window.screenY;
-    var params = "directories=no,menubar=no,status=0,location=0,fullscreen=yes";
+    var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no";
+    
+    var w = window.open(pickerSource, windowid, params);
 
     intent._id = id;
     intents[id] = { intent: intent }; 
@@ -45,10 +45,6 @@
         serverSource );
       intents[id].callback = onResult;
     }
-
-    var w = window.open(pickerSource, windowid, params);
-    //w.resizeTo(300,300);
-    //w.moveTo(winx + 40, document.body.offsetHeight + winy);
   };
 
   var _str = function(obj) {
@@ -57,23 +53,7 @@
 
   var handler = function(e) {
     var data = JSON.parse(e.data);
-    if(data.request && 
-       data.request == "ready") {
-      // The picker is ready
-      var id = data.id;
-      var intent = intents[id];
-      
-      // Send the intent data to the app.
-      e.source.postMessage(
-        _str({ request: "startActivity", intent: intent.intent }),
-        pickerSource 
-      );
-    }
-    else if(data.request &&
-            data.request == "intentData") {
-      loadIntentData(data.intent);
-    }
-    else if(data.request &&
+    if(data.request &&
             data.request == "response") {
       intents[data.intent._id].callback(data.intent);
     }
@@ -234,7 +214,6 @@
             data[name] = element.value;
           }
         }
-
       }
 
       var intent = new Intent(action, enctype, data);
@@ -251,30 +230,14 @@
     }
   };
 
-  var getIntentData = function() {
-    if(window.opener && window.opener.closed == false) {
-      iframe.contentWindow.postMessage(
-       _str({ request: "launched", name: window.name }), 
-       "*");
-    }
-  };
-
   var init = function () {
     var intents = new Intents();
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
 
-    if(window.name) {
-      try {
-        loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
-        window.name = "";
-      } catch(ex) {
-        // If the window.name is not intent data, get it from the subsystem.
-        getIntentData();
-      }
-    }
-    else {
-      getIntentData();
+    if(window.name != "") {
+      loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
+      window.name = "";
     }
    
     if(!!window.postMessage) {

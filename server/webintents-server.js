@@ -103,15 +103,6 @@ var MessageDispatcher = function() {
     callbacks[data.id] = {};
   };
 
-  this.launched = function(data, timestamp, e) {
-    // The app has launched, send it the intent data.
-    var launchId = data.name;
-    var intent = JSON.parse(localStorage[launchId]);
-    var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
-    e.source.postMessage(message, e.origin);
-    localStorage.removeItem(launchId);
-  };
-  
   /*
    * The service has sent a response, route it back to the correct frame.
    */
