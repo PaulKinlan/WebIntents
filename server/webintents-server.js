@@ -171,7 +171,3 @@ var msgHandler = new MessageHandler();;
 
 attachEventListener(window, "message", msgHandler.handler, false); 
 attachEventListener(window, "storage", msgHandler.handler, false); 
-attachEventListener(window, "storage", function(e) {
-  // Intent messages are stored in localStorage as a synch mechanism.
-  // This is a dirty hack.
-  }, false);
