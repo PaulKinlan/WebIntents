@@ -7,8 +7,9 @@ picker.html
 controller.js
 webintents.js
 webintents-server.js
+base64.js
 json2.js
 picker.js
 
 # Make time 
-# Wed Jun 22 11:43:20 BST 2011
+# Wed Jun 22 14:19:33 BST 2011
