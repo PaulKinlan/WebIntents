@@ -123,8 +123,6 @@ var MessageDispatcher = function() {
    * The correct frame has recieved the reposen, route it back to the parent app.
    */
   this.sendResponse = function(data, timestamp, e) {
-    var vals = localStorage[e.key];
-    var data = JSON.parse(vals);
     localStorage.removeItem[data.intent._id];
     var message = JSON.stringify({ intent: data.intent, request: "response" });
     window.parent.postMessage(
