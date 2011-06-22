@@ -28,9 +28,7 @@
   Intents.prototype.startActivity = function (intent, onResult) {
     var id = "intent" + new Date().valueOf();
     var windowid = "beginStart" + id;
-    var winx = (document.all)?window.screenLeft:window.screenX;
-    var winy = (document.all)?window.screenTop:window.screenY;
-    var params = "directories=no,menubar=no,status=0,location=0,fullscreen=yes";
+    var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no";
 
     intent._id = id;
     intents[id] = { intent: intent }; 
@@ -47,8 +45,6 @@
     }
 
     var w = window.open(pickerSource, windowid, params);
-    //w.resizeTo(300,300);
-    //w.moveTo(winx + 40, document.body.offsetHeight + winy);
   };
 
   var _str = function(obj) {
