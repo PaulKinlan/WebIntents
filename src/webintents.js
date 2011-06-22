@@ -297,10 +297,6 @@
       }
     }
 
-    if(window.opener) {
-      window.opener.postMessage(_str({request: "ready"}), server);
-    }
-
     addEventListener(window, "submit", handleFormSubmit, false);
   };
 
