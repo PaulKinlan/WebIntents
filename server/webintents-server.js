@@ -94,7 +94,7 @@ var MessageDispatcher = function() {
     if(!!window.onstorage == false) {
       // We are going to have to set up something that polls.
       var timer = setInterval(function() {
-        var intentStr = localStorage[data.id];
+        var intentStr = localStorage.getItem(data.id);
         if(!!intentStr) {
           var intentObj = JSON.parse(intentStr);
           if(intentObj.request == "sendResponse") {
