@@ -153,3 +153,4 @@ var msgHandler = new MessageHandler();;
 
 attachEventListener(window, "message", msgHandler.handler, false); 
 attachEventListener(window, "storage", msgHandler.handler, false); 
+attachEventListener(document, "storage", msgHandler.handler, false); 
