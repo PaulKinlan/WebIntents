@@ -1,5 +1,4 @@
 attachEventListener(window, "load", function() {
-  console.log(window.name); 
   var obj = localStorage[window.name];
   //localStorage.removeItem(window.name);
 
