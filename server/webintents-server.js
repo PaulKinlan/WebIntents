@@ -80,6 +80,7 @@ var MessageDispatcher = function() {
    */
   this.beginStartActivity = function(data, timestamp, e) {
     var id = "beginStart" + data.intent._id;
+    data.process == false;
     if(!!localStorage[id] == false) {
       localStorage[id] = JSON.stringify(data);
     }
@@ -157,8 +158,9 @@ var MessageHandler = function() {
       }
     }
 
-    if(data.origin && data.origin !== window.name) {
-      // If there is an intended origin, then enforce it
+    if(data.origin && data.origin !== window.name ||
+       data.process && data.process == false) {
+      // If there is an intended origin, then enforce it, or the system says not to listen to the event.
       return;
     }
 
