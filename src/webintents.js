@@ -291,8 +291,9 @@
       // Listen to new "intent" nodes.
       var heads = document.getElementsByTagName("HEAD");
       if(heads.length > 0) {
-        addEventListener(heads, "DOMNodeInserted", onIntentDOMAdded, false);
-        heads.appendChild(iframe);
+        var head = heads[0];
+        addEventListener(head, "DOMNodeInserted", onIntentDOMAdded, false);
+        head.appendChild(iframe);
       }
     }
 
