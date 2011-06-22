@@ -22,7 +22,7 @@ var IntentController = new (function() {
   var launch = function(intent) { 
     return function(e) {
       e.preventDefault();
-      var intentStr = window.atob(encodeURI(JSON.stringify(intent))).replace("=", "_");
+      var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
       var w = window.open(e.target.href, intentStr); 
       window.close();
       return false;

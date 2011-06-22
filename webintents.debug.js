@@ -266,7 +266,7 @@
 
     if(window.name) {
       try {
-        loadIntentData(JSON.parse(decodeURI(window.btoa(window.name.replace("_", "=")))));
+        loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
         window.name = "";
       } catch(ex) {
         // If the window.name is not intent data, get it from the subsystem.
