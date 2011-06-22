@@ -75,17 +75,6 @@ var MessageDispatcher = function() {
     Intents.addAction(data.intent);
   };
 
-  /*
-   * The system is starting an activity, save the intent data so we can get it back later.
-   */
-  this.beginStartActivity = function(data, timestamp, e) {
-    var id = "beginStart" + data.intent._id;
-    data.process == false;
-    if(!!localStorage[id] == false) {
-      localStorage[id] = JSON.stringify(data);
-    }
-  };
-
   this.startActivity = function(data, timestamp, e) {
     var actions = Intents.getActions(data.intent);
 
@@ -128,7 +117,6 @@ var MessageDispatcher = function() {
       message,
       "*"  
     );
-
   };
 };
 
