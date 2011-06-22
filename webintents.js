@@ -47,8 +47,8 @@
     }
 
     var w = window.open(pickerSource, windowid, params);
-    w.resizeTo(300,300);
-    w.moveTo(winx + 40, document.body.offsetHeight + winy);
+    //w.resizeTo(300,300);
+    //w.moveTo(winx + 40, document.body.offsetHeight + winy);
   };
 
   var _str = function(obj) {
