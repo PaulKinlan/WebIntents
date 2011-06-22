@@ -106,7 +106,6 @@ var MessageDispatcher = function() {
     var message = JSON.stringify({"request" : "intentData",  intent: intent.intent});
     e.source.postMessage(message, e.origin);
     localStorage.removeItem(launchId);
-    setTimeout(function() { window.close(); });
   };
   
   /*
