@@ -53,23 +53,7 @@
 
   var handler = function(e) {
     var data = JSON.parse(e.data);
-    if(data.request && 
-       data.request == "ready") {
-      // The picker is ready
-      var id = data.id;
-      var intent = intents[id];
-      
-      // Send the intent data to the app.
-      e.source.postMessage(
-        _str({ request: "startActivity", intent: intent.intent }),
-        pickerSource 
-      );
-    }
-    else if(data.request &&
-            data.request == "intentData") {
-      loadIntentData(data.intent);
-    }
-    else if(data.request &&
+    if(data.request &&
             data.request == "response") {
       intents[data.intent._id].callback(data.intent);
     }
@@ -230,7 +214,6 @@
             data[name] = element.value;
           }
         }
-
       }
 
       var intent = new Intent(action, enctype, data);
