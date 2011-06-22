@@ -1,6 +1,6 @@
 attachEventListener(window, "load", function() {
   var obj = localStorage[window.name];
-  //localStorage.removeItem(window.name);
+  localStorage.removeItem(window.name);
 
   var data = JSON.parse(obj);
   data.request = "startActivity";

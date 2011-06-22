@@ -29,6 +29,8 @@
     var id = "intent" + new Date().valueOf();
     var windowid = "beginStart" + id;
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no";
+    
+    var w = window.open(pickerSource, windowid, params);
 
     intent._id = id;
     intents[id] = { intent: intent }; 
@@ -43,8 +45,6 @@
         serverSource );
       intents[id].callback = onResult;
     }
-
-    var w = window.open(pickerSource, windowid, params);
   };
 
   var _str = function(obj) {
@@ -247,30 +247,14 @@
     }
   };
 
-  var getIntentData = function() {
-    if(window.opener && window.opener.closed == false) {
-      iframe.contentWindow.postMessage(
-       _str({ request: "launched", name: window.name }), 
-       "*");
-    }
-  };
-
   var init = function () {
     var intents = new Intents();
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
 
-    if(window.name) {
-      try {
-        loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
-        window.name = "";
-      } catch(ex) {
-        // If the window.name is not intent data, get it from the subsystem.
-        getIntentData();
-      }
-    }
-    else {
-      getIntentData();
+    if(window.name != "") {
+      loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
+      window.name = "";
     }
    
     if(!!window.postMessage) {
