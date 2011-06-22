@@ -34,8 +34,9 @@ var IntentController = new (function() {
         e.preventDefault();
       else
         e.returnValue = false;
+
       var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
-      var w = window.open(e.target.href, intentStr); 
+      var w = window.open((e.srcElement || e.target).href, intentStr); 
       window.close();
       return false;
     };
