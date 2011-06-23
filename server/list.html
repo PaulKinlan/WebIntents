@@ -15,7 +15,10 @@
 
       attachEventListener(window, "load", function() {
         var clearall = document.getElementById("clearall");
-        attachEventListener(clearall, "click", Intents.clearAll);
+        attachEventListener(clearall, "click", function() {
+          Intents.clearAll()
+          window.location.reload();
+        });
         
         var actions = Intents.getAllActions();
          
