@@ -1,0 +1,19 @@
+interface Intent {
+  string action;
+  string type;
+  object data;
+
+  void postResult(in object data);
+}
+
+[NoInterfaceObject]
+interface Intents {
+  const string SHARE = "http://webintents.org/share";
+  const string EDIT = "http://webintents.org/share";
+  const string PICK = "http://webintents.org/share";
+  const string SHARE = "http://webintents.org/share";
+
+  void startActivity(in Intent intent, in optional callback); 
+};
+
+Navigator implements Intents;
