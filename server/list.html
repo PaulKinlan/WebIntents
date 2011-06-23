@@ -4,19 +4,19 @@
     <script src="webintents-server.js"></script>
     <script src="controller.js"></script>
     <script>
-window.attachEventListener = function(obj, type, func, capture) {
-  if(!!obj.addEventListener) {
-    obj.addEventListener(type, func, capture);
-  }
-  else if(!!obj.attachEvent) {
-    obj.attachEvent("on" + type, func);
-  }
-};
-
-
-
+      window.attachEventListener = function(obj, type, func, capture) {
+        if(!!obj.addEventListener) {
+          obj.addEventListener(type, func, capture);
+        }
+        else if(!!obj.attachEvent) {
+          obj.attachEvent("on" + type, func);
+        }
+      };
 
       attachEventListener(window, "load", function() {
+        var clearall = document.getElementById("clearall");
+        attachEvent(clearall, Intents.clearAll);
+        
         var actions = Intents.getAllActions();
          
         for(var key in actions) {
@@ -30,5 +30,9 @@ window.attachEventListener = function(obj, type, func, capture) {
   </head>
   <body>
     <h1>Intents</h1>
+    <div>
+      <p></p>
+      <div><a id="clearall" href="#" >Clear all</a></div>
+    </div>
   </body>
 </html>
