@@ -11,9 +11,9 @@ interface Intent {
 [NoInterfaceObject]
 interface Intents {
   const string SHARE = "http://webintents.org/share";
-  const string EDIT = "http://webintents.org/share";
-  const string PICK = "http://webintents.org/share";
-  const string SHARE = "http://webintents.org/share";
+  const string EDIT = "http://webintents.org/edit";
+  const string PICK = "http://webintents.org/pick";
+  const string VIEW = "http://webintents.org/view";
 
   void startActivity(in Intent intent, in optional callback); 
 };
