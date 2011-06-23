@@ -1,3 +1,5 @@
+[Constructor,
+ Constructor(in string action, in string type, in string data)]
 interface Intent {
   string action;
   string type;

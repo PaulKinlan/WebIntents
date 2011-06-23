@@ -43,6 +43,10 @@ var Intents = new (function() {
     return filteredActions;
   };
 
+  this.clearAll = function() {
+    localStorage.clear();
+  };
+
   this.addAction = function(intent) {
     if(!!intent == false) throw "No intent";
     if(!!intent.action == false) throw "No action to resolve";
