@@ -15,7 +15,7 @@
 
       attachEventListener(window, "load", function() {
         var clearall = document.getElementById("clearall");
-        attachEvent(clearall, Intents.clearAll);
+        attachEventListener(clearall, Intents.clearAll);
         
         var actions = Intents.getAllActions();
          
