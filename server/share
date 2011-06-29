@@ -36,13 +36,13 @@ window.navigator.startActivity(intent);</pre>
     <p>Advisory data-schemes are described below based off <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">MIME-Types</a> or <a href="http://activitystrea.ms/head/activity-schema.html#object-types" target="_blank">Activity Streams</a></p>
     <dl id="dataformats">
       <dt>image/*</dt>
-      <dd><pre>{ uris: [ <i>string uri</i> ] }</pre></dd>
+      <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
       <dt>audio/*</dt>
-      <dd><pre>{ uris: [ <i>string uri</i> ] }</pre></dd>
+      <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
       <dt>video/*</dt>
-      <dd><pre>{ uris: [ <i>string uri</i> ] }</pre></dd>
+      <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
       <dt>text/uri-list</dt>
-      <dd><pre>{ uris: [ <i>string uri</i> ] }</pre></dd>
+      <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
     </dl>
   </body>
 </html>

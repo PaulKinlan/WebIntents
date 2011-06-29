@@ -19,7 +19,7 @@
   
         var intentResponse = function (intentData) {
           var output = document.getElementById("output");
-          output.src = intentData.data.images[0];
+          output.src = intentData.data[0];
           focus();
         };
       }, false);

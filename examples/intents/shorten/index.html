@@ -20,7 +20,7 @@
           var intent = new Intent();
           intent.action = "http://webintents.org/shorten";
           intent.type = "text/uri-list";
-          intent.data = { uris : [ url ] };
+          intent.data = [ url ];
 
           window.navigator.startActivity(intent, intentResponse);
           return false;
@@ -28,7 +28,7 @@
 
         var intentResponse = function (intentData) {
           var output = document.getElementById("output");
-          setText(output, intentData.data.uris[0]);
+          setText(output, intentData.data[0]);
           focus();
         };
       }, false);

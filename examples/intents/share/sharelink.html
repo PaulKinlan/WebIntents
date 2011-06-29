@@ -7,10 +7,10 @@
   <script>
     attachEventListener(window, "load", function(e) {
       var output = document.getElementById("output");
-      if(intent.data.uris instanceof Array)
-        setText(output, intent.data.uris[0]); 
+      if(intent.data instanceof Array)
+        setText(output, intent.data[0]); 
       else
-        setText(output.textContent, intent.data.uris);
+        setText(output.textContent, intent.data);
     }, false);
   </script>
   <body>
