@@ -56,8 +56,10 @@
 
   var handler = function(e) {
     var data = JSON.parse(e.data);
-    if(data.request &&
-            data.request == "response") {
+    if(!!intents[data.intent._id] == true &&
+       data.request &&
+       data.request == "response") {
+
       intents[data.intent._id].callback(data.intent);
     }
   };
