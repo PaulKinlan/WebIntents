@@ -19,8 +19,8 @@ case $1 in
   )
   ;;
 'stop')
-  kill $(cat server/server.pid) $(cat examples/examples.pid) $(cat experiements/experiments.pid)
-  rm server/server.pid examples/examples.pid experiements/experiments.pid
+  kill $(cat server/server.pid) $(cat examples/examples.pid) $(cat experiments/experiments.pid)
+  rm server/server.pid examples/examples.pid experiments/experiments.pid
   ;;
 'restart')
   $0 stop ; $0 start
