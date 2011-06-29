@@ -17,7 +17,7 @@
     var returnImage = function(e) {
       if(!!window.intent) {
         // Do some magic to return the raw data.
-        var data = { images : [ getImageData(e.target) ] }; 
+        var data = [ getImageData(e.target) ]; 
 
         window.intent.postResult(data);
         setTimeout(function() { window.close();}, 500);
@@ -50,7 +50,7 @@
 var returnImage = function(e) {
   if(!!window.intent) {
     // Do some magic to return the raw data.
-    var data = { images : [ getImageData(e.target) ] }; 
+    var data = [ getImageData(e.target) ] ; 
   
     window.intent.postResult(data);
     setTimeout(function() { window.close();}, 500);

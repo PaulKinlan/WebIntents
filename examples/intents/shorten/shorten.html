@@ -7,8 +7,8 @@
   <script>
     attachEventListener(window, "load", function() {
       var output = document.getElementById("output");
-      setText(output, intent.data.uris[0]); 
-      intent.postResult({ uris: ["http://kin.ly/A" ] } );
+      setText(output, intent.data[0]); 
+      intent.postResult(["http://kin.ly/A" ]);
     }, false);
   </script>
   <body>

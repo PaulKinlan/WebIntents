@@ -11,7 +11,7 @@ attachEventListener(window, "load", function() {
   data.intent = intent;
 
   // Send a message to itself, mainly for webkit. 
-  window.postMessage(JSON.stringify(data), "*");
+  window.postMessage(JSON.stringify(data), document.location.origin);
 
   window.resizeTo(300,300);
 }, false);
