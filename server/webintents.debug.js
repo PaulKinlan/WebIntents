@@ -270,6 +270,9 @@
 
 
       addEventListener(iframe, "load", function() {
+        if(iframe.src == "about:blank") {
+          iframe.src = serverSource;
+        }
         parseIntentsDocument();
         parseIntentsMetaData();
       }, false);
