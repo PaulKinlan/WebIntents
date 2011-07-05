@@ -270,7 +270,7 @@
 
 
       addEventListener(iframe, "load", function() {
-        if(iframe.src == "about:blank") {
+        if(iframe.src != serverSource) {
           iframe.src = serverSource;
         }
         parseIntentsDocument();
