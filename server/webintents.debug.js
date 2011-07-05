@@ -267,7 +267,7 @@
       // We can handle postMessage.
       iframe = document.createElement("iframe");
       iframe.style.display = "none";
-      iframe.src = serverSource;
+
 
       addEventListener(iframe, "load", function() {
         parseIntentsDocument();
@@ -280,6 +280,7 @@
         var head = heads[0];
         addEventListener(head, "DOMNodeInserted", onIntentDOMAdded, false);
         head.appendChild(iframe);
+        iframe.src = serverSource;
       }
     }
 
