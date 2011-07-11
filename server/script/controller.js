@@ -58,11 +58,25 @@ var IntentController = new (function() {
     };
   };
 
+  var setDefault = function(intent) {
+    return function(e) {
+      if(!!e.preventDefault) 
+        e.preventDefault();
+      else
+        e.returnValue = false;
+     
+      Intents.setDefault(intent); 
+
+      return false;
+    };
+  };
+
   var renderAction = function(action, intent) {
     var actionElement = document.createElement("li");
     var actionLink = document.createElement("a");
     var icon = document.createElement("img");
     var domain = document.createElement("span");
+    var isDefault = document.createElement("img");
 
     icon.src = action.icon;
 
@@ -71,11 +85,15 @@ var IntentController = new (function() {
     setText(actionLink, action.title);
     attachEventListener(actionLink, "click", launch(intent), false);
 
+    isDefault.src = "/images/default.png";
+    attachEventListener(isDefault, "click", setDefault(intent), false);
+
     setText(domain, action.domain || "Unknown domain");
     
     actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);
     actionElement.appendChild(domain);
+    actionELement.appendChild(isDefault)
 
     return actionElement;
   };

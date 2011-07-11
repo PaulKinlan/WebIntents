@@ -46,14 +46,19 @@ var Intents = new (function() {
     if(!!intent == false) throw "No intent";
     if(!!intent.action == false) throw "No action to resolve";
 
-    var actionData = localStorage[intent.action] || "[]";
+    var actionData = localStorage[intent.action] || "{}";
     var actions = JSON.parse(actionData);
+
+    if(actions instanceof Array) {
+      actions = { "actions" : actions };
+    }
+
     var action;
-    var filteredActions = [];
+    var filteredActions = { "actions": [], defaultAction: actions.defaultAction };
     // Find the actions that are of the correct type (or not).  Does not handle *, yet
-    for(var i = 0; action = actions[i]; i++) {
+    for(var i = 0; action = actions.actions[i]; i++) {
       if(intent.type == action.type || !!intent.type == false) {
-        filteredActions.push(action);
+        filteredActions.actions.push(action);
       }
     }
 
@@ -64,26 +69,41 @@ var Intents = new (function() {
     localStorage.clear();
   };
 
+  this.setDefault = function(intent) {
+    var actions = JSON.parse(localStorage[intent.action]);
+    if(action instanceof Array) {
+      actions = { "actions": actions };
+    }
+    actions.defaultAction = intent;
+    localStorage[intent.action] = JSON.stringify(actions);
+  };
+
   this.addAction = function(intent) {
     if(!!intent == false) throw "No intent";
     if(!!intent.action == false) throw "No action to resolve";
     
-    var actionData = localStorage[intent.action] || "[]";
+    var actionData = localStorage[intent.action] || "{}";
     var actions = JSON.parse(actionData);
+    
+    if(actions instanceof Array) {
+      // Upgrade 
+      actions = { "actions" : actions };
+    }
+
     var action;
     var found = false;
      
     // Replace an existing action. 
-    for(var i = 0; action = actions[i]; i++) {
+    for(var i = 0; action = actions.actions[i]; i++) {
       if(intent.action == action.action && intent.url == action.url && intent.type == action.type) {
-        actions[i] = intent;
+        actions.actions[i] = intent;
         found = true;
         break;
       }
     }
     // Add a new action
     if(found == false) {
-      actions.push(intent);
+      actions.actions.push(intent);
     }
 
     localStorage[intent.action] = JSON.stringify(actions);
@@ -104,6 +124,14 @@ var MessageDispatcher = function() {
       intent: data.intent,
       timestamp: timestamp
     };
+
+    if(actions.defaultAction) {
+      var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
+
+      window.name = intentStr;
+      window.location = action.url;
+      return;
+    }
 
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
