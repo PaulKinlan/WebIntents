@@ -69,7 +69,7 @@
     <pre>var intent = new Intent();
 intent.action = "http://webintents.org/share";
 intent.type = "text/uri-list";
-intent.data = { uris : [ url ] };
+intent.data = [ url ];
 
 window.navigator.startActivity(intent);</pre>
     </section>
@@ -81,7 +81,7 @@ window.navigator.startActivity(intent);</pre>
   <pre>var intent = new Intent();
 intent.action = "http://webintents.org/share";
 intent.type = "image/*";
-intent.data = { images : [ imageData ] };
+intent.data = [ imageData ];
             
 window.navigator.startActivity(intent);</pre>
       </section>
