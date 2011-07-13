@@ -1,6 +1,11 @@
 [Constructor,
  Constructor(in string action, in string type, in string data)]
 interface Intent {
+  const string SHARE = "http://webintents.org/share";
+  const string EDIT = "http://webintents.org/edit";
+  const string PICK = "http://webintents.org/pick";
+  const string VIEW = "http://webintents.org/view";
+
   string action;
   string type;
   object data;
@@ -10,11 +15,6 @@ interface Intent {
 
 [NoInterfaceObject]
 interface Intents {
-  const string SHARE = "http://webintents.org/share";
-  const string EDIT = "http://webintents.org/edit";
-  const string PICK = "http://webintents.org/pick";
-  const string VIEW = "http://webintents.org/view";
-
   void startActivity(in Intent intent, in optional callback); 
 };
 
