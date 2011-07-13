@@ -38,7 +38,7 @@ var IntentController = new (function() {
   this.renderActions = function(actions, intent, root) {
     root = root || document.getElementById("actions");
     var action;
-    for(var i = 0; action = actions[i]; i++) {
+    for(var i = 0; action = actions.actions[i]; i++) {
       var actionElement = renderAction(action, intent);
       root.appendChild(actionElement); 
     } 
@@ -52,8 +52,19 @@ var IntentController = new (function() {
         e.returnValue = false;
 
       var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
-      var w = window.open((e.srcElement || e.target).href, intentStr); 
-      window.close();
+
+      var defaultIntent = Intents.getDefault(intent.action);
+      if(!!defaultIntent && defaultIntent.url == intent.url) {
+        // Open in current window.
+        var w = window.open((e.srcElement || e.target).href, intentStr);
+      }
+      else {
+        window.name = "";
+        window.open((e.srcElement || e.target).href, intentStr);
+        window.close();
+      }
+
+
       return false;
     };
   };
@@ -64,7 +75,8 @@ var IntentController = new (function() {
         e.preventDefault();
       else
         e.returnValue = false;
-     
+
+      e.target.src = "/images/star.png"; 
       Intents.setDefault(intent); 
 
       return false;
@@ -84,16 +96,17 @@ var IntentController = new (function() {
     actionLink.target = "_blank";
     setText(actionLink, action.title);
     attachEventListener(actionLink, "click", launch(intent), false);
-
-    isDefault.src = "/images/default.png";
-    attachEventListener(isDefault, "click", setDefault(intent), false);
+ 
+    isDefault.className = "star";
+    isDefault.src = "/images/unstar.png";
+    attachEventListener(isDefault, "click", setDefault(action), false);
 
     setText(domain, action.domain || "Unknown domain");
     
     actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);
     actionElement.appendChild(domain);
-    actionELement.appendChild(isDefault)
+    actionElement.appendChild(isDefault)
 
     return actionElement;
   };

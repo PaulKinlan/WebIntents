@@ -52,6 +52,9 @@ var Intents = new (function() {
     if(actions instanceof Array) {
       actions = { "actions" : actions };
     }
+    else if (!!actions.actions == false) {
+      actions = { "actions" : [] };
+    }
 
     var action;
     var filteredActions = { "actions": [], defaultAction: actions.defaultAction };
@@ -69,10 +72,18 @@ var Intents = new (function() {
     localStorage.clear();
   };
 
+  this.getDefault = function(action) {
+    var actions = JSON.parse(localStorage[action]);
+    return actions.defaultAction;
+  };
+
   this.setDefault = function(intent) {
     var actions = JSON.parse(localStorage[intent.action]);
-    if(action instanceof Array) {
+    if(actions instanceof Array) {
       actions = { "actions": actions };
+    }
+    else if (!!actions.actions == false) {
+      actions = { "actions" : [] };
     }
     actions.defaultAction = intent;
     localStorage[intent.action] = JSON.stringify(actions);
@@ -86,8 +97,11 @@ var Intents = new (function() {
     var actions = JSON.parse(actionData);
     
     if(actions instanceof Array) {
-      // Upgrade 
+      // Upgrade existing intents to new format.
       actions = { "actions" : actions };
+    }
+    else if (!!actions.actions == false) {
+      actions = { "actions" : [] };
     }
 
     var action;
@@ -118,6 +132,7 @@ var MessageDispatcher = function() {
 
   this.startActivity = function(data, timestamp, e) {
     var actions = Intents.getActions(data.intent);
+    var defaultAction = Intents.getDefault(data.intent.action);
 
     var intentData = {
       id: data.intent._id,
@@ -125,11 +140,11 @@ var MessageDispatcher = function() {
       timestamp: timestamp
     };
 
-    if(actions.defaultAction) {
-      var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
-
+    if(defaultAction) {
+      var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(data.intent)))).replace(/=/g, "_");
+      console.log(defaultAction);
       window.name = intentStr;
-      window.location = action.url;
+      window.location = defaultAction.url;
       return;
     }
 
