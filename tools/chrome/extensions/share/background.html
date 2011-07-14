@@ -5,6 +5,7 @@
   var tabPorts = {};
 
   var clickHandler = function(info, tab) {
+    console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
        info.meditType == "audio") {
@@ -16,16 +17,25 @@
 
        return;
      }
+     else if(!!info.linkUrl) {
+       var intent = new Intent();
+       intent.action = "http://webintents.org/share";
+       intent.type = "text/uri-list";
+       intent.data = info.linkUrl;
+
+       tabPorts[tab.id].postMessage(intent);
+     }
   };
 
   chrome.extension.onConnect.addListener(function(e) {
+    console.log(e);
     tabPorts[e.sender.tab.id] = e;
   });
 
   chrome.contextMenus.create({
     "title" : "Share",
     "type" : "normal",
-    "contexts" : ["link", "image", "page", "video", "audio"],
+    "contexts" : ["link"], //, "image", "page", "video", "audio"],
     "onclick" : clickHandler 
   }); 
 

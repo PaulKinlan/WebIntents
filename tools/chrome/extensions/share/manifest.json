@@ -13,6 +13,14 @@
   "background_page": "background.html",
   "content_scripts" : [{
     "matches" : ["http://*/*", "https://*/*"],
-    "js" :  ["webintents.js", "startActivity.js"]
-  }]
+    "js" :  ["startActivity.js"]
+  },
+  {
+    "matches" : ["https://plus.google.com/"],
+    "js" : ["plus.js"]
+  },
+  {
+    "matches" : ["http://twitter.com/"],
+    "js" : ["twitter.js"]
+  }] 
 }
