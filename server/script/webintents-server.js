@@ -30,16 +30,23 @@ window.attachEventListener = function(obj, type, func, capture) {
 var Intents = new (function() {
  
   this.getAllActions = function () {
-    var actions = [];
+    var allActions = [];
     for(var key in localStorage) {
-      var action = JSON.parse(localStorage[key]);
+      var actions = JSON.parse(localStorage[key]);
 
-      if(action instanceof Array) {
-        actions.push({ key: key, actions: action });
+      if(actions instanceof Array) {
+        actions = { "actions" : actions };
+      }
+      else if (!!actions.actions == false) {
+        actions = { "actions" : [] };
+      }
+     
+      if(!!actions.actions && actions.actions instanceof Array) {
+        allActions.push({ key: key, actions: actions.actions });
       }
     }
 
-    return actions;
+    return allActions;
   };
 
   this.getActions = function(intent) {
