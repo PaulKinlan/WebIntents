@@ -117,11 +117,14 @@
 
   var Intent = function(action, type, data) {
     var me = this;
+    var closed = false;
     this.action = action;
     this.type = type;
     this.data = data;
 
     this.postResult = function (data) {
+      if(closed) return;
+
       var returnIntent = new Intent();
       returnIntent._id = me._id;
       returnIntent.action = me.action;
@@ -133,6 +136,8 @@
           intent: returnIntent 
         }),
         serverSource);
+
+      closed = true;
     };
   };
 
