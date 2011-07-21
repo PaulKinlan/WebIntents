@@ -193,8 +193,8 @@
   };
 
   var parseIntentTag = function(intent) {
-    var title = intent.getAttribute("title");
-    var href = intent.getAttribute("href");
+    var title = intent.getAttribute("title") || document.title;
+    var href = intent.getAttribute("href") || document.location.href;
     var action = intent.getAttribute("action");
     var type = intent.getAttribute("type");
     var icon = intent.getAttribute("icon") || getFavIcon();

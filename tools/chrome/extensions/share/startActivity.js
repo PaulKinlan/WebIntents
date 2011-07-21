@@ -12,6 +12,6 @@ port.onMessage.addListener(function(intent) {
 });
 
 var intentsScript = document.createElement("script");
-intentsScript.src = "http://webintents.org/webintents.js";
+intentsScript.src = "http://0.0.0.0:8080/webintents.js";
 
 document.head.appendChild(intentsScript);

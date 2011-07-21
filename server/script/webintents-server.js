@@ -142,9 +142,7 @@ var MessageDispatcher = function() {
 
     if(defaultAction) {
       var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(data.intent)))).replace(/=/g, "_");
-      console.log(defaultAction);
-      window.name = intentStr;
-      window.location = defaultAction.url;
+      window.open(defaultAction.url, intentStr, "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes");
       return;
     }
 
