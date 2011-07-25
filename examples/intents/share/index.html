@@ -2,20 +2,35 @@
 <html>
   <head>
     <title>Intent: Share</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
     <style>
-      body {
-        height: 100%;
-      }
-
       iframe {
-        width: 45%;
-        height: 80%;
+        float:left;
+        width: 50%;
+        height: 800px;
       }
     </style>
   </head>
   <body>
-    <h2>This is an example app that needs to share links</h2>
-    <iframe src="register.html"></iframe>
-    <iframe src="action.html"></iframe>
+    <header>
+      <h1>Share intent example</h1>
+      <nav>
+        <a href="http://webintents.org/">Web Intents</a> 
+        <a href="http://webintents.org/share">Share Intent documentation</a> 
+        <a href="http://examples.webintents.org/">Examples</a> 
+      </nav>
+    </header>
+    <section>
+      <p>
+      Sharing is a common action on the Internet. This example shows you how easy it is
+      to build applications that recieve Share requests, and how simple it is to build
+      applications that request Share functionality. 
+      </p>
+      <div>
+        <iframe src="register.html"></iframe>
+        <iframe src="action.html"></iframe>
+      </div>
+    </section>
   </body>
 </html>

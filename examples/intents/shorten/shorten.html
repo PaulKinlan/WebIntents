@@ -1,9 +1,18 @@
 <!doctype html>
 <html>
-  <title>Edit Link</title>
+  <title>Kinlan's Link Shortener</title>
   <script src="/lib/webintents.debug.js"></script>
   <script src="/lib/events.js"></script>
   <script src="/lib/common.js"></script>
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <style>
+    iframe {
+      float:left;
+      width: 50%;
+      height: 800px;
+    }
+  </style>
   <script>
     attachEventListener(window, "load", function() {
       var output = document.getElementById("output");
@@ -12,7 +21,19 @@
     }, false);
   </script>
   <body>
-    <h1>Kinlan's Link Shortener</h1>
-    <div id="output"></div>
+    <header>
+      <h1>Kinlan's Link Shortener</h1>
+    </header>
+    <section>
+    <p>The data that is passed to this application will appear below. We also send it back to 
+    the calling application</p>
+      <div id="output"></div>
+      <h3>The code</h3>
+      <pre>attachEventListener(window, "load", function() {
+  var output = document.getElementById("output");
+  setText(output, intent.data[0]); 
+  intent.postResult(["http://kin.ly/A" ]);
+}, false);</pre>
+    </section>
   </body>
 </html>

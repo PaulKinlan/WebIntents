@@ -17,6 +17,7 @@ line-height: 20px;
 }
 
 header h1 {
+  margin-top: 10px;
   font-size: 3em;
   margin-bottom: 15px;
 }
@@ -41,14 +42,14 @@ nav.sub a:active {
 
 section h2 {
   font-size: 2em;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-top: 25px;
 }
 
 section h3 {
   font-size: 1.6em;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 section dl {
@@ -57,7 +58,7 @@ line-height: 20px;
 
 section p {
   margin-top: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   line-height: 20px;
 }
 

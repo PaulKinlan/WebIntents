@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>Discover</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
   </head>
   <body>
-    <h1>Intent: Discover - http://webintents.org/discover</h1>
+    <header>
+      <h1>Discover - http://webintents.org/discover</h1>
+      </header>
+    <section>
     <p>
       The discover intent is designed to let developers query the API's and services that might live on external services.
     </p>
@@ -34,6 +39,7 @@ window.navigator.startActivity(intent);</pre>
     <dl id="dataformats">
       <dt>application/JSON</dt>
       <dd><pre>[ <i>Object</i> ]</pre></dd>
-    </dl>
+      </dl>
+   </section>
   </body>
 </html>

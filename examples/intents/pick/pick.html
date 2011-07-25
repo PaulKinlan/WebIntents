@@ -3,6 +3,15 @@
   <title>Pick an Image</title>
   <script src="/lib/webintents.debug.js"></script>
   <script src="/lib/events.js"></script>
+  <link rel="stylesheet" href="/css/reset.css" />
+  <link rel="stylesheet" href="/css/base.css" />
+  <style>
+    iframe {
+      float:left;
+      width: 50%;
+      height: 800px;
+    }
+  </style>
   <script>
     var getImageData = function(img) {
       var canvas = document.createElement("canvas");
@@ -36,11 +45,16 @@
 
   </script>
   <body>
-    <h1>Kinlan's Cloud File Store</h1>
+    <header>
+      <h1>Kinlan's Cloud File Store</h1>
+    </header>
+    <section>
     <p>Select a file for the app to use</p>
-    <img id="img1" src="images/kitten1.jpg">
-    <img id="img2" src="images/kitten2.jpg">
-    <img id="img3" src="images/kitten3.jpg">
+    <div>
+      <img id="img1" src="images/kitten1.jpg">
+      <img id="img2" src="images/kitten2.jpg">
+      <img id="img3" src="images/kitten3.jpg">
+    </div>
     <h2>Code</h2>
     <pre>var getImageData = function(img) {
   ...
@@ -56,5 +70,6 @@ var returnImage = function(e) {
     setTimeout(function() { window.close();}, 500);
   }
 };</pre>
+    </section>
   </body>
 </html>

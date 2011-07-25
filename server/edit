@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>Edit</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
   </head>
   <body>
-    <h1>Intent: Edit - http://webintents.org/edit</h1>
+    <header>
+    <h1>Edit - http://webintents.org/edit</h1>
+    </header>
+    <section>
     <p>
       The edit intent is designed to give applications the ability to offer a simple mechanism for to edit data from the current page.
     </p>
@@ -43,6 +48,7 @@ window.navigator.startActivity(intent);</pre>
       <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
       <dt>text/uri-list</dt>
       <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
-    </dl>
+      </dl>
+    </section>
   </body>
 </html>

@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>Share</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
   </head>
   <body>
-    <h1>Intent: Share - http://webintents.org/share</h1>
+    <header>
+    <h1>Share - http://webintents.org/share</h1>
+    </header>
+    <section>
     <p>
       The share intent is designed to give applications the ability to offer a simple mechanism for sharing data from the current page.
     </p>
@@ -43,6 +48,7 @@ window.navigator.startActivity(intent);</pre>
       <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
       <dt>text/uri-list</dt>
       <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
-    </dl>
-  </body>
+      </dl>
+   </section>
+ </body>
 </html>

@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>Pick</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
   </head>
   <body>
-    <h1>Intent: Pick - http://webintents.org/pick</h1>
+    <header>
+    <h1>Pick - http://webintents.org/pick</h1>
+    </header>
+    <section>
     <p>
       The pick intent is designed to give services the ability to allow their users pick files from their service for use in a client application.
     </p>
@@ -43,6 +48,7 @@ window.navigator.startActivity(intent);</pre>
       <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
       <dt>text/uri-list</dt>
       <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
-    </dl>
+      </dl>
+    </section>
   </body>
 </html>

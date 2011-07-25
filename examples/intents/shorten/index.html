@@ -4,7 +4,16 @@
     <title>Intent: Shorten</title>
     <script src="/lib/webintents.debug.js"></script>
     <script src="/lib/events.js"></script>
-    <script src="/lib/common.js"></script>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <style>
+      iframe {
+        float:left;
+        width: 50%;
+        height: 800px;
+      }
+    </style>
+     <script src="/lib/common.js"></script>
     <intent 
       action="http://webintents.org/shorten" 
       type="text/uri-list" 
@@ -33,15 +42,24 @@
         };
       }, false);
     </script>  
-    
   </head>
-
-
   <body>
-    <h2>This is an app that needs to share links</h2>
-    <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
-    <button id="shortenLink">Shorten link</button>
-    <h3>Response will appear here:</h3> 
-    <div id="output"></div>
+    <header>
+      <h1>Example: Shorten</h1>
+      <nav>
+        <a href="http://webintents.org/">Web Intents</a> 
+        <a href="http://webintents.org/shorten">Shorten Intent documentation</a> 
+        <a href="http://examples.webintents.org/">Examples</a> 
+      </nav>
+    </header>
+    <section>
+      <p>Applications often have to </p>
+      <div>
+        <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
+        <button id="shortenLink">Shorten link</button>
+      </div>
+      <p>Response will appear here:</p> 
+      <div id="output"></div>
+    </section>
   </body>
 </html>
