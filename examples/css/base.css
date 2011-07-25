@@ -1,0 +1,55 @@
+body {
+}
+
+header {
+  padding: 10px;
+  background-color: #F1F1F1;
+  border-bottom: 1px solid #E2E2E2;
+  margin-bottom: 10px;
+}
+
+header > * {
+max-width: 960px;
+min-width: 896px;
+margin: 0 auto;
+}
+
+header h1 {
+  font-size: 3em;
+  margin-bottom: 5px;
+}
+
+section {
+  margin: 0px 50px 0px 50px;
+}
+
+section > * {
+max-width: 960px;
+min-width: 896px;
+margin: 0 auto;
+}
+
+a {
+  color: #1465A3;
+}
+
+nav.sub a:active {
+  background-color: red;
+}
+
+section h2 {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+
+section ul {
+  list-style-type: disc;
+  list-style-position: inside;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+section ul li {
+  margin-bottom: 3px;
+}
