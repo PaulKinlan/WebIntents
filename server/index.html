@@ -2,19 +2,30 @@
 <html>
   <head>
     <title>Web Intents</title>
-    <style>
-      body {
-        margin: 100px;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
   </head>
   <body>
-    <h1>Web Intents</h1>
-    <p>
-      Javascript Shim API: <a href="http://github.com/PaulKinlan/WebIntents">
-      http://github.com/PaulKinlan/WebIntents</a>. Live Demos:
-    <a href="http://examples.webintents.org">http://examples.webintents.org</a> 
-    </p>
+    <header>
+      <h1>Web Intents</h1>
+      <nav class="main">
+        <span>Site: </span>
+        <span><a href="http://webintents.org">Specification</a></span>
+        <span><a href="http://examples.webintents.org">Examples</a></span>
+        <span><a href="http://usecases.webintents.org">Usecases</a></span>
+      </nav>
+
+      <nav class="sub">
+      <span>Page: </span>
+      <a href="#introduction">Introduction</a>
+      <a href="#javascript">Javascript Shim</a>
+      <a href="#api">API</a>
+      <a href="#default">Default Intents</a>
+      <a href="#extending">Extending</a>
+      <a href="#contributing">Contributing</a>
+      </nav>
+    </header>  
+    <section>
     <h2>Introduction</h2>
     <p>
     Users use many differnet services on the web to handle their day to day
@@ -84,6 +95,20 @@ window.navigator.startActivity(intent);</pre>
       <li><a href="/view">View</a></li>
       <li><a href="/pick">Pick</a></li>
     </ul>
+
+    <h2>Javascript Shim</h2>
+    <p>
+    This is fundumentally new platform feature, and as such has not been implemented in any browser.
+    To compensate and to allow you to build rich applications today, we have built an API compatible 
+    JavaScript shim.
+    </p>
+
+    <p>
+    It is simple to start, just drop the code in from 
+    <a href="http://github.com/PaulKinlan/WebIntents">http://github.com/PaulKinlan/WebIntents</a>.
+    in to your site via a &lt;script&gt; tag and your applicaiton will work across IE 8 and 9, FF 3 upwards, Chrome 5 upwards and Safari.
+    </p>
+
     <h2>Extending</h2>
     <p>
       Intents are matched based on their action and data type, neither of
@@ -92,5 +117,6 @@ window.navigator.startActivity(intent);</pre>
       activity-stream "post" and the data-type can be an activity-stream
       object of type "audio".
     </p>
+    </section>
   </body>
 </html>
