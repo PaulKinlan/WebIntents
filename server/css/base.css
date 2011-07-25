@@ -6,17 +6,19 @@ header {
   background-color: #F1F1F1;
   border-bottom: 1px solid #E2E2E2;
   margin-bottom: 10px;
+  padding-top: 15px;
 }
 
 header > * {
 max-width: 960px;
 min-width: 896px;
 margin: 0 auto;
+line-height: 20px;
 }
 
 header h1 {
   font-size: 3em;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 section {
@@ -39,13 +41,13 @@ nav.sub a:active {
 
 section h2 {
   font-size: 2em;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   margin-top: 10px;
 }
 
 section h3 {
   font-size: 1.6em;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   margin-top: 10px;
 }
 
@@ -65,7 +67,7 @@ section pre {
   background-color: #eee;
   border: solid 1px #ccc;
   line-height: 20px;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 

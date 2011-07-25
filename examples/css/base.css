@@ -6,17 +6,19 @@ header {
   background-color: #F1F1F1;
   border-bottom: 1px solid #E2E2E2;
   margin-bottom: 10px;
+  padding-top: 15px;
 }
 
 header > * {
 max-width: 960px;
 min-width: 896px;
 margin: 0 auto;
+line-height: 20px;
 }
 
 header h1 {
   font-size: 3em;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 section {
@@ -39,7 +41,42 @@ nav.sub a:active {
 
 section h2 {
   font-size: 2em;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+section h3 {
+  font-size: 1.6em;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+section dl {
+line-height: 20px;
+}
+
+section p {
+  margin-top: 10px;
   margin-bottom: 5px;
+  line-height: 20px;
+}
+
+section pre {
+  padding: 5px;
+  font-family: Courier New;
+  background-color: #eee;
+  border: solid 1px #ccc;
+  line-height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+section dt {
+  font-weight: 700;
+}
+
+section dd {
+  padding-left: 10px;
 }
 
 section ul {
