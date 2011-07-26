@@ -175,23 +175,6 @@
     return window.location.origin + "/favicon.ico";
   };
 
-  var parseIntentsMetaData = function() {
-    var intents = document.getElementsByTagName("meta");
-    var intent;
-    for(var i = 0; intent = intents[i]; i++) {
-      var name = intent.getAttribute("name");
-      if(name == "intent") {
-        var title = intent.getAttribute("title");
-        var href = intent.getAttribute("href");
-        var action = intent.getAttribute("content");
-        var type = intent.getAttribute("type");
-        var icon = intent.getAttribute("icon") || getFavIcon();
-  
-        register(action, type, href, title, icon);
-      }
-    }
-  };
-
   var parseIntentTag = function(intent) {
     var title = intent.getAttribute("title") || document.title;
     var href = intent.getAttribute("href") || document.location.href;
@@ -279,7 +262,6 @@
           iframe.src = serverSource;
         }
         parseIntentsDocument();
-        parseIntentsMetaData();
       }, false);
 
       // Listen to new "intent" nodes.
