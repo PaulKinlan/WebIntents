@@ -1,0 +1,93 @@
+body {
+}
+
+header {
+  padding: 10px;
+  background-color: #F1F1F1;
+  border-bottom: 1px solid #E2E2E2;
+  margin-bottom: 10px;
+  padding-top: 15px;
+}
+
+header > * {
+max-width: 960px;
+min-width: 896px;
+margin: 0 auto;
+line-height: 20px;
+}
+
+header h1 {
+  margin-top: 10px;
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+section {
+  margin: 0px 50px 0px 50px;
+}
+
+section > * {
+max-width: 960px;
+min-width: 896px;
+margin: 0 auto;
+}
+
+a {
+  color: #1465A3;
+}
+
+nav.sub a:active {
+  background-color: red;
+}
+
+section h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+  margin-top: 25px;
+}
+
+section h3 {
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+section dl {
+line-height: 20px;
+}
+
+section p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 20px;
+}
+
+section pre {
+  padding: 5px;
+  font-family: Courier New;
+  background-color: #eee;
+  border: solid 1px #ccc;
+  line-height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+section dt {
+  font-weight: 700;
+}
+
+section dd {
+  padding-left: 10px;
+}
+
+section ul {
+  list-style-type: disc;
+  list-style-position: inside;
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+section ul li {
+  margin-bottom: 3px;
+}
