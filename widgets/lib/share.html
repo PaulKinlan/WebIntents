@@ -1,0 +1,16 @@
+<! doctype html>
+<html>
+  <head>
+    <script src="http://webintents.org/webintents.min.js"></script> 
+    <script>
+      var share = document.getElementById("share");
+      share.addEventListener("click", function() {
+        var i = new Intent("http://webintents.org/share", "text/uri-list", "");
+        window.navigator.startActivity(i);
+      });
+    </script>
+  </head>
+  <body>
+    <a href="#" id="share"><img src="/images/share.png"><span>Share</span></a>
+  </body>
+</html>
