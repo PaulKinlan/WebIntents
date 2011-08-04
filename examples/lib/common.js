@@ -1,5 +1,5 @@
 var setText = function(obj, text) {
-  if(!!obj.textContent) {
+  if(typeof(obj.textContent) !== 'undefined') {
     obj.textContent = text;
   }
   else {
