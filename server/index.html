@@ -12,13 +12,13 @@
         <span>Site: </span>
         <span><a href="http://webintents.org">Specification</a></span>
         <span><a href="http://examples.webintents.org">Examples</a></span>
-        <span><a href="http://usecases.webintents.org">Usecases</a></span>
+        <span><a href="http://usecases.webintents.org">Use Cases</a></span>
       </nav>
 
       <nav class="sub">
       <span>Page: </span>
       <a href="#introduction">Introduction</a>
-      <a href="#javascriptshim">Javascript Shim</a>
+      <a href="#javascriptshim">JavaScript Shim</a>
       <a href="#api">API</a>
       <a href="#defaultintents">Default Intents</a>
       <a href="#extending">Extending</a>
@@ -28,15 +28,15 @@
     <section>
     <h2 id="introduction">Introduction</h2>
     <p>
-    Users use many differnet services on the web to handle their day to day
+    Users use many different services on the web to handle their day to day
     tasks, such as sharing images, editing documents and listening to music. 
     They expect their applications to be connected and to work together
     seamlessly.
     </p>
     <p>
     It is impossible for developers to anticipate every new service and to 
-    intergrate with every existing external service that their users prefer 
-    and thus they must choose to integrate with a few select API's at great
+    integrate with every existing external service that their users prefer 
+    and thus they must choose to integrate with a few select APIs at great
     expense to the developer.
     </p>
     <p>
@@ -56,8 +56,8 @@
     <h2 id="api">API</h2>
     <p>
     The Web Intent API is simple to use. Service developers define the 
-    intent they intend to support, and what to do with the data they recieve.
-    Client applications simply initate a new action with the given parameters.
+    intent they intend to support, and what to do with the data they receive.
+    Client applications simply initiate a new action with the given parameters.
     </p>
     <h3 id="intentregistration">Intent Registration</h3>
     <pre>&lt;intent
@@ -84,8 +84,8 @@
 window.navigator.startActivity(intent);</pre>
     <h2 id="defaultintents">Default Intents</h2>
     <p>
-      We are colating a suite of default intents that we belive the majority of
-      applications and service will use.  The schema URL used to define an
+      We are collating a suite of default intents that we believe the majority
+      of applications and service will use.  The schema URL used to define an
       intent is designed to be self documenting.
     </p> 
     <ul>
@@ -96,17 +96,18 @@ window.navigator.startActivity(intent);</pre>
       <li><a href="/pick">Pick</a></li>
     </ul>
 
-    <h2 id="javascriptshim">Javascript Shim</h2>
+    <h2 id="javascriptshim">JavaScript Shim</h2>
     <p>
-    This is fundumentally new platform feature, and as such has not been implemented in any browser.
-    To compensate and to allow you to build rich applications today, we have built an API compatible 
-    JavaScript shim.
+      This is fundamentally new platform feature, and as such has not been
+      implemented in any browser.  To compensate and to allow you to build rich
+      applications today, we have built an API compatible JavaScript shim.
     </p>
 
     <p>
-    It is simple to start, just drop the code in from 
-    <a href="http://github.com/PaulKinlan/WebIntents">http://github.com/PaulKinlan/WebIntents</a>.
-    in to your site via a &lt;script&gt; tag and your applicaiton will work across IE 8 and 9, FF 3 upwards, Chrome 5 upwards and Safari.
+      It is simple to start, just drop the code from 
+      <a href="http://github.com/PaulKinlan/WebIntents">http://github.com/PaulKinlan/WebIntents</a>.
+      in to your site via a &lt;script&gt; tag and your application will work
+      across IE 8 and 9, FF 3 upwards, Chrome 5 upwards and Safari.
     </p>
 
     <h2 id="extending">Extending</h2>
