@@ -1,0 +1,32 @@
+<! doctype html>
+<html>
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var share = document.getElementById("share");
+        share.addEventListener("click", function() {
+          var parentUrl = parent.location.href;
+          var i = new Intent("http://webintents.org/share", "text/uri-list", parentUrl);
+          window.navigator.startActivity(i, function(data) {
+            // The data returned by the request. 
+          });
+        });
+
+        // We don't have the webintents, download the framework.
+        if(!!window.Intent == false) {
+
+          // In this imlementation there might be a race.
+          var script = document.createElement("script");
+          script.src = "http://webintents.org/webintents.min.js"; 
+
+          document.head.appendChild(script);
+        }
+      }); 
+    </script>
+    <script>
+          </script>
+  </head>
+  <body>
+    <a href="#" id="share"><img src="/images/share.png"><span>Share</span></a>
+  </body>
+</html>

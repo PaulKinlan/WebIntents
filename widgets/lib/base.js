@@ -1,7 +1,5 @@
 (function(intentName) {
   intentName = document.encodeURIComponent(intentName);
-  if(!!window.intent == false) {
-    // Download the script
-    document.writeln("<ifrmae src='" + intentName + ".html' class='intent_widget' />"
-  }
+  var baseScript = "";
+  document.writeln("<iframe src='" baseScript + "/" + intentName + ".html' class='intent_widget'></iframe>");
 })(/*__EMBED__*/);
