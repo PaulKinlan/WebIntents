@@ -1,0 +1,19 @@
+{
+  "name": "Share Extension",
+  "version": "1.0",
+  "background_page": "background.html",
+  "description": "The first extension that I made.",
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["webintents.js", "shareurl.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "openshareicon-16x16.png",
+    "default_title": "Share this page"
+  }
+}
