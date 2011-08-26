@@ -32,6 +32,9 @@
     tabPorts[e.sender.tab.id] = e;
   });
 
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    clickHandler({linkUrl: tab.url}, tab);
+  });
   chrome.contextMenus.create({
     "title" : "Share",
     "type" : "normal",
