@@ -16,7 +16,8 @@
         });
 
         if(!!localStorage[parentUrl]) {
-          console.log("Shared", parentUrl);
+          window.document.body.className = "shared";
+          share.title = "Shared";
         } 
 
         // We don't have the webintents, download the framework.
@@ -30,10 +31,19 @@
         }
       }); 
     </script>
-    <script>
-          </script>
+    <style>
+      body {
+       margin: 0;
+       padding: 0;
+       background-color: transparent;
+      }
+
+      body.shared {
+        opacity: 0.5;  
+      }
+    </style>
   </head>
   <body>
-    <a href="#" id="share"><img src="/images/share.png"><span>Share</span></a>
+    <a href="#" id="share" title="Share this"><img src="/images/share.png"></a>
   </body>
 </html>
