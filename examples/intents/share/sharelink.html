@@ -11,6 +11,8 @@
         setText(output, intent.data[0]); 
       else
         setText(output, intent.data);
+      
+      intent.data.postResult(intent.data);
     }, false);
   </script>
   <link rel="stylesheet" href="/css/reset.css" />

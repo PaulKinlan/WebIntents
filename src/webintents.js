@@ -243,6 +243,7 @@
 
   var init = function () {
     var intents = new Intents();
+
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
 

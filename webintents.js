@@ -243,12 +243,17 @@
 
   var init = function () {
     var intents = new Intents();
+
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
 
     if(window.name != "") {
-      loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
-      window.name = "";
+      var openerLocation = window.opener.location;
+      console.log(window.opener);
+      if(openerLocation.hostname == server) {
+        loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
+        window.name = "";
+      }
     }
    
     if(!!window.postMessage) {
