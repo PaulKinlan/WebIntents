@@ -70,13 +70,16 @@
   };
 
   var handler = function(e) {
-    var data = JSON.parse(e.data);
-    if(!!intents[data.intent._id] == true &&
-       data.request &&
-       data.request == "response") {
+      try {
+	  var data = JSON.parse(e.data);
+	  if(!!intents[data.intent._id] == true &&
+	     data.request &&
+	     data.request == "response") {
 
-      intents[data.intent._id].callback(data.intent);
-    }
+	     intents[data.intent._id].callback(data.intent);
+	  }
+      } catch (e) {
+      }
   };
 
   addEventListener(window, "message", handler, false);
