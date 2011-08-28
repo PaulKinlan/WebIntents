@@ -19,7 +19,7 @@
   "background_page": "background.html",
   "content_scripts" : [{
     "matches" : ["http://*/*", "https://*/*"],
-    "js" :  ["webintents.js", "startActivity.js"]
+    "js" :  ["webintents.js", "webintents-inject.js", "startActivity.js"]
   },
   {
     "matches" : ["https://plus.google.com/"],

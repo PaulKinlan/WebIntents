@@ -30,7 +30,6 @@
   var server = __WEBINTENTS_ROOT; 
   var serverSource = server + "intents.html";
   var pickerSource = server + "picker.html";
-  var iframe;
   var channels = {};
   var intents = {};
 
@@ -51,7 +50,7 @@
   Intents.prototype.startActivity = function (intent, onResult) {
     var id = "intent" + new Date().valueOf();
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no,width=300,height=300";
-    
+    var iframe = document.getElementById("webintents_channel"); 
     intent._id = id;
     intents[id] = { intent: intent }; 
 
@@ -70,16 +69,13 @@
   };
 
   var handler = function(e) {
-      try {
-	  var data = JSON.parse(e.data);
-	  if(!!intents[data.intent._id] == true &&
-	     data.request &&
-	     data.request == "response") {
+    var data = JSON.parse(e.data);
+    if(!!intents[data.intent._id] == true &&
+       data.request &&
+       data.request == "response") {
 
-	     intents[data.intent._id].callback(data.intent);
-	  }
-      } catch (e) {
-      }
+      intents[data.intent._id].callback(data.intent);
+    }
   };
 
   addEventListener(window, "message", handler, false);
@@ -95,6 +91,7 @@
   };
   
   var register = function(action, type, url, title, icon) {
+    var iframe = document.getElementById("webintents_channel"); 
     if(!!url == false) url = document.location.toString();
     if(url.substring(0, 7) != "http://" && 
        url.substring(0, 8) != "https://") {
@@ -119,6 +116,7 @@
   };
 
   var Intent = function(action, type, data) {
+    var iframe = document.getElementById("webintents_channel"); 
     var me = this;
     var closed = false;
     this.action = action;
@@ -257,15 +255,17 @@
    
     if(!!window.postMessage) {
       // We can handle postMessage.
-      iframe = document.createElement("iframe");
+      var iframe = document.createElement("iframe");
       iframe.style.display = "none";
-
+      iframe.id = "webintents_channel";
 
       addEventListener(iframe, "load", function() {
         if(iframe.src != serverSource) {
           iframe.src = serverSource;
         }
-        parseIntentsDocument();
+        else {
+          parseIntentsDocument();
+        }
       }, false);
 
       // Listen to new "intent" nodes.
