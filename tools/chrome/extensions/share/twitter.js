@@ -10,14 +10,14 @@ var addIntent = function() {
 };
 
 var checkIntent = function() {
-  setTimeout(function() {
-     var script = document.createElement("script");
-     var scriptText = "var se = document.getElementsByClassName('twitter-anywhere-tweet-box-editor')[0];";
-     scriptText += "se.value = window.intent.data;";
-     scriptText += "se.focus();";
-     script.textContent = scriptText;
-     document.head.appendChild(script);
-  }, 2000);
+    if (!window.intent)
+      return;
+
+    setTimeout(function() {
+      var se = document.getElementsByClassName('twitter-anywhere-tweet-box-editor')[0];
+      se.value = window.intent.data;
+      se.focus();
+    }, 2000);
 }
 
 if(document.readyState == "complete") {

@@ -1,0 +1,15 @@
+<html>
+<head>
+<!--
+    <script src="http://examples.webintents.org/lib/webintents.debug.js"></script>
+     -->
+<script src="http://0.0.0.0:8000/lib/webintents.debug.js"></script>
+<script>
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+  var jscode = 'shareURL("' + tab.url + '");';
+  chrome.tabs.sendRequest(tab.id, tab.url);
+});
+</script>
+</head>
+</html>

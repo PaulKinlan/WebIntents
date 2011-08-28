@@ -70,16 +70,13 @@
   };
 
   var handler = function(e) {
-      try {
-	  var data = JSON.parse(e.data);
-	  if(!!intents[data.intent._id] == true &&
-	     data.request &&
-	     data.request == "response") {
+    var data = JSON.parse(e.data);
+    if(!!intents[data.intent._id] == true &&
+       data.request &&
+       data.request == "response") {
 
-	     intents[data.intent._id].callback(data.intent);
-	  }
-      } catch (e) {
-      }
+      intents[data.intent._id].callback(data.intent);
+    }
   };
 
   addEventListener(window, "message", handler, false);
@@ -246,7 +243,6 @@
 
   var init = function () {
     var intents = new Intents();
-
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
 

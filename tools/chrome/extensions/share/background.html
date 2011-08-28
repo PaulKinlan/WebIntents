@@ -2,9 +2,7 @@
 <script src="webintents.js"></script>
 <script>
 
-  var tabPorts = {};
-
-  var clickHandler = function(info, tab) {
+  function clickHandler(info, tab) {
     console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
@@ -13,9 +11,7 @@
        intent.action = "http://webintents.org/share";
        intent.type = info.mediaType + "/*";
        
-       tabPorts[tab.id].postMessage(intent);
-
-       return;
+       chrome.tabs.sendRequest(tab.id, intent);
      }
      else if(!!info.linkUrl) {
        var intent = new Intent();
@@ -23,13 +19,12 @@
        intent.type = "text/uri-list";
        intent.data = info.linkUrl;
 
-       tabPorts[tab.id].postMessage(intent);
+       chrome.tabs.sendRequest(tab.id, intent);
      }
   };
 
-  chrome.extension.onConnect.addListener(function(e) {
-    console.log(e);
-    tabPorts[e.sender.tab.id] = e;
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    clickHandler({linkUrl: tab.url}, tab);
   });
 
   chrome.contextMenus.create({
