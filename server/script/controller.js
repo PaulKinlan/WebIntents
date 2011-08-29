@@ -16,12 +16,7 @@
 
 var IntentController = new (function() { 
   var setText = function(obj, text) {
-    if(!!obj.textContent) {
-      obj.textContent = text;
-    }
-    else {
-      obj.innerText = text; 
-    }
+    obj.appendChild(document.createTextNode(text));
   };
 
   this.renderActionContainer = function (action, root) {
