@@ -97,7 +97,7 @@
        url.substring(0, 8) != "https://") {
       if(url.substring(0,1) == "/") {
         // absolute path
-        url = document.location.origin + url;
+        url = window.location.protocol + "//" + window.location.hostname + "/" + url;
       }
       else {
         // relative path
@@ -158,7 +158,7 @@
           url.substring(0, 8) != "https://") {
           if(url.substring(0,1) == "/") {
             // absolute path
-            return document.location.origin + url;
+            return window.location.protocol + "//" + window.location.hostname + "/" + url;
           }
           else {
             // relative path
@@ -172,8 +172,8 @@
         }
       }
     }
-
-    return window.location.origin + "/favicon.ico";
+              
+    return window.location.protocol + "//" + window.location.hostname + "/favicon.ico";
   };
 
   var parseIntentTag = function(intent) {
