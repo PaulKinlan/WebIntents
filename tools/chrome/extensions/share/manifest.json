@@ -16,7 +16,7 @@
     "js" :  ["startActivity.js"]
   },
   {
-    "matches" : ["https://plus.google.com/"],
+    "matches" : ["https://plus.google.com/*"],
     "js" : ["plus.js"]
   },
   {

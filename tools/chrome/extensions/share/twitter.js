@@ -12,9 +12,10 @@ var addIntent = function() {
 var checkIntent = function() {
   setTimeout(function() {
      var script = document.createElement("script");
-     var scriptText = "var se = document.getElementsByClassName('twitter-anywhere-tweet-box-editor')[0];";
+     var scriptText = "if (window.intent) {";
+     scriptText += "var se = document.getElementsByClassName('twitter-anywhere-tweet-box-editor')[0];";
      scriptText += "se.value = window.intent.data;";
-     scriptText += "se.focus();";
+     scriptText += "se.focus(); }";
      script.textContent = scriptText;
      document.head.appendChild(script);
   }, 2000);
