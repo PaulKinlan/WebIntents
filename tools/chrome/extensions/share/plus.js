@@ -13,14 +13,21 @@ var addIntent = function() {
 };
 
 var checkIntent = function() {
-  if(window.intent) {
-  }
+  setTimeout(function() {
+     var script = document.createElement("script");
+     var scriptText = "if (window.intent) {";
+     scriptText += "alert(window.intent.data);";
+     scriptText += "}";
+     script.textContent = scriptText;
+     document.head.appendChild(script);
+  }, 0);
 };
 
 if(document.readyState == "complete") {
   addIntent();
-
+  checkIntent();
 }
 else {
   window.addEventListener("load", addIntent, false);
+  window.addEventListener("load", checkIntent, false);
 }
