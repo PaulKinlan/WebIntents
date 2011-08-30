@@ -70,12 +70,17 @@
   };
 
   var handler = function(e) {
-    var data = JSON.parse(e.data);
-    if(!!intents[data.intent._id] == true &&
-       data.request &&
-       data.request == "response") {
+    try {
+      var data = JSON.parse(e.data);
+      if(!!intents[data.intent._id] == true &&
+         data.request &&
+         data.request == "response") {
 
-      intents[data.intent._id].callback(data.intent);
+        intents[data.intent._id].callback(data.intent);
+      }
+    } catch (err) {
+      // TODO(tpayne): filter on the origin. For now, just swallow JSON parse
+      // errors that get thrown.
     }
   };
 
