@@ -16,3 +16,21 @@ unstar.png
 
 # Make time 
 # Tue Aug 30 11:46:44 PDT 2011
+CACHE MANIFEST
+
+intents.html
+list.html
+picker.html
+
+controller.js
+webintents.js
+webintents-server.js
+base64.js
+json2.js
+picker.js
+
+star.png
+unstar.png
+
+# Make time 
+# Tue Aug 30 11:55:52 PDT 2011

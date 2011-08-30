@@ -13,8 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-if(document.location.hostname == "0.0.0.0") {
-  var __WEBINTENTS_ROOT = "http://0.0.0.0:8080/";
+if(document.location.hostname == "127.0.0.1") {
+  var __WEBINTENTS_ROOT = "https://127.0.0.1:8080/";
 }
 else {
   var __WEBINTENTS_ROOT = "http://webintents.org/";
