@@ -69,12 +69,20 @@
   };
 
   var handler = function(e) {
-    var data = JSON.parse(e.data);
-    if(!!intents[data.intent._id] == true &&
-       data.request &&
-       data.request == "response") {
+    // We will only process messages from the webintents.
+    if (e.origin != serverSource) return;
 
-      intents[data.intent._id].callback(data.intent);
+    var data;
+    try {
+      data = JSON.parse(e.data);
+      if(!!intents[data.intent._id] == true &&
+         data.request &&
+         data.request == "response") {
+
+        intents[data.intent._id].callback(data.intent);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -97,7 +105,7 @@
        url.substring(0, 8) != "https://") {
       if(url.substring(0,1) == "/") {
         // absolute path
-        url = window.location.protocol + "//" + window.location.hostname + "/" + url;
+        url = window.location.protocol + "//" + window.location.host + "/" + url;
       }
       else {
         // relative path
@@ -158,7 +166,7 @@
           url.substring(0, 8) != "https://") {
           if(url.substring(0,1) == "/") {
             // absolute path
-            return window.location.protocol + "//" + window.location.hostname + "/" + url;
+            return window.location.protocol + "//" + window.location.host + "/" + url;
           }
           else {
             // relative path
@@ -173,7 +181,7 @@
       }
     }
               
-    return window.location.protocol + "//" + window.location.hostname + "/favicon.ico";
+    return window.location.protocol + "//" + window.location.host + "/favicon.ico";
   };
 
   var parseIntentTag = function(intent) {
