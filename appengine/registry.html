@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Web Intents Registry</title>
+  </head>
+  <body>
+    <h2>Intents</h2>
+    <ul>
+      {% for intent in intents %}
+      <li><a href="/registry/intent?intent={{intent.action}}">
+        {{ intent.action|escape}}</a></li>
+      {% endfor %}
+    </ul>
+    <br/>
+    <h4>Add new provider:</h4>
+    <form method="post">
+      Action (URL): <input type="text" name="action"/><br/>
+      MIME type: <input type="text" name="mime_type"/><br/>
+      Service (URL): <input type="text" name="href"/><br/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>
+
