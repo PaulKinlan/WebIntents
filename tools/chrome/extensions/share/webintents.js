@@ -116,7 +116,6 @@
   };
 
   var Intent = function(action, type, data) {
-    var iframe = document.getElementById("webintents_channel"); 
     var me = this;
     var closed = false;
     this.action = action;
@@ -126,6 +125,7 @@
     this.postResult = function (data) {
       if(closed) return;
 
+      var iframe = document.getElementById("webintents_channel"); 
       var returnIntent = new Intent();
       returnIntent._id = me._id;
       returnIntent.action = me.action;
