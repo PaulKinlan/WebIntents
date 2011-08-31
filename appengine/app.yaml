@@ -16,5 +16,3 @@ handlers:
   mime_type: text/html
 - url: /registry.*
   script: Registry.py
-- url: /datastore_admin
-  script: $PYTHON_LIB/google/appengine/ext/datastore_admin/main.py
