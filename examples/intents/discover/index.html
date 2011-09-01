@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/base.css" />
     <title>Intent: Discover</title>
     <style>
       body {
@@ -8,14 +10,27 @@
       }
 
       iframe {
-        width: 45%;
+        width: 47%;
         height: 80%;
       }
     </style>
   </head>
   <body>
-    <h2>This is an example app that lets the user discover services that other API's offer</h2>
-    <iframe src="register.html"></iframe>
-    <iframe src="action.html"></iframe>
+    <header>
+      <h1>Discover intent example</h1>
+      <nav>
+        <a href="http://webintents.org/">Web Intents</a> 
+        <a href="http://webintents.org/discover">Discover Intent documentation</a> 
+        <a href="http://examples.webintents.org/">Examples</a> 
+      </nav>
+    </header>
+    <section>
+      <p>This is an example app that lets the user discover services that other 
+        APIs offer</p>
+      <div>
+        <iframe src="register.html"></iframe>
+        <iframe src="action.html"></iframe>
+      </div>
+    </section>
   </body>
 </html>
