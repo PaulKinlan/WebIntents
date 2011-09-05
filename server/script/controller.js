@@ -56,8 +56,11 @@ var IntentController = new (function() {
       else {
         window.name = "";
         window.open((e.srcElement || e.target).href, intentStr);
+        if(!!intent._callback == false) {
+          // There is no callback so remove any reference to the intent.
+          localStorage.removeItem(intent._id);
+        }
       }
-
 
       return false;
     };

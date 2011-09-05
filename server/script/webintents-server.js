@@ -125,7 +125,6 @@ var Intents = new (function() {
   };
 
   this.verify = function(intent) {
-    alert(intent);
     return true;
   };
 })();

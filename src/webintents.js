@@ -52,6 +52,7 @@
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no,width=300,height=300";
     var iframe = document.getElementById("webintents_channel"); 
     intent._id = id;
+    intent._callback = (onResult) ? true : false;
     intents[id] = { intent: intent }; 
 
     var w = window.open(pickerSource, encodeNameTransport(intent), params);
