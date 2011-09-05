@@ -11,10 +11,10 @@
     </header>
     <section>
     <p>
-      The edit intent is designed to give applications the ability to offer a simple mechanism for to edit data from the current page.
+      The edit intent is designed to give applications the ability to offer a simple mechanism to edit data from the current page.
     </p>
     <p>
-      An action that can handle edit could be anything that the user has installed, including and not limited to image maniupulation tools and text editors. 
+      An action that can handle edit could be anything that the user has installed, including and not limited to image manipulation tools and text editors. 
     </p>
     <p>
       The "Edit" protocol is intended to be a lightweight edit facility.
@@ -31,7 +31,7 @@
       <dt id="type">type</dt>
         <dd>Optional. Types are a filter</dd> 
       <dt id="href">href</dt>
-        <dd>Optional. If specified it will point to the action that is loaded when the user chooses the service.  If undefined, use the current page.</dd> 
+        <dd>Optional. If specified, it will point to the action that is loaded when the user chooses the service.  If undefined, use the current page.</dd> 
     </dl>
     <h2>Invocation</h2>
     <pre>var intent = new Intent("http://webintents.org/edit");

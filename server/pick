@@ -31,7 +31,7 @@
       <dt id="type">type</dt>
         <dd>Optional. Types are a filter</dd> 
       <dt id="href">href</dt>
-        <dd>Optional. If specified it will point to the action that is loaded when the user chooses the service.  If undefined, use the current page.</dd> 
+        <dd>Optional. If specified, it will point to the action that is loaded when the user chooses the service.  If undefined, use the current page.</dd> 
     </dl>
     <h2>Invocation</h2>
     <pre>var intent = new Intent("http://webintents.org/pick");
