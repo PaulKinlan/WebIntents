@@ -56,7 +56,6 @@ var IntentController = new (function() {
       else {
         window.name = "";
         window.open((e.srcElement || e.target).href, intentStr);
-        window.close();
       }
 
 

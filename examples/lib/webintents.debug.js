@@ -249,8 +249,14 @@
     window.navigator.startActivity = intents.startActivity;
 
     if(window.name != "") {
-      loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
-      window.name = "";
+      // Verify the source of the intent data.
+      var verified = false;
+      verified = (window.history.length == 1) ? true : false;
+      //verified = (window.document.referrer == pickerSource) ?  true : false;  
+      if(verified) {
+        loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
+        window.name = "";
+      }
     }
    
     if(!!window.postMessage) {

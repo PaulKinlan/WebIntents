@@ -27,6 +27,7 @@ window.attachEventListener = function(obj, type, func, capture) {
   }
 };
 
+
 var Intents = new (function() {
  
   this.getAllActions = function () {
@@ -122,7 +123,18 @@ var Intents = new (function() {
 
     localStorage[intent.action] = JSON.stringify(actions);
   };
+
+  this.verify = function(intent) {
+    alert(intent);
+    return true;
+  };
 })();
+
+if(window.parent.opener && window.parent.opener.Intents) {
+  verified = window.parent.opener.Intents.verify();
+  // The picker has said it is legit. (TODO), so close the window.
+  if(verified) window.parent.opener.close();
+}
 
 var MessageDispatcher = function() {
 
