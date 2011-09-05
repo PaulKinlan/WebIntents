@@ -91,6 +91,8 @@
   };
   
   var register = function(action, type, url, title, icon) {
+    if(!!window.parent) return;
+
     var iframe = document.getElementById("webintents_channel"); 
     if(!!url == false) url = document.location.toString();
     if(url.substring(0, 7) != "http://" && 
