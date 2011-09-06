@@ -18,7 +18,7 @@ debug: ./src/webintents.js ./src/debug.js ./src/json2.js ./src/base64.js
 	cp webintents.js tools/chrome/extensions/share/webintents.js
 
 production: release
-	uglifyJs webintents.js > server/webintents.min.js 
+	uglifyjs webintents.js > server/webintents.min.js 
 
 server/webintents.js:
 
