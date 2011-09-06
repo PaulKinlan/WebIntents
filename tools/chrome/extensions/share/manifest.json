@@ -15,11 +15,11 @@
     "default_icon": "openshareicon-16x16.png",
     "default_title": "Share this page"
   },
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "background_page": "background.html",
   "content_scripts" : [{
     "matches" : ["http://*/*", "https://*/*"],
-    "js" :  ["webintents.js", "webintents-inject.js", "startActivity.js"]
+    "js" :  ["webintents-inject.js", "startActivity.js"]
   },
   {
     "matches" : ["https://plus.google.com/"],
