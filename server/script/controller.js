@@ -88,6 +88,7 @@ var IntentController = new (function() {
     var isDefault = document.createElement("img");
 
     icon.src = action.icon;
+    icon.style.float = "left";
 
     actionLink.href = action.url;
     actionLink.target = "_blank";
@@ -100,6 +101,8 @@ var IntentController = new (function() {
 
     setText(domain, action.domain || "Unknown domain");
     
+    actionElement.style.clear = "both";
+    actionElement.style.listStyle = "none";
     actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);
     actionElement.appendChild(domain);
