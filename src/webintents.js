@@ -92,7 +92,7 @@
   };
   
   var register = function(action, type, url, title, icon) {
-    if(!!window.parent) return;
+    if(window.self != window.top) return;
 
     var iframe = document.getElementById("webintents_channel"); 
     if(!!url == false) url = document.location.toString();

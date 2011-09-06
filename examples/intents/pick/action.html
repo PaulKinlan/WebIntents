@@ -4,6 +4,8 @@
     <title>Intent: Pick</title>
     <script src="/lib/webintents.debug.js"></script>
     <script src="/lib/events.js"></script>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/embedbase.css" />
     <script>
      attachEventListener(window, "load", function() {
         var pickImage = document.getElementById("pickImage");
@@ -26,6 +28,7 @@
     </script>  
   </head>
   <body>
+    <section>
     <h2>Pick an image from a remote service to use in this application</h2>
     <button id="pickImage">Pick an Image</button>
     <h3>Response will appear here:</h3> 
@@ -42,6 +45,7 @@ var intentResponse = function (intentData) {
   var output = document.getElementById("output");
   output.src = intentData.data[0];
 };</pre>
+    </section>
   </body>
 </html>
 

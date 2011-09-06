@@ -1,10 +1,22 @@
 <!doctype html>
 <html>
   <head>
+    <script src="/lib/webintents.debug.js"></script>
+    <intent 
+      action="http://webintents.org/pick" 
+      type="image/*" 
+      href="pick.html" 
+      title="Cat Image picker" />
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/base.css" />
     <style>
       iframe {
+        float:left;
+        width: 50%;
+        height: 800px;
+      }
+      
+      #register {
         float:left;
         width: 50%;
         height: 800px;
@@ -24,7 +36,14 @@
     <section>
       <p>This example demonstrates a cloud-based file picker.</p>
       <div>
-        <iframe src="register.html"></iframe>
+        <div id="register">
+          <h2>Pick Intent Registration</h2>
+          <pre>&lt;intent 
+  action="http://webintents.org/pick" 
+  type="image/*" 
+  href="pick.html" 
+  title="Cat Image picker" /&gt;</pre>
+        </div>
         <iframe src="action.html"></iframe>
       </div>
     </section>

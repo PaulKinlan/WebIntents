@@ -2,9 +2,26 @@
 <html>
   <head>
     <title>Intent: Share</title>
+    <script src="/lib/webintents.debug.js"></script>
+    <intent 
+      action="http://webintents.org/share" 
+      type="image/*" 
+      href="shareimage.html" 
+      title="Kinlan's Image Share" />
+    <intent 
+      action="http://webintents.org/share" 
+      type="text/uri-list" 
+      href="sharelink.html" 
+      title="Kinlan's Link Share" />
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/base.css" />
     <style>
+      #register {
+        float: left;
+        width: 50%;
+        height: 800px;
+      }
+
       iframe {
         float:left;
         width: 50%;
@@ -28,7 +45,20 @@
       applications that request Share functionality. 
       </p>
       <div>
-        <iframe src="register.html"></iframe>
+        <div id="register">
+          <h2>Share Intent Registration</h2>
+          <pre>&lt;intent 
+  action="http://webintents.org/share" 
+  type="image/*" 
+  href="shareimage.html" 
+  title="Kinlan's Image Share" /&gt;
+&lt;intent 
+  action="http://webintents.org/share" 
+  type="text/uri-list" 
+  href="sharelink.html" 
+  title="Kinlan's Link Share" /&gt;</pre>
+          <p>Any application that launches a startActivity with an action of "http://webintents.org/share" will see these applications listed.</p>
+        </div>
         <iframe src="action.html"></iframe>
       </div>
     </section>
