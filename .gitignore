@@ -1,3 +1,10 @@
 .DS_Store
 *.pid
 *.bpkg
+webintents.js
+webintents.debug.js
+webintents.min.js
+tools/chrome/extensions/share/webintents.js
+examples/lib/webintents*
+widgets/lib/webintents*
+server/lib/webintents*

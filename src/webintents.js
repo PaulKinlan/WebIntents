@@ -60,7 +60,7 @@
     if(onResult) {
       iframe.contentWindow.postMessage(
         _str({"request": "registerCallback", "id": id }), 
-        serverSource );
+        server );
       intents[id].callback = onResult;
     }
   };
@@ -115,7 +115,7 @@
         request: "register", 
         intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host } 
       }), 
-      serverSource);
+      server);
   };
 
   var Intent = function(action, type, data) {
@@ -139,7 +139,7 @@
           request: "intentResponse",
           intent: returnIntent 
         }),
-        serverSource);
+        server);
 
       closed = true;
     };
