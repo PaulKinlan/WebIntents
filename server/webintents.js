@@ -199,46 +199,6 @@
     }
   };
 
-  var handleFormSubmit = function(e) {
-    var form = e.target;
-
-    if(form.method.toLowerCase() == "intent") {
-      if(!!e.preventDefault) 
-        e.preventDefault();
-      else
-        e.returnValue = false;
-      var action = form.action;
-      var enctype = form.getAttribute("enctype");
-      var data = {};
-      var element;
-
-      for(var i = 0; element = form.elements[i]; i++) {
-        if(!!element.name) {
-          var name = element.name;
-          if(!!data[name]) {
-            // If the element make it an array
-            if(data[name] instanceof Array) 
-              data[name].push(element.value);
-            else {
-              var elements = [data[name]];
-              elements.push(element.value);
-              data[name] = elements;
-            }
-          }
-          else {
-            data[name] = element.value;
-          }
-        }
-      }
-
-      var intent = new Intent(action, enctype, data);
-       
-      window.navigator.startActivity(intent);
-    
-      return false;
-    }
-  };
-
   var onIntentDOMAdded = function(e) {
     if(e.target.tagName == "INTENT") {
       parseIntentTag(e.target) 
@@ -286,8 +246,6 @@
         iframe.src = serverSource;
       }
     }
-
-    addEventListener(window, "submit", handleFormSubmit, false);
   };
 
   init();
