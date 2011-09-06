@@ -133,13 +133,14 @@
       returnIntent._id = me._id;
       returnIntent.action = me.action;
       returnIntent.data = data;
-    
+      setTimeout(function() { 
       iframe.contentWindow.postMessage(
         _str({
           request: "intentResponse",
           intent: returnIntent 
         }),
-        server);
+        "*");
+      }, 500);
 
       closed = true;
     };

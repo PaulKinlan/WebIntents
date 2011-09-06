@@ -11,6 +11,8 @@
             // The data returned by the request.
             if(!!data) {
               localStorage[parentUrl] = "1";
+              window.document.body.className = "shared";
+              share.title = "Shared";
             }
           });
         });

@@ -11,7 +11,7 @@ release: ./src/webintents.js ./src/json2.js ./src/base64.js
 	cp webintents.js tools/chrome/extensions/share/webintents.js
 
 debug: ./src/webintents.js ./src/debug.js ./src/json2.js ./src/base64.js
-	cat ./src/debug.js ./src/webintents.js ./src/json2.js ./src/base64.js | sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' > webintents.js
+	cat ./src/debug.js ./src/webintents.js ./src/json2.js ./src/base64.js | sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' | sed 's|//DEBUG(|DEBUG(|' > webintents.js
 	cp webintents.js server/webintents.js
 	cp webintents.js widgets/lib/webintents.js
 	cp webintents.js examples/lib/webintents.js
@@ -34,3 +34,4 @@ clean:
 	rm -f server/webintents.min.js
 	rm -f examples/lib/webintents.js
 	rm -f widgets/lib/webintents.js
+	rm -f tools/chrome/extensions/share/webintents.js
