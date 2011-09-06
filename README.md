@@ -31,13 +31,6 @@ To build a client application that can use the share functionality, it is as sim
     );
     window.navigator.startActivity(intent);
 
-You can even use a FORM so you don't have to do any coding.
-
-    <form method="intent" action="http://webintents.org/share" enctype="image/*">
-       <input name="uris" type="file" accepts="image/*" />
-       <input type="submit" />
-    </form>
-
 Service
 -------
 
