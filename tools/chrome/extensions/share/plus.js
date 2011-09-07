@@ -8,11 +8,19 @@ var addIntent = function() {
 };
 
 var checkIntent = function() {
-    setTimeout(function() {
+    var interval = setInterval(function() {
+      debugger;
       if (!!window.intent == false) return;
-      var shareElement = document.getElementById(":3r.f");
-      se.innerText = window.intent.data;
-      se.focus();
+      clearInterval(interval);
+      var share = document.querySelector(".c-i-f-C");
+      var ev = document.createEvent("MouseEvent");
+      ev.initMouseEvent("click");
+      share.dispatchEvent(ev);
+      setTimeout(function() {
+        var se = document.querySelector(".m-n-f-ba-rd");
+        se.textContent = window.intent.data;
+      }, 1000);
+
     }, 1000);
 }
 
