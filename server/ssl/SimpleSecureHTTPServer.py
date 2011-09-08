@@ -22,8 +22,10 @@ class FetchImageHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
 def main():
   port = int(sys.argv[1])
+  secure = len(sys.argv) > 2 and sys.argv[2] == "-s"
   httpd = BaseHTTPServer.HTTPServer(('', port), FetchImageHandler)
-  httpd.socket = ssl.wrap_socket (httpd.socket, certfile='../server/ssl/server.pem', server_side=True)
+  if secure:
+    httpd.socket = ssl.wrap_socket (httpd.socket, certfile='../server/ssl/server.pem', server_side=True)
   print "Serving on", port
   httpd.serve_forever()
 
