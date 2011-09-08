@@ -1,0 +1,18 @@
+application: webintents
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /
+  static_files: ../server/index.html
+  upload: ../server/index.html
+- url: /(.*\.(html|js))
+  static_files: ../server/\1
+  upload: ../server/.*\.(html|js)
+- url: /(discover|share|edit|view|pick)
+  static_files: ../server/\1
+  upload: ../server/(discover|share|edit|view|pick)
+  mime_type: text/html
+- url: /registry.*
+  script: Registry.py

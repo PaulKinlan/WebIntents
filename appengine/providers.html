@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>{{ intent.action|escape }}[{{ mime_type.mime_type|escape}}]</title>
+  </head>
+  <body>
+    <ul>
+      {% for provider in mime_type.providers %}
+      <li>{{ provider.provider.href|escape }}
+        <ul>
+        {% for mt in provider.provider.intents %}
+        <li><a href="/registry/intent?intent={{mt.intent.parent.action}}">
+          {{ mt.intent.parent.action|escape }}</a>
+          [{{ mt.intent.mime_type|escape }}]</li>
+        {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
+
