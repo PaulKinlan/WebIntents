@@ -48,43 +48,22 @@ var IntentController = new (function() {
 
       var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
 
-      var defaultIntent = Intents.getDefault(intent.action);
-      if(!!defaultIntent && defaultIntent.url == intent.url) {
-        // Open in current window.
-        var w = window.open((e.srcElement || e.target).href, intentStr);
+      var href = (e.srcElement || e.target).href;
+      if(!!intent._callback == false) {
+        // There is no callback so remove any reference to the intent.
+        localStorage.removeItem(intent._id);
+      }
+
+      if(disposition == "inline") {
+        var iframe = document.getElementById("inline");
+        iframe.contentWindow.name = intentStr;
+        iframe.src= href;
+        iframe.style.display = "block";
       }
       else {
-        var href = (e.srcElement || e.target).href;
-        if(!!intent._callback == false) {
-          // There is no callback so remove any reference to the intent.
-          localStorage.removeItem(intent._id);
-        }
-
-        if(disposition == "inline") {
-          var iframe = document.getElementById("inline");
-          iframe.contentWindow.name = intentStr;
-          iframe.src= href;
-          iframe.style.display = "block";
-        }
-        else {
-          window.name = "";
-          window.open(href, intentStr);
-        }
+        window.name = "";
+        window.open(href, intentStr);
       }
-
-      return false;
-    };
-  };
-
-  var setDefault = function(intent) {
-    return function(e) {
-      if(!!e.preventDefault) 
-        e.preventDefault();
-      else
-        e.returnValue = false;
-
-      e.target.src = "/images/star.png"; 
-      Intents.setDefault(intent); 
 
       return false;
     };
@@ -95,7 +74,6 @@ var IntentController = new (function() {
     var actionLink = document.createElement("a");
     var icon = document.createElement("img");
     var domain = document.createElement("span");
-    var isDefault = document.createElement("img");
 
     icon.src = action.icon;
     icon.style.float = "left";
@@ -104,11 +82,6 @@ var IntentController = new (function() {
     actionLink.target = "_blank";
     setText(actionLink, action.title);
     attachEventListener(actionLink, "click", launch(intent, action.disposition), false);
- 
-    isDefault.className = "star";
-    isDefault.src = "/images/unstar.png";
-    attachEventListener(isDefault, "click", setDefault(action), false);
-
     setText(domain, action.domain || "Unknown domain");
     
     actionElement.style.clear = "both";
@@ -116,7 +89,6 @@ var IntentController = new (function() {
     actionElement.appendChild(icon);
     actionElement.appendChild(actionLink);
     actionElement.appendChild(domain);
-    actionElement.appendChild(isDefault)
 
     return actionElement;
   };

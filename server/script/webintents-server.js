@@ -58,7 +58,7 @@ var Intents = new (function() {
     }
 
     var action;
-    var filteredActions = { "actions": [], defaultAction: actions.defaultAction };
+    var filteredActions = { "actions": [] };
     // Find the actions that are of the correct type (or not).  Does not handle *, yet
     for(var i = 0; action = actions.actions[i]; i++) {
       if(intent.type == action.type || !!intent.type == false) {
@@ -71,23 +71,6 @@ var Intents = new (function() {
 
   this.clearAll = function() {
     localStorage.clear();
-  };
-
-  this.getDefault = function(action) {
-    var actions = JSON.parse(localStorage[action]);
-    return actions.defaultAction;
-  };
-
-  this.setDefault = function(intent) {
-    var actions = JSON.parse(localStorage[intent.action]);
-    if(actions instanceof Array) {
-      actions = { "actions": actions };
-    }
-    else if (!!actions.actions == false) {
-      actions = { "actions" : [] };
-    }
-    actions.defaultAction = intent;
-    localStorage[intent.action] = JSON.stringify(actions);
   };
 
   this.addAction = function(intent) {
@@ -143,19 +126,12 @@ var MessageDispatcher = function() {
 
   this.startActivity = function(data, timestamp, e) {
     var actions = Intents.getActions(data.intent);
-    var defaultAction = Intents.getDefault(data.intent.action);
 
     var intentData = {
       id: data.intent._id,
       intent: data.intent,
       timestamp: timestamp
     };
-
-    if(defaultAction) {
-      var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(data.intent)))).replace(/=/g, "_");
-      window.open(defaultAction.url, intentStr, "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes");
-      return;
-    }
 
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
