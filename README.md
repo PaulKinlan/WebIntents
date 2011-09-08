@@ -6,6 +6,14 @@ Web Intents is a discovery mechanism and extremely light-weight RPC system betwe
 Usage
 =====
 
+To use today
+------------
+No browsers currently support this API natively.  To use this system simple drop the following code in to your site:
+
+    <script src="http://webintents.org/webintents.min.js"></script>
+
+When browsers start to implement this natively the Shim will defer all its functionality to the native interface.
+
 Declaration
 -----------
 
@@ -25,9 +33,7 @@ To build a client application that can use the share functionality, it is as sim
     var intent = new Intent(
         "http://webintents.org/share", 
         "image/*", 
-        { 
-          uris : ["http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png"] 
-        }
+        "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Three_jolly_kittens.png/800px-Three_jolly_kittens.png" 
     );
     window.navigator.startActivity(intent);
 
@@ -42,7 +48,7 @@ That's it.
 
 To send data back to the client that invoked it, it is as simple as calling postResult() on the intent.
 
-    window.intent.postResult({ data: "something cool" });
+    window.intent.postResult("something cool");
 
 Examples
 ========
