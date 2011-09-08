@@ -91,7 +91,7 @@
     window.intent = intent;
   };
   
-  var register = function(action, type, url, title, icon) {
+  var register = function(action, type, url, title, icon, disposition) {
     if(window.self != window.top) return;
 
     var iframe = document.getElementById("webintents_channel"); 
@@ -113,7 +113,7 @@
     iframe.contentWindow.postMessage(
       _str({
         request: "register", 
-        intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host } 
+        intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host, disposition: disposition } 
       }), 
       server);
   };
@@ -185,11 +185,12 @@
     var href = intent.getAttribute("href") || document.location.href;
     var action = intent.getAttribute("action");
     var type = intent.getAttribute("type");
+    var disposition = intent.getAttribute("disposition") || "new";
     var icon = intent.getAttribute("icon") || getFavIcon();
 
     if(!!action == false) return;
 
-    register(action, type, href, title, icon);
+    register(action, type, href, title, icon, disposition);
   };
 
   var parseIntentsDocument = function() {
