@@ -59,9 +59,24 @@ var Intents = new (function() {
 
     var action;
     var filteredActions = { "actions": [] };
-    // Find the actions that are of the correct type (or not).  Does not handle *, yet
+    // Find the actions that are of the correct type.
     for(var i = 0; action = actions.actions[i]; i++) {
-      if(intent.type == action.type || !!intent.type == false) {
+      var actiontype = action.type;
+
+      var actionOffset = actiontype.indexOf("/*");
+      var actionEnd = (actionOffset == -1) ? actiontype.length : actionOffset; 
+      
+      var intentOffset = intent.type.indexOf("/*");
+      var intentEnd = (intentOffset == -1) ? intent.type.length : intentOffset;
+     
+      var matchType = actiontype.substr(0, actionEnd + 1);
+      var intentType = intent.type.substr(0, intentEnd); 
+
+      if(intentType.indexOf(matchType) == 0 || 
+         matchType.indexOf(intentType) == 0 ||
+         action.type == "*" ||
+         intent.type == "*" ||
+         !!intent.type == false) {
         filteredActions.actions.push(action);
       }
     }
@@ -224,8 +239,3 @@ attachEventListener(window, "load", function() {
   var message = JSON.stringify({ request: "ready" });
   window.parent.postMessage(message, "*");   
 }, false); 
-
-if(!!window.onstorage) {
-  // we don't have storage events, so lets poll.
-
-}
