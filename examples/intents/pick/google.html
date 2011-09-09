@@ -37,7 +37,7 @@
 
       function pickerCallback(data) {
         if (data.action == google.picker.Action.PICKED) {
-          returnImage(cdata.docs[0].thumbnails[3].url);
+          returnImage(data.docs[0].thumbnails[3].url);
         }
       }
     </script>
