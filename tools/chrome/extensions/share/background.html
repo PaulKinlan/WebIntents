@@ -1,12 +1,18 @@
 <!doctype html>
 <script src="webintents.js"></script>
+<intent 
+  action="http://webintents.org/share"
+  type="text/*"
+  href="/handler/twitter.html"
+  title="Twitter"
+  />
 <script>
 
   function clickHandler(info, tab) {
     console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
-       info.meditType == "audio") {
+       info.mediaType == "audio") {
        var intent = new Intent();
        intent.action = "http://webintents.org/share";
        intent.type = info.mediaType + "/*";

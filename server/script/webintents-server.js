@@ -219,6 +219,12 @@ attachEventListener(window, "message", msgHandler.handler, false);
 attachEventListener(window, "storage", msgHandler.handler, false); 
 attachEventListener(document, "storage", msgHandler.handler, false); 
 
+attachEventListener(window, "load", function() {
+  // Tell the app we are loaded.
+  var message = JSON.stringify({ request: "ready" });
+  window.parent.postMessage(message, "*");   
+}, false); 
+
 if(!!window.onstorage) {
   // we don't have storage events, so lets poll.
 
