@@ -1,5 +1,3 @@
-
-
 var addIntent = function() {
   // Always add the intent in.
   var intentEl = document.createElement("intent");
@@ -10,15 +8,12 @@ var addIntent = function() {
 };
 
 var checkIntent = function() {
-  setTimeout(function() {
-     var script = document.createElement("script");
-     var scriptText = "if (window.intent) {";
-     scriptText += "var se = document.getElementsByClassName('twitter-anywhere-tweet-box-editor')[0];";
-     scriptText += "se.value = window.intent.data;";
-     scriptText += "se.focus(); }";
-     script.textContent = scriptText;
-     document.head.appendChild(script);
-  }, 2000);
+    setTimeout(function() {
+      if (!!window.intent == false) return;
+      var se = document.getElementsByClassName('twitter-anywhere-tweet-box-editor')[0];
+      se.value = window.intent.data;
+      se.focus();
+    }, 1000);
 }
 
 if(document.readyState == "complete") {

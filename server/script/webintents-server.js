@@ -27,6 +27,7 @@ window.attachEventListener = function(obj, type, func, capture) {
   }
 };
 
+
 var Intents = new (function() {
  
   this.getAllActions = function () {
@@ -57,7 +58,7 @@ var Intents = new (function() {
     }
 
     var action;
-    var filteredActions = { "actions": [], defaultAction: actions.defaultAction };
+    var filteredActions = { "actions": [] };
     // Find the actions that are of the correct type (or not).  Does not handle *, yet
     for(var i = 0; action = actions.actions[i]; i++) {
       if(intent.type == action.type || !!intent.type == false) {
@@ -70,23 +71,6 @@ var Intents = new (function() {
 
   this.clearAll = function() {
     localStorage.clear();
-  };
-
-  this.getDefault = function(action) {
-    var actions = JSON.parse(localStorage[action]);
-    return actions.defaultAction;
-  };
-
-  this.setDefault = function(intent) {
-    var actions = JSON.parse(localStorage[intent.action]);
-    if(actions instanceof Array) {
-      actions = { "actions": actions };
-    }
-    else if (!!actions.actions == false) {
-      actions = { "actions" : [] };
-    }
-    actions.defaultAction = intent;
-    localStorage[intent.action] = JSON.stringify(actions);
   };
 
   this.addAction = function(intent) {
@@ -122,7 +106,17 @@ var Intents = new (function() {
 
     localStorage[intent.action] = JSON.stringify(actions);
   };
+
+  this.verify = function(intent) {
+    return true;
+  };
 })();
+
+if(window.parent.opener && window.parent.opener.Intents) {
+  verified = window.parent.opener.Intents.verify();
+  // The picker has said it is legit. (TODO), so close the window.
+  if(verified) window.parent.opener.close();
+}
 
 var MessageDispatcher = function() {
 
@@ -132,19 +126,12 @@ var MessageDispatcher = function() {
 
   this.startActivity = function(data, timestamp, e) {
     var actions = Intents.getActions(data.intent);
-    var defaultAction = Intents.getDefault(data.intent.action);
 
     var intentData = {
       id: data.intent._id,
       intent: data.intent,
       timestamp: timestamp
     };
-
-    if(defaultAction) {
-      var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(data.intent)))).replace(/=/g, "_");
-      window.open(defaultAction.url, intentStr, "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes");
-      return;
-    }
 
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.renderActions(actions, data.intent);
@@ -231,6 +218,12 @@ var msgHandler = new MessageHandler();;
 attachEventListener(window, "message", msgHandler.handler, false); 
 attachEventListener(window, "storage", msgHandler.handler, false); 
 attachEventListener(document, "storage", msgHandler.handler, false); 
+
+attachEventListener(window, "load", function() {
+  // Tell the app we are loaded.
+  var message = JSON.stringify({ request: "ready" });
+  window.parent.postMessage(message, "*");   
+}, false); 
 
 if(!!window.onstorage) {
   // we don't have storage events, so lets poll.

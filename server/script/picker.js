@@ -21,14 +21,13 @@ var decodeNameTransport = function(str) {
 attachEventListener(window, "load", function() {
   var intent = decodeNameTransport(window.name);   
   
-  //window.name = "";
   data = {};
   data.request = "startActivity";
   data.origin = window.name;
   data.intent = intent;
 
   // Send a message to itself, mainly for webkit. 
-  window.postMessage(JSON.stringify(data), document.location.origin);
+  window.postMessage(JSON.stringify(data), window.location.protocol + "//" + window.location.host);
 
   window.resizeTo(300,300);
 }, false);

@@ -13,6 +13,7 @@
         <span><a href="http://webintents.org">Specification</a></span>
         <span><a href="http://examples.webintents.org">Examples</a></span>
         <span><a href="http://usecases.webintents.org">Use Cases</a></span>
+        <span><a href="/faq.html">FAQ</a></span>
       </nav>
 
       <nav class="sub">
@@ -35,7 +36,7 @@
     </p>
     <p>
     It is impossible for developers to anticipate every new service and to 
-    integrate with every existing external service that their users prefer 
+    integrate with every existing external service that their users prefer, 
     and thus they must choose to integrate with a few select APIs at great
     expense to the developer.
     </p>
@@ -45,18 +46,18 @@
     their intention to be able to handle an action on the user's behalf.
     Applications request to start an Action of a certain verb
     (<a href="/share">share</a>, <a href="/edit">edit</a>,
-     <a href="/view">view</a>, <a href="/pick">pick</a> etc) and the system 
+     <a href="/view">view</a>, <a href="/pick">pick</a> etc.) and the system 
     will find the appropriate Services for the user to use based on the user's
     preference.
     </p>
     <p>
     Web Intents puts the user in control of service integrations and makes the
-    developers life simple.
+    developer's life simple.
     </p>
     <h2 id="api">API</h2>
     <p>
     The Web Intent API is simple to use. Service developers define the 
-    intent they intend to support, and what to do with the data they receive.
+    intent they intend to support and what to do with the data they receive.
     Client applications simply initiate a new action with the given parameters.
     </p>
     <h3 id="intentregistration">Intent Registration</h3>
@@ -71,7 +72,7 @@
       <dt id="type">type</dt>
         <dd>Optional. Types are a filter</dd> 
       <dt id="href">href</dt>
-        <dd>Optional. If specified it will point to the action that is loaded 
+        <dd>Optional. If specified, it will point to the action that is loaded 
           when the user chooses the service.  If undefined, use the current 
           page.</dd> 
     </dl>
@@ -85,7 +86,7 @@ window.navigator.startActivity(intent);</pre>
     <h2 id="defaultintents">Default Intents</h2>
     <p>
       We are collating a suite of default intents that we believe the majority
-      of applications and service will use.  The schema URL used to define an
+      of applications and services will use.  The schema URL used to define an
       intent is designed to be self documenting.
     </p> 
     <ul>
@@ -98,16 +99,23 @@ window.navigator.startActivity(intent);</pre>
 
     <h2 id="javascriptshim">JavaScript Shim</h2>
     <p>
-      This is fundamentally new platform feature, and as such has not been
+      This is a fundamentally new platform feature, and as such has not been
       implemented in any browser.  To compensate and to allow you to build rich
       applications today, we have built an API compatible JavaScript shim.
     </p>
 
     <p>
-      It is simple to start, just drop the code from 
-      <a href="http://github.com/PaulKinlan/WebIntents">http://github.com/PaulKinlan/WebIntents</a>.
-      in to your site via a &lt;script&gt; tag and your application will work
-      across IE 8 and 9, FF 3 upwards, Chrome 5 upwards and Safari.
+      It is simple to start, just drop the code following code in to your site 
+      and now you will be able to get your users who use IE 8 and 9, FF 3 
+      upwards, Chrome 5 upwards and Safari to use the functionality in Web 
+      Intents.
+    </p>
+
+    <pre>&lt;script&gt;http://webintents.org/webtintents.min.js&gt;&lt;/script&gt;</pre>
+
+    <p>
+      If you want to host the Shim yourself, simply visit 
+      <a href="http://github.com/PaulKinlan/WebIntents">the code repository</a>.
     </p>
 
     <h2 id="extending">Extending</h2>

@@ -4,7 +4,7 @@
     <!--script
       src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRSs7LgCgiaTQIQPWqybRxS3H3zfqRSCIvzXzge1CIW7mxn9PWmB7bxLSw"
     /-->
-    <script src="/lib/webintents.debug.js"></script>
+    <script src="/lib/webintents.js"></script>
     <script src="/lib/events.js"></script>
     <script
       src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug"></script>
@@ -35,23 +35,9 @@
         }
       }
 
-      function getImageData(url) {
-        var img = new Image();
-        img.src = '/proxy?url=' + url;
-        attachEventListener(img, "load", function() {
-          var canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          var context = canvas.getContext("2d");
-
-          context.drawImage(img, 0, 0);
-          returnImage(canvas.toDataURL("image/png"));
-        });
-      }
-
       function pickerCallback(data) {
         if (data.action == google.picker.Action.PICKED) {
-          returnImage(data.docs[0].thumbnails[4].url);
+          returnImage(data.docs[0].thumbnails[3].url);
         }
       }
     </script>

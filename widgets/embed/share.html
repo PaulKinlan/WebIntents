@@ -11,6 +11,8 @@
             // The data returned by the request.
             if(!!data) {
               localStorage[parentUrl] = "1";
+              window.document.body.className = "shared";
+              share.title = "Shared";
             }
           });
         });
@@ -25,8 +27,8 @@
 
           // In this imlementation there might be a race.
           var script = document.createElement("script");
-          script.src = "http://webintents.org/webintents.min.js"; 
-
+          script.src = "/lib/webintents.js"; 
+          
           document.head.appendChild(script);
         }
       }); 
@@ -44,6 +46,6 @@
     </style>
   </head>
   <body>
-    <a href="#" id="share" title="Share this"><img src="/images/share.png"></a>
+    <a href="#" id="share" title="Share this"><img src="/images/share32.png"></a>
   </body>
 </html>
