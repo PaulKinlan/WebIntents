@@ -8,9 +8,10 @@
     console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
-       info.meditType == "audio") {
+       info.mediaType == "audio") {
        var intent = new Intent();
        intent.action = "http://webintents.org/share";
+       intent.data = info.srcUrl;
        intent.type = info.mediaType + "/*";
        
        tabPorts[tab.id].postMessage(intent);
@@ -35,7 +36,7 @@
   chrome.contextMenus.create({
     "title" : "Share",
     "type" : "normal",
-    "contexts" : ["link"], //, "image", "page", "video", "audio"],
+    "contexts" : ["link", "image", "page", "video", "audio"],
     "onclick" : clickHandler 
   }); 
 
