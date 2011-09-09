@@ -1,0 +1,82 @@
+<% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
+  <%= javascript_include_tag :events %>
+  <%= stylesheet_link_tag :embedbase %>
+  <script>
+    attachEventListener(window, "load", function() {
+
+      var shareLink = document.getElementById("shareLink");
+      attachEventListener(shareLink, "click", function() {
+        var url = document.getElementById("url").value;
+
+        var intent = new Intent();
+        intent.action = "http://webintents.org/share";
+        intent.type = "text/uri-list";
+        intent.data = [ url ];
+
+        window.navigator.startActivity(intent);
+        return false;
+      }, false);
+
+
+      var shareImage = document.getElementById("shareImage");
+      var imageList = document.getElementById("imageList");
+      var imageData;
+
+      attachEventListener(shareImage, "click", function(e) {
+        if(!!imageData == false) {
+          alert("Please select a file");
+          return false;
+        }
+        // We are going to send the ACTUAL data, not just a link.
+        var intent = new Intent();
+        intent.action = "http://webintents.org/share";
+        intent.type = "image/*";
+        intent.data = [ imageData ];
+
+        window.navigator.startActivity(intent);
+        return false;
+      }, false);
+
+      attachEventListener(imageList, "change", function(e) {
+        // Get the data
+        var fileData = e.target.files[0];
+        var reader = new FileReader();
+
+        // Closure to capture the file information.
+        reader.onload = function(evt) {
+          imageData = evt.target.result;
+        };
+
+        reader.readAsDataURL(fileData);
+
+      }, false);
+    }, false);
+
+  </script>
+<% end %>
+<% content_for(:headline) do %>Client App<% end %>
+<p>This is an external app that needs to share links. It has no prior knowledge of any other sharing application.</p>
+    <section>
+      <h2>Share a link</h2>
+    <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
+    <button id="shareLink">Share link</button>
+    <pre>var intent = new Intent();
+intent.action = "http://webintents.org/share";
+intent.type = "text/uri-list";
+intent.data = [ url ];
+
+window.navigator.startActivity(intent);</pre>
+    </section>
+    <section>
+      <h2>Share an image</h2>
+      <p>Pick an image to share.</p>
+      <input id="imageList" type="file" accept="image/*" />
+      <button id="shareImage">Share Image</button>
+  <pre>var intent = new Intent();
+intent.action = "http://webintents.org/share";
+intent.type = "image/*";
+intent.data = [ imageData ];
+
+window.navigator.startActivity(intent);</pre>
+      </section>
