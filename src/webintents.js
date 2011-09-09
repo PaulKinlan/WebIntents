@@ -81,6 +81,7 @@
     }
     else if (data.request == "ready") {
       console.log("Webintents frame ready"); 
+      parseIntentsDocument();
     }
   };
 
@@ -115,6 +116,7 @@
       }
     }
 
+    console.log("Attempting to register");
     iframe.contentWindow.postMessage(
       _str({
         request: "register", 
@@ -240,7 +242,7 @@
           iframe.src = serverSource;
         }
         else {
-          parseIntentsDocument();
+          //parseIntentsDocument();
         }
       }, false);
 
