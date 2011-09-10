@@ -84,11 +84,11 @@
 
         intents[data.intent._id].callback(data.intent);
       }
+      else if (data.request == "ready") {
+        console.log("Webintents frame ready"); 
+      }
     } catch (err) {
       console.log(err);
-    }
-    else if (data.request == "ready") {
-      console.log("Webintents frame ready"); 
     }
   };
 
