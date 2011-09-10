@@ -70,8 +70,12 @@
   };
 
   var handler = function(e) {
+    // We will only process messages from the webintents.
+    if (e.origin != serverSource) return;
+
+    var data;
     try {
-      var data = JSON.parse(e.data);
+      data = JSON.parse(e.data);
       if(
          !!data.intent == true &&
          !!intents[data.intent._id] == true &&
@@ -81,8 +85,7 @@
         intents[data.intent._id].callback(data.intent);
       }
     } catch (err) {
-      // TODO(tpayne): filter on the origin. For now, just swallow JSON parse
-      // errors that get thrown.
+      console.log(err);
     }
     else if (data.request == "ready") {
       console.log("Webintents frame ready"); 
