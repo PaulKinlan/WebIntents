@@ -14,7 +14,7 @@
     "default_title": "Share this page"
   },
   "permissions" : [
-     "http://*/*", "https://*/*", "contentMenu"
+     "http://*/*", "https://*/*", "contextMenus"
   ],
   "content_scripts": [
     {
