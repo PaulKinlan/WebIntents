@@ -1,66 +1,49 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Web Intents FAQ</title>
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/base.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Frequently Asked Questions</h1>
-      <nav class="main">
-        <span>Site: </span>
-        <span><a href="http://webintents.org">Specification</a></span>
-        <span><a href="http://examples.webintents.org">Examples</a></span>
-        <span><a href="http://usecases.webintents.org">Use Cases</a></span>
-        <span><a href="http://webintents.org/faq.html">FAQ</a></span>
-      </nav>
-
-      <nav class="sub">
-        <span>Page: </span>
-        <a href="#toc">Table of Contents</a>
-        <a href="#questions">Questions</a>
-      </nav>
-    </header>  
-    <section>
-      <h2>Table of Contents</h2>
-      <ul>
-        <li><a href="#protocolhandler">Why not just use navigator.registerProtocolHandler?</a></li>
-        <li><a href="#contenthandler">Why not just use navigator.registerContentHandler?</a></li>
-        <li><a href="#improveboth">Why not just improve both navigator.registerContentHandler
-            and navigator.registerProtocolHandler?</a></li>
-      </ul>
-      <h2>Questions</h2>
-      <dl>
-        <dt id="protocolhandler">Why not just use navigator.registerProtocolHandler?</dt>
-        <dd>
-        <p>registerProtocolHandler is designed to handle cases where there is a
-           specific type of application that needs to be launched, commonly via
-           an anchor or form, for instance "mailto://". When a user launches a 
-           link with mailto defined it will open the registered native 
-           application or web application.</p>
-           <p>We don't think this goes quite far enough, the protocol handlers 
-           have no concept of what data will be presented to the launched 
-           application; what happens when the opened application can't handle 
-           the data? how do you send an image to an app? There is no way to 
-           communicate data back to the calling application. Web Intents solves 
-           both of these problems.</p>
-           <p>Web Intents uses a filter mechanism to let applications register
-           the commands that they wish to handle and also the data-types that 
-           they can support.</p>
-        </dd>
-        <dt id="contenthandler">Why not just use navigator.registerContentHandler?</dt>
-        <dd>
-        <p>The answer is very similar to the problems that
-           navigator.registerProtocolHandler suffers from. It's primary usecase
-           is for registering the browser as a handler for a type of file data, 
-           it doesn't provide context as to the action's it can perform on 
-           those files.</p>
-        </dd>
-        <dt id="#improveboth">Why not just improve both navigator.registerContentHandler 
-        and navigator.registerProtocolHandler?</dt>
-        <dd></dd>
-      </dl>
-    </section>
-  </body>
-</html>
+<% content_for(:title) do %>Web Intents FAQ<% end %>
+<% content_for(:headline) do %>Frequently Asked Questions<% end %>
+<% content_for(:head) do %>
+  <nav class="sub">
+    <span>Page: </span>
+    <a href="#toc">Table of Contents</a>
+    <a href="#questions">Questions</a>
+  </nav>
+<% end %>
+<section>
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><a href="#protocolhandler">Why not just use navigator.registerProtocolHandler?</a></li>
+    <li><a href="#contenthandler">Why not just use navigator.registerContentHandler?</a></li>
+    <li><a href="#improveboth">Why not just improve both navigator.registerContentHandler
+        and navigator.registerProtocolHandler?</a></li>
+  </ul>
+  <h2>Questions</h2>
+  <dl>
+    <dt id="protocolhandler">Why not just use navigator.registerProtocolHandler?</dt>
+    <dd>
+    <p>registerProtocolHandler is designed to handle cases where there is a
+       specific type of application that needs to be launched, commonly via
+       an anchor or form, for instance "mailto://". When a user launches a 
+       link with mailto defined it will open the registered native 
+       application or web application.</p>
+       <p>We don't think this goes quite far enough, the protocol handlers 
+       have no concept of what data will be presented to the launched 
+       application; what happens when the opened application can't handle 
+       the data? how do you send an image to an app? There is no way to 
+       communicate data back to the calling application. Web Intents solves 
+       both of these problems.</p>
+       <p>Web Intents uses a filter mechanism to let applications register
+       the commands that they wish to handle and also the data-types that 
+       they can support.</p>
+    </dd>
+    <dt id="contenthandler">Why not just use navigator.registerContentHandler?</dt>
+    <dd>
+    <p>The answer is very similar to the problems that
+       navigator.registerProtocolHandler suffers from. It's primary usecase
+       is for registering the browser as a handler for a type of file data, 
+       it doesn't provide context as to the action's it can perform on 
+       those files.</p>
+    </dd>
+    <dt id="#improveboth">Why not just improve both navigator.registerContentHandler 
+    and navigator.registerProtocolHandler?</dt>
+    <dd></dd>
+  </dl>
+</section>

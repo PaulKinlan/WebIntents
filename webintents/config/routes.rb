@@ -1,4 +1,4 @@
-WebintentsOrg::Application.routes.draw do
+Webintents::Application.routes.draw do
   match 'examples/' => 'examples#index'
   match 'examples/intents/pick/' => 'examples#pick'
   match 'examples/intents/pick/index.html' => 'examples#pick'

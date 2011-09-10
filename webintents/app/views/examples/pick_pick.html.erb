@@ -1,15 +1,7 @@
-<!doctype html>
-<html>
-  <title>Pick an Image</title>
-  <script src="/lib/webintents.js"></script>
-  <intent 
-    action="http://webintents.org/pick" 
-    type="image/*" 
-    href="pick.html" 
-    title="Cat Image picker" />
-  <script src="/lib/events.js"></script>
-  <link rel="stylesheet" href="/css/reset.css" />
-  <link rel="stylesheet" href="/css/base.css" />
+<% content_for(:title) do %>Pick an Image<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag 'webintents.debug' %>
+  <%= javascript_include_tag :events %>
   <style>
     iframe {
       float:left;
@@ -49,32 +41,30 @@
    }, false);   
 
   </script>
-  <body>
-    <header>
-      <h1>Kinlan's Cloud File Store</h1>
-    </header>
-    <section>
-    <p>Select a file for the app to use</p>
-    <div>
-      <img id="img1" src="images/kitten1.jpg">
-      <img id="img2" src="images/kitten2.jpg">
-      <img id="img3" src="images/kitten3.jpg">
-    </div>
-    <h2>Code</h2>
-    <pre>var getImageData = function(img) {
-  ...
-  return ......;
+<% end %>
+<% content_for(:head) do %>
+  <h1>Kinlan's Cloud File Store</h1>
+<% end %>
+<section>
+<p>Select a file for the app to use</p>
+<div>
+  <%= image_tag 'kitten1.jpg', :id => 'img1' %>
+  <%= image_tag 'kitten2.jpg', :id => 'img2' %>
+  <%= image_tag 'kitten3.jpg', :id => 'img3' %>
+</div>
+<h2>Code</h2>
+<pre>var getImageData = function(img) {
+...
+return ......;
 };
 
 var returnImage = function(e) {
-  if(!!window.intent) {
-    // Do some magic to return the raw data.
-    var data = [ getImageData(e.target) ] ; 
-  
-    window.intent.postResult(data);
-    setTimeout(function() { window.close();}, 500);
-  }
+if(!!window.intent) {
+// Do some magic to return the raw data.
+var data = [ getImageData(e.target) ] ; 
+
+window.intent.postResult(data);
+setTimeout(function() { window.close();}, 500);
+}
 };</pre>
-    </section>
-  </body>
-</html>
+</section>
