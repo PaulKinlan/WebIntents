@@ -17,6 +17,8 @@ group :assets do
   gem 'uglifier'
 end
 
+gem 'uglifier'
+
 gem 'jquery-rails'
 
 gem 'execjs'
