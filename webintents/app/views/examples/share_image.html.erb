@@ -1,22 +1,18 @@
-<!doctype html>
-<html>
-  <title>Share Link</title>
-  <script src="/lib/webintents.js"></script>
-  <intent 
-    action="http://webintents.org/share" 
-    type="text/uri-list" 
-    href="sharelink.html" 
+<% content_for(:title) do %>Share Link<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
+  <intent
+    action="http://webintents.org/share"
+    type="text/uri-list"
+    href="sharelink.html"
     title="Kinlan's Link Share" />
-
-  <script src="/lib/events.js"></script>
+  <%= javascript_include_tag :events %>
   <script>
     attachEventListener(window, "load", function(e) {
       var output = document.getElementById("output");
-      output.src = intent.data[0]; 
+      output.src = intent.data[0];
     });
   </script>
-  <link rel="stylesheet" href="/css/reset.css" />
-  <link rel="stylesheet" href="/css/base.css" />
   <style>
     iframe {
       float:left;
@@ -24,13 +20,9 @@
       height: 800px;
     }
   </style>
-  <body>
-    <header>
-      <h1>Image Sharing app</h1>
-    </header>
-    <section>
-      <p>Imagine this is a page like twit pic or picplz.</p>
-      <img id="output" />
-    </section>
-  </body>
-</html>
+<% end %>
+<% content_for(:headline) do %>Image Sharing app<% end %>
+<section>
+  <p>Imagine this is a page like twit pic or picplz.</p>
+  <img id="output" />
+</section>

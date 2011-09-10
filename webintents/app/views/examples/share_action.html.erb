@@ -1,7 +1,6 @@
 <% content_for(:js) do %>
   <%= javascript_include_tag :webintents %>
   <%= javascript_include_tag :events %>
-  <%= stylesheet_link_tag :embedbase %>
   <script>
     attachEventListener(window, "load", function() {
 
@@ -55,8 +54,8 @@
 
   </script>
 <% end %>
-<% content_for(:headline) do %>Client App<% end %>
-<p>This is an external app that needs to share links. It has no prior knowledge of any other sharing application.</p>
+  <h2>Client App</h2>
+  <p>This is an external app that needs to share links. It has no prior knowledge of any other sharing application.</p>
     <section>
       <h2>Share a link</h2>
     <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
