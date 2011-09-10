@@ -1,5 +1,6 @@
 <% content_for(:title) do %>Intent: Share<% end %>
 <% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
   <style>
     iframe {
       width: 100%;
