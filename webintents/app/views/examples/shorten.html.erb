@@ -1,65 +1,58 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Intent: Shorten</title>
-    <script src="/lib/webintents.js"></script>
-    <script src="/lib/events.js"></script>
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/base.css" />
-    <style>
-      iframe {
-        width: 100%;
-        height: 800px;
-      }
-    </style>
-     <script src="/lib/common.js"></script>
-    <intent 
-      action="http://webintents.org/shorten" 
-      type="text/uri-list" 
-      href="shorten.html" 
-      title="Kinlan's Link Shortener" />
-    <script>
-      attachEventListener(window, "load", function() {
+<% content_for(:title) do %>Intent: Shorten<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
+  <%= javascript_include_tag :events %>
+  <style>
+    iframe {
+      width: 100%;
+      height: 800px;
+    }
+  </style>
+  <%= javascript_include_tag :common %>
+  <intent
+    action="http://webintents.org/shorten"
+    type="text/uri-list"
+    href="shorten.html"
+    title="Kinlan's Link Shortener" />
+  <script>
+    attachEventListener(window, "load", function() {
 
-        var shareLink = document.getElementById("shortenLink");
-        attachEventListener(shareLink, "click", function() {
-          var url = document.getElementById("url").value;
-          
-          var intent = new Intent();
-          intent.action = "http://webintents.org/shorten";
-          intent.type = "text/uri-list";
-          intent.data = [ url ];
+      var shareLink = document.getElementById("shortenLink");
+      attachEventListener(shareLink, "click", function() {
+        var url = document.getElementById("url").value;
 
-          window.navigator.startActivity(intent, intentResponse);
-          return false;
-        }, false);
+        var intent = new Intent();
+        intent.action = "http://webintents.org/shorten";
+        intent.type = "text/uri-list";
+        intent.data = [ url ];
 
-        var intentResponse = function (intentData) {
-          var output = document.getElementById("output");
-          setText(output, intentData.data[0]);
-          focus();
-        };
+        window.navigator.startActivity(intent, intentResponse);
+        return false;
       }, false);
-    </script>  
-  </head>
-  <body>
-    <header>
-      <h1>Shorten intent example</h1>
-      <nav>
-        <a href="http://webintents.org/">Web Intents</a> 
-        <a href="http://webintents.org/shorten">Shorten Intent documentation</a> 
-        <a href="http://examples.webintents.org/">Examples</a> 
-        <a href="http://webintents.org/faq.html">FAQ</a>
-      </nav>
-    </header>
-    <section>
-      <p>Applications often have to </p>
-      <div>
-        <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
-        <button id="shortenLink">Shorten link</button>
-      </div>
-      <p>Response will appear here:</p> 
-      <div id="output"></div>
-    </section>
-  </body>
-</html>
+
+      var intentResponse = function (intentData) {
+        var output = document.getElementById("output");
+        setText(output, intentData.data[0]);
+        focus();
+      };
+    }, false);
+  </script>
+<% end %>
+<% content_for(:headline) do %>Shorten intent example<% end %>
+<% content_for(:head) do %>
+  <nav>
+    <a href="http://webintents.org/">Web Intents</a>
+    <a href="http://webintents.org/shorten">Shorten Intent documentation</a>
+    <a href="http://examples.webintents.org/">Examples</a>
+    <a href="http://webintents.org/faq.html">FAQ</a>
+  </nav>
+<% end %>
+<section>
+  <p>Applications often have to </p>
+  <div>
+    <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
+    <button id="shortenLink">Shorten link</button>
+  </div>
+  <p>Response will appear here:</p>
+  <div id="output"></div>
+</section>

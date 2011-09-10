@@ -1,19 +1,19 @@
-<!doctype html>
-<html>
-  <title>startActivity Handle Input Data</title>
-  <script src="/lib/webintents.js"></script>
+<% content_for(:title) do %>startActivity Handle Input Data<% end %>
+<% content_for(:headline) do %>startActivity Handle Input Data<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       var regBtn = document.getElementById("register");
       regBtn.addEventListener("click", function() {
-        window.navigator.register("http://webintents.org/share", undefined); 
+        window.navigator.register("http://webintents.org/share", undefined);
       }, false);
-      
+
       var startButton = document.getElementById("startActivity");
       startButton.addEventListener("click", function() {
         var intent = new Intent();
         intent.action = "http://webintents.org/share";
-  
+
         window.navigator.startActivity(intent);
       }, false);
 
@@ -23,9 +23,7 @@
       };
     }, false);
   </script>
-  <body>
-    <button id="register">Click to Register Handler</button>
-    <button id="startActivity">Click to Start Activity</button>
-    <div id="output"></div>
-  </body>
-</html>
+<% end %>
+<button id="register">Click to Register Handler</button>
+<button id="startActivity">Click to Start Activity</button>
+<div id="output"></div>

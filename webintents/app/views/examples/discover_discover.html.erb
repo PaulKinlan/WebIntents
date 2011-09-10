@@ -1,14 +1,13 @@
-<!doctype html>
-<html>
-  <title>Discovery</title>
-  <script src="/lib/webintents.js"></script>
-  <intent 
-    action="http://webintents.org/discover" 
-    type="application/JSON" 
-    href="discover.html" 
+<% content_for(:title) do %>Discovery<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
+  <intent
+    action="http://webintents.org/discover"
+    type="application/JSON"
+    href="discover.html"
     title="Example.com's APIs"
     />
-  <script src="/lib/events.js"></script>
+  <%= javascript_include_tag :events %>
   <script>
 
     attachEventListener(window, "load", function() {
@@ -16,7 +15,7 @@
       attachEventListener(use, "click", function() {
         if(!!window.intent) {
           var data = [
-            { 
+            {
               action: "http://example.com/purchase",
               title: "A New type of Purchase intent"
             },
@@ -27,16 +26,14 @@
           ];
           window.intent.postResult(data);
           setTimeout(function() { window.close();}, 500);
-        }      
+        }
 
     });
-   }, false);   
+   }, false);
 
   </script>
-  <body>
-    <h2>Code</h2>
-    <button id="use">Use</button>
-    <pre>
+<% end %>
+<h2>Code</h2>
+<button id="use">Use</button>
+<pre>
 </pre>
-  </body>
-</html>

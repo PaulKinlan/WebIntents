@@ -33,18 +33,27 @@ class ExamplesController < ApplicationController
   def shorten
   end
 
+  def shorten_action
+    render :layout => 'blank'
+  end
+
   def discover
   end
 
-  def registration
+  def discover_discover
+    render :layout => 'blank'
   end
 
-  def startActivity
+  def discover_action
+    render :layout => 'blank'
   end
 
-  def startActivityWithData
+  def declarative_registration
   end
 
-  def startWithForm
+  def start_activity
+  end
+
+  def start_activity_handle_input_data
   end
 end

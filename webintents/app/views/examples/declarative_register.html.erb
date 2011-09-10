@@ -1,20 +1,16 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Declartive Registration</title>
-    <script src="/lib/webintents.js"></script>
-    <intent 
-      action="http://webintents.org/share" 
-      type="image/*" 
-      href="run.html" 
-      title="declarive test" />
-  </head>
-  <body>
-    <pre>&lt;intent 
+<% content_for(:title) do %>Declarative Registration<% end %>
+<% content_for(:headline) do %>Declarative Registration<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
+  <intent 
+    action="http://webintents.org/share" 
+    type="image/*" 
+    href="run.html" 
+    title="declarive test" />
+<% end %>
+<pre>&lt;intent 
       action="http://webintents.org/share" 
       type="image/*" 
       href="run.html" 
       title="declarive test" /&gt;
 </pre>
-  </body>
-</html>
