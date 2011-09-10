@@ -15,7 +15,11 @@
 */
 
 var decodeNameTransport = function(str) {
-  return JSON.parse(window.atob(str.replace(/_/g, "=")));
+  try {
+    return JSON.parse(window.atob(str.replace(/_/g, "=")));
+  } catch (e) {
+    return '';
+  }
 };
 
 attachEventListener(window, "load", function() {
