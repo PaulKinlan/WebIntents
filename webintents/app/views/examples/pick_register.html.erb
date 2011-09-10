@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Intent: Pick</title>
+    <script src="/lib/webintents.js"></script>
+    <intent 
+      action="http://webintents.org/pick" 
+      type="image/*" 
+      href="pick.html" 
+      title="Cat Image picker" />
+    <intent 
+      action="http://webintents.org/pick" 
+      type="image/*" 
+      href="google.html" 
+      title="Google Image picker" />
+  </head>
+
+
+  <body>
+    <h1>Service</h1>
+    <p>This is a service you use.  It has registered it's intent to be able to handle the share action for "image/*" datatypes.</p>
+    <p>Imaging one of the services is a Picasa, or Flickr style image hosting service.  We want to be able to select one of images to use in the application (think attach picture to gmail).</p>
+    <h2>Pick Intent Registration</h2>
+    <pre>&lt;intent 
+  action="http://webintents.org/pick" 
+  type="image/*" 
+  href="pick.html" 
+  title="Cat Image picker" /&gt;</pre>
+
+  </body>
+</html>

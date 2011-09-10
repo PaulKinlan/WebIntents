@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= yield(:title) %></title>
+    <%= stylesheet_link_tag 'reset.css' %>
+    <%= stylesheet_link_tag 'embedbase.css' %>
+    <%= yield(:js) %>
+  </head>
+  <body>
+    <header>
+      <h1><%= yield(:headline) %></h1>
+      <%= yield(:head) %>
+    </header>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <title>startActivity</title>
+  <script src="/lib/webintents.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var regBtn = document.getElementById("register");
+      regBtn.addEventListener("click", function() {
+        window.navigator.register("http://webintents.org/share", undefined, function(data) {
+          // This is a handler for return responses from the exectued actions. 
+          alert(data);
+        });
+      }, false);
+      
+      var startButton = document.getElementById("startActivity");
+      startButton.addEventListener("click", function() {
+        var intent = new Intent();
+        intent.action = "http://webintents.org/share";
+  
+        window.navigator.startActivity(intent);
+      }, false);
+    }, false);
+  </script>
+  <body>
+    <button id="register">Click to Register Handler</button>
+    <button id="startActivity">Click to Start Activity</button>
+  </body>
+</html>

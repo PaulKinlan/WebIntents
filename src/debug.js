@@ -19,3 +19,7 @@ if(document.location.hostname == "127.0.0.1") {
 else {
   var __WEBINTENTS_ROOT = "http://webintents.org/";
 }
+
+var DEBUG_INTENT = function(str) {
+  console.log(str);
+};

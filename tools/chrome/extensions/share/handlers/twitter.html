@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="webintents.js"></script>
+    <script>
+      document.addEventListener("load", function() {
+        if(window.intent) {
+          if(window.intent.type.indexOf("text/") {
+            var href = "https://twitter.com/intent/tweet?" +
+              encodeURI(window.intent.data);
+            window.location = href;
+          }
+        }
+      });
+    </script>
+  </head>
+
+</html>

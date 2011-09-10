@@ -1,27 +1,28 @@
-var shareElement = document.getElementById(":3r.f");
-
-if(window.intent) {
-  shareElement.innerText = window.intent.data;
-}
-
 var addIntent = function() {
   // Always add the intent in.
   var intentEl = document.createElement("intent");
   intentEl.setAttribute("action", "http://webintents.org/share");
   intentEl.setAttribute("type", "text/uri-list");
+  intentEl.setAttribute("href", document.location.href);
   document.head.appendChild(intentEl);
 };
 
 var checkIntent = function() {
-  setTimeout(function() {
-     var script = document.createElement("script");
-     var scriptText = "if (window.intent) {";
-     scriptText += "alert(window.intent.data);";
-     scriptText += "}";
-     script.textContent = scriptText;
-     document.head.appendChild(script);
-  }, 0);
-};
+    var interval = setInterval(function() {
+      debugger;
+      if (!!window.intent == false) return;
+      clearInterval(interval);
+      var share = document.querySelector(".c-i-f-C");
+      var ev = document.createEvent("MouseEvent");
+      ev.initMouseEvent("click");
+      share.dispatchEvent(ev);
+      setTimeout(function() {
+        var se = document.querySelector(".m-n-f-ba-rd");
+        se.textContent = window.intent.data;
+      }, 1000);
+
+    }, 1000);
+}
 
 if(document.readyState == "complete") {
   addIntent();

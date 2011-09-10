@@ -52,6 +52,7 @@
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no,width=300,height=300";
     var iframe = document.getElementById("webintents_channel"); 
     intent._id = id;
+    intent._callback = (onResult) ? true : false;
     intents[id] = { intent: intent }; 
 
     var w = window.open(pickerSource, encodeNameTransport(intent), params);
@@ -59,7 +60,7 @@
     if(onResult) {
       iframe.contentWindow.postMessage(
         _str({"request": "registerCallback", "id": id }), 
-        serverSource );
+        server );
       intents[id].callback = onResult;
     }
   };
@@ -75,7 +76,9 @@
     var data;
     try {
       data = JSON.parse(e.data);
-      if(!!intents[data.intent._id] == true &&
+      if(
+         !!data.intent == true &&
+         !!intents[data.intent._id] == true &&
          data.request &&
          data.request == "response") {
 
@@ -83,6 +86,9 @@
       }
     } catch (err) {
       console.log(err);
+    }
+    else if (data.request == "ready") {
+      console.log("Webintents frame ready"); 
     }
   };
 
@@ -98,7 +104,9 @@
     window.intent = intent;
   };
   
-  var register = function(action, type, url, title, icon) {
+  var register = function(action, type, url, title, icon, disposition) {
+    if(window.self != window.top) return;
+
     var iframe = document.getElementById("webintents_channel"); 
     if(!!url == false) url = document.location.toString();
     if(url.substring(0, 7) != "http://" && 
@@ -118,13 +126,12 @@
     iframe.contentWindow.postMessage(
       _str({
         request: "register", 
-        intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host } 
+        intent: { action: action, type: type, url: url, title: title, icon: icon, domain: window.location.host, disposition: disposition } 
       }), 
-      serverSource);
+      server);
   };
 
   var Intent = function(action, type, data) {
-    var iframe = document.getElementById("webintents_channel"); 
     var me = this;
     var closed = false;
     this.action = action;
@@ -134,17 +141,19 @@
     this.postResult = function (data) {
       if(closed) return;
 
+      var iframe = document.getElementById("webintents_channel"); 
       var returnIntent = new Intent();
       returnIntent._id = me._id;
       returnIntent.action = me.action;
       returnIntent.data = data;
-    
+      setTimeout(function() { 
       iframe.contentWindow.postMessage(
         _str({
           request: "intentResponse",
           intent: returnIntent 
         }),
-        serverSource);
+        "*");
+      }, 500);
 
       closed = true;
     };
@@ -189,11 +198,12 @@
     var href = intent.getAttribute("href") || document.location.href;
     var action = intent.getAttribute("action");
     var type = intent.getAttribute("type");
+    var disposition = intent.getAttribute("disposition") || "new";
     var icon = intent.getAttribute("icon") || getFavIcon();
 
     if(!!action == false) return;
 
-    register(action, type, href, title, icon);
+    register(action, type, href, title, icon, disposition);
   };
 
   var parseIntentsDocument = function() {
@@ -201,46 +211,6 @@
     var intent;
     for(var i = 0; intent = intents[i]; i++) {
       parseIntentTag(intent);
-    }
-  };
-
-  var handleFormSubmit = function(e) {
-    var form = e.target;
-
-    if(form.method.toLowerCase() == "intent") {
-      if(!!e.preventDefault) 
-        e.preventDefault();
-      else
-        e.returnValue = false;
-      var action = form.action;
-      var enctype = form.getAttribute("enctype");
-      var data = {};
-      var element;
-
-      for(var i = 0; element = form.elements[i]; i++) {
-        if(!!element.name) {
-          var name = element.name;
-          if(!!data[name]) {
-            // If the element make it an array
-            if(data[name] instanceof Array) 
-              data[name].push(element.value);
-            else {
-              var elements = [data[name]];
-              elements.push(element.value);
-              data[name] = elements;
-            }
-          }
-          else {
-            data[name] = element.value;
-          }
-        }
-      }
-
-      var intent = new Intent(action, enctype, data);
-       
-      window.navigator.startActivity(intent);
-    
-      return false;
     }
   };
 
@@ -257,8 +227,14 @@
     window.navigator.startActivity = intents.startActivity;
 
     if(window.name != "") {
-      loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
-      window.name = "";
+      // Verify the source of the intent data.
+      var verified = false;
+      verified = (window.history.length == 1) ? true : false;
+      //verified = (window.document.referrer == pickerSource) ?  true : false;  
+      if(verified) {
+        loadIntentData(JSON.parse(window.atob(window.name.replace(/_/g, "="))));
+        window.name = "";
+      }
     }
    
     if(!!window.postMessage) {
@@ -285,8 +261,6 @@
         iframe.src = serverSource;
       }
     }
-
-    addEventListener(window, "submit", handleFormSubmit, false);
   };
 
   init();
