@@ -26,10 +26,10 @@ production: webintents/public/cache.manifest release
 	gzip webintents/public/webintents.min.js
 	uglifyjs webintents.js > webintents/public/webintents.min.js
 
-server/webintents.js:
+webintents/public/webintents.js:
 
 # Manifest depends on changes to other files, so include them in the dependency chain
-webintents/public/cache.manifest: server/cache.manifest.src server/picker.html server/script/picker.js server/webintents.js server/intents.html server/script/json2.js server/script/webintents-server.js server/script/controller.js server/script/base64.js
+webintents/public/cache.manifest: server/cache.manifest.src webintents/public/picker.html webintents/public/picker.js webintents/public/webintents.js webintents/public/intents.html webintents/public/json2.js webintents/public/webintents-server.js webintents/public/controller.js webintents/public/base64.js
 	cat server/cache.manifest.src >> webintents/public/cache.manifest
 	echo '#' `date` >> webintents/public/cache.manifest
 
