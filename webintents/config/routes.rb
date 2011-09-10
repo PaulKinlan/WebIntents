@@ -12,7 +12,11 @@ Webintents::Application.routes.draw do
   match 'examples/intents/share/action.html' => 'examples#share_action'
   match 'examples/intents/share/sharelink.html' => 'examples#share_link'
   match 'examples/intents/share/shareimage.html' => 'examples#share_image'
-
+  match 'share' => 'root#share'
+  match 'discover' => 'root#discover'
+  match 'edit' => 'root#edit'
+  match 'view' => 'root#view'
+  match 'pick' => 'root#pick'
   match 'faq' => 'root#faq'
   root :to => 'root#index'
 end
