@@ -70,18 +70,23 @@
   };
 
   var handler = function(e) {
-    var data = JSON.parse(e.data);
-    if(
-       !!data.intent == true &&
-       !!intents[data.intent._id] == true &&
-       data.request &&
-       data.request == "response") {
+    var data;
+    try {
+      data = JSON.parse(e.data);
+      if(
+         !!data.intent == true &&
+         !!intents[data.intent._id] == true &&
+         data.request &&
+         data.request == "response") {
 
-      intents[data.intent._id].callback(data.intent);
-    }
-    else if (data.request == "ready") {
-      console.log("Webintents frame ready"); 
-      parseIntentsDocument();
+        intents[data.intent._id].callback(data.intent);
+      }
+      else if (data.request == "ready") {
+        console.log("Webintents frame ready"); 
+        parseIntentsDocument();
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 

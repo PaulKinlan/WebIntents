@@ -13,13 +13,25 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-if(document.location.hostname == "127.0.0.1") {
-  var __WEBINTENTS_ROOT = "https://127.0.0.1:8080/";
-}
-else {
-  var __WEBINTENTS_ROOT = "http://webintents.org/";
-}
 
-var DEBUG_INTENT = function(str) {
-  console.log(str);
+var decodeNameTransport = function(str) {
+  try {
+    return JSON.parse(window.atob(str.replace(/_/g, "=")));
+  } catch (e) {
+    return '';
+  }
 };
+
+attachEventListener(window, "load", function() {
+  var intent = decodeNameTransport(window.name);   
+  
+  data = {};
+  data.request = "startActivity";
+  data.origin = window.name;
+  data.intent = intent;
+
+  // Send a message to itself, mainly for webkit. 
+  window.postMessage(JSON.stringify(data), window.location.protocol + "//" + window.location.host);
+
+  window.resizeTo(300,300);
+}, false);

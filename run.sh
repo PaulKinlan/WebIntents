@@ -4,22 +4,22 @@ case $1 in
 'start')
   (
     cd server
-    python -m SimpleHTTPServer 8080 &
+    python ssl/SimpleSecureHTTPServer.py 8080 &
     echo $! > server.pid
   )
   (
     cd examples
-    python -m SimpleHTTPServer &
+    python ../server/ssl/SimpleSecureHTTPServer.py 8000 &
     echo $! > examples.pid
   )
   (
     cd experiments
-    python -m SimpleHTTPServer 9000 &
+    python ../server/ssl/SimpleSecureHTTPServer.py 9000 &
     echo $! > experiments.pid
   )
   (
     cd widgets
-    python -m SimpleHTTPServer 9001 &
+    python ../server/ssl/SimpleSecureHTTPServer.py 9001 &
     echo $! > widgets.pid
   )
   ;;

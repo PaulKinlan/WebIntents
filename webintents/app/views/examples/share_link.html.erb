@@ -1,0 +1,35 @@
+<% content_for(:title) do %>Share Link<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag :webintents %>
+  <intent
+    action="http://webintents.org/share"
+    type="text/uri-list"
+    href="sharelink.html"
+    disposition="inline"
+    title="Kinlan's Link Share" />
+  <%= javascript_include_tag :events %>
+  <%= javascript_include_tag :common %>
+  <script>
+    attachEventListener(window, "load", function(e) {
+      var output = document.getElementById("output");
+      if(intent.data instanceof Array)
+        setText(output, intent.data[0]);
+      else
+        setText(output, intent.data);
+
+      intent.postResult(intent.data);
+    }, false);
+  </script>
+  <style>
+    iframe {
+      float:left;
+      width: 50%;
+      height: 800px;
+    }
+  </style>
+<% end %>
+<% content_for(:headline) do %>Link Sharing app<% end %>
+<section>
+  <p>Imagine this is a page like twitter or facebook or google buzz.</p>
+  <div id="output"></div>
+</section>
