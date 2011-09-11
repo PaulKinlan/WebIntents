@@ -48,7 +48,7 @@
 
       function pickerCallback(data) {
         if (data.action == google.picker.Action.PICKED) {
-          returnImage(data.docs[0].thumbnails[4].url);
+          returnImage(data.docs[0].thumbnails[data.docs[0].thumbnails.length > 4 ? 4 : 3].url);
         }
       }
     </script>
