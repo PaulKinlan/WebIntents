@@ -2,9 +2,7 @@
   "name": "Share",
   "description" : "Share images, and links",
   "permissions": [
-    "contextMenus",
-    "http://*/*",
-    "https://*/*"
+    "contextMenus"
   ],
   "icons": {
     "16": "openshareicon-16x16.png",
@@ -15,18 +13,15 @@
     "default_icon": "openshareicon-16x16.png",
     "default_title": "Share this page"
   },
+  "permissions" : [
+     "http://*/*", "https://*/*", "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches" : ["http://*/*", "https://*/*"],
+      "js" : ["webintents.js", "startActivity.js"]
+    }
+  ],
   "version": "0.0.0.2",
   "background_page": "background.html",
-  "content_scripts" : [{
-    "matches" : ["http://*/*", "https://*/*"],
-    "js" :  ["webintents-inject.js", "webintents.js", "startActivity.js"]
-  },
-  {
-    "matches" : ["https://plus.google.com/*"],
-    "js" : ["plus.js"]
-  },
-  {
-    "matches" : ["http://twitter.com/"],
-    "js" : ["twitter.js"]
-  }] 
 }

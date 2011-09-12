@@ -32,5 +32,7 @@ Webintents::Application.routes.draw do
   match 'edit' => 'root#edit'
   match 'view' => 'root#view'
   match 'pick' => 'root#pick'
+  match 'subscribe' => 'root#subscribe'
+  match 'save' => 'root#save'
   root :to => 'root#index'
 end

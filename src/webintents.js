@@ -70,9 +70,6 @@
   };
 
   var handler = function(e) {
-    // We will only process messages from the webintents.
-    if (e.origin != serverSource) return;
-
     var data;
     try {
       data = JSON.parse(e.data);
@@ -86,6 +83,7 @@
       }
       else if (data.request == "ready") {
         console.log("Webintents frame ready"); 
+        parseIntentsDocument();
       }
     } catch (err) {
       console.log(err);
@@ -123,6 +121,7 @@
       }
     }
 
+    console.log("Attempting to register");
     iframe.contentWindow.postMessage(
       _str({
         request: "register", 
@@ -248,7 +247,7 @@
           iframe.src = serverSource;
         }
         else {
-          parseIntentsDocument();
+          //parseIntentsDocument();
         }
       }, false);
 

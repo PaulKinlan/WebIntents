@@ -20,19 +20,12 @@ class RootController < ApplicationController
   def faq
   end
 
-  def discover
-  end
-
-  def share
-  end
-
-  def edit
-  end
-
-  def view
-  end
-
   def pick
   end
 
+  def save
+  end
+ 
+  def subscribe
+  end
 end
