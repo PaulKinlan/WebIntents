@@ -9,6 +9,7 @@ release: ./src/webintents.js ./src/json2.js ./src/base64.js
 	gzip -f webintents/public/webintents.js
 	cp webintents.js webintents/public/webintents.js
 	cp webintents.js webintents/app/assets/javascripts/webintents.js
+	cp webintents.js examples/app/assets/javascripts/webintents.js
 	cp webintents.js widgets/lib/webintents.js
 	cp webintents.js tools/chrome/extensions/share/webintents.js
 
@@ -23,6 +24,7 @@ debug: ./src/webintents.js ./src/debug.js ./src/json2.js ./src/base64.js
 production: webintents/public/cache.manifest release
 	uglifyjs webintents.js > webintents/public/webintents.min.js
 	cp webintents/public/webintents.min.js webintents/app/assets/javascripts/
+	cp webintents/public/webintents.min.js examples/app/assets/javascripts/
 	gzip -f webintents/public/webintents.min.js
 	uglifyjs webintents.js > webintents/public/webintents.min.js
 
@@ -37,6 +39,8 @@ clean:
 	rm -f webintents.js
 	rm -f webintents/app/assets/javascripts/webintents.js
 	rm -f webintents/app/assets/javascripts/webintents.min.js
+	rm -f examples/app/assets/javascripts/webintents.js
+	rm -f examples/app/assets/javascripts/webintents.min.js
 	rm -f webintents/public/cache.manifest
 	rm -f webintents/public/webintents.min.js
 	rm -f webintents/public/webintents.min.js.gz

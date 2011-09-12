@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Google Picker</title>
+    <%= javascript_include_tag 'webintents' %>
+    <%= javascript_include_tag :events %>
+    <script
+      src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug"></script>
+    <script type="text/javascript">
+      google.setOnLoadCallback(createPicker);
+      google.load('picker', '1');
+
+      function createPicker() {
+        if (!!window.intent) {
+          var pickerBuilder = new google.picker.PickerBuilder();
+          if (window.intent.type.indexOf('image/') == 0) {
+            pickerBuilder.addViewGroup(
+                new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
+                    addView(new google.picker.PhotosView().
+                        setType(google.picker.PhotosView.Type.UPLOADED)).
+                    addView(new google.picker.PhotosView().
+                        setType(google.picker.PhotosView.Type.FEATURED)));
+          }
+          pickerBuilder.setCallback(pickerCallback);
+          pickerBuilder.build().setVisible(true);
+        }
+      }
+
+      function returnImage (e) {
+        if(!!window.intent) {
+          window.intent.postResult([e]);
+          setTimeout(function() { window.close();}, 500);
+        }
+      }
+
+      function getImageData(url) {
+        var img = new Image();
+        img.src = '/proxy?url=' + url;
+        attachEventListener(img, "load", function() {
+          var canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          var context = canvas.getContext("2d");
+
+          context.drawImage(img, 0, 0);
+          returnImage(canvas.toDataURL("image/png"));
+        });
+      }
+
+      function pickerCallback(data) {
+        if (data.action == google.picker.Action.PICKED) {
+          returnImage(data.docs[0].thumbnails[data.docs[0].thumbnails.length > 4 ? 4 : 3].url);
+        }
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

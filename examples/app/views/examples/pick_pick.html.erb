@@ -1,0 +1,70 @@
+<% content_for(:title) do %>Pick an Image<% end %>
+<% content_for(:js) do %>
+  <%= javascript_include_tag 'webintents' %>
+  <%= javascript_include_tag :events %>
+  <style>
+    iframe {
+      float:left;
+      width: 50%;
+      height: 800px;
+    }
+  </style>
+  <script>
+    var getImageData = function(img) {
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height; 
+      var context = canvas.getContext("2d");
+
+      context.drawImage(img, 0, 0); 
+      return canvas.toDataURL("image/png");
+    };
+
+    var returnImage = function(e) {
+      if(!!window.intent) {
+        // Do some magic to return the raw data.
+        var data = [ getImageData(e.target) ]; 
+
+        window.intent.postResult(data);
+        setTimeout(function() { window.close();}, 500);
+      }
+   };
+
+   attachEventListener(window, "load", function() {
+     var img1 = document.getElementById("img1");
+     var img2 = document.getElementById("img2");
+     var img3 = document.getElementById("img3");
+
+     attachEventListener(img1, "click", returnImage, false);
+     attachEventListener(img2, "click", returnImage, false);
+     attachEventListener(img3, "click", returnImage, false);
+   }, false);   
+
+  </script>
+<% end %>
+<% content_for(:head) do %>
+  <h1>Kinlan's Cloud File Store</h1>
+<% end %>
+<section>
+<p>Select a file for the app to use</p>
+<div>
+  <%= image_tag 'kitten1.jpg', :id => 'img1' %>
+  <%= image_tag 'kitten2.jpg', :id => 'img2' %>
+  <%= image_tag 'kitten3.jpg', :id => 'img3' %>
+</div>
+<h2>Code</h2>
+<pre>var getImageData = function(img) {
+...
+return ......;
+};
+
+var returnImage = function(e) {
+if(!!window.intent) {
+// Do some magic to return the raw data.
+var data = [ getImageData(e.target) ] ; 
+
+window.intent.postResult(data);
+setTimeout(function() { window.close();}, 500);
+}
+};</pre>
+</section>

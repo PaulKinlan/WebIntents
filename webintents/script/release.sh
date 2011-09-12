@@ -4,5 +4,11 @@
 # Author: tpayne@google.com (Tony Payne)
 
 make production
-cd webintents
-rake assets:precompile
+(
+  cd webintents
+  rake assets:precompile
+)
+(
+  cd examples
+  rake assets:precompile
+)

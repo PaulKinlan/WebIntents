@@ -1,6 +1,9 @@
 .DS_Store
 *.pid
 *.bpkg
+*.log
+*.lock
+*.sqlite3
 webintents.js
 webintents.debug.js
 webintents.min.js
