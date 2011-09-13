@@ -1,0 +1,54 @@
+<% content_for(:js) do %>
+  <script type="text/javascript">
+    var context;
+    var canvas;
+    function textChanged() {
+      if (context) {
+        topText = $('#top').val();
+        bottomText = $('#bottom').val();
+
+        var image = $('#image')
+        var width = image.width();
+        var height = image.height();
+        context.drawImage(image.get()[0], 0, 0);
+        context.font = "bold 36px sans-serif";
+        context.textAlign = "center";
+        context.fillText(topText, width * 0.5, height * 0.1, width * 0.9);
+        context.fillText(bottomText, width * 0.5, height * 0.95, width * 0.9);
+      }
+    }
+    $(function() {
+      if (window.intent) {
+        $('#top').change(textChanged);
+        $('#bottom').change(textChanged);
+        $('#done').click(function() {
+          if (canvas) {
+            window.intent.postResult(canvas.toDataURL());
+            window.setTimeout(function() { window.close(); }, 5000);
+          }
+        });
+        var url = $.isArray(window.intent.data) ? window.intent.data[0] : window.intent.data;
+        var img = $('#image');
+        img.load(function() {
+          var image = $('#image');
+          canvas = document.createElement('canvas');
+          $('body').append(canvas);
+          canvas.width = image.width();
+          canvas.height = image.height();
+          context = canvas.getContext('2d');
+          context.drawImage(image.get()[0], 0, 0);
+        });
+        loadImage(img, url);
+      }
+    });
+  </script>
+<% end %>
+
+
+<div>
+  <input type="text" id="top"/>
+  <input type="text" id="bottom"/>
+  <input type="button" id="done" value="Done Editing" />
+</div>
+<img id="image" style="display:none"/>
+
