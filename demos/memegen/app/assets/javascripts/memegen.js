@@ -5,10 +5,5 @@
  * @author tpayne@google.com (Tony Payne)
  */
 function loadImage(img, url) {
-  img.attr('src', '/proxy?url=' + encodeURIComponent(url));
+  img.attr('src', 'proxy?url=' + encodeURIComponent(url));
 }
-
-function imageData(canvas) {
-  return canvas.toDataUri();
-}
-
