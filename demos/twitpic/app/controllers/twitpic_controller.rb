@@ -15,7 +15,7 @@ class TwitpicController < ApplicationController
         error
       else
         session[:tried_login] = true
-        redirect '/auth/twitter'
+        redirect_to '/auth/twitter'
       end
     end
   end
@@ -40,6 +40,11 @@ class TwitpicController < ApplicationController
     ensure
       cleanup(path)
     end
+  end
+
+  def destroy
+    reset_session
+    redirect_to root_path, :notice => "Signed out!"
   end
 
   private

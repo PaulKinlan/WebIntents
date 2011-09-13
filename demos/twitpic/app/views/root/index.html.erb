@@ -25,3 +25,7 @@
   <h3>Result</h3>
   <img src='' id='result'/>
 </div>
+
+<%= form_tag logout_path, :method => :delete do %>
+  <%= submit_tag 'Sign out' %>
+<% end %>
