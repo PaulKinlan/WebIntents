@@ -16,7 +16,7 @@ class TwitpicController < ApplicationController
         error
       else
         session[:tried_login] = true
-        redirect_to '/auth/twitter'
+        redirect_to OmniAuth::Strategies::Twitter.new(nil).request_path()
       end
     end
   end
