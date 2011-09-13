@@ -12,3 +12,11 @@ make production
   cd examples
   rake assets:precompile
 )
+(
+  cd demos/twitpic
+  rake assets:precompile
+)
+(
+  cd demos/memegen
+  rake assets:precompile
+)
