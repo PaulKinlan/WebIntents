@@ -1,0 +1,11 @@
+<% content_for(:js) do %>
+  <intent
+    type="image/*"
+    action="http://webintents.org/save"
+    href="twitpic"/>
+<% end %>
+
+<script type="text/javascript">
+  $(uploadImage);
+</script>
+Uploading your image to twitpic...
