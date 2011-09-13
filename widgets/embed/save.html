@@ -1,0 +1,51 @@
+<! doctype html>
+<html>
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var parentUrl = window.parent.location.href;
+        var share = document.getElementById("save");
+        share.addEventListener("click", function() {
+          var i = new Intent("http://webintents.org/save", "text/uri-list", parentUrl);
+          window.navigator.startActivity(i, function(data) {
+            // The data returned by the request.
+            if(!!data) {
+              localStorage[parentUrl] = "1";
+              window.document.body.className = "saved";
+              share.title = "Shared";
+            }
+          });
+        });
+
+        if(!!localStorage[parentUrl]) {
+          window.document.body.className = "saved";
+          share.title = "Saved";
+        } 
+
+        // We don't have the webintents, download the framework.
+        if(!!window.Intent == false) {
+
+          // In this imlementation there might be a race.
+          var script = document.createElement("script");
+          script.src = "/lib/webintents.js"; 
+          
+          document.head.appendChild(script);
+        }
+      }); 
+    </script>
+    <style>
+      body {
+       margin: 0;
+       padding: 0;
+       background-color: transparent;
+      }
+
+      body.shared {
+        opacity: 0.5;  
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#" id="save" title="Save this"><img src="/images/share32.png"></a>
+  </body>
+</html>
