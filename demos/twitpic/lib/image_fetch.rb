@@ -4,6 +4,8 @@
 # License:: All Rights Reserved.
 # Original Author:: Tony Payne (mailto:tpayne@google.com)
 #
+#
+require 'open-uri'
 
 class ImageFetch
   def initialize(url)
@@ -13,19 +15,20 @@ class ImageFetch
     elsif url.starts_with?('http://') || url.starts_with?('https://')
       store_url(url)
     else
-      raise 'Unsupported URL format'
+      raise "Unsupported URL format: #{url}"
     end
-
-    @path
   end
 
   def path
     @path
   end
 
+  def type
+    @type
+  end
+
   def store_data_url(url)
-    data, type = Datafy::decode_data_uri(url)
-    suffix = get_suffix(type)
+    data, @type = Datafy::decode_data_uri(url)
     return get_tempfile('image' + suffix) { |f|
       f.write(data)
     }
@@ -33,7 +36,10 @@ class ImageFetch
 
   def store_url(url)
     return get_tempfile(File::basename(URI.split(url)[5])) { |f|
-      f << open(url).read
+      open(url) { |rf|
+        @type = rf.content_type
+        f << rf.read
+      }
     }
   end
 
@@ -50,7 +56,7 @@ class ImageFetch
     Dir.rmdir(File::dirname(@path))
   end
 
-  def get_suffix(type)
+  def suffix
     if (type == 'image/jpg' || type == 'image/jpeg')
       return '.jpg'
     elsif (type == 'image/png')

@@ -1,0 +1,37 @@
+<% content_for(:js) do %>
+  <intent
+    type="image/*"
+    action="http://webintents.org/edit"
+    href="memegen"/>
+  <script type="text/javascript">
+    $(function() {
+      attachPickListener(
+          $('#choose'), $('#step1'), $('#step2'), $('#result_div'), $('#result'));
+      $('#save').click(function() {
+        var intent = new Intent();
+        intent.action = 'http://webintents.org/save';
+        intent.type = 'image/*';
+        intent.data = $('#result').attr('src');
+        window.navigator.startActivity(intent, function(data) {
+          alert('Saved! ' + data.data);
+        });
+      });
+    });
+  </script>
+<% end %>
+
+<h1>Demo: Edit Image</h1>
+<div id='step1'>
+  <h3>First, pick an image</h3>
+  <input type="button" value="Choose Image" id="choose"/>
+</div>
+
+<div id='step2' style='display:none'>
+  <h3>Now, edit the image</h3>
+</div>
+
+<div id='result_div' style='display:none'>
+  <h3>Result</h3>
+  <input type="button" value="Save" id="save"/>
+  <img src='' id='result'/>
+</div>
