@@ -10,11 +10,13 @@ class TwitpicController < ApplicationController
   end
 
   def show
-    if session[:tried_login]
-      error
-    elsif !logged_in?
-      session[:tried_login] = true
-      redirect '/auth/twitter'
+    if !logged_in?
+      if session[:tried_login]
+        error
+      else
+        session[:tried_login] = true
+        redirect '/auth/twitter'
+      end
     end
   end
 
