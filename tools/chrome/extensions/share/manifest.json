@@ -23,5 +23,5 @@
     }
   ],
   "version": "0.0.0.2",
-  "background_page": "background.html",
+  "background_page": "background.html"
 }
