@@ -10,8 +10,10 @@
         intent.action = 'http://webintents.org/pick';
         intent.type = 'image/*';
         window.navigator.startActivity(intent, function(intent) {
-        $("#result").attr('src', intent.data).css({ "width": "auto", "height": "auto"});
-          $("#edit, #share, #save").removeClass("disabled");
+          $("#result").attr('src', intent.data).css({ "width": "auto", "height": "auto"});
+          $("#edit, #share, #save").removeClass("disabled")
+                                   .removeAttr('disabled');
+
         });
       });
 
@@ -51,8 +53,8 @@
 
 <div id="steps">
   <input type="button" class="btn primary" value="Choose Image" id="choose"/>
-  <input type="button" class="btn disabled" value="Edit" id="edit"  />
-  <input type="button" class="btn disabled" value="Save" id="save"  />
-  <input type="button" class="btn disabled" value="Share" id="share"  />
+  <input type="button" class="btn disabled" disabled value="Edit" id="edit"  />
+  <input type="button" class="btn disabled" disabled value="Save" id="save"  />
+  <input type="button" class="btn disabled" disabled value="Share" id="share"  />
 </div>
 <img src='' id='result'/>
