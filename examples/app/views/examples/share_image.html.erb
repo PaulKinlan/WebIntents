@@ -10,7 +10,14 @@
   <script>
     attachEventListener(window, "load", function(e) {
       var output = document.getElementById("output");
-      output.src = intent.data[0];
+
+      if(intent.data instanceof Array)
+        output.src = intent.data[0];
+      else
+        output.src = intent.data;
+
+      intent.postResult(intent.data);
+ 
     });
   </script>
   <style>
