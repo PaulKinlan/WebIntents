@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Memegen</title>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <script src='//webintents.org/webintents.min.js'></script>
@@ -9,8 +10,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<header>
+  <h1>Memeinator</h1>
+</header>
+<section>
+  <%= yield %>
+</section>
 
-<%= yield %>
+<footer>
+
+</footer>
 
 </body>
 </html>

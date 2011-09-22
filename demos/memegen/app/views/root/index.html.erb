@@ -5,33 +5,54 @@
     href="edit"/>
   <script type="text/javascript">
     $(function() {
-      attachPickListener(
-          $('#choose'), $('#step1'), $('#step2'), $('#result_div'), $('#result'));
-      $('#save').click(function() {
+       $('#choose').click(function(e) {
+        var intent = new Intent();
+        intent.action = 'http://webintents.org/pick';
+        intent.type = 'image/*';
+        window.navigator.startActivity(intent, function(intent) {
+        $("#result").attr('src', intent.data).css({ "width": "auto", "height": "auto"});
+          $("#edit, #share, #save").removeClass("disabled");
+        });
+      });
+
+      $("#edit").click(function (e) {
+        var intent = new Intent();
+        intent.action = 'http://webintents.org/edit';
+        intent.type = 'image/*';
+        intent.data = $("#result").attr("src");
+        window.navigator.startActivity(intent, function(data) {
+          $("#result").attr('src', data.data);
+        });
+      });
+
+      $('#save').click(function(e) {
         var intent = new Intent();
         intent.action = 'http://webintents.org/save';
         intent.type = 'image/*';
         intent.data = $('#result').attr('src');
         window.navigator.startActivity(intent, function(data) {
-          alert('Saved! ' + data.data);
+
+        });
+      });
+
+      $('#share').click(function() {
+        var intent = new Intent();
+        intent.action = 'http://webintents.com/share';
+        intent.type = 'image/png';
+        intent.data = $('#result').attr('src');
+
+        window.navigator.startActivity(intent, function(data) {
+          
         });
       });
     });
   </script>
 <% end %>
 
-<h1>Demo: Edit Image</h1>
-<div id='step1'>
-  <h3>First, pick an image</h3>
-  <input type="button" value="Choose Image" id="choose"/>
+<div id="steps">
+  <input type="button" class="btn primary" value="Choose Image" id="choose"/>
+  <input type="button" class="btn disabled" value="Edit" id="edit"  />
+  <input type="button" class="btn disabled" value="Save" id="save"  />
+  <input type="button" class="btn disabled" value="Share" id="share"  />
 </div>
-
-<div id='step2' style='display:none'>
-  <h3>Now, edit the image</h3>
-</div>
-
-<div id='result_div' style='display:none'>
-  <h3>Result</h3>
-  <input type="button" value="Save" id="save"/>
-  <img src='' id='result'/>
-</div>
+<img src='' id='result'/>
