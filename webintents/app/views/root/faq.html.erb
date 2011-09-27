@@ -13,7 +13,13 @@
     <li><a href="#protocolhandler">Why not just use navigator.registerProtocolHandler?</a></li>
     <li><a href="#contenthandler">Why not just use navigator.registerContentHandler?</a></li>
     <li><a href="#improveboth">Why not just improve both navigator.registerContentHandler
-        and navigator.registerProtocolHandler?</a></li>
+      and navigator.registerProtocolHandler?</a></li>
+    <li><a href="#tag">Why do we need a new tag? And why can't you use create an new registerIntentHandler() API</a></li>
+    <li><a href="#noinline">Why is there no inline-in-page disposition?</a></li>
+    <li><a href="#nobackground">Why is there no background disposition</a></li>
+    <li><a href="#offline">How well does Web Intents work with offline apps?</a></li>
+    <li><a href="#fivemeg">Why can I only transter 5MB of data?</a></li>
+    <li><a href="#support">Which browsers will support it?</a></li>
   </ul>
   <h2>Questions</h2>
   <dl>
@@ -45,5 +51,43 @@
     <dt id="#improveboth">Why not just improve both navigator.registerContentHandler 
     and navigator.registerProtocolHandler?</dt>
     <dd></dd>
+    <dt id="#tag">Why do we need a new tag? And why can't you use create an new registerIntentHandler() API</dt>
+    <dd>
+    <ul>
+      <li>We can easily index the intentions of services and provide a list of possible apps for the users to use;</li>
+      <li>It is declarative;</li>
+      <li>It can be validated;</li>
+      <li>Less developer API surface area;</li>
+      <li>Copy and Pastability.  It is very easy for developers to start handling intents without any code</li>
+    </ul>
+    </dd>
+    <dt id="#noinline">Why is there no inline-in-page disposition?</dt>
+    <dd>
+    <p>We want to provide a picker and application context to the user that is not spoofable by a malicious page.
+    An in-page in-line solution would look and feel very similar to an iframe and thus could be spoofable.  It would be
+    nearly impossible to provide an interface that could not be spoofed by a site.
+    </p>
+    </dd>
+    <dt id="#nobackground">Why is there no background disposition?</dt>
+    <dd>
+    <p>
+      The user experience of having services that are invisible adds greater complexity to the user-agent and the user experience.
+    </p>
+    </dd>
+    <dt id="#offline">How well does Web Intents work with offline apps?</dt>
+    <dd>
+      <p>Very well. Web Intents is designed to be an entirely clientside discovery and communication channel.</p>
+      <p>The native implementation requires no 3rd party scripts or hosting.  It is built in as a function of the User Agent.</p>
+      <p>The Javascript shim is hosted on webintents.org and is built to work with AppCache, 
+        so as long as you have a browser that supports AppCache then Web Intents will work offline.
+      </p>
+    </dd>
+    <dt id="fivemeg">Why can I only transfer 5MB of data?</dt>
+    <dd>This is an artifact of localStorage limits in Chrome, it only affects the use of the Javascript shim, not the native implementation.</dd>
+    <dt id="support">Which browsers will support it?</dt>
+    <dd>
+    <p>We are working with browser vendors to build Web Intents natively in to their browsers.  In the meantime, we have an
+    <a href="/webintents.js">API compatible Javascript Shim</a> with support for  IE8, IE9, Opera, Safari, Firefox 3+ and Chrome 3+.</p>
+    </dd>
   </dl>
 </section>
