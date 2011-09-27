@@ -13,14 +13,3 @@ function pickCallback(step1Div, step2Div, resultDiv, resultImg, data) {
     resultDiv.show();
   });
 };
-
-function attachPickListener(chooseElement, step1Div, step2Div, resultDiv, resultImg) {
-  chooseElement.click(function(e) {
-    var intent = new Intent();
-    intent.action = 'http://webintents.org/pick';
-    intent.type = 'image/*';
-    window.navigator.startActivity(intent, function(data) {
-      pickCallback(step1Div, step2Div, resultDiv, resultImg, data);
-    });
-  });
-}
