@@ -6,6 +6,11 @@
     <a href="#toc">Table of Contents</a>
     <a href="#questions">Questions</a>
   </nav>
+  <style>
+    li > ul {
+      margin-left: 30px;
+    }
+  </style>
 <% end %>
 <section>
   <h2>Table of Contents</h2>
@@ -15,11 +20,13 @@
     <li><a href="#improveboth">Why not just improve both navigator.registerContentHandler
       and navigator.registerProtocolHandler?</a></li>
     <li><a href="#tag">Why do we need a new tag? And why can't you use create an new registerIntentHandler() API</a></li>
+    <li><a href="#manifest">Why not simply use a manifest file to register intents</a></li>
     <li><a href="#noinline">Why is there no inline-in-page disposition?</a></li>
     <li><a href="#nobackground">Why is there no background disposition</a></li>
     <li><a href="#offline">How well does Web Intents work with offline apps?</a></li>
     <li><a href="#fivemeg">Why can I only transter 5MB of data?</a></li>
     <li><a href="#support">Which browsers will support it?</a></li>
+    <li><a href="#whyurl">Why is Action a URL?</a></li>
   </ul>
   <h2>Questions</h2>
   <dl>
@@ -61,6 +68,30 @@
       <li>Copy and Pastability.  It is very easy for developers to start handling intents without any code</li>
     </ul>
     </dd>
+    <dt id="manifest">Why not simply use a manifest file to register intents?</dt>
+    <dd>
+    <ul>
+      <li>It is another file to manage and deploy - our experience with AppCache and the deployment issues irk us.
+        <ul>
+          <li>It hasn't got the copy and paste-ability that a plain tag has.</li>
+          <li>It is another request for the UA to make:
+            <ul>
+              <li>Management issues: if the manifest 404's do we uninstall intents, if the manifest changes do we uninstall/install etc.</li>
+              <li>Increased latency and load on the server</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Syntax, should it be text like AppCache? should it be XML? should it be JSON?
+        <ul>
+          <li>We would also have to spec out the format of the file and the exact parsing semantics</li>
+          <li>It is another dialect for developers to learn - The chrome manifest are simple, but we have had to build tools (appmator.appspot.com) to help developers because it was too much to grok the spec.</li>
+          <li>Add a new rel type to the html spec.</li>
+        </ul>
+      </li>
+      <li>Other app manifests formats - there isn't consensus about the manifest formats for apps and this would lead us to not have one solid place to put it, and even then it might take longer to get this standardised.</li>
+    </ul>
+    </dd>
     <dt id="#noinline">Why is there no inline-in-page disposition?</dt>
     <dd>
     <p>We want to provide a picker and application context to the user that is not spoofable by a malicious page.
@@ -83,11 +114,27 @@
       </p>
     </dd>
     <dt id="fivemeg">Why can I only transfer 5MB of data?</dt>
-    <dd>This is an artifact of localStorage limits in Chrome, it only affects the use of the Javascript shim, not the native implementation.</dd>
+    <dd>
+      <p>This is an artifact of localStorage limits in Chrome, it only affects the use of the Javascript shim, not the native implementation.</p>
+    </dd>
     <dt id="support">Which browsers will support it?</dt>
     <dd>
-    <p>We are working with browser vendors to build Web Intents natively in to their browsers.  In the meantime, we have an
+      <p>We are working with browser vendors to build Web Intents natively in to their browsers.  In the meantime, we have an
     <a href="/webintents.js">API compatible Javascript Shim</a> with support for  IE8, IE9, Opera, Safari, Firefox 3+ and Chrome 3+.</p>
+    </dd>
+    <dt id="whyurl">Why is Action a URL?</dt>
+    <dd>
+      <p> 
+       The action in the intent tag is a URL to facilitate the following cases:
+      </p>
+      <ul>
+        <li>Namespacing;</li>
+        <li>Versioning;</li>
+        <li>Documentation</li>
+      </ul>
+      <p>
+       Throughout the Android intent eco-system you see regular use of com.domain.intentname for custom intents. Looking at Android (not the external apps), every intent is already in a namespace, the documentation suggests that everyone prefix it with their package name, therefore "android.intent.action.SEND" is different "com.example.intent.SEND". Given that they are namespaced to a physical location on an Android device (the package) translating this to the web, is through URL's.
+      </p>
     </dd>
   </dl>
 </section>
