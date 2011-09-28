@@ -10,6 +10,60 @@
     li > ul {
       margin-left: 30px;
     }
+    table {
+      width: 100%;
+      margin-bottom: 18px;
+      padding: 0;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+    table th, table td {
+      padding: 10px 10px 9px;
+      line-height: 18px;
+      text-align: left;
+    }
+    table th {
+      padding-top: 9px;
+      font-weight: bold;
+      vertical-align: middle;
+      border: 1px solid #ddd;
+    }
+      
+    table td {
+      vertical-align: top;
+    }
+      
+    table th + th, table td + td {
+      border-left: 1px solid #ddd;
+    }
+      
+    table tr + tr td {
+      border-top: 1px solid #ddd;
+    }
+      
+    table tbody tr:first-child td:first-child {
+      -webkit-border-radius: 4px 0 0 0;
+      -moz-border-radius: 4px 0 0 0;
+      border-radius: 4px 0 0 0;
+    }
+    
+    table tbody tr:first-child td:last-child {
+      -webkit-border-radius: 0 4px 0 0;
+      -moz-border-radius: 0 4px 0 0;
+      border-radius: 0 4px 0 0;
+    }
+    
+    table tbody tr:last-child td:first-child {
+      -webkit-border-radius: 0 0 0 4px;
+      -moz-border-radius: 0 0 0 4px;
+      border-radius: 0 0 0 4px;
+    }
+     
+    table tbody tr:last-child td:last-child {
+      -webkit-border-radius: 0 0 4px 0;
+      -moz-border-radius: 0 0 4px 0;
+      border-radius: 0 0 4px 0;
+    }
   </style>
 <% end %>
 <section>
@@ -152,6 +206,64 @@
         <li>Registering at the intent level allows an app to specify a selection of datatypes that it can support. Applications can choose to handle a very specific type: image/png; a range of types: image/* - every image, or any type of data "*"</li>
         <li>Client apps can invoke an intent by saying the type of data the expect to send to the app, or recieve from the app. The app can support a vvery specific type: image/png; a range of types: image/* - every image, or any type of data "*"</li>
       </ul>
+
+      <table>
+        <caption>Intent type resolution matrix</caption>
+        <thead>
+          <tr>
+            <th rowspan=2 colspan=2></th>
+            <th colspan=5>&lt;intent&gt;</th>
+          </tr>
+          <tr>
+            <th>text/uri-list</th>
+            <th>image/jpg</th>
+            <th>image/png</th>
+            <th>image/*</th>
+            <th>*</th>
+          </tr>
+        </thead>
+        <tr>
+          <th rowspan=5>startActivity</th>
+          <th>text/uri-list</th>
+          <td>Yes</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>image/jpg</th>
+          <td></td>
+          <td>Yes</td>
+          <td></td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>image/png</th>
+          <td></td>
+          <td></td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>image/*</th>
+          <td></td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>*</th>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+      </table>
     </dd>
   </dl>
 </section>
