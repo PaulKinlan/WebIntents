@@ -13,8 +13,13 @@
         context.drawImage(image.get()[0], 0, 0);
         context.font = "bold 36px sans-serif";
         context.textAlign = "center";
+        context.fillStyle = "white";
+        context.strokeStyle = "black";
         context.fillText(topText, width * 0.5, height * 0.1, width * 0.9);
+        context.strokeText(topText, width * 0.5, height * 0.1, width * 0.9);
+        
         context.fillText(bottomText, width * 0.5, height * 0.95, width * 0.9);
+        context.strokeText(bottomText, width * 0.5, height * 0.95, width * 0.9);
       }
     }
     $(function() {
@@ -48,7 +53,7 @@
 <div>
   <input type="text" id="top"/>
   <input type="text" id="bottom"/>
-  <input type="button" id="done" value="Done Editing" />
+  <input type="button" class="btn primary" id="done" value="Done Editing" />
 </div>
 <img id="image" style="display:none"/>
 

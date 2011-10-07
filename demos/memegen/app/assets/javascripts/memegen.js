@@ -5,5 +5,10 @@
  * @author tpayne@google.com (Tony Payne)
  */
 function loadImage(img, url) {
-  img.attr('src', 'proxy?url=' + encodeURIComponent(url));
+  if(url.substring(0,4) == "data") {
+    img.attr('src', url);
+  }
+  else {
+    img.attr('src', 'proxy?url=' + encodeURIComponent(url));
+  }
 }

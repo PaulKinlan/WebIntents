@@ -50,6 +50,15 @@ To send data back to the client that invoked it, it is as simple as calling post
 
     window.intent.postResult("something cool");
 
+Building
+========
+Prerequisites:
+Node.js: http://nodejs.org/
+NPM: http://npmjs.org/
+uglify-js: npm -g install uglify-js
+
+Then, run make.
+
 Examples
 ========
 

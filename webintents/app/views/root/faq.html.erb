@@ -6,6 +6,65 @@
     <a href="#toc">Table of Contents</a>
     <a href="#questions">Questions</a>
   </nav>
+  <style>
+    li > ul {
+      margin-left: 30px;
+    }
+    table {
+      width: 100%;
+      margin-bottom: 18px;
+      padding: 0;
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+    }
+    table th, table td {
+      padding: 10px 10px 9px;
+      line-height: 18px;
+      text-align: left;
+    }
+    table th {
+      padding-top: 9px;
+      font-weight: bold;
+      vertical-align: middle;
+      border: 1px solid #ddd;
+    }
+      
+    table td {
+      vertical-align: top;
+    }
+      
+    table th + th, table td + td {
+      border-left: 1px solid #ddd;
+    }
+      
+    table tr + tr td {
+      border-top: 1px solid #ddd;
+    }
+      
+    table tbody tr:first-child td:first-child {
+      -webkit-border-radius: 4px 0 0 0;
+      -moz-border-radius: 4px 0 0 0;
+      border-radius: 4px 0 0 0;
+    }
+    
+    table tbody tr:first-child td:last-child {
+      -webkit-border-radius: 0 4px 0 0;
+      -moz-border-radius: 0 4px 0 0;
+      border-radius: 0 4px 0 0;
+    }
+    
+    table tbody tr:last-child td:first-child {
+      -webkit-border-radius: 0 0 0 4px;
+      -moz-border-radius: 0 0 0 4px;
+      border-radius: 0 0 0 4px;
+    }
+     
+    table tbody tr:last-child td:last-child {
+      -webkit-border-radius: 0 0 4px 0;
+      -moz-border-radius: 0 0 4px 0;
+      border-radius: 0 0 4px 0;
+    }
+  </style>
 <% end %>
 <section>
   <h2>Table of Contents</h2>
@@ -13,7 +72,16 @@
     <li><a href="#protocolhandler">Why not just use navigator.registerProtocolHandler?</a></li>
     <li><a href="#contenthandler">Why not just use navigator.registerContentHandler?</a></li>
     <li><a href="#improveboth">Why not just improve both navigator.registerContentHandler
-        and navigator.registerProtocolHandler?</a></li>
+      and navigator.registerProtocolHandler?</a></li>
+    <li><a href="#tag">Why do we need a new tag? And why can't you use create an new registerIntentHandler() API</a></li>
+    <li><a href="#manifest">Why not simply use a manifest file to register intents</a></li>
+    <li><a href="#noinline">Why is there no inline-in-page disposition?</a></li>
+    <li><a href="#nobackground">Why is there no background disposition</a></li>
+    <li><a href="#offline">How well does Web Intents work with offline apps?</a></li>
+    <li><a href="#fivemeg">Why can I only transter 5MB of data?</a></li>
+    <li><a href="#support">Which browsers will support it?</a></li>
+    <li><a href="#whyurl">Why is Action a URL?</a></li>
+    <li><a href="#whataretypes">What are Type strings going to be? How will they be matched?</a></li>
   </ul>
   <h2>Questions</h2>
   <dl>
@@ -45,5 +113,157 @@
     <dt id="#improveboth">Why not just improve both navigator.registerContentHandler 
     and navigator.registerProtocolHandler?</dt>
     <dd></dd>
+    <dt id="#tag">Why do we need a new tag? And why can't you use create an new registerIntentHandler() API</dt>
+    <dd>
+    <ul>
+      <li>We can easily index the intentions of services and provide a list of possible apps for the users to use;</li>
+      <li>It is declarative;</li>
+      <li>It can be validated;</li>
+      <li>Less developer API surface area;</li>
+      <li>Copy and Pastability.  It is very easy for developers to start handling intents without any code</li>
+    </ul>
+    </dd>
+    <dt id="manifest">Why not simply use a manifest file to register intents?</dt>
+    <dd>
+    <ul>
+      <li>It is another file to manage and deploy - our experience with AppCache and the deployment issues irk us.
+        <ul>
+          <li>It hasn't got the copy and paste-ability that a plain tag has.</li>
+          <li>It is another request for the UA to make:
+            <ul>
+              <li>Management issues: if the manifest 404's do we uninstall intents, if the manifest changes do we uninstall/install etc.</li>
+              <li>Increased latency and load on the server</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Syntax, should it be text like AppCache? should it be XML? should it be JSON?
+        <ul>
+          <li>We would also have to spec out the format of the file and the exact parsing semantics</li>
+          <li>It is another dialect for developers to learn - The chrome manifest are simple, but we have had to build tools (appmator.appspot.com) to help developers because it was too much to grok the spec.</li>
+          <li>Add a new rel type to the html spec.</li>
+        </ul>
+      </li>
+      <li>Other app manifests formats - there isn't consensus about the manifest formats for apps and this would lead us to not have one solid place to put it, and even then it might take longer to get this standardised.</li>
+    </ul>
+    </dd>
+    <dt id="#noinline">Why is there no inline-in-page disposition?</dt>
+    <dd>
+    <p>We want to provide a picker and application context to the user that is not spoofable by a malicious page.
+    An in-page in-line solution would look and feel very similar to an iframe and thus could be spoofable.  It would be
+    nearly impossible to provide an interface that could not be spoofed by a site.
+    </p>
+    </dd>
+    <dt id="#nobackground">Why is there no background disposition?</dt>
+    <dd>
+    <p>
+      The user experience of having services that are invisible adds greater complexity to the user-agent and the user experience.
+    </p>
+    </dd>
+    <dt id="#offline">How well does Web Intents work with offline apps?</dt>
+    <dd>
+      <p>Very well. Web Intents is designed to be an entirely clientside discovery and communication channel.</p>
+      <p>The native implementation requires no 3rd party scripts or hosting.  It is built in as a function of the User Agent.</p>
+      <p>The Javascript shim is hosted on webintents.org and is built to work with AppCache, 
+        so as long as you have a browser that supports AppCache then Web Intents will work offline.
+      </p>
+    </dd>
+    <dt id="fivemeg">Why can I only transfer 5MB of data?</dt>
+    <dd>
+      <p>This is an artifact of localStorage limits in Chrome, it only affects the use of the Javascript shim, not the native implementation.</p>
+    </dd>
+    <dt id="support">Which browsers will support it?</dt>
+    <dd>
+      <p>We are working with browser vendors to build Web Intents natively in to their browsers.  In the meantime, we have an
+    <a href="/webintents.js">API compatible Javascript Shim</a> with support for  IE8, IE9, Opera, Safari, Firefox 3+ and Chrome 3+.</p>
+    </dd>
+    <dt id="whyurl">Why is Action a URL?</dt>
+    <dd>
+      <p> 
+       The action in the intent tag is a URL to facilitate the following cases:
+      </p>
+      <ul>
+        <li>Namespacing;</li>
+        <li>Versioning;</li>
+        <li>Documentation</li>
+      </ul>
+      <p>
+       Throughout the Android intent eco-system you see regular use of com.domain.intentname for custom intents. Looking at Android (not the external apps), every intent is already in a namespace, the documentation suggests that everyone prefix it with their package name, therefore "android.intent.action.SEND" is different "com.example.intent.SEND". Given that they are namespaced to a physical location on an Android device (the package) translating this to the web, is through URL's.
+      </p>
+    </dd>
+    <dt id="whataretypes">What are Type strings going to be? How will they be matched?</dt>
+    <dd>
+      <p>
+        Type strings are a filter used by the User agent to resolve the list of services that are known to be able to handle a particular type of data.  For example, there is no point in listing a service that can only edit images at the start of an activity to edit audio.
+      </p>
+      <p>
+        Type strings are based on a MIME-type style syntax and can be resolved either via a full string match or via a simple wildcard system. 
+      </p>
+      <p>
+        Wildcard types can be specified both in the intent tag and at the time of "startActivity".
+      </p>
+      <ul>
+        <li>Registering at the intent level allows an app to specify a selection of datatypes that it can support. Applications can choose to handle a very specific type: image/png; a range of types: image/* - every image, or any type of data "*"</li>
+        <li>Client apps can invoke an intent by saying the type of data the expect to send to the app, or recieve from the app. The app can support a vvery specific type: image/png; a range of types: image/* - every image, or any type of data "*"</li>
+      </ul>
+
+      <table>
+        <caption>Intent type resolution matrix</caption>
+        <thead>
+          <tr>
+            <th rowspan=2 colspan=2></th>
+            <th colspan=5>&lt;intent&gt;</th>
+          </tr>
+          <tr>
+            <th>text/uri-list</th>
+            <th>image/jpg</th>
+            <th>image/png</th>
+            <th>image/*</th>
+            <th>*</th>
+          </tr>
+        </thead>
+        <tr>
+          <th rowspan=5>startActivity</th>
+          <th>text/uri-list</th>
+          <td>Yes</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>image/jpg</th>
+          <td></td>
+          <td>Yes</td>
+          <td></td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>image/png</th>
+          <td></td>
+          <td></td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>image/*</th>
+          <td></td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <th>*</th>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+      </table>
+    </dd>
   </dl>
 </section>
