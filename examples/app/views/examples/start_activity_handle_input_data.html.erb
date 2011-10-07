@@ -11,8 +11,8 @@
 
       var startButton = document.getElementById("startActivity");
       startButton.addEventListener("click", function() {
-        var intent = new Intent();
-        intent.action = "http://webintents.org/share";
+        var intent = new Intent(
+            "http://webintents.org/share");
 
         window.navigator.startActivity(intent);
       }, false);

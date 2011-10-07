@@ -6,9 +6,9 @@
   <script type="text/javascript">
     $(function() {
        $('#choose').click(function(e) {
-        var intent = new Intent();
-        intent.action = 'http://webintents.org/pick';
-        intent.type = 'image/*';
+        var intent = new Intent(
+            'http://webintents.org/pick',
+            'image/*');
         window.navigator.startActivity(intent, function(intent) {
           $("#result").attr('src', intent.data).css({ "width": "auto", "height": "auto"});
           $("#edit, #share, #save").removeClass("disabled")
@@ -18,30 +18,30 @@
       });
 
       $("#edit").click(function (e) {
-        var intent = new Intent();
-        intent.action = 'http://webintents.org/edit';
-        intent.type = 'image/*';
-        intent.data = $("#result").attr("src");
+        var intent = new Intent(
+            'http://webintents.org/edit',
+            'image/*',
+            $("#result").attr("src"));
         window.navigator.startActivity(intent, function(data) {
           $("#result").attr('src', data.data);
         });
       });
 
       $('#save').click(function(e) {
-        var intent = new Intent();
-        intent.action = 'http://webintents.org/save';
-        intent.type = 'image/*';
-        intent.data = $('#result').attr('src');
+        var intent = new Intent(
+            'http://webintents.org/save',
+            'image/*',
+            $('#result').attr('src'));
         window.navigator.startActivity(intent, function(data) {
 
         });
       });
 
       $('#share').click(function() {
-        var intent = new Intent();
-        intent.action = 'http://webintents.org/share';
-        intent.type = 'image/png';
-        intent.data = $('#result').attr('src');
+        var intent = new Intent(
+            'http://webintents.org/share',
+            'image/png',
+            $('#result').attr('src'));
 
         window.navigator.startActivity(intent, function(data) {
           

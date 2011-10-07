@@ -8,10 +8,10 @@
       attachEventListener(shareLink, "click", function() {
         var url = document.getElementById("url").value;
 
-        var intent = new Intent();
-        intent.action = "http://webintents.org/share";
-        intent.type = "text/uri-list";
-        intent.data = [ url ];
+        var intent = new Intent(
+            "http://webintents.org/share",
+            "text/uri-list",
+            [ url ]);
 
         window.navigator.startActivity(intent);
         return false;
@@ -28,10 +28,10 @@
           return false;
         }
         // We are going to send the ACTUAL data, not just a link.
-        var intent = new Intent();
-        intent.action = "http://webintents.org/share";
-        intent.type = "image/*";
-        intent.data = [ imageData ];
+        var intent = new Intent(
+            "http://webintents.org/share",
+            "image/*",
+            [ imageData ]);
 
         window.navigator.startActivity(intent);
         return false;
@@ -60,10 +60,10 @@
       <h2>Share a link</h2>
     <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
     <button id="shareLink">Share link</button>
-    <pre>var intent = new Intent();
-intent.action = "http://webintents.org/share";
-intent.type = "text/uri-list";
-intent.data = [ url ];
+    <pre>var intent = new Intent(
+    "http://webintents.org/share",
+    "text/uri-list",
+    [ url ]);
 
 window.navigator.startActivity(intent);</pre>
     </section>
@@ -72,10 +72,10 @@ window.navigator.startActivity(intent);</pre>
       <p>Pick an image to share.</p>
       <input id="imageList" type="file" accept="image/*" />
       <button id="shareImage">Share Image</button>
-  <pre>var intent = new Intent();
-intent.action = "http://webintents.org/share";
-intent.type = "image/*";
-intent.data = [ imageData ];
+  <pre>var intent = new Intent(
+    "http://webintents.org/share",
+    "image/*",
+    [ imageData ]);
 
 window.navigator.startActivity(intent);</pre>
       </section>

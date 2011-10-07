@@ -6,9 +6,9 @@
    attachEventListener(window, "load", function() {
       var selectAPI = document.getElementById("selectAPI");
       attachEventListener(selectAPI, "click", function() {
-        var intent = new Intent();
-        intent.action = "http://webintents.org/discover";
-        intent.type = "application/JSON";
+        var intent = new Intent(
+            "http://webintents.org/discover",
+            "application/JSON");
 
         window.navigator.startActivity(intent, intentResponse);
 
@@ -39,9 +39,9 @@
 </ul>
 
 <h3>Code</h3>
-<pre>var intent = new Intent();
-intent.action = "http://webintents.org/discover";
-intent.type = "application/JSON";
+<pre>var intent = new Intent(
+    "http://webintents.org/discover",
+    "application/JSON");
 
 window.navigator.startActivity(intent, intentResponse);
 
