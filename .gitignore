@@ -11,3 +11,5 @@ tools/chrome/extensions/share/webintents.js
 examples/lib/webintents*
 widgets/lib/webintents*
 server/lib/webintents*
+demos/twitpic/public/assets/*
+demos/memegen/public/assets/*
