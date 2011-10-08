@@ -6,9 +6,9 @@
   <script type="text/javascript">
     $(function() {
        $('#choose').click(function(e) {
-        var intent = new Intent();
-        intent.action = 'http://webintents.org/pick';
-        intent.type = 'image/*';
+        var intent = new Intent(
+            'http://webintents.org/pick',
+            'image/*');
         window.navigator.startActivity(intent, function(intent) {
           $("#result").attr('src', intent.data).css({ "width": "auto", "height": "auto"});
         });

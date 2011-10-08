@@ -21,10 +21,10 @@
       attachEventListener(shareLink, "click", function() {
         var url = document.getElementById("url").value;
 
-        var intent = new Intent();
-        intent.action = "http://webintents.org/shorten";
-        intent.type = "text/uri-list";
-        intent.data = [ url ];
+        var intent = new Intent(
+            "http://webintents.org/shorten",
+            "text/uri-list",
+            [ url ]);
 
         window.navigator.startActivity(intent, intentResponse);
         return false;
