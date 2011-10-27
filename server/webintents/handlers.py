@@ -17,5 +17,5 @@ class PageHandler(webapp2.RequestHandler):
     if os.path.exists(path):
       template = jinja_environment.get_template(path)
       self.response.out.write(template.render())
-    else
+    else:
       self.error(404)
