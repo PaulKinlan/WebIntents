@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
-{% block title %}Web Intents{% endblock %}
-{% block headline %}Web Intents{% endblock %}
+{% block headline %}Pick intent example{% endblock %}
+{% block title %}Intent: Pick{% endblock %}
 {% block scripts %}
   <intent 
     action="http://webintents.org/pick" 
@@ -29,8 +29,6 @@
       <a href="http://webintents.org/faq.html">FAQ</a>
     </nav>
 {% endblock %}
-{% block headline %}Pick intent example{% endblock %}
-{% block title %}Intent: Pick{% endblock %}
 {% block content %}
 <section>
   <p>This example demonstrates a cloud-based file picker.</p>
@@ -46,4 +44,4 @@
     <iframe src="action.html"></iframe>
   </div>
 </section>
-{% block content %}
+{% endblock %}
