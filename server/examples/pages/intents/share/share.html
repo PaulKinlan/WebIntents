@@ -1,0 +1,58 @@
+{% extends "layouts/base.html" %}
+{% block title %}Intent: Share{% endblock %}
+{% block headline %}Share intent examples{% endblock %}
+{% block scripts %}
+  <script src="://webinents.org/webinetents.min.js"></script>
+  <style>
+    iframe {
+      width: 100%;
+      height: 800px;
+    }
+    #register {
+    }
+  </style>
+  <intent 
+    action="http://webintents.org/share" 
+    type="image/*" 
+    href="shareimage.html" 
+    title="Kinlan's Image Share" />
+  <intent 
+    action="http://webintents.org/share" 
+    type="text/uri-list" 
+    href="sharelink.html" 
+    disposition="inline"
+    title="Kinlan's Link Share" />
+{% endblock %}
+{% block head %}
+  <nav>
+    <a href="http://webintents.org/">Web Intents</a> 
+    <a href="http://webintents.org/share">Share Intent documentation</a> 
+    <a href="http://examples.webintents.org/">Examples</a> 
+  </nav>
+{% endblock %}
+{% block content %}
+<section>
+  <p>
+  Sharing is a common action on the Internet. This example shows you how easy it is
+  to build applications that recieve Share requests, and how simple it is to build
+  applications that request Share functionality. 
+  </p>
+  <div>
+    <div id="register">
+      <h2>Share Intent Registration</h2>
+      <pre>&lt;intent 
+  action="http://webintents.org/share" 
+  type="image/*" 
+  href="shareimage.html" 
+  title="Kinlan's Image Share" /&gt;
+&lt;intent 
+  action="http://webintents.org/share" 
+  type="text/uri-list" 
+  href="sharelink.html" 
+  title="Kinlan's Link Share" /&gt;</pre>
+      <p>Any application that launches a startActivity with an action of "http://webintents.org/share" will see these applications listed.</p>
+    </div>
+    <iframe src="action.html"></iframe>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layouts/base.html" %}
+{% block title %}Intent: Discover{% endblock %}
+{% block headline %}Discover Intent Example{% endblock %}
+{% block head %}
+  <nav>
+    <a href="http://webintents.org/">Web Intents</a>
+    <a href="http://webintents.org/discover">Discover Intent documentation</a>
+    <a href="http://examples.webintents.org/">Examples</a>
+    <a href="http://webintents.org/faq.html">FAQ</a>
+  </nav>
+{% endblock %}
+{% block scripts %}
+  <script src="://webintents.org/webintents.min.js"></script>
+  <intent
+    action="http://webintents.org/discover"
+    type="application/JSON"
+    href="discover.html"
+    title="Webintents.org's APIs"/>
+  <style>
+    iframe {
+      width: 100%;
+      height: 800px;
+    }
+
+    #register {
+    }
+  </style>
+{% endblock %}
+{% block content %}
+<section>
+  <p>This is an example app that lets the user discover services that other
+    APIs offer</p>
+  <div>
+    <div id="register">
+      <h2>Discover Intent Registration</h2>
+       <pre>&lt;intent
+  action="http://webintents.org/discover"
+  type="application/JSON"
+  href="discover.html"
+  title="Example.com's APIs"
+  /&gt;</pre>
+    </div>
+    <iframe src="action.html"></iframe>
+  </div>
+</section>
+{% endblock %}

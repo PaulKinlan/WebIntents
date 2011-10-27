@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+{% block title %}startActivity Handle Input Data{% endblock %}
+{% block headline %}startActivity Handle Input Data{% endblock %}
+{% block scripts %}
+  <script src="://webintents.org/webintents.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var regBtn = document.getElementById("register");
+      regBtn.addEventListener("click", function() {
+        window.navigator.register("http://webintents.org/share", undefined);
+      }, false);
+
+      var startButton = document.getElementById("startActivity");
+      startButton.addEventListener("click", function() {
+        var intent = new Intent(
+            "http://webintents.org/share");
+
+        window.navigator.startActivity(intent);
+      }, false);
+
+      window.navigator.onActivity = function(data) {
+        var output = document.getElementById("output");
+        output.textContent = JSON.stringify(data);
+      };
+    }, false);
+  </script>
+  {% endblock %}
+{% block content %}
+<button id="register">Click to Register Handler</button>
+<button id="startActivity">Click to Start Activity</button>
+<div id="output"></div>
+{% endblock %}
