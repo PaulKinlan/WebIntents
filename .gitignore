@@ -13,3 +13,5 @@ widgets/lib/webintents*
 server/lib/webintents*
 demos/twitpic/public/assets/*
 demos/memegen/public/assets/*
+server/webintents/webintents.*
+server/webintents/cache.manifest
