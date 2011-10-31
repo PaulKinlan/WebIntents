@@ -1,7 +1,8 @@
 {% extends "layouts/base.html" %}
-{% block title %}startActivity{% endblock %}
+{% block title %}Example: startActivity{% endblock %}
+{% block headline %}Example: startActivity{% endblock %}
 {% block scripts %}
-  <script src="://webintents.org/webintents.min.js"></script>
+  <script src="//webintents.org/webintents.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       var startButton = document.getElementById("startActivity");
@@ -14,6 +15,13 @@
     }, false);
   </script>
   {% endblock %}
-{% block content %}
-<button id="startActivity">Click to Start Activity</button>
+  {% block content %}
+  <section>
+<pre>var intent = new Intent("http://webintents.org/share");
+
+window.navigator.startActivity(intent);</pre>
+  <div> 
+    <button id="startActivity">Click to Start Activity</button>
+  </div>
+  </section>
 {% endblock %}
