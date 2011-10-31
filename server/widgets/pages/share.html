@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+{% block title %}Widgets: Share{% endblock %}
+{% block headline %}Share{% endblock %}
+{% block head %}
+      <nav class="main">
+        <span>Site: </span>
+        <span><a href="http://webintents.org">Specification</a></span>
+        <span><a href="http://webintents.org/share">Share Specification</a></span>
+        <span><a href="http://examples.webintents.org">Examples</a></span>
+        <span><a href="http://usecases.webintents.org">Usecases</a></span>
+        </nav>
+{% endblock %}
+{% block content %}
+<section>
+  <p>
+  The Share Widget is designed to allow users to embed a single line of code inside their site, blog or application and 
+  instantly benefit from services that support the <a href="http://webintents.org/share">Share</a> intent.
+  </p>
+  <p>
+  The Share Widget designed to remember the items that the user has shared and provide a visual
+  indication.
+  </p>
+  <h2>Example</h2>
+  <div>
+    <script src="/share.js"></script>
+  </div>
+  <h2>Usage</h2>
+  <pre>&lt;script src="http://widgets.webintents.org/share.js"&gt;&lt/script&gt;</pre>
+</section>
+{% endblock %}

@@ -4,6 +4,7 @@
 *.log
 *.lock
 *.sqlite3
+*.pyc
 webintents.js
 webintents.debug.js
 webintents.min.js

@@ -6,6 +6,7 @@ import examples.handlers
 import demos.handlers
 import registry.handlers
 import webintents.handlers
+import widgets.handlers
 
 app = webapp2.WSGIApplication([
     routes.DomainRoute('webintents-org.appspot.com', [
@@ -19,6 +20,9 @@ app = webapp2.WSGIApplication([
     ]),
     routes.DomainRoute('registry.webintents-org.appspot.com', [
       Route('/<:.*>', registry.handlers.PageHandler, 'registry')
+    ]),
+    routes.DomainRoute('widgets.webintents-org.appspot.com', [
+      Route('/<:.*>', widgets.handlers.PageHandler, 'widgets')
     ])
   ])
 
