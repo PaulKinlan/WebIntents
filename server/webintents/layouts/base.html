@@ -20,7 +20,10 @@
         <span><a href="http://usecases.webintents.org">Use Cases</a></span>
         <span><a href="/faq.html">FAQ</a></span>
         {% block head %}{% endblock %}
-      </nav>
+        <div>
+          <g:plusone annotation="inline"></g:plusone>
+        </div>
+        </nav>
     </header>
     {% block content %}{% endblock %}
   </body>
@@ -35,5 +38,13 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
-  </script>
+</script>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
 </html>
