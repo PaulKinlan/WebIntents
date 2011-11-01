@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    {% block styles %}
+    <link rel="stylesheet" href="/stylesheets/reset.css" />
+    <link rel="stylesheet" href="/stylesheets/base.css" />
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+    <h1>{% block headline %}{% endblock %}</h1>
+      <nav class="main">
+        <span>Site: </span>
+        <span><a href="http://webintents.org/">Specification</a></span>
+        <span><a href="http://examples.webintents.org/">Examples</a></span>
+        <span><a href="http://usecases.webintents.org">Use Cases</a></span>
+        <span><a href="/faq.html">FAQ</a></span>
+        {% block head %}{% endblock %}
+        <div>
+          <g:plusone size="small" annotation="inline"></g:plusone>
+        </div>
+        </nav>
+    </header>
+    {% block content %}{% endblock %}
+  </body>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-114468-27']);
+  _gaq.push(['_setDomainName', '.webintents.org']);
+  _gaq.push(['_trackPageview']);
+            
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
+</html>

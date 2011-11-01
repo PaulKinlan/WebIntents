@@ -1,0 +1,34 @@
+{% extends "layouts/base.html" %}
+{% block title %}Demos{% endblock %}
+{% block headline %}Demos{% endblock %}
+{% block content %}
+<section>
+  <h2>Demos</h2>
+  <p>A collection of demo applications</p>
+  <dl>
+    <dt><a href="/imagestudio/index.html">Image Studio</a></dt>
+    <dd>Image Studio is an application built in only 
+    <strong>40 lines</strong> of code that lets the user load an image
+    using the http://webintents.org/pick intent, edit the image using the
+    http://webintents.org/edit intent, share the image using the 
+    http://webintents.org/share intent and then save the result back out
+    to the user's preferred storage solution using the 
+    http://webintents.org/save intent.
+    </dd>
+    <dt><a href="/twitpic/index.html">Twitpic</a></dt>
+    <dd>This application is a bridge to twitter and an image host.  It gives
+    users the ability to save (using the http://webintents.org/share intent)
+    their images to a remote file system and then also share them out for 
+    later use.  If a user opens the application without using the intent
+    system it will let the user pick an image from an external image service
+    (using the http://webintents.org/pick intent) 
+    </dd>
+    <dt><a href="/mememator/index.html">Mememator</a></dt>
+    <dd>
+    Mememator is an application that supports image editing (intent:
+    http://webintents.org/edit with type: image/*).  It only has the ability
+    to recieve an image and add a small piece of text to the header and footer.
+    </dd>
+  </dl>
+</section>
+{% endblock %}
