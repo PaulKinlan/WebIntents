@@ -3,7 +3,6 @@ import jinja2
 import os
 from google.appengine.api import urlfetch
 
-
 jinja_environment = jinja2.Environment(
         loader=jinja2.FileSystemLoader(
           os.path.dirname(__file__)))
@@ -37,6 +36,15 @@ class PageHandler(webapp2.RequestHandler):
       self.response.out.write(template.render())
     else:
       self.error(404)
+
+class ImageHandler(webapp2.RequestHandler):
+  def post(self):
+    '''
+    Saves the image to here if not logged in, uploads to twitpic if you are
+    '''
+
+  def get(self):
+    pass
 
 class ProxyHandler(webapp2.RequestHandler):
   def get(self):

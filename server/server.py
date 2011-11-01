@@ -9,6 +9,7 @@ import webintents.handlers
 import widgets.handlers
 import demos.mememator.handlers
 import demos.imagestudio.handlers
+import demos.twitpic.handlers
 
 app = webapp2.WSGIApplication([
     routes.DomainRoute('webintents-org.appspot.com', [
@@ -18,9 +19,11 @@ app = webapp2.WSGIApplication([
       Route('/<:.*>', examples.handlers.PageHandler, 'examples')
     ]),
     routes.DomainRoute('demos.webintents-org.appspot.com', [
+      Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'mememator-proxy'),
       Route('/mememator/<:.*>', demos.mememator.handlers.PageHandler, 'mememator'),
-      Route('/imagestudio/proxy', demos.imagestudio.handlers.ProxyHandler, 'imagestudio-proxy'),
       Route('/imagestudio/<:.*>', demos.imagestudio.handlers.PageHandler, 'imagestudio'),
+      Route('/twitpic/proxy', demos.twitpic.handlers.ProxyHandler, 'twitpic-proxy'),
+      Route('/twitpic/<:.*>', demos.twitpic.handlers.PageHandler, 'twitpic'),
       Route('/<:.*>', demos.handlers.PageHandler, 'demos')
     ]),
     routes.DomainRoute('registry.webintents-org.appspot.com', [
