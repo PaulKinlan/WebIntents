@@ -37,14 +37,11 @@ class PageHandler(webapp2.RequestHandler):
     else:
       self.error(404)
 
-class ImageHandler(webapp2.RequestHandler):
+class UploadHandler(webapp2.RequestHandler):
   def post(self):
     '''
     Saves the image to here if not logged in, uploads to twitpic if you are
     '''
-
-  def get(self):
-    pass
 
 class ProxyHandler(webapp2.RequestHandler):
   def get(self):

@@ -1,12 +1,14 @@
 {% extends "layouts/application.html" %}
 {% block scripts %}
+  <intent action="http://webintents.org/save" 
+    type="image/*" />
+  <script src="scripts/upload_image.js"></script>
   <script type="text/javascript">
     var context;
     var canvas;
 
     $(function() {
       if (window.intent) {
-
         // Data has been passed in.
         $('#done').click(function() {
           if (canvas) {
@@ -14,47 +16,53 @@
             window.setTimeout(function() { window.close(); }, 5000);
           }
         });
+
         var url = $.isArray(window.intent.data) ? window.intent.data[0] : window.intent.data;
         var img = $('#image');
-        img.load(function() {
-          var image = $('#image');
-          canvas = document.createElement('canvas');
-          $('body').append(canvas);
-          canvas.width = image.width();
-          canvas.height = image.height();
-          context = canvas.getContext('2d');
-          context.drawImage(image.get()[0], 0, 0);
-        });
-     
         loadImage(img, url);
       }
       else {
         // There is no data so we want to pick an image.
-          $('pick').show();
-          $('save').hide();
+          $('#pick').show();
+          $('#save').hide();
       }
 
-      $('save').click(function() {
-
+      $('#save').click(function() {
+        // Save the image.
+        var img = $("#image");
+        uploadImage(img[0]);
       });
 
-
-
-      $('pick').click(function(e) {
-          var img = $('image');
+      $('#pick').click(function(e) {
+          var img = $('#image');
           var i = new Intent('http://webintents.org/pick', 'image/*');
-          window.navigator.startActivity(i, function(data) {
+          window.navigator.startActivity(i, function(returnIntent) {
+            var data = returnIntent.data;
             var url = $.isArray(data) ? data[0] : data;
-            loadImage(img, url);
+            loadImage(img[0], url);
+            $("#save").show();
           });
       });
+
     });
+
+    var getImageData = function(img) {
+      var c = document.createElement('canvas');
+      c.width = img.width();
+      c.height = img.height();
+      var ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      return c.toDataURL('image/png'); 
+    };
   </script>
 {% endblock %}
 {% block content %}
 <div>
-  <input type="button" id="save"/>
-  <input type="button" id="pick" />
+  <div id="container">
+    <input type="button" id="save" value="Save" class="btn primary" />
+    <input type="button" id="pick" value="Pick" class="btn" />
+  </div>
+  <img id="image" />
 </div>
-<img id="image" style="display:none"/>
+
 {% endblock %}
