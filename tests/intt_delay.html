@@ -1,0 +1,33 @@
+<html>
+<head>
+<intent action="share"
+        type="text/plain"
+        href="intt_delay.html"
+        title="Sample share intent - delay response" />
+<script>
+  console.log('Im here! Wheres my intent?');
+  if (window.intent) {
+    console.log('GOT INTENT!!!');
+    console.log('action = ' + window.intent.action);
+    window.addEventListener("load", function() {
+      var d = document.getElementById('message-div');
+      d.hidden = false;
+      document.getElementById('message').innerText =
+        JSON.stringify(window.intent.data);
+    });
+    setTimeout(function() {
+      window.intent.postResult('a');
+      //window.intent.postFailure('bad');
+    }, 5000);
+  } else {
+    console.log('no intent');
+  }
+</script>
+</head>
+<body>
+  <h1>Intent processor</h1>
+  <div id="message-div" hidden="true">
+    Intent message: <div id="message"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <intent action="test"
+            type="*"
+            href="intents1_jstest_echo.html"
+            title="Echo Success" />
+    <script>
+      if (window.intent) {
+        window.addEventListener("load", function() {
+          document.getElementById('message-div').hidden = false;
+          document.getElementById('message').innerText =
+            JSON.stringify(window.intent.data);
+            window.intent.postResult(window.intent.data);
+            console.log('Posted reply...');
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Echo</h1>
+    <div id="message-div" hidden="true">
+      Intent message: <div id="message"></div></div>
+  </body>
+</html>
