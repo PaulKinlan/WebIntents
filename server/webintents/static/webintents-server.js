@@ -191,7 +191,7 @@ var MessageDispatcher = function() {
       return;
     }
     localStorage.removeItem(data.intent._id);
-    var message = JSON.stringify({ intent: data.intent, request: "response" });
+    var message = JSON.stringify({ intent: data.intent.data, request: "response" });
     window.parent.postMessage(
       message,
       "*"  
