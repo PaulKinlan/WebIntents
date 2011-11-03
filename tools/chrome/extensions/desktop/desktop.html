@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Desktop</title>
+    <style>
+
+      body {
+        position: absolute;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url('images/code.jpg');
+        background-size: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: inset 0px 0px 10px #000000;
+      }
+
+      #actions {
+        position: absolute;
+        left: 0;
+        margin: 20px 0;
+        background-color: rgba(0,0,0,0);
+      }
+
+      #actions.show {
+        background-color: rgba(0,0,0,1);
+      }
+
+      #actions button {
+        width: 128px;
+        height: 128px;
+        padding: 10px;
+        margin: 10px;
+        display: block;
+      }
+
+      #actions button.recieve {
+        background-color: blue;
+      }
+    </style>
+
+    <script>
+      var addEvent = function(element, evt, func) {
+        var elements;
+        if(element instanceof Array) {
+          elements = element; 
+        }
+        else elements = [element];
+
+        for(var i = 0; i < elements.length; i++) {
+          elements[i].addEventListener(evt, func, false);
+        }
+      };
+
+    </script>
+
+    <script>
+      /*
+      Drop handlers: All the code to handle dropping of data.
+       */
+
+       window.addEventListener("DOMContentLoaded", function() {
+         var actions = document.getElementById("actions");
+         var share = document.getElementById("share");
+         var edit  = document.getElementById("edit");
+         var view  = document.getElementById("view");
+         var save  = document.getElementById("save");
+
+         addEvent(document.body, "dragover", function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+           console.log("Entered body");
+           actions.className = "show";
+         });
+
+         addEvent(document.body, "dragleave", function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+           actions.className = "";
+         });
+
+         var highlightElement = function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+
+         };
+
+         var dropHandler = function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+           var reader = new FileReader();
+
+           console.log(e.dataTransfer);
+           
+           var objects = [];
+           var fileType;
+           if(e.dataTransfer.files) {
+             var files = e.dataTransfer.files;
+             reader.onload = function(er) {
+               objects.push[er.target.result];
+             };
+
+             for(var f = 0; f < files.length; f++) {
+               var file = files[f];
+               if(!!fileType == false) fileType = file.type; // all files must be the same type as the first file, maybe some better logic can be used
+               if(file.type == fileType) {
+                 reader.readAsDataURL(files[f]);
+               }
+             }
+           }
+
+           return false;
+         };
+
+         var dragLeaveHandler = function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+           e.target.className = "";
+         };
+
+         var dragEnterHandler = function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+           e.target.className = "recieve";
+         };
+
+         var dragOverHandler = function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+           e.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+         };
+
+         addEvent([share, edit, view, save], "dragenter", dragEnterHandler);
+         addEvent([share, edit, view, save], "dragleave", dragLeaveHandler);
+         addEvent([share, edit, view, save], "dragover", dragOverHandler);
+         addEvent([share, edit, view, save], "drop", dropHandler);
+
+       },false);
+    </script>
+
+    <script>
+      /*
+        Click handlers for each of the actions.
+
+        Shows a menu of supported base types.
+      */
+       window.addEventListener("DOMContentLoaded", function() {
+         var actions = document.getElementById("actions");
+         var share = document.getElementById("share");
+         var edit  = document.getElementById("edit");
+         var view  = document.getElementById("view");
+         var save  = document.getElementById("save");
+
+         var pickHandler = function () {
+           // Show a list of data types.
+         };
+
+         addEvent([share, edit, view, save], "click", pickHandler);
+       }, false);
+
+
+    </script>
+  </head>
+  <body>
+    <div id="actions">
+      <button id="share" data-action="http://webintents.org/share">Share</button>
+      <button id="view" data-action="http://webintents.org/view">View</button>
+      <button id="edit" data-action="http://webintents.org/edit">Edit</button>
+      <button id="save" data-action="http://webintents.org/save">Save</button>
+    </div>
+  </body>
+</html>
