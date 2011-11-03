@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Desktop</title>
+    <script src="webintents.js"></script>
     <style>
       body {
         position: absolute;
@@ -140,6 +141,12 @@
            actions.className = "";
          });
 
+         addEvent([share, edit, view, save], "dragend", function(e) {
+           e.stopPropagation();
+           e.preventDefault();
+           e.target.className = "";
+         });
+
          var highlightElement = function(e) {
            e.stopPropagation();
            e.preventDefault();
@@ -154,18 +161,27 @@
            var fileType;
            if(e.dataTransfer.files) {
              var files = e.dataTransfer.files;
+             var fileCount = 0;
              reader.onload = function(er) {
-               objects.push[er.target.result];
+               objects.push(er.target.result);
+               if(objects.length == fileCount) {
+                 var i = new Intent(e.target.dataset["action"], fileType, objects);
+                 window.navigator.startActivity(i);
+               }
+
              };
 
              for(var f = 0; f < files.length; f++) {
                var file = files[f];
                if(!!fileType == false) fileType = file.type; // all files must be the same type as the first file, maybe some better logic can be used
                if(file.type == fileType) {
+                 fileCount++;
                  reader.readAsDataURL(files[f]);
                }
              }
            }
+
+           e.target.className = "";
 
            return false;
          };
@@ -225,7 +241,7 @@
          var bgItem = localStorage.getItem('background-image');
          // I am sure this is not secure.
          if(bgItem) {
-           document.body.styles.backgroundImage = "url(" + bgItem + ")";
+           document.body.style.backgroundImage = "url(" + bgItem + ")";
          }
        });
         
