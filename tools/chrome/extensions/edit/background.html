@@ -7,7 +7,7 @@
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
        info.mediaType == "audio") {
-       var intent = new Intent( "http://webintents.org/edit", info.srcUrl, info.mediaType + "/*")
+       var intent = new Intent( "http://webintents.org/edit", info.mediaType + "/*", info.srcUrl);
        
        chrome.tabs.sendRequest(tab.id, intent);
      }
