@@ -1,0 +1,23 @@
+{
+  "name": "Edit",
+  "description" : "Edit images, and links",
+  "permissions": [
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "edit16.png",
+    "48": "edit48.png",
+    "128": "edit128.png"
+  },
+  "permissions" : [
+     "http://*/*", "https://*/*", "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches" : ["http://*/*", "https://*/*"],
+      "js" : ["webintents.js", "startActivity.js"]
+    }
+  ],
+  "version": "0.0.0.2",
+  "background_page": "background.html"
+}

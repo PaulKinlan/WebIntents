@@ -1,0 +1,30 @@
+<!doctype html>
+<script src="webintents.js"></script>
+<script>
+
+  function clickHandler(info, tab) {
+    console.log(info);
+    if(info.mediaType == "image" ||
+       info.mediaType == "video" ||
+       info.mediaType == "audio") {
+       var intent = new Intent();
+       intent.action = "http://webintents.org/edit";
+       intent.data = info.srcUrl;
+       intent.type = info.mediaType + "/*";
+       
+       chrome.tabs.sendRequest(tab.id, intent);
+     }
+  };
+
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    clickHandler({linkUrl: tab.url}, tab);
+  });
+
+  chrome.contextMenus.create({
+    "title" : "Edit",
+    "type" : "normal",
+    "contexts" : ["image", "video", "audio"],
+    "onclick" : clickHandler 
+  }); 
+
+</script>
