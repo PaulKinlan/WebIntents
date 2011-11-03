@@ -23,6 +23,7 @@ app = webapp2.WSGIApplication([
       Route('/mememator/<:.*>', demos.mememator.handlers.PageHandler, 'mememator'),
       Route('/imagestudio/<:.*>', demos.imagestudio.handlers.PageHandler, 'imagestudio'),
       Route('/twitpic/proxy', demos.twitpic.handlers.ProxyHandler, 'twitpic-proxy'),
+      Route('/twitpic/upload', demos.twitpic.handlers.UploadHandler, 'twitpic-proxy'),
       Route('/twitpic/<:.*>', demos.twitpic.handlers.PageHandler, 'twitpic'),
       Route('/<:.*>', demos.handlers.PageHandler, 'demos')
     ]),

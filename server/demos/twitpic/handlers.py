@@ -42,6 +42,7 @@ class UploadHandler(webapp2.RequestHandler):
     '''
     Saves the image to here if not logged in, uploads to twitpic if you are
     '''
+    
 
 class ProxyHandler(webapp2.RequestHandler):
   def get(self):
