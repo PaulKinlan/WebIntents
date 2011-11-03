@@ -211,8 +211,8 @@
 
          var pickHandler = function (e) {
            var i = new Intent("http://webintents.org/pick", "*");
-           window.navigator.startActivity(i, function(intentData) {
-             var newI = new Intent(e.target.action, "*");
+           window.navigator.startActivity(i, function(data) {
+             var newI = new Intent(e.target.dataset["action"], "*", data);
              window.navigator.startActivity(newI);  
            });
          };
@@ -224,7 +224,9 @@
        addEvent(window, "DOMContentLoaded", function() {
          var bgItem = localStorage.getItem('background-image');
          // I am sure this is not secure.
-         body.styles.backgroundImage = "url(" + bgItem + ")";
+         if(bgItem) {
+           document.body.styles.backgroundImage = "url(" + bgItem + ")";
+         }
        });
         
        addEvent(window, "DOMContentLoaded", function() {
@@ -234,8 +236,8 @@
            e.preventDefault();
 
            var i = new Intent("http://webintents.org/pick", "image/*");
-           window.navigator.startActivity(i, function(intentData) {
-             localStorage['background-image'] = intentData.data; 
+           window.navigator.startActivity(i, function(data) {
+             localStorage['background-image'] = data; 
            });
 
            return false;
