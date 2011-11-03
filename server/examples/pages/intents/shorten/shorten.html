@@ -34,15 +34,15 @@
         var intent = new Intent(
             "http://webintents.org/shorten",
             "text/uri-list",
-            [ url ]);
+            url);
 
         window.navigator.startActivity(intent, intentResponse);
         return false;
       }, false);
 
-      var intentResponse = function (intentData) {
+      var intentResponse = function (data) {
         var output = document.getElementById("output");
-        setText(output, intentData.data[0]);
+        setText(output, data);
         focus();
       };
     }, false);

@@ -16,9 +16,9 @@
         return false;
       });
 
-      var intentResponse = function (intentData) {
+      var intentResponse = function (data) {
         var output = document.getElementById("output");
-        output.src = intentData.data;
+        output.src = data;
         focus();
       };
     }, false);
@@ -38,8 +38,8 @@
 
 window.navigator.startActivity(intent, intentResponse);
 
-var intentResponse = function (intentData) {
+var intentResponse = function (data) {
 var output = document.getElementById("output");
-output.src = intentData.data[0];
+output.src = data[0];
 };</pre>
 {% endblock %}

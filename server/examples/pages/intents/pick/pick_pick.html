@@ -24,7 +24,7 @@
     var returnImage = function(e) {
       if(!!window.intent) {
         // Do some magic to return the raw data.
-        var data = [ getImageData(e.target) ]; 
+        var data = getImageData(e.target); 
 
         window.intent.postResult(data);
         setTimeout(function() { window.close();}, 500);
@@ -50,9 +50,9 @@
 <section>
 <p>Select a file for the app to use</p>
 <div>
-  <%= image_tag 'kitten1.jpg', :id => 'img1' %>
-  <%= image_tag 'kitten2.jpg', :id => 'img2' %>
-  <%= image_tag 'kitten3.jpg', :id => 'img3' %>
+  <img src="kitten1.jpg" id="img1" />
+  <img src="kitten2.jpg" id="img2" />
+  <img src="kitten3.jpg" id="img3" />
 </div>
 <h2>Code</h2>
 <pre>var getImageData = function(img) {
@@ -63,7 +63,7 @@ return ......;
 var returnImage = function(e) {
 if(!!window.intent) {
 // Do some magic to return the raw data.
-var data = [ getImageData(e.target) ] ; 
+var data = getImageData(e.target); 
 
 window.intent.postResult(data);
 setTimeout(function() { window.close();}, 500);

@@ -12,7 +12,7 @@
         var intent = new Intent(
             "http://webintents.org/share",
             "text/uri-list",
-            [ url ]);
+            url);
 
         window.navigator.startActivity(intent);
         return false;
@@ -31,7 +31,7 @@
         var intent = new Intent(
             "http://webintents.org/share",
             "image/*",
-            [ imageData ]);
+            imageData);
 
         window.navigator.startActivity(intent);
         return false;
