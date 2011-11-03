@@ -3,7 +3,6 @@
   <head>
     <title>Desktop</title>
     <style>
-
       body {
         position: absolute;
         bottom: 0;
@@ -16,15 +15,52 @@
         box-shadow: inset 0px 0px 10px #000000;
       }
 
+      #configure {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: white;
+        font-family: Arial;
+        font-weight: bold;
+        text-shadow: 0px 0px 1px black;
+        opacity: 0.3;
+        padding: 5px;
+        background-color: #000;
+        border:none;
+        cursor: pointer;
+        -webkit-transition: all 0.2s ease-in-out;
+      }
+
+      #configure:hover {
+        opacity: 1;
+      }
+
       #actions {
         position: absolute;
         left: 0;
-        margin: 20px 0;
-        background-color: rgba(0,0,0,0);
+        margin: 2em 0;
+        border-top: 2px white solid;
+        border-right: 2px white solid;
+        border-bottom: 2px white solid;
+        background-color: rgba(0,0,0,0.3);
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        -webkit-transition: all 0.2s ease-in-out;
       }
 
-      #actions.show {
-        background-color: rgba(0,0,0,1);
+      #actions h2 {
+        color: white;
+        font-family: Arial;
+        text-align: center;
+        text-shadow: 0px 0px 2px black;
+      }
+
+      #actions.show, #actions:hover {
+        background-color: rgba(0,0,0,0.6);
+        border-top: 2px white solid;
+        border-right: 2px white solid;
+        border-bottom: 2px white solid;
+        box-shadow: 0px 0px 10px #000;
       }
 
       #actions button {
@@ -33,6 +69,31 @@
         padding: 10px;
         margin: 10px;
         display: block;
+        background-color: transparent;
+        border: none;
+        color: white;
+        text-shadow: 0px 0px 3px black;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      #share {
+        background-image: url('images/openshareicon-128x128.png');
+      }
+
+      #save {
+        background-image: url('images/save-128x128.png');
+        background-size: 100%;
+      }
+
+      #edit {
+        background-image: url('images/edit-128x128.png');
+        background-size: 100%;
+      }
+
+      #view {
+        background-image: url('images/view-128x128.png');
+        background-size: 100%;
       }
 
       #actions button.recieve {
@@ -52,7 +113,6 @@
           elements[i].addEventListener(evt, func, false);
         }
       };
-
     </script>
 
     <script>
@@ -83,7 +143,6 @@
          var highlightElement = function(e) {
            e.stopPropagation();
            e.preventDefault();
-
          };
 
          var dropHandler = function(e) {
@@ -91,8 +150,6 @@
            e.preventDefault();
            var reader = new FileReader();
 
-           console.log(e.dataTransfer);
-           
            var objects = [];
            var fileType;
            if(e.dataTransfer.files) {
@@ -145,29 +202,58 @@
 
         Shows a menu of supported base types.
       */
-       window.addEventListener("DOMContentLoaded", function() {
+      addEvent(window, "DOMContentLoaded", function() {
          var actions = document.getElementById("actions");
          var share = document.getElementById("share");
          var edit  = document.getElementById("edit");
          var view  = document.getElementById("view");
          var save  = document.getElementById("save");
 
-         var pickHandler = function () {
-           // Show a list of data types.
+         var pickHandler = function (e) {
+           var i = new Intent("http://webintents.org/pick", "*");
+           window.navigator.startActivity(i, function(intentData) {
+             var newI = new Intent(e.target.action, "*");
+             window.navigator.startActivity(newI);  
+           });
          };
 
          addEvent([share, edit, view, save], "click", pickHandler);
-       }, false);
+       });
+     </script>
+     <script>
+       addEvent(window, "DOMContentLoaded", function() {
+         var bgItem = localStorage.getItem('background-image');
+         // I am sure this is not secure.
+         body.styles.backgroundImage = "url(" + bgItem + ")";
+       });
+        
+       addEvent(window, "DOMContentLoaded", function() {
+         var configure = document.getElementById("configure");
+         var configureHandler = function(e) {
+           e.stopPropagation();
+           e.preventDefault();
 
+           var i = new Intent("http://webintents.org/pick", "image/*");
+           window.navigator.startActivity(i, function(intentData) {
+             localStorage['background-image'] = intentData.data; 
+           });
 
-    </script>
+           return false;
+         };
+         addEvent(configure,"click",  configureHandler);
+       });
+     </script>
   </head>
   <body>
     <div id="actions">
+      <h2>Tasks</h2>
       <button id="share" data-action="http://webintents.org/share">Share</button>
       <button id="view" data-action="http://webintents.org/view">View</button>
       <button id="edit" data-action="http://webintents.org/edit">Edit</button>
       <button id="save" data-action="http://webintents.org/save">Save</button>
+    </div>
+    <div id="configure">
+      Configure Background
     </div>
   </body>
 </html>
