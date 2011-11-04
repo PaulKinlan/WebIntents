@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block title %}Web Intents: Twitter Demo{% endblock %}
+{% block headline %}Web Intents: Twitter Demos{% endblock %}
+{% block scripts %}
+<intent action="http://webintents.org/share"
+        type="text/uri-list"
+        href="/twitter/twitter_inline.html"
+        disposition="inline"
+        title="Twitter Demo"
+        icon="http://twitter.com/favicon.ico" />
+{% endblock %}
+{% block content %}
+<section>
+  <p>This demo is a simple illustration of how to integrate a 3rd party API</p>
+</section>
+{% endblock %}
