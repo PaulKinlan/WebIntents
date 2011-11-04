@@ -2,7 +2,7 @@
 {% block title %}Intent: Share{% endblock %}
 {% block headline %}Share intent examples{% endblock %}
 {% block scripts %}
-  <script src="//webinents.org/webinetents.min.js"></script>
+  <script src="//webinents.org/webintents.min.js"></script>
   <style>
     iframe {
       width: 100%;
@@ -14,12 +14,12 @@
   <intent 
     action="http://webintents.org/share" 
     type="image/*" 
-    href="shareimage.html" 
+    href="share_image.html" 
     title="Kinlan's Image Share" />
   <intent 
     action="http://webintents.org/share" 
     type="text/uri-list" 
-    href="sharelink.html" 
+    href="share_link.html" 
     disposition="inline"
     title="Kinlan's Link Share" />
 {% endblock %}
