@@ -10,6 +10,5 @@
     "newtab": "desktop.html"
   },
   "permissions": ["http://*", "https://*", "management"],
-  "version": "0.0.0.2",
-  "background_page": "background.html"
+  "version": "0.0.0.2"
 }
