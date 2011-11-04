@@ -2,9 +2,9 @@
   "name": "Desktop",
   "description" : "A desktop driven by web intents",
   "icons": {
-    "16": "images/openshareicon-16x16.png",
-    "48": "images/openshareicon-48x48.png",
-    "128": "images/openshareicon-128x128.png"
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
   },
   "chrome_url_overrides" : {
     "newtab": "desktop.html"

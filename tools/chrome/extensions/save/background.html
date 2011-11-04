@@ -1,30 +1,17 @@
 <!doctype html>
 <script src="webintents.js"></script>
-<intent 
-  action="http://webintents.org/share"
-  type="text/uri-list"
-  href="handlers/twitter.html"
-  title="Twitter"
-  />
 <script>
-
   function clickHandler(info, tab) {
     console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
        info.mediaType == "audio") {
-       var intent = new Intent();
-       intent.action = "http://webintents.org/share";
-       intent.data = info.srcUrl;
-       intent.type = info.mediaType + "/*";
+       var intent = new Intent("http://webintents.org/save", info.mediaType + "/*", info.srcUrl);
        
        chrome.tabs.sendRequest(tab.id, intent);
      }
      else if(!!info.linkUrl) {
-       var intent = new Intent();
-       intent.action = "http://webintents.org/share";
-       intent.type = "text/uri-list";
-       intent.data = info.linkUrl;
+       var intent = new Intent("http://webintents.org/save", "text/uri-list", info.linkUrl);
 
        chrome.tabs.sendRequest(tab.id, intent);
      }
@@ -35,7 +22,7 @@
   });
 
   chrome.contextMenus.create({
-    "title" : "Share",
+    "title" : "Save",
     "type" : "normal",
     "contexts" : ["link", "image", "page", "video", "audio"],
     "onclick" : clickHandler 

@@ -1,0 +1,27 @@
+{
+  "name": "Save",
+  "description" : "Saves images, and links",
+  "permissions": [
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "save16.png",
+    "48": "save48.png",
+    "128": "save128.png"
+  },
+  "browser_action": {
+    "default_icon": "save16.png",
+    "default_title": "Save this page"
+  },
+  "permissions" : [
+     "http://*/*", "https://*/*", "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches" : ["http://*/*", "https://*/*"],
+      "js" : ["webintents.js", "startActivity.js"]
+    }
+  ],
+  "version": "0.0.0.2",
+  "background_page": "background.html"
+}
