@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Desktop</title>
-    <script src="webintents.js"></script>
+  <script src="webintents.js"></script>
     <style>
       body {
         position: absolute;
@@ -36,6 +36,21 @@
         opacity: 1;
       }
 
+      #apps {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        margin: 2em 0;
+        border-top: 2px white solid;
+        border-left: 2px white solid;
+        border-bottom: 2px white solid;
+        background-color: rgba(0,0,0,0.3);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        -webkit-transition: all 0.2s ease-in-out;
+      }
+
       #actions {
         position: absolute;
         left: 0;
@@ -49,7 +64,7 @@
         -webkit-transition: all 0.2s ease-in-out;
       }
 
-      #actions h2 {
+      #actions h2, #apps h2 {
         color: white;
         font-family: Arial;
         text-align: center;
@@ -63,6 +78,15 @@
         border-bottom: 2px white solid;
         box-shadow: 0px 0px 10px #000;
       }
+
+      #apps:hover {
+        background-color: rgba(0,0,0,0.6);
+        border-top: 2px white solid;
+        border-left: 2px white solid;
+        border-bottom: 2px white solid;
+        box-shadow: 0px 0px 10px #000;
+      }
+
 
       #actions button {
         width: 128px;
@@ -261,6 +285,47 @@
          addEvent(configure,"click",  configureHandler);
        });
      </script>
+
+     <script>
+      var getAllCallback = function(list) {
+        var apps = document.getElementById("apps");
+        var counter = 0;
+        for (var i in list) {
+            // we don't want to do anything with extensions yet.
+            var extInf = list[i];
+            if (extInf.isApp && extInf.enabled) {
+                var app = document.createElement("div");
+                var img = new Image();
+                img.className = "image";
+                img.src = find128Image(extInf.icons);
+                img.addEventListener("click", (function(ext) {
+                    return function() {
+                        chrome.management.launchApp(ext.id);
+                    };
+                })(extInf));
+                app.className = "app";
+                app.appendChild(img);
+                apps.appendChild(app);
+            }
+        }
+    };
+
+    var find128Image = function(icons) {
+        for (var icon in icons) {
+            if (icons[icon].size == "128") {
+                return icons[icon].url;
+            }
+        }
+        return "/noicon.png";
+    };
+
+    var loadApps = function() {
+        chrome.management.getAll(getAllCallback);
+      };
+
+    addEvent(window, "DOMContentLoaded", loadApps);
+
+  </script>
   </head>
   <body>
     <div id="actions">
@@ -272,6 +337,9 @@
     </div>
     <div id="configure">
       Configure Background
+    </div>
+    <div id="apps">
+      <h2>Apps</h2>
     </div>
   </body>
 </html>

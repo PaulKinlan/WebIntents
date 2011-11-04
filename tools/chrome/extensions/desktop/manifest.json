@@ -9,7 +9,7 @@
   "chrome_url_overrides" : {
     "newtab": "desktop.html"
   },
-  "permissions": ["http://*", "https://*"],
+  "permissions": ["http://*", "https://*", "management"],
   "version": "0.0.0.2",
   "background_page": "background.html"
 }
