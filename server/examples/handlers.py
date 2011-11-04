@@ -9,6 +9,8 @@ jinja_environment = jinja2.Environment(
 
 class PageHandler(webapp2.RequestHandler):
   def get(self, file):
+    self.response.headers['X-Content-Security-Policy'] = "allow 'self'; img-src *"
+    
     if file is None or file == "":
       file = "index.html"
 
