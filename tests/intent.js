@@ -1,46 +1,18 @@
-describe("Intent tests", function() {
+if (navigator.startActivity) {
+  if (ix = new Intent('action', 'type', {'attr':'val'})) {
+    console.log('Created intent! ' + JSON.stringify(ix));
+  }
+  console.log('HAVE startActivity');
+  console.log('sending ' + JSON.stringify(ix));
+  navigator.startActivity(ix);
+} else {
+  console.log('NO START ACTIVITY');
+}
 
-  it("Should be unitialized when instansiated", function() {
-    var intent = new Intent();
-    expect(intent.action).not.toBeDefined();
-    expect(intent.type).not.toBeDefined();
-    expect(intent.data).not.toBeDefined();
-  });
-
-  it("Should contain an action when instansiated", function() {
-    var intent = new Intent("test");
-    expect(intent.action).toBe("test");
-  });
-
-  it("Should contain an data type when instansiated", function() {
-    var intent = new Intent("test", "test-filter");
-    expect(intent.type).toBe("test-filter");
-  });
-
-  it("Should contain an data type when instansiated", function() {
-    var intent = new Intent("test", "test-filter", {test: "hello"});
-    expect(intent.data).toBeDefined();
-    expect(intent.data).toBeDefined();
-    expect(intent.data.test).toBeDefined();
-    expect(intent.data.test).toBe("hello");
-  });
-
-  it("Should contain an action when set", function() {
-    var intent = new Intent();
-    intent.action = "test";
-    expect(intent.action).toBe("test");
-  });
-  
-  it("Should contain a type when set", function() {
-    var intent = new Intent();
-    intent.type = "test";
-    expect(intent.type).toBe("test");
-  });
-  
-  it("Should containn data when set", function() {
-    var intent = new Intent();
-    intent.data = "test";
-    expect(intent.data).toBe("test");
-  });
-
-});
+if (navigator.Intents) {
+    console.log('have intents');
+    console.log('PICK=' + navigator.Intents.PICK);
+    console.log('SHARE=' + navigator.Intents.SHARE);
+    console.log('VIEW=' + navigator.Intents.VIEW);
+    console.log('EDIT=' + navigator.Intents.EDIT);
+}

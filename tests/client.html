@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Sample client page</title>
+    <script>
+      function onSuccess(x) {
+        console.log('SUCCESS: ' + x);
+        document.getElementById('reply').innerText = "Reply = " + JSON.stringify(x);
+      }
+      function onError(x) {
+        console.log('ERROR: ' + x);
+        document.getElementById('reply').innerText = "Error = " + JSON.stringify(x);
+      }
+
+      function send() {
+        var message = document.getElementById('message').value;
+        if (navigator.startActivity) {
+          var tt = new Intent('a', 'b', 'c');
+          console.log('have data = ' + tt.data);
+          tt.data = {'d':'e'};
+          console.log('now have data = ' + JSON.stringify(tt.data));
+
+          console.log('using message ' + message);
+          var intent = new Intent('share', 'text/plain', message);
+          console.log('start intent for ' + intent.type);
+          console.log('with data ' + intent.data);
+          navigator.startActivity(intent, onSuccess, onError);
+          console.log('Started intent...' + intent.action);
+        } else {
+          alert('No intents!!!');
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Sample client page</h1>
+    Message: <input type="text" id="message">
+    <button id="send" type="button" onclick="send()">Send intent</button>
+    <p>
+    <div id="reply"></div>
+  </body>
+</html>

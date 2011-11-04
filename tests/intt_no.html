@@ -1,0 +1,32 @@
+<html>
+<head>
+<intent action="share"
+        type="text/plain"
+        href="intt_no.html"
+        title="Sample share intent - no response" />
+<script>
+  console.log('Im here! Wheres my intent?');
+  if (window.intent) {
+    console.log('GOT INTENT!!!');
+    console.log('action = ' + window.intent.action);
+    window.addEventListener("load", function() {
+      var d = document.getElementById('message-div');
+      d.hidden = false;
+      document.getElementById('message').innerText =
+        JSON.stringify(window.intent.data);
+    });
+    var result = 'a';
+    //window.intent.postResult(result);
+    //window.intent.postFailure('bad');
+  } else {
+    console.log('no intent');
+  }
+</script>
+</head>
+<body>
+  <h1>Intent processor</h1>
+  <div id="message-div" hidden="true">
+    Intent message: <div id="message"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<html>
+  <head>
+    <style>
+      .success {
+        margin: 2px;
+        padding: 2px;
+      }
+      .failure {
+        margin: 2px;
+        padding: 2px;
+      }
+
+      .pending {
+        margin: 2px;
+        padding: 2px;
+        border: 2px dotted;
+      }
+
+      .success div {
+        display: inline;
+        background-color: green;
+        margin: 2px;
+        padding: 2px;
+      }
+      .failure div {
+        display: inline;
+        background-color: red;
+        margin: 2px;
+        padding: 2px;
+      }
+    </style>
+    <script>
+      function Test() {
+      }
+
+      Test.prototype.runAllTests = function() {
+        for (var t in this) {
+          if (t.substr(0,4) == 'test')
+            this.runAndReport(this[t], t);
+        }
+      }
+
+      Test.prototype.assertEquals = function(a,b) {
+        if (typeof(a) != typeof(b))
+          throw new Error("Assertion Fail: " + a + " == " + b + " - not the same type");
+        if (a != b)
+          throw new Error("Assertion Fail: " + a + " == " + b);
+      }
+
+      Test.prototype.assertArrayEquals = function(a,b) {
+        if (a.length != b.length)
+          throw new Error("Assertion Fail: " + a + " == " + b);
+        for (var i = 0; i < a.length; i++) {
+          if (a[i] != b[i])
+            throw new Error("Assertion Fail: " + a + " == " + b + " -- at index " + i);
+        }
+      }
+
+      Test.prototype.assertObjectEquals = function(a,b) {
+        for (var i in a)
+          if (a.hasOwnProperty(i) && !b.hasOwnProperty(i))
+            throw new Error("Assert Fail: " + a + " == " + b + " -- no property " + i);
+        for (var i in b)
+          if (b.hasOwnProperty(i) && !a.hasOwnProperty(i))
+            throw new Error("Assert Fail: " + a + " == " + b + " -- no property " + i);
+        for (var i in a)
+          if (a.hasOwnProperty(i) && a[i] != b[i])
+            throw new Error("Assert Fail: " + a + " == " + b + " -- at property " + i);
+      }
+
+      Test.prototype.runAndReport = function(f, name) {
+        console.log("Test ----- " + name);
+        var r = document.createElement("div")
+        r.id = name;
+        var methodName = document.createElement("div");
+        r.appendChild(methodName);
+        methodName.appendChild(document.createTextNode(name));
+        document.body.appendChild(r);
+        try {
+          var testDiv = document.createElement("div");
+          testDiv.style.display = 'none';
+          r.appendChild(testDiv);
+          if (f.call(this, testDiv)) {
+            r.className = "pending";
+          } else {
+            r.className = "success";
+          }
+        } catch (err) {
+          r.className = "failure";
+          var errorMsg = document.createElement("div");
+          errorMsg.className = "error";
+          r.appendChild(errorMsg);
+          errorMsg.innerHTML = "<b>" + err.name + "</b> " + err.message;
+        }
+      }
+
+      Test.prototype.NewCallback = function(f, testDiv) {
+        var trampoline = function(r, func, arg) {
+          r.innerHTML = "<div>" + r.id +"</div>";
+          try {
+            func(arg);
+            r.className = "success";
+          } catch (err) {
+            r.className = "failure";
+            var errorMsg = document.createElement("div");
+            errorMsg.classname = "error";
+            r.appendChild(errorMsg);
+            errorMsg.innerHTML = "<b>" + err.name + "</b> " + err.message;
+          }
+        }
+        return trampoline.bind(undefined, testDiv, f.bind(this));
+      }
+
+      /**************************************************************/
+
+      
+
+      /**************************************************************/
+
+      IntentsIdlTest.prototype = new Test();
+      IntentsIdlTest.prototype.constructor = IntentsIdlTest;
+      function IntentsIdlTest() {}
+
+      IntentsIdlTest.prototype.testAlwaysPass = function() {
+      }
+
+      IntentsIdlTest.prototype.testIntentObjectEmptyConstructor = function() {
+        var intent = new Intent();
+      }
+
+      IntentsIdlTest.prototype.testIntentObjectTwoArgConstructor = function() {
+        var intent = new Intent("action", "type");
+      }
+
+      IntentsIdlTest.prototype.testIntentObjectThreeArgConstructor = function() {
+        var intent1 = new Intent("action", "type", "data");
+        var intent2 = new Intent("action", "type", null);
+        var intent3 = new Intent("action", "type", 4);
+        var intent4 = new Intent("action", "type", 4.4);
+        var intent5 = new Intent("action", "type", true);
+        var intent6 = new Intent("action", "type", {'a':'b'});
+        var intent7 = new Intent("action", "type", ['a', 'b']);
+        var intent8 = new Intent("action", "type", ['a', 11]);
+        var intent9 = new Intent("action", "type", {11: 11});
+        var intent10 = new Intent("action", "type", {});
+      }
+
+      IntentsIdlTest.prototype.testImmutableEmptyIntentObject = function() {
+        var intent = new Intent();
+        this.assertEquals("", intent.action);
+        intent.action = "action";
+        this.assertEquals("", intent.action);
+
+        this.assertEquals("", intent.type);
+        intent.type = "type";
+        this.assertEquals("", intent.type);
+
+        this.assertEquals(null, intent.data);
+      }
+
+      IntentsIdlTest.prototype.testRetrievableIntentData = function() {
+        var intent;
+        intent = new Intent("a", "t", 4);
+        this.assertEquals(4, intent.data);
+        intent = new Intent("a", "t", [3]);
+        this.assertArrayEquals([3], intent.data);
+        intent = new Intent("a", "t", [4,5]);
+        this.assertArrayEquals([4,5], intent.data);
+        intent = new Intent("a", "t", ["8","9"]);
+        this.assertArrayEquals(["8","9"], intent.data);
+        intent = new Intent("a", "t", {"8":"6"});
+        this.assertObjectEquals({"8":"6"}, intent.data);
+      }
+
+      IntentsIdlTest.prototype.testImmutableNewTwoArgIntentObject = function() {
+        var intent = new Intent("a", "t");
+        this.assertEquals("a", intent.action);
+        this.assertEquals("t", intent.type);
+        this.assertEquals(null, intent.data);
+        intent.action = "aa";
+        intent.type = "tt";
+        intent.data = "s";
+        this.assertEquals("a", intent.action);
+        this.assertEquals("t", intent.type);
+        this.assertEquals(null, intent.data);
+      }
+
+      IntentsIdlTest.prototype.testImmutableNewThreeArgIntentObject = function() {
+        var intent = new Intent("a", "t", "d");
+        console.log(intent.data);
+        this.assertEquals("a", intent.action);
+        this.assertEquals("t", intent.type);
+        this.assertEquals("d", intent.data);
+        intent.action = "aa";
+        intent.type = "tt";
+        intent.data = "s";
+        this.assertEquals("a", intent.action);
+        this.assertEquals("t", intent.type);
+        this.assertEquals("d", intent.data);
+      }
+
+      IntentsIdlTest.prototype.testIntentConstants = function() {
+        this.assertEquals("http://webintents.org/share", navigator.Intents.SHARE);
+        this.assertEquals("http://webintents.org/edit", navigator.Intents.EDIT);
+        this.assertEquals("http://webintents.org/pick", navigator.Intents.PICK);
+        this.assertEquals("http://webintents.org/view", navigator.Intents.VIEW);
+
+        this.assertEquals("http://webintents.org/share", new Intent().SHARE);
+        this.assertEquals("http://webintents.org/edit", new Intent().EDIT);
+        this.assertEquals("http://webintents.org/pick", new Intent().PICK);
+        this.assertEquals("http://webintents.org/view", new Intent().VIEW);
+      }
+
+      IntentsIdlTest.prototype.testStartActivity = function() {
+        if (!navigator.startActivity)
+          throw new Error("Cannot find startActivity");
+      }
+
+      IntentsIdlTest.prototype.testIntentConstructorDefensive = function() {
+        try {
+          var intent1 = new Intent("", "type");
+          throw new Error("Shouldn't create intent with empty action");
+        } catch (e) {
+          console.log(e);
+        }
+
+        try {
+          var intent1 = new Intent("action", "");
+          throw new Error("Shouldn't create intent with empty type");
+        } catch (e) {
+          console.log(e);
+        }
+
+        try {
+          var intent1 = new Intent("", "type", "data");
+          throw new Error("Shouldn't create intent with empty action");
+        } catch (e) {
+          console.log(e);
+        }
+
+        try {
+          var intent1 = new Intent("action", "", "data");
+          throw new Error("Shouldn't create intent with empty type");
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      IntentsIdlTest.prototype.testStartActivityDefensive = function() {
+        var intent1 = new Intent();
+        try {
+          navigator.startActivity(intent1);
+          throw new Error("Shouldn't start activity with empty action");
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      /**************************************************************/
+
+      IntentsDispatchTest.prototype = new Test();
+      IntentsDispatchTest.prototype.constructor = IntentsDispatchTest;
+      function IntentsDispatchTest() {}
+
+      IntentsDispatchTest.prototype.testCallbackSuccessFunction = function() {
+        var intent = new Intent("test", "something");
+        try {
+          navigator.startActivity(intent, "callback");
+          throw new Error("Shouldn't start activity with non-function callback");
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      IntentsDispatchTest.prototype.testCallbackErrorFunction = function() {
+        var intent = new Intent("test", "something");
+        try {
+          navigator.startActivity(intent, function(response) {}, "error");
+          throw new Error("Shouldn't start activity with non-function callback");
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      IntentsDispatchTest.prototype.testSendString = function(div) {
+        var b = document.createElement("button");
+        b.innerText = "Send String";
+        div.style.display = null;
+        div.appendChild(b);
+        b.addEventListener("click", function(evt) {
+          var intent = new Intent("test", "text/plain", "message");
+          navigator.startActivity(intent, this.NewCallback(function(response) {
+            console.log("Got reply " + JSON.stringify(response));
+            this.assertEquals("message", response);
+          }, document.getElementById("testSendString")));
+        }.bind(this));
+        return true;
+      }
+
+      IntentsDispatchTest.prototype.testSendArray = function(div) {
+        var b = document.createElement("button");
+        b.innerText = "Send Array";
+        div.style.display = null;
+        div.appendChild(b);
+        b.addEventListener("click", function(evt) {
+          var intent = new Intent("test", "text/plain", ["my", "message"]);
+          navigator.startActivity(intent, this.NewCallback(function(response) {
+            console.log("Got reply " + JSON.stringify(response));
+            this.assertArrayEquals(["my", "message"], response);
+          }, document.getElementById("testSendArray")));
+        }.bind(this));
+        return true;
+      }
+
+      IntentsDispatchTest.prototype.testSendObject = function(div) {
+        var b = document.createElement("button");
+        b.innerText = "Send Object";
+        div.style.display = null;
+        div.appendChild(b);
+        b.addEventListener("click", function(evt) {
+          var intent = new Intent("test", "text/plain", {"my": "message"});
+          navigator.startActivity(intent, this.NewCallback(function(response) {
+            console.log("Got reply " + JSON.stringify(response));
+            this.assertObjectEquals({"my": "message"}, response);
+          }, document.getElementById("testSendObject")));
+        }.bind(this));
+        return true;
+      }
+
+      IntentsDispatchTest.prototype.testErrorString = function(div) {
+        var b = document.createElement("button");
+        b.innerText = "Send String For Error";
+        div.style.display = null;
+        div.appendChild(b);
+        b.addEventListener("click", function(evt) {
+          var intent = new Intent("test", "text/plain", "message");
+          navigator.startActivity(
+            intent,
+            this.NewCallback(function(response) {
+              throw new Error("Should not succeed");
+            }, document.getElementById("testErrorString")),
+            this.NewCallback(function(response) {
+              console.log("Got reply " + JSON.stringify(response));
+              this.assertEquals("message", response);
+            }, document.getElementById("testErrorString")));
+        }.bind(this));
+        return true;
+      }
+
+      IntentsDispatchTest.prototype.testSendStringWithError = function(div) {
+        var b = document.createElement("button");
+        b.innerText = "Send String For Success";
+        div.style.display = null;
+        div.appendChild(b);
+        b.addEventListener("click", function(evt) {
+          var intent = new Intent("test", "text/plain", "message");
+          navigator.startActivity(
+            intent,
+            this.NewCallback(function(response) {
+              this.assertEquals("message", response);
+            }, document.getElementById("testSendStringWithError")),
+            this.NewCallback(function(response) {
+              console.log("Got error reply " + JSON.stringify(response));
+              throw new Error("Should not fail");
+            }, document.getElementById("testSendStringWithError")));
+        }.bind(this));
+        return true;
+      }
+
+
+      /**************************************************************/
+
+      function run() {
+        new IntentsIdlTest().runAllTests();
+
+        var empty = document.createElement("div");
+        empty.style.margin = "1em";
+        empty.appendChild(document.createTextNode(" "));
+        document.body.appendChild(empty);
+
+        new IntentsDispatchTest().runAllTests();
+      }
+
+    </script>
+  </head>
+  <body onload="run()">
+    <h1>Tests:</h1>
+    <div>
+      [<a href="intents1_jstest_echo.html">Register echo service</a>]
+      [<a href="intents1_jstest_failure.html">Register failure service</a>]
+    </div>
+    <p>
+  </body>
+</html>
