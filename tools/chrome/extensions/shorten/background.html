@@ -1,0 +1,24 @@
+<!doctype html>
+<script src="webintents.js"></script>
+<script>
+
+  function clickHandler(info, tab) {
+     if(!!info.linkUrl) {
+       var intent = new Intent("http://webintents.org/shorten", "text/uri-list", info.linkUrl);
+
+       chrome.tabs.sendRequest(tab.id, intent);
+     }
+  };
+
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    clickHandler({linkUrl: tab.url}, tab);
+  });
+
+  chrome.contextMenus.create({
+    "title" : "Shorten",
+    "type" : "normal",
+    "contexts" : ["page", "link"],
+    "onclick" : clickHandler 
+  }); 
+
+</script>
