@@ -9,6 +9,10 @@
     "48": "shorten48.png",
     "128": "shorten128.png"
   },
+  "browser_action": {
+    "default_icon": "shorten16.png",
+    "default_title": "Shorten this page url"
+  },
   "permissions" : [
      "http://*/*", "https://*/*", "contextMenus"
   ],
