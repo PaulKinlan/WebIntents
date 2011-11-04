@@ -10,6 +10,7 @@ import widgets.handlers
 import demos.mememator.handlers
 import demos.imagestudio.handlers
 import demos.twitpic.handlers
+import demos.shortener.handlers
 
 app = webapp2.WSGIApplication([
     routes.DomainRoute('webintents-org.appspot.com', [
@@ -25,6 +26,8 @@ app = webapp2.WSGIApplication([
       Route('/twitpic/proxy', demos.twitpic.handlers.ProxyHandler, 'twitpic-proxy'),
       Route('/twitpic/upload', demos.twitpic.handlers.UploadHandler, 'twitpic-proxy'),
       Route('/twitpic/<:.*>', demos.twitpic.handlers.PageHandler, 'twitpic'),
+      Route('/shortener/shorten', demos.shortener.handlers.ShortenHandler, 'shortener-proxy'),
+      Route('/shortener/<:.*>', demos.shortener.handlers.PageHandler, 'shortener'),
       Route('/<:.*>', demos.handlers.PageHandler, 'demos')
     ]),
     routes.DomainRoute('registry.webintents-org.appspot.com', [
