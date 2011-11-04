@@ -1,0 +1,11 @@
+{% extends "layouts/application.html" %}
+{% block title %}Demo: Goo.gl URL Shortener{% endblock%}
+{% block head %}Demo: Goo.gl URL Shortener{% endblock%}
+{% block scripts %}
+<intent action="http://webintents.org/shorten"
+  type="text/uri-list"
+  disposition="inline" />
+{% endblock %}
+{% block content %}
+<p>This is the registration page of a url Shortener that is hooked in to Goo.gl</p>
+{% endblock %}
