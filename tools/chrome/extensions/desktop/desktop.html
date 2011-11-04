@@ -278,6 +278,7 @@
            var i = new Intent("http://webintents.org/pick", "image/*");
            window.navigator.startActivity(i, function(data) {
              localStorage['background-image'] = data; 
+             document.body.style.backgroundImage = data;
            });
 
            return false;
@@ -321,7 +322,7 @@
 
     var loadApps = function() {
         chrome.management.getAll(getAllCallback);
-      };
+    };
 
     addEvent(window, "DOMContentLoaded", loadApps);
 
