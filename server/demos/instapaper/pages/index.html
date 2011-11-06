@@ -1,0 +1,12 @@
+{% extends "layouts/application.html" %}
+{% block title %}Demo: Instapaper{% endblock%}
+{% block head %}Demo: Instapaper{% endblock%}
+{% block scripts %}
+<intent action="http://webintents.org/save"
+  type="text/uri-list"
+  href="add.html"
+  disposition="inline" />
+{% endblock %}
+{% block content %}
+<p>This is the registration page for instapaper api</p>
+{% endblock %}

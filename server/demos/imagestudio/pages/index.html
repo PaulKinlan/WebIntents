@@ -1,22 +1,25 @@
 {% extends "layouts/application.html" %}
 {% block title %}Image Studio{% endblock %}
 {% block scripts %}
+  <intent action="http://webintents.org/view"
+          type="image/*" />
   <script type="text/javascript">
     $(function() {
       $('#choose').click(function(e) {
         var intent = new Intent( 'http://webintents.org/pick', 'image/*');
         window.navigator.startActivity(intent, function(data) {
+          data = (!!data.data) ? data.data : data;
           var url = $.isArray(data) ? data[0] : data; 
           $("#result").attr('src', url).css({ "width": "auto", "height": "auto"});
           $("#edit, #share, #save").removeClass("disabled")
                                    .removeAttr('disabled');
-
         });
       });
 
       $("#edit").click(function (e) {
         var intent = new Intent( 'http://webintents.org/edit', 'image/*', $("#result").attr("src"));
         window.navigator.startActivity(intent, function(data) {
+          data = (!!data.data) ? data.data : data;
           var url = $.isArray(data) ? data[0] : data; 
           $("#result").attr('src', url);
         });
@@ -30,7 +33,7 @@
       });
 
       $('#share').click(function() {
-        var intent = new Intent( 'http://webintents.org/share', 'image/png', $('#result').attr('src'));
+        var intent = new Intent( 'http://webintents.org/share', 'image/*', $('#result').attr('src'));
 
         window.navigator.startActivity(intent, function(data) {
           

@@ -11,17 +11,17 @@
             var result = JSON.parse(xhr.responseText);
             var resDiv = document.getElementById("result");
             var shortDiv = document.getElementById("short");
-            var longDiv = document.getElementById("long");
+            var state = document.getElementById("state");
+            state.innerText = "Success!";
 
-            shortUrl = result.id;
+            shortUrl = result.links.imgur_page;
             shortDiv.innerText = shortUrl;
-            longDiv.innerText = window.intent.data;
             resDiv.style.display = "block";
           } 
         };
 
-        xhr.open("POST", "shorten?url=" + window.intent.data);
-        xhr.send();
+        xhr.open("POST", "save");
+        xhr.send("url=" + window.intent.data);
       };
         
       window.addEventListener("DOMContentLoaded", function() {
@@ -45,10 +45,8 @@
   <body>
     <h1 id="state">Processing</h1>
     <div id="result" style="display:none">
-      Shortening <span id="long"></span>
-      to <span id="short"></span>.
+      Image is saved to <span id="short"></span>.
       <button id="return">Return</button>
     </div>
-
   </body>
 </html>

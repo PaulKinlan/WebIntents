@@ -1,0 +1,12 @@
+{% extends "layouts/application.html" %}
+{% block title %}Demo: Imgur{% endblock%}
+{% block head %}Demo: Imgur{% endblock%}
+{% block scripts %}
+<intent action="http://webintents.org/save"
+  type="image/*"
+  href="save.html"
+  disposition="inline" />
+{% endblock %}
+{% block content %}
+<p>This is the registration page of the Imgur Image saving service</p>
+{% endblock %}
