@@ -7,21 +7,28 @@
       var fetchData = function() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-          if(xhr.status == 200 && xhr.readyState == 4) {
+          if(xhr.readyState == 4 && xhr.status == 200) {
             var result = JSON.parse(xhr.responseText);
             var resDiv = document.getElementById("result");
             var shortDiv = document.getElementById("short");
             var state = document.getElementById("state");
             state.innerText = "Success!";
 
-            shortUrl = result.links.imgur_page;
+            shortUrl = result.upload.links.imgur_page;
             shortDiv.innerText = shortUrl;
             resDiv.style.display = "block";
           } 
         };
 
-        xhr.open("POST", "save");
-        xhr.send("url=" + window.intent.data);
+        var data = window.intent.data;
+        var type = "url";
+        if(data.substr(0, 5) == "data:") {
+          type = "base64";
+          data = data.substring(data.indexOf(",") + 1);
+        }
+
+        xhr.open("POST", "save?type="+type);
+        xhr.send(data);
       };
         
       window.addEventListener("DOMContentLoaded", function() {
