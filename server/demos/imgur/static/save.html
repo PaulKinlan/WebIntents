@@ -10,12 +10,13 @@
           if(xhr.readyState == 4 && xhr.status == 200) {
             var result = JSON.parse(xhr.responseText);
             var resDiv = document.getElementById("result");
-            var shortDiv = document.getElementById("short");
+            var short = document.getElementById("short");
             var state = document.getElementById("state");
             state.innerText = "Success!";
 
             shortUrl = result.upload.links.imgur_page;
-            shortDiv.innerText = shortUrl;
+            short.innerText = shortUrl;
+            short.href = shortUrl;
             resDiv.style.display = "block";
           } 
         };
@@ -38,8 +39,8 @@
 
         var retButton = document.getElementById("return");
         retButton.addEventListener("click", function() {
-          window.intent.postResult(shortUrl);
-          window.close();
+          window.intent.postResult(shortUrl)
+          setTimeout(500, function() { window.close(); });
         });
       }, false);
     </script>
@@ -52,7 +53,7 @@
   <body>
     <h1 id="state">Processing</h1>
     <div id="result" style="display:none">
-      Image is saved to <span id="short"></span>.
+      Image is saved to <a id="short"></a>.
       <button id="return">Return</button>
     </div>
   </body>
