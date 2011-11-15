@@ -14,14 +14,8 @@ import demos.shortener.handlers
 import demos.instapaper.handlers
 import demos.imgur.handlers
 
-app = webapp2.WSGIApplication([
-    routes.DomainRoute('webintents-org.appspot.com', [
-      Route('/<:.*>', webintents.handlers.PageHandler, 'webintents')
-    ]),
-    routes.DomainRoute('examples.webintents-org.appspot.com', [
-      Route('/<:.*>', examples.handlers.PageHandler, 'examples')
-    ]),
-    routes.DomainRoute('demos.webintents-org.appspot.com', [
+exampleRoutes = [ Route('/<:.*>', examples.handlers.PageHandler, 'examples')]
+demoRoutes = [
       Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'mememator-proxy'),
       Route('/mememator/<:.*>', demos.mememator.handlers.PageHandler, 'mememator'),
       Route('/imagestudio/<:.*>', demos.imagestudio.handlers.PageHandler, 'imagestudio'),
@@ -35,7 +29,16 @@ app = webapp2.WSGIApplication([
       Route('/imgur/save', demos.imgur.handlers.SaveHandler, 'imgur-proxy'),
       Route('/imgur/<:.*>', demos.imgur.handlers.PageHandler, 'imgur'),
       Route('/<:.*>', demos.handlers.PageHandler, 'demos')
+]
+
+app = webapp2.WSGIApplication([
+    routes.DomainRoute('webintents-org.appspot.com', [
+      Route('/<:.*>', webintents.handlers.PageHandler, 'webintents')
     ]),
+    routes.DomainRoute('examples.webintents-org.appspot.com', exampleRoutes),
+    routes.DomainRoute('examples.webintents.org', exampleRoutes),
+    routes.DomainRoute('demos.webintents-org.appspot.com', demoRoutes ),
+    routes.DomainRoute('demos.webintents.org', demoRoutes),
     routes.DomainRoute('registry.webintents-org.appspot.com', [
       Route('/<:.*>', registry.handlers.PageHandler, 'registry')
     ]),
