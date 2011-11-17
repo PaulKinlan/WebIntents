@@ -7,7 +7,7 @@
       var fetchData = function() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
-          if(xhr.status == 200 && xhr.readyState == 4) {
+          if(xhr.readyState == 4 && xhr.status == 200) {
             var result = JSON.parse(xhr.responseText);
             var resDiv = document.getElementById("result");
             var shortDiv = document.getElementById("short");
