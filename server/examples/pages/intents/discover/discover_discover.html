@@ -1,0 +1,42 @@
+{% extends "layouts/base.html" %}
+{% block title %}Discovery{% endblock %}
+{% block scripts %}
+  <script src="//webintents.org/webintents.min.js"></script>
+  <script src="/javascripts/events.js"></script>
+  <intent
+    action="http://webintents.org/discover"
+    type="application/JSON"
+    href="discover.html"
+    title="Example.com's APIs"
+  />
+  <script>
+
+    attachEventListener(window, "load", function() {
+      var use = document.getElementById("use");
+      attachEventListener(use, "click", function() {
+        if(!!window.intent) {
+          var data = [
+            {
+              action: "http://example.com/purchase",
+              title: "A New type of Purchase intent"
+            },
+            {
+              action: "http://example.com/book",
+              title: "A way to book a resource such as a table, or ticket"
+            }
+          ];
+          window.intent.postResult(data);
+          setTimeout(function() { window.close();}, 500);
+        }
+
+    });
+   }, false);
+
+  </script>
+{% endblock %}
+{% block content %}
+<h2>Code</h2>
+<button id="use">Use</button>
+<pre>
+</pre>
+{% endblock %}

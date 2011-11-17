@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="//webintents.org/webintents.min.js"></script>
+    <script>
+      if(window.intent) {
+        if(window.intent.type.indexOf("text/") == 0) {
+          var href = "https://twitter.com/intent/tweet?url=" +
+              encodeURI(window.intent.data);
+          window.location = href;
+        }
+      }
+    </script>
+  </head>
+</html>

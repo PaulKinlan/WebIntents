@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/application.css">
+  <script src='//webintents.org/webintents.min.js'></script>
+  {% block scripts %}{% endblock %}
+</head>
+<body>
+<section>
+{% block content %}{% endblock %}
+</section>
+</body>
+</html>

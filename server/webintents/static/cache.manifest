@@ -1,0 +1,15 @@
+CACHE MANIFEST
+
+intents.html
+list.html
+picker.html
+
+controller.js
+webintents.js
+webintents-server.js
+base64.js
+json2.js
+picker.js
+
+# Make time 
+# Mon Oct 31 10:05:09 GMT 2011

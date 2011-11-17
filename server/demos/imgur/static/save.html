@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="//webintents.org/webintents.min.js"></script>
+    <script>
+      var shortUrl;
+      var fetchData = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4 && xhr.status == 200) {
+            var result = JSON.parse(xhr.responseText);
+            var resDiv = document.getElementById("result");
+            var short = document.getElementById("short");
+            var state = document.getElementById("state");
+            state.innerText = "Success!";
+
+            shortUrl = result.upload.links.imgur_page;
+            short.innerText = shortUrl;
+            short.href = shortUrl;
+            resDiv.style.display = "block";
+          } 
+        };
+
+        var data = window.intent.data;
+        var type = "url";
+        if(data.substr(0, 5) == "data:") {
+          type = "base64";
+          data = data.substring(data.indexOf(",") + 1);
+        }
+
+        xhr.open("POST", "save?type="+type);
+        xhr.send(data);
+      };
+        
+      window.addEventListener("DOMContentLoaded", function() {
+        if(window.intent) {
+          fetchData();
+        }
+
+        var retButton = document.getElementById("return");
+        retButton.addEventListener("click", function() {
+          window.intent.postResult(shortUrl)
+          setTimeout(500, function() { window.close(); });
+        });
+      }, false);
+    </script>
+    <style>
+      #short, #long {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="state">Processing</h1>
+    <div id="result" style="display:none">
+      Image is saved to <a id="short"></a>.
+      <button id="return">Return</button>
+    </div>
+  </body>
+</html>

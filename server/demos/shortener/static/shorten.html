@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="//webintents.org/webintents.min.js"></script>
+    <script>
+      var shortUrl;
+      var fetchData = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if(xhr.status == 200 && xhr.readyState == 4) {
+            var result = JSON.parse(xhr.responseText);
+            var resDiv = document.getElementById("result");
+            var shortDiv = document.getElementById("short");
+            var longDiv = document.getElementById("long");
+
+            shortUrl = result.id;
+            shortDiv.innerText = shortUrl;
+            longDiv.innerText = window.intent.data;
+            resDiv.style.display = "block";
+          } 
+        };
+
+        xhr.open("POST", "shorten?url=" + window.intent.data);
+        xhr.send();
+      };
+        
+      window.addEventListener("DOMContentLoaded", function() {
+        if(window.intent) {
+          fetchData();
+        }
+
+        var retButton = document.getElementById("return");
+        retButton.addEventListener("click", function() {
+          window.intent.postResult(shortUrl);
+          window.close();
+        });
+      }, false);
+    </script>
+    <style>
+      #short, #long {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="state">Processing</h1>
+    <div id="result" style="display:none">
+      Shortening <span id="long"></span>
+      to <span id="short"></span>.
+      <button id="return">Return</button>
+    </div>
+
+  </body>
+</html>

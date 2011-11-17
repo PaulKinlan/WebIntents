@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="//webintents.org/webintents.min.js"></script>
+    <script>
+      var addedUrl;
+      var username = localStorage["Instapaperusername"];
+      var password = localStorage["Instapaperpassword"];
+      var fetchData = function() {
+        var xhr = new XMLHttpRequest();
+        var state = document.getElementById("state");
+        xhr.onreadystatechange = function() {
+          if(xhr.status == 201 && xhr.readyState == 4) {
+            var result = JSON.parse(xhr.responseText);
+            var resDiv = document.getElementById("result");
+            var long = document.getElementById("long");
+
+            var instapaperLocation = xhr.getResponseHeader("Content-Location");
+
+            state.innerText = "Success - Saved to Instapaper";
+            long.innerText = window.intent.data;
+            instapaperurl.innerText = instapaperLocation; 
+            resDiv.style.display = "block";
+          } 
+          else if(xhr.status == 403 && xhr.readyState == 4) {
+            state.innerText = "Authentication Error";
+          }
+          else if(xhr.status == 400 && xhr.readyState == 4) {
+            state.innerText = "Rate limit Error";
+          }
+        };
+
+        var qs = "url=" + window.intent.data +"&username=" + username + "&password=" + password;
+
+        xhr.open("POST", "add?" + qs);
+        xhr.send();
+      };
+        
+      window.addEventListener("DOMContentLoaded", function() {
+        if(window.intent) {
+          if(username) fetchData();
+        }
+
+        var retButton = document.getElementById("return");
+        retButton.addEventListener("click", function() {
+          window.intent.postResult(addedUrl);
+          
+          setTimeout(500, function() { window.close(); });
+        }, false);
+
+        var saveButton = document.getElementById("save");
+        saveButton.addEventListener("click", function() {
+          username = document.getElementById("username").value;
+          password = document.getElementById("password").value;
+
+          localStorage["Instapaperusername"] = username;
+          localStorage["Instapaperpassword"] = password;
+
+          fetchData();
+        }, false);
+      }, false);
+    </script>
+    <style>
+      #short, #long {
+        font-weight: bold;
+      }
+
+      h1 {
+ background-color: transparent;
+ color: black;
+ font-family: Georgia, 'Times New Roman', Times, serif;
+ font-size: 40px;
+ font-weight: normal;
+ line-height: 56px;
+ margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Instapaper Bridge</h1>
+    <label for="username">Username: </label><input type="text" id="username" /><br/>
+    <label for="password">Password: </label><input type="password" id="password" /><br />
+    <button id="save">Save</button><br />
+    <h1 id="state">Processing</h1>
+    <div id="result" style="display:none">
+      Saved <a target="_blank" id="long"></a> to <a target="_blank" id="instapaperurl"></a>
+      <button id="return">Return</button>
+    </div>
+  </body>
+</html>
