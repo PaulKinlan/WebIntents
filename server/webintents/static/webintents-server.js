@@ -17,6 +17,7 @@
 
 var id;
 var callbacks = {};
+var errorCallbacks = {};
 
 window.attachEventListener = function(obj, type, func, capture) {
   if(!!obj.addEventListener) {
@@ -170,6 +171,25 @@ var MessageDispatcher = function() {
     }
   };
 
+  this.registerErrorCallback = function(data, timestamp, e) {
+    errorCallbacks[data.id] = {};
+
+    if(!!window.onstorage == false) {
+      // We are going to have to set up something that polls.
+      var timer = setInterval(function() {
+        var intentStr = localStorage.getItem(data.id);
+        if(!!intentStr) {
+          var intentObj = JSON.parse(intentStr);
+          if(intentObj.request == "sendErrorResponse") {
+            window.postMessage(intentStr, "*");
+            clearInterval(timer);
+          }
+        }
+      },1000);
+    }
+  };
+
+
   /*
    * The service has sent a response, route it back to the correct frame.
    */
@@ -184,14 +204,42 @@ var MessageDispatcher = function() {
   };
 
   /*
-   * The correct frame has recieved the reposen, route it back to the parent app.
+   * The service has said there has been an error, route it back to the correct frame.
+   */
+  this.intentErrorResponse = function(data, timestamp, e) {
+    var id = data.intent._id;
+    var intentData = {
+      "request": "sendErrorReponse",
+      intent: data.intent,
+      timestampe: timestamp
+    };
+    localStorage[id] = JSON.stringify(intentData);
+  };
+
+  /*
+   * The correct frame has recieved the response, route it back to the parent app.
    */
   this.sendResponse = function(data, timestamp, e) {
     if(!!callbacks[data.intent._id] == false) {
       return;
     }
     localStorage.removeItem(data.intent._id);
-    var message = JSON.stringify({ intent: data.intent.data, request: "response" });
+    var message = JSON.stringify({ intent: data.intent, request: "response" });
+    window.parent.postMessage(
+      message,
+      "*"  
+    );
+  };
+
+  /*
+   * The correct frame has recieved the error response, route it back to the parent app.
+   */
+  this.sendErrorResponse = function(data, timestamp, e) {
+    if(!!errorCallbacks[data.intent._id] == false) {
+      return;
+    }
+    localStorage.removeItem(data.intent._id);
+    var message = JSON.stringify({ intent: data.intent, request: "errorResponse" });
     window.parent.postMessage(
       message,
       "*"  
@@ -233,7 +281,6 @@ var msgHandler = new MessageHandler();;
 attachEventListener(window, "message", msgHandler.handler, false); 
 attachEventListener(window, "storage", msgHandler.handler, false); 
 attachEventListener(document, "storage", msgHandler.handler, false); 
-
 attachEventListener(window, "load", function() {
   // Tell the app we are loaded.
   var message = JSON.stringify({ request: "ready" });

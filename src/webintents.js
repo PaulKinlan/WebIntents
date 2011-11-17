@@ -47,12 +47,13 @@
   /*
    * Starts an activity.
    */
-  Intents.prototype.startActivity = function (intent, onResult) {
+  Intents.prototype.startActivity = function (intent, onResult, onError) {
     var id = "intent" + new Date().valueOf();
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no,width=300,height=300";
     var iframe = document.getElementById("webintents_channel"); 
     intent._id = id;
     intent._callback = (onResult) ? true : false;
+    intent._error = (onError) ? true : false;
     intents[id] = { intent: intent }; 
 
     var w = window.open(pickerSource, encodeNameTransport(intent), params);
@@ -62,6 +63,13 @@
         _str({"request": "registerCallback", "id": id }), 
         server );
       intents[id].callback = onResult;
+    }
+
+    if(onError) {
+      iframe.contentWindow.postMessage(
+        _str({"request": "registerErrorCallback", "id": id }), 
+        server );
+      intents[id].errorCallback = onError;
     }
   };
 
@@ -79,7 +87,13 @@
          data.request &&
          data.request == "response") {
 
-        intents[data.intent._id].callback(data.intent);
+        intents[data.intent._id].callback(data.intent.data);
+      }
+      else if(!!data.intent == true &&
+              !!intents[data.intent._id] == true &&
+              data.request &&
+              data.request == "errorResponse") {
+        intents[data.intent._id].errorCallback();
       }
       else if (data.request == "ready") {
         console.log("Webintents frame ready"); 
@@ -149,6 +163,25 @@
       iframe.contentWindow.postMessage(
         _str({
           request: "intentResponse",
+          intent: returnIntent 
+        }),
+        "*");
+      }, 500);
+
+      closed = true;
+    };
+
+    this.postError = function() {
+      if(closed) return;
+
+      var iframe = document.getElementById("webintents_channel");
+      var returnIntent = new Intent();
+      returnIntent._id = me._id;
+      returnIntent.action = me.action;
+      setTimeout(function() { 
+      iframe.contentWindow.postMessage(
+        _str({
+          request: "intentErrorResponse",
           intent: returnIntent 
         }),
         "*");
