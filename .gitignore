@@ -15,6 +15,6 @@ server/lib/webintents*
 demos/twitpic/public/assets/*
 demos/memegen/public/assets/*
 server/webintents/pages/webintents.*
-server/webintents/pages/cache.manifest
+server/webintents/static/cache.manifest
 server/webintents/static/webintents.*
 server/webintents/static/cache.manifest

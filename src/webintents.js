@@ -93,10 +93,9 @@
               !!intents[data.intent._id] == true &&
               data.request &&
               data.request == "errorResponse") {
-        intents[data.intent._id].errorCallback();
+        intents[data.intent._id].errorCallback(data.intent.data);
       }
       else if (data.request == "ready") {
-        console.log("Webintents frame ready"); 
         parseIntentsDocument();
       }
     } catch (err) {
@@ -171,13 +170,14 @@
       closed = true;
     };
 
-    this.postError = function() {
+    this.postError = function(data) {
       if(closed) return;
 
       var iframe = document.getElementById("webintents_channel");
       var returnIntent = new Intent();
       returnIntent._id = me._id;
       returnIntent.action = me.action;
+      returnIntent.data = data;
       setTimeout(function() { 
       iframe.contentWindow.postMessage(
         _str({
