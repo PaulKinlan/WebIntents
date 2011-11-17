@@ -1,6 +1,8 @@
 {% extends "layouts/application.html" %}
 {% block title %}Image Studio{% endblock %}
 {% block scripts %}
+  <script src="//webintents.org/webintents.min.js"></script>
+  <link rel=icon href="favicon.ico" />
   <intent action="http://webintents.org/view"
           type="image/*" />
   <script type="text/javascript">
