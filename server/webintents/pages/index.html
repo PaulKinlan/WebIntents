@@ -15,6 +15,9 @@
 {% block content %}
 <section>
 <h2 id="introduction">Introduction</h2>
+<div style="width:512px;height:384px;background:black;float:right;overflow:hidden; min-height: 384px; min-width: 512px;margin: 5px;">
+  <iframe style="width:1024px;height:768px;-ms-transform: scale(.50) translate(-50%, -50%); -moz-transform: scale:(0.50) translate(-50%, -50%); -webkit-transform:scale(.50) translate(-50%,-50%);" src="http://kinlan-presentations.appspot.com/next-gen-apps-with-webintents/index.html#1"></iframe>
+</div>
 <p>
 Users use many different services on the web to handle their day to day
 tasks, such as sharing images, editing documents and listening to music. 
@@ -52,6 +55,7 @@ Client applications simply initiate a new action with the given parameters.
   <a href="#action">action</a>="http://webintents.org/share" 
   <a href="#type">type</a>="image/*" 
   <a href="#href">href</a>="share.html"
+  <a href="#disposition">disposition</a>="window|inline"
  /&gt;</pre>
 <dl>
   <dt id="action">action</dt>
@@ -62,6 +66,12 @@ Client applications simply initiate a new action with the given parameters.
     <dd>Optional. If specified, it will point to the action that is loaded 
       when the user chooses the service.  If undefined, use the current 
       page.</dd> 
+  <dt id="disposition">disposition<dt>
+    <dd>Optional. If specified, it will be either "window" or "inline". If
+    not specified "window" will be the default. When "inline" is provided
+    the service page will be opened in the same context as the picker.  A
+    value of "window" will open the service in a new context.
+    </dd>
 </dl>
 
 <h3 id="invocation">Invocation</h3>
