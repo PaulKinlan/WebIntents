@@ -1,4 +1,4 @@
-{% extends "layouts/base.html" %}
+{% extends "webintents/layouts/base.html" %}
 {% block title %}Subscribe{% endblock %}
 {% block headline %}Subscribe - http://webintents.org/subscribe{% endblock %}
 {% block content %}

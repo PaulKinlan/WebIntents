@@ -18,23 +18,26 @@ import sys
 
 exampleRoutes = [ Route('/<:.*>', handlers_base.PageHandler, 'examples')]
 demoRoutes = [
-      Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'demos'),
-      Route('/mememator/<:.*>', handlers_base.PageHandler, 'demos'),
-      Route('/imagestudio/<:.*>', handlers_base.PageHandler, 'demos'),
-      Route('/twitpic/proxy', demos.twitpic.handlers.ProxyHandler, 'demos'),
-      Route('/twitpic/upload', demos.twitpic.handlers.UploadHandler, 'demos'),
-      Route('/twitpic/<:.*>', handlers_base.PageHandler, 'demos'),
-      Route('/shortener/shorten', demos.shortener.handlers.ShortenHandler, 'demos'),
-      Route('/shortener/<:.*>', handlers_base.PageHandler, 'demos'),
-      Route('/instapaper/add', demos.instapaper.handlers.AddHandler, 'demos'),
-      Route('/instapaper/<:.*>', handlers_base.PageHandler, 'demos'),
-      Route('/imgur/save', demos.imgur.handlers.SaveHandler, 'demos'),
-      Route('/imgur/<:.*>', handlers_base.PageHandler, 'demos'),
+      Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
+      Route('/mememator/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
+      Route('/imagestudio/<:.*>', handlers_base.PageHandler, 'demos/imagestudio'),
+      Route('/twitpic/proxy', demos.twitpic.handlers.ProxyHandler, 'demos/twitpic'),
+      Route('/twitpic/upload', demos.twitpic.handlers.UploadHandler, 'demos/twitpic'),
+      Route('/twitpic/<:.*>', handlers_base.PageHandler, 'demos/twitpic'),
+      Route('/shortener/shorten', demos.shortener.handlers.ShortenHandler, 'demos/shortener'),
+      Route('/shortener/<:.*>', handlers_base.PageHandler, 'demos/shortener'),
+      Route('/instapaper/add', demos.instapaper.handlers.AddHandler, 'demos/instapaper'),
+      Route('/instapaper/<:.*>', handlers_base.PageHandler, 'demos/instapaper'),
+      Route('/imgur/save', demos.imgur.handlers.SaveHandler, 'demos/imgur'),
+      Route('/imgur/<:.*>', handlers_base.PageHandler, 'demos/imgur'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos')
 ]
 
 app = webapp2.WSGIApplication([
     routes.DomainRoute('webintents-org.appspot.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'webintents')
+    ]),
+    routes.DomainRoute('webintents.org', [
       Route('/<:.*>', handlers_base.PageHandler, 'webintents')
     ]),
     routes.DomainRoute('examples.webintents-org.appspot.com', exampleRoutes),

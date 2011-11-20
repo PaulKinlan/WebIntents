@@ -1,4 +1,4 @@
-{% extends "layouts/base.html" %}
+{% extends "webintents/layouts/base.html" %}
 {% block title %}Save{% endblock %}
 {% block headline %}Save - http://webintents.org/save{% endblock %}
 {% block content %}
