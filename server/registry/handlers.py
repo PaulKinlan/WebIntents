@@ -21,11 +21,6 @@ class IndexHistory(db.Model):
   created_on = db.DateTimeProperty(auto_now = False, auto_now_add = True)
   status = db.TextProperty()
 
-class PageHandler(handlers_base.PageHandler):
-  """
-  Basic Page Handler for Registry
-  """
-
 class IndexerHandler(handlers_base.PageHandler):
   def post(self):
     '''

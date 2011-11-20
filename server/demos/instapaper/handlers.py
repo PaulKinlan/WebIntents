@@ -1,11 +1,5 @@
 import webapp2
 from google.appengine.api import urlfetch
-import handlers_base
-
-class PageHandler(handlers_base.PageHandler):
-  """
-  The handler for the Instapaper app 
-  """
 
 class AddHandler(webapp2.RequestHandler):
   def post(self):
