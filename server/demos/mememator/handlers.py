@@ -1,11 +1,8 @@
 import webapp2
-import jinja2
-import os
 from google.appengine.api import urlfetch
+import handlers_base
 
-import handlers
-
-class PageHandler(handlers.PageHandler):
+class PageHandler(handlers_base.PageHandler):
   """
   The handler for the Mememator app 
   """

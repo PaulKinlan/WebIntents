@@ -2,6 +2,7 @@ import webapp2
 from webapp2 import Route
 from webapp2_extras import routes
 
+import handlers_base
 import examples.handlers
 import demos.handlers
 import registry.handlers
@@ -14,20 +15,21 @@ import demos.shortener.handlers
 import demos.instapaper.handlers
 import demos.imgur.handlers
 
+
 exampleRoutes = [ Route('/<:.*>', examples.handlers.PageHandler, 'examples')]
 demoRoutes = [
-      Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'mememator-proxy'),
-      Route('/mememator/<:.*>', demos.mememator.handlers.PageHandler, 'mememator'),
-      Route('/imagestudio/<:.*>', demos.imagestudio.handlers.PageHandler, 'imagestudio'),
-      Route('/twitpic/proxy', demos.twitpic.handlers.ProxyHandler, 'twitpic-proxy'),
-      Route('/twitpic/upload', demos.twitpic.handlers.UploadHandler, 'twitpic-proxy'),
-      Route('/twitpic/<:.*>', demos.twitpic.handlers.PageHandler, 'twitpic'),
-      Route('/shortener/shorten', demos.shortener.handlers.ShortenHandler, 'shortener-proxy'),
-      Route('/shortener/<:.*>', demos.shortener.handlers.PageHandler, 'shortener'),
-      Route('/instapaper/add', demos.instapaper.handlers.AddHandler, 'instapaper-proxy'),
-      Route('/instapaper/<:.*>', demos.instapaper.handlers.PageHandler, 'instapaper'),
-      Route('/imgur/save', demos.imgur.handlers.SaveHandler, 'imgur-proxy'),
-      Route('/imgur/<:.*>', demos.imgur.handlers.PageHandler, 'imgur'),
+      Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'demos'),
+      Route('/mememator/<:.*>', demos.mememator.handlers.PageHandler, 'demos'),
+      Route('/imagestudio/<:.*>', demos.imagestudio.handlers.PageHandler, 'demos'),
+      Route('/twitpic/proxy', demos.twitpic.handlers.ProxyHandler, 'demos'),
+      Route('/twitpic/upload', demos.twitpic.handlers.UploadHandler, 'demos'),
+      Route('/twitpic/<:.*>', demos.twitpic.handlers.PageHandler, 'demos'),
+      Route('/shortener/shorten', demos.shortener.handlers.ShortenHandler, 'demos'),
+      Route('/shortener/<:.*>', demos.shortener.handlers.PageHandler, 'demos'),
+      Route('/instapaper/add', demos.instapaper.handlers.AddHandler, 'demos'),
+      Route('/instapaper/<:.*>', demos.instapaper.handlers.PageHandler, 'demos'),
+      Route('/imgur/save', demos.imgur.handlers.SaveHandler, 'demos'),
+      Route('/imgur/<:.*>', demos.imgur.handlers.PageHandler, 'demos'),
       Route('/<:.*>', demos.handlers.PageHandler, 'demos')
 ]
 
@@ -46,5 +48,3 @@ app = webapp2.WSGIApplication([
       Route('/<:.*>', widgets.handlers.PageHandler, 'widgets')
     ])
   ])
-
-

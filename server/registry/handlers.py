@@ -3,7 +3,7 @@ import jinja2
 import os
 from google.appengine.api import urlfetch
 from google.appengine.ext import db
-import handlers
+import handlers_base
 
 class Intent(db.Model):
   href = db.StringProperty(indexed = False)
@@ -21,12 +21,12 @@ class IndexHistory(db.Model):
   created_on = db.DateTimeProperty(auto_now = False, auto_now_add = True)
   status = db.TextProperty()
 
-class PageHandler(handlers.PageHandler):
-   """
-   The base page handler for the registry
-   """
+class PageHandler(handlers_base.PageHandler):
+  """
+  Basic Page Handler for Registry
+  """
 
-class IndexerHandler(PageHandler):
+class IndexerHandler(handlers_base.PageHandler):
   def post(self):
     '''
       Creates a new task to go off and fetch the data from the page.
@@ -74,6 +74,6 @@ class RegisteryHandler(webapp2.RequestHandler):
     path = os.path.join(os.path.dirname(__file__), "results", "results.%s" % alt)
     if os.path.exists(path):
       template = jinja_environment.get_template(os.path.join("results", "results.%s" % alt))
-      self.response.out.write(template.render({intents = results}))
+      self.response.out.write(template.render({intents : results}))
     else:
       self.error(404)

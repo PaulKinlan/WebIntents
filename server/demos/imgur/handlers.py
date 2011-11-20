@@ -1,10 +1,8 @@
 import webapp2
-import jinja2
-import os
 from google.appengine.api import urlfetch
-import handlers
+import handlers_base
 
-class PageHandler(handlers.PageHandler):
+class PageHandler(handlers_base.PageHandler):
   """
   The handler for the Imgur app 
   """
