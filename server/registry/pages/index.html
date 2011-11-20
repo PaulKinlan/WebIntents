@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% block title %}Web Intents: Index{% endblock %}
+{% block headline %}Web Intents: Index{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<section>
+<h2>Register</h2>
+<p>By registering your web-app with the Web Intents system your app may appear
+as a choice for users who do not have a app installed to handle the requested
+action or data-type.
+</p>
+<p>This service will scan your site for an <a href="#api">Intent tag</a> and if
+discovered will include your site in the index. Please ensure your intent tags
+are on a publically accessible URL.
+</p>
+<form method="post" action="/indexer.html">
+  <label for="url">Url of service:</label>
+  <input type="url" name="url" id="url" />
+  <input type="submit" />
+</form>
+<h2 id="api">API</h2>
+<p>
+The Web Intent API is simple to use. Service developers define the 
+intent they intend to support and what to do with the data they receive.
+Client applications simply initiate a new action with the given parameters.
+</p>
+<h3 id="intentregistration">Intent Registration</h3>
+<pre>&lt;intent
+  <a href="#action">action</a>="http://webintents.org/share" 
+  <a href="#type">type</a>="image/*" 
+  <a href="#href">href</a>="share.html"
+  <a href="#disposition">disposition</a>="window|inline"
+ /&gt;</pre>
+<dl>
+  <dt id="action">action</dt>
+    <dd>Required. A verb describing the action to be performed</dd> 
+  <dt id="type">type</dt>
+    <dd>Optional. Types are a filter</dd> 
+  <dt id="href">href</dt>
+    <dd>Optional. If specified, it will point to the action that is loaded 
+      when the user chooses the service.  If undefined, use the current 
+      page.</dd> 
+  <dt id="disposition">disposition<dt>
+    <dd>Optional. If specified, it will be either "window" or "inline". If
+    not specified "window" will be the default. When "inline" is provided
+    the service page will be opened in the same context as the picker.  A
+    value of "window" will open the service in a new context.
+    </dd>
+</dl>
+</section>
+{% endblock %}
