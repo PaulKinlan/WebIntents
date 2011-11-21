@@ -1,5 +1,6 @@
 {% extends "demos/imagestudio/layouts/application.html" %}
-{% block title %}Image Studio{% endblock %}
+{% block title %}Imagemator{% endblock %}
+{% block headline %}Imagemator{% endblock %}
 {% block scripts %}
   <script src="//webintents.org/webintents.min.js"></script>
   <link rel=icon href="favicon.ico" />
@@ -7,23 +8,28 @@
           type="image/*" />
   <script type="text/javascript">
     $(function() {
+      var loadImage = function(data) {
+        var url = $.isArray(data) ? data[0] : data; 
+        $("#result").attr('src', url).css({ "width": "auto", "height": "auto"});
+        $("#edit, #share, #save").removeClass("disabled")
+                                 .removeAttr('disabled');
+      };
+
+      if(window.intent) {
+        laodImage(window.intent.data);
+      }
+
       $('#choose').click(function(e) {
         var intent = new Intent( 'http://webintents.org/pick', 'image/*');
         window.navigator.startActivity(intent, function(data) {
-          data = (!!data.data) ? data.data : data;
-          var url = $.isArray(data) ? data[0] : data; 
-          $("#result").attr('src', url).css({ "width": "auto", "height": "auto"});
-          $("#edit, #share, #save").removeClass("disabled")
-                                   .removeAttr('disabled');
+          loadIamge(data);
         });
       });
 
       $("#edit").click(function (e) {
         var intent = new Intent( 'http://webintents.org/edit', 'image/*', $("#result").attr("src"));
         window.navigator.startActivity(intent, function(data) {
-          data = (!!data.data) ? data.data : data;
-          var url = $.isArray(data) ? data[0] : data; 
-          $("#result").attr('src', url);
+          loadImage(data);
         });
       });
 
