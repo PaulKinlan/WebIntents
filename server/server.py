@@ -49,5 +49,20 @@ app = webapp2.WSGIApplication([
     ]),
     routes.DomainRoute('widgets.webintents-org.appspot.com', [
       Route('/<:.*>', widgets.handlers.PageHandler, 'widgets')
+    ]),
+    routes.DomainRoute('registry.webintents-org.appspot.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'registry')
+    ]),
+    routes.DomainRoute('registry.webintents.org', [
+      Route('/<:.*>', handlers_base.PageHandler, 'registry')
+    ]),
+    routes.DomainRoute('www.imagemator.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/imagestudio'),
+    ]),
+    routes.DomainRoute('www.comicmator.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/comicmator'),
+    ]),
+    routes.DomainRoute('www.mememator.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
     ])
   ])
