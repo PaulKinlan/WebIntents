@@ -2,17 +2,8 @@
 {% block title %}Mememator{% endblock %}
 {% block headline %}Mememator{% endblock %}
 {% block scripts %}
-<script src="//webintents.org/webintents.min.js"></script>
 <link rel=icon href="favicon.ico" />
-<intent action="http://webintents.org/edit"
-  type="image/*"
-  href="index.html" />
-
-<intent action="http://webintents.org/pick"
-  type="image/*"
-  href="pick.html" />
-
-<script src="scripts/memegen.js"></script>
+<script type="text/javascript" src="scripts/memegen.js"></script>
 <script type="text/javascript">
     var context;
     var canvas;
@@ -79,7 +70,14 @@
       $('#bottom').change(textChanged);
     });
   </script>
-{% endblock %}
+<intent action="http://webintents.org/edit"
+  type="image/*"
+  href="index.html" />
+
+<intent action="http://webintents.org/pick"
+  type="image/*"
+  href="pick.html" />
+  {% endblock %}
 {% block content %}
 <input type="text" id="top" placeholder="Headline" />
 <div id="container">
