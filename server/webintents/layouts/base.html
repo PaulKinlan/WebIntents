@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="/stylesheets/reset.css" />
     <link rel="stylesheet" href="/stylesheets/base.css" />
     {% endblock %}
-
-    {% block scripts %}
-    {% endblock %}
+    {% block scripts %}{% endblock %}
   </head>
   <body>
     <header>
@@ -24,7 +22,7 @@
         <div>
           <g:plusone size="small" annotation="inline"></g:plusone>
         </div>
-        </nav>
+      </nav>
     </header>
     {% block content %}{% endblock %}
   </body>

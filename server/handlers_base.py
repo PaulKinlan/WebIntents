@@ -8,7 +8,6 @@ jinja_environment = jinja2.Environment(
           os.path.dirname(__file__)))
 
 import logging 
-logging.info(os.path.dirname(__file__))
 
 file_types = {
   '.js' : 'application/javascript',
@@ -18,12 +17,12 @@ file_types = {
   '.png' : 'image/png',
   '.jpg' : 'image/jpeg',
   '.jpeg' : 'image/jpeg',
-  '.txt' : 'text/plain'
+  '.txt' : 'text/plain',
+  '.cache' : 'text/manifest'
 } 
 
 class PageHandler(webapp2.RequestHandler):
   def render_file(self, file, domain):
-    import logging
     self.response.headers['X-Content-Security-Policy'] = "allow 'self'; img-src *; script-src www.google-analytics.com apis.google.com;"
 
     if file is None or file == "":
@@ -31,9 +30,9 @@ class PageHandler(webapp2.RequestHandler):
 
     name, extension  = os.path.splitext(file)
 
-    content_type = file_types.get(extension)
+    content_type = file_types.get(extension, "text/html")
     # Only display known file types
-    if content_type is None and extension is not None:
+    if content_type is None and extension == " ":
       self.error(404)
       return
 

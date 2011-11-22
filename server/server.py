@@ -63,6 +63,7 @@ app = webapp2.WSGIApplication([
       Route('/<:.*>', handlers_base.PageHandler, 'demos/comicmator'),
     ]),
     routes.DomainRoute('www.mememator.com', [
+      Route('/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
     ])
   ])

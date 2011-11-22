@@ -2,7 +2,7 @@
 {% block title %}Imagemator{% endblock %}
 {% block headline %}Imagemator{% endblock %}
 {% block scripts %}
-  <script src="//webintents.org/webintents.min.js"></script>
+  <script src="//webintents.org/webintents.js"></script>
   <link rel=icon href="favicon.ico" />
   <intent action="http://webintents.org/view"
           type="image/*" />
@@ -22,7 +22,7 @@
       $('#choose').click(function(e) {
         var intent = new Intent( 'http://webintents.org/pick', 'image/*');
         window.navigator.startActivity(intent, function(data) {
-          loadIamge(data);
+          loadImage(data);
         });
       });
 
@@ -35,17 +35,13 @@
 
       $('#save').click(function(e) {
         var intent = new Intent( 'http://webintents.org/save', 'image/*', $('#result').attr('src'));
-        window.navigator.startActivity(intent, function(data) {
-
-        });
+        window.navigator.startActivity(intent);
       });
 
       $('#share').click(function() {
         var intent = new Intent( 'http://webintents.org/share', 'image/*', $('#result').attr('src'));
 
-        window.navigator.startActivity(intent, function(data) {
-          
-        });
+        window.navigator.startActivity(intent);
       });
     });
   </script>
