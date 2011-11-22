@@ -34,8 +34,14 @@
       var img = $('#image');
       img.load(function() {
         var image = $('#image');
-        canvas = document.createElement('canvas');
-        $('#container').append(canvas);
+        canvas = $('#container canvas');
+        if(canvas.length == 0) {
+          canvas = document.createElement('canvas');
+          $('#container').append(canvas);
+        }
+        else
+          canvas = canvas[0];
+
         canvas.width = image.width();
         canvas.height = image.height();
         context = canvas.getContext('2d');
