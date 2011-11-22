@@ -1,0 +1,34 @@
+{% extends "demos/mememator/layouts/application.html" %}
+{% block title %}Mememator: Pick an Image{% endblock %}
+{% block headline %}Pick an Image{% endblock %}
+{% block scripts %}
+    <script src="//webintents.org/webintents.min.js"></script>
+  <link rel=icon href="favicon.ico" />
+<intent action="http://webintents.org/edit"
+  type="image/*"
+  href="index.html"/>
+<intent action="http://webintents.org/pick"
+  type="image/*"
+  title="Mememator"
+  href="pick.html"/>
+<script src="scripts/memegen.js"></script>
+<script>    
+  $(function() {
+    $('#images img').click(function(e) {
+      if(!!window.intent == false) {
+        var i = new Intent("http://webintents.org/edit", "image/*", this.src);
+        window.navigator.startActivity(i);
+      }
+      else {
+        window.intent.postResult(this.src);
+        setTimeout(function() { window.close(); }, 1000);
+      }
+    });
+  });
+</script>
+{% endblock %}
+{% block content %}
+<div id="images">
+  <img src="lonely_paul.jpeg"/>
+</div>
+{% endblock %}

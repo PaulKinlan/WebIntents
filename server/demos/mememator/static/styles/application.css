@@ -3,39 +3,97 @@ html {
 }
 
 body {
-  margin: 30px 50px 30px 50px;
-  box-shadow: 0 0 10px #666;
-  padding: 20px;
-  border-bottom-left-radius: 20px;
-  border-top-right-radius: 20px;
-  background-color: #eee;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: #97CCEE;
+  background-image: url('../kitten.jpeg');
+  background-size: 100%;
 }
 
 header {
+  width: 100%;
+  background-color: #AE1215; 
+  box-shadow: 0 0 20px #000;
+  margin-bottom: 20px;
+}
 
+header h1 {
+  font-family: 'Sigmar One';
+  color: white;
+  padding: 10px;
+  -webkit-text-stroke: 1px black;
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+header h1 .tagline:before {
+  content: ' - '
+}
+header h1 .tagline {
+  font-family: Arial;
+  font-weight: lighter;
+  font-style: italic;
+  color: #AE1215;
+  text-shadow: 1px 1px 1px #F5A3A4;
+  -webkit-text-stroke: 0; 
+  font-size: 0.6em; 
 }
 
 section {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
+  min-width: 800px;
+  width: 50%;
+  min-height: 600px;
+  border-radius: 20px;
+  background-color: rgba(0,0,0,0.5);
+  margin: auto;
+  box-shadow: 0 0 20px #000;
+  padding: 20px;
 }
 
 footer {
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
-#result {
-  height: 600px;
-  width: 800px;
+#container {
+  height: 480px;
+  width: 100%;
   box-shadow: inset 0 0 10px #666;
+  background-color: #ddd;
 }
 
-#steps {
-  margin: 0 10px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+#done {
+  display: none;
 }
 
-#steps input {
+input[type=text] {
   display: block;
-  margin: 0 5px 5px 5px;
+  font-size: 2em;
+  font-family: 'Sigmar One';
+  box-sizing: border-box;
+  padding: 20px;
+  width: 100%;
+  margin: 5px 0px 5px 0px;
+  color: white;
+  -webkit-text-stroke: 1px black;
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+#images img {
+  width: 128px;
+  border: solid 5px white;
+  cursor: pointer;
 }
