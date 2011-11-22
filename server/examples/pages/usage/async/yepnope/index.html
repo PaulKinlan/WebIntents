@@ -1,0 +1,45 @@
+{% extends "examples/layouts/base.html" %}
+{% block title %}Example: YepNop{% endblock %}
+{% block headline %}Example: YepNope{% endblock %}
+{% block scripts %}
+  <script src="/javascripts/yepnope.1.0.2-min.js"></script>
+  <script src="//webintents.org/webintents.min.js"></script>
+    {% endblock %}
+  {% block content %}
+  <section>
+<pre>&lt;script&gt;
+yepnope({
+  test : !!window.Intent,
+  nope : ['http://webintents.org/webintents.min.js'],
+  complete:  function() {
+    var startButton = document.getElementById("startActivity");
+    startButton.addEventListener("click", function() {
+      var intent = new Intent(
+          "http://webintents.org/share", "*");
+
+      window.navigator.startActivity(intent);
+    }, false);
+  }
+});
+&lt;/script&gt;</pre>
+  <div> 
+    <button id="startActivity">Click to Start Activity</button>
+  </div>
+  </section>
+  <script>
+    yepnope({
+      test : !!window.Intent,
+      nope : ['http://webintents.org/webintents.min.js'],
+      complete:  function() {
+        var startButton = document.getElementById("startActivity");
+        startButton.addEventListener("click", function() {
+          var intent = new Intent(
+              "http://webintents.org/share", "*");
+
+          window.navigator.startActivity(intent);
+        }, false);
+      }
+    });
+  </script>
+
+{% endblock %}
