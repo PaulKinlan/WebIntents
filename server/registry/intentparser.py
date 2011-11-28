@@ -44,7 +44,6 @@ class IntentParser():
     for match in re.finditer(IntentParser.intent_regex, text, flags = re.I | re.M | re.S):
       result = match.groups(0)[0]
       type = self._parse_type(result)
-      print type
       if type:
         type_major, type_minor = type.split("/")
 
