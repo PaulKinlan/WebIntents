@@ -1,11 +1,11 @@
 import webapp2
-import re
 import jinja2
 import os
 from google.appengine.api import urlfetch
 from google.appengine.api import taskqueue
 from google.appengine.ext import db
 import handlers_base
+import intentparser
 import logging
 
 class Intent(db.Model):
@@ -47,7 +47,7 @@ class CrawlerTask(webapp2.RequestHandler):
   '''
   def post(self):
     url = self.request.get("url")
-    data = urlfetch.fetch(url)
+    data = urlfetch.fetch(url, deadline = 10)
     
     history = IndexHistory()
     history.status_code = str(data.status_code)
@@ -58,72 +58,13 @@ class CrawlerTask(webapp2.RequestHandler):
 
     taskqueue.add(url ='/tasks/parse-intent', params = { "key" : history.key() })
 
-class IntentParser():
-  intent_regex = "<intent .*?/>"
-  attribute_value_regex = "['\"]?([^>]+)['\"]?"
-  type_regex = "type=" + attribute_value_regex
-  icon_regex = "icon=" + attribute_value_regex
-  title_regex = "title=" + attribute_value_regex
-  disposition_regex = "disposition=" + attribute_value_regex
-  href_regex = "href=" + attribute_value_regex
- 
-  def _get_value(self, regex, text):
-    match = re.search(regex, text, flags = re.I | re.M)
-    if match is None:
-      return None
-    else:
-      return match.groups(0)
-
-    return None
-
-  def _parse_type(self, text):
-    return _get_value(IntentParser.type_regex, text)
-
-  def _parse_action(self, text):
-    return _get_value(IntentParser.action_regex, text)
-
-  def _parse_icon(self, text):
-    return _get_value(IntentParser.icon_regex, text)
-
-  def _parse_title(self, text):
-    return _get_value(IntentParser.title_regex, text)
-
-  def _parse_href(self, text):
-    return _get_value(IntentParser.href_regex, text)
-
-  def _parse_disposition(self, text):
-    return _get_value(disposition_regex, text)
-
-  def parse(self, text):
-    intents = []
-
-    for match in re.finditer(IntentParser.intent_regex, text, flags = re.I | re.M):
-      text = match.groups(0)
-      logging.info(text)
-      type = self._parse_type(text)
-      if type:
-        type_major, type_minor = type.split("/")
-
-      intent = {
-        "title": self._parse_title(text),
-        "icon": self._parse_icon(text),
-        "action": self._parse_action(text),
-        "href": self._parse_href(text),
-        "type_major": type_major,
-        "type_minor": type_minor,
-        "disposition": self._parse_disposition(text)
-      }
-      intents.push(intent)
-
-    return intents
-
 class ParseIntentTask(webapp2.RequestHandler):
   '''
     Parses the intent out of an a document that was fetched from the web
   '''
   def post(self):
     key = self.request.get('key')
-    parser = IntentParser()
+    parser = intentparser.IntentParser()
 
     history = IndexHistory.get(key)
     
