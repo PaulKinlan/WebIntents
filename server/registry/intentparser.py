@@ -44,17 +44,18 @@ class IntentParser():
     for match in re.finditer(IntentParser.intent_regex, text, flags = re.I | re.M | re.S):
       result = match.groups(0)[0]
       type = self._parse_type(result)
+      type_major, type_minor = ("*", None)
       if type:
         type_major, type_minor = type.split("/")
 
       intent = {
         "title": self._parse_title(result),
-        "icon": self._parse_icon(result),
+        "icon": self._parse_icon(result) or "favicon.ico",
         "action": self._parse_action(result),
         "href": self._parse_href(result),
         "type_major": type_major,
         "type_minor": type_minor,
-        "disposition": self._parse_disposition(result)
+        "disposition": self._parse_disposition(result) or "window"
       }
       intents.append(intent)
 
