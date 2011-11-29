@@ -8,6 +8,9 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
+- url: /javascripts
+  static_dir: javascripts
+
 - url: /.*
   script: server.app
 

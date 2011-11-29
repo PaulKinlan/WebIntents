@@ -24,6 +24,7 @@ file_types = {
 class PageHandler(webapp2.RequestHandler):
   def render_file(self, file, domain):
     self.response.headers['X-Content-Security-Policy'] = "allow 'self'; img-src *; script-src www.google-analytics.com apis.google.com;"
+    self.response.headers['Cache-Control'] = 'max-age=3600'
 
     if file is None or file == "":
       file = "index.html"

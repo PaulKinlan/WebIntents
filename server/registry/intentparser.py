@@ -1,4 +1,5 @@
 import logging
+import urlparse
 import re
 
 class IntentParser():
@@ -38,21 +39,28 @@ class IntentParser():
   def _parse_disposition(self, text):
     return self._get_value(IntentParser.disposition_regex, text)
 
-  def parse(self, text):
+  def parse(self, text, base):
     intents = []
 
     for match in re.finditer(IntentParser.intent_regex, text, flags = re.I | re.M | re.S):
       result = match.groups(0)[0]
       type = self._parse_type(result)
       type_major, type_minor = ("*", None)
+      
+      favicon = self._parse_icon(result)
+      if favicon is None:
+        favicon = urlparse.urljoin(base, "favicon.ico")
+      else:
+        favicon = urlparse.urljoin(base, favicon)
+
       if type:
         type_major, type_minor = type.split("/")
 
       intent = {
         "title": self._parse_title(result),
-        "icon": self._parse_icon(result) or "favicon.ico",
+        "icon": favicon, 
         "action": self._parse_action(result),
-        "href": self._parse_href(result),
+        "href": urlparse.urljoin(base, self._parse_href(result)),
         "type_major": type_major,
         "type_minor": type_minor,
         "disposition": self._parse_disposition(result) or "window"

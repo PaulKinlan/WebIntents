@@ -11,11 +11,6 @@ import demos.shortener.handlers
 import demos.instapaper.handlers
 import demos.imgur.handlers
 
-import sys
-#for attr in ('stdin', 'stdout', 'stderr'):
-#  setattr(sys, attr, getattr(sys, '__%s__' % attr))
-
-
 exampleRoutes = [ Route('/<:.*>', handlers_base.PageHandler, 'examples')]
 demoRoutes = [
       Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
@@ -34,6 +29,8 @@ demoRoutes = [
 ]
 
 app = webapp2.WSGIApplication([
+    Route('/tasks/crawl', registry.handlers.CrawlerTask),
+    Route('/tasks/parse-intent', registry.handlers.ParseIntentTask),
     routes.DomainRoute('webintents-org.appspot.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'webintents')
     ]),
@@ -50,10 +47,8 @@ app = webapp2.WSGIApplication([
     routes.DomainRoute('widgets.webintents-org.appspot.com', [
       Route('/<:.*>', widgets.handlers.PageHandler, 'widgets')
     ]),
-    routes.DomainRoute('registry.webintents-org.appspot.com', [
-      Route('/<:.*>', handlers_base.PageHandler, 'registry')
-    ]),
     routes.DomainRoute('registry.webintents.org', [
+      Route('/indexer.html', registry.handlers.IndexerHandler, 'registry'),
       Route('/<:.*>', handlers_base.PageHandler, 'registry')
     ]),
     routes.DomainRoute('www.imagemator.com', [
@@ -61,6 +56,9 @@ app = webapp2.WSGIApplication([
     ]),
     routes.DomainRoute('www.comicmator.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'demos/comicmator'),
+    ]),
+    routes.DomainRoute('www.cloudfilepicker.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/cloudfilepicker'),
     ]),
     routes.DomainRoute('www.mememator.com', [
       Route('/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),

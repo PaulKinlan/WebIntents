@@ -8,6 +8,13 @@ import handlers_base
 import intentparser
 import logging
 
+class IndexHistory(db.Model):
+  created_on = db.DateTimeProperty(auto_now = False, auto_now_add = True)
+  content = db.TextProperty()
+  status_code = db.StringProperty()
+  headers = db.TextProperty()
+  final_url = db.StringProperty()
+
 class Intent(db.Model):
   href = db.StringProperty(indexed = False)
   title = db.StringProperty(indexed = False)
@@ -18,15 +25,17 @@ class Intent(db.Model):
   type_minor = db.StringProperty()
   created_on = db.DateTimeProperty(auto_now = False, auto_now_add = True)
   updated_on = db.DateTimeProperty(auto_now = True, auto_now_add = True)
-  enabled = db.BooleanProperty() # The intent may no longer exist at the URL where it was defined, if it doesn't remove it
+  enabled = db.BooleanProperty(default = True)
   rank = db.FloatProperty(default = 0.0) # Some arbitrary rank.
+  scan = db.ReferenceProperty(IndexHistory) # A reference to the scan
 
-class IndexHistory(db.Model):
-  created_on = db.DateTimeProperty(auto_now = False, auto_now_add = True)
-  content = db.TextProperty()
-  status_code = db.StringProperty()
-  headers = db.TextProperty()
-  final_url = db.StringProperty()
+class PageIntent(db.Model):
+  """
+  A page will point to an intent handler, use this to keep track.
+  """
+  url = db.StringProperty()
+  target_url = db.StringProperty()
+  intent = db.ReferenceProperty()
 
 class IndexerHandler(handlers_base.PageHandler):
   def post(self):
@@ -53,7 +62,7 @@ class CrawlerTask(webapp2.RequestHandler):
     history.status_code = str(data.status_code)
     history.content = data.content
     history.headers = str(data.headers)
-    history.final_url = data.final_url
+    history.final_url = data.final_url or url
     history.put()
 
     taskqueue.add(url ='/tasks/parse-intent', params = { "key" : history.key() })
@@ -68,13 +77,19 @@ class ParseIntentTask(webapp2.RequestHandler):
 
     history = IndexHistory.get(key)
     
-    intents = parser.parse(history.content)
-    logging.info(intents)      
+    intents = parser.parse(history.content, history.final_url)
     for intent in intents:
       new_intent = Intent(**intent)
+      new_intent.scan = history
       new_intent.put()
 
-class RegisteryHandler(webapp2.RequestHandler):
+      page_intent = PageIntent()
+      page_intent.url = history.final_url
+      page_intent.target_url = new_intent.href
+      page_intent.intent = new_intent;
+      page_intent.put()
+
+class RegistryHandler(webapp2.RequestHandler):
   def get(self):
     '''
       Gets a list of intents that can handle this
