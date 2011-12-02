@@ -57,11 +57,18 @@ app = webapp2.WSGIApplication([
     routes.DomainRoute('www.comicmator.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'demos/comicmator'),
     ]),
+    routes.DomainRoute('www.binhexdec.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/binhexdec'),
+    ]),
     routes.DomainRoute('www.cloudfilepicker.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'demos/cloudfilepicker'),
     ]),
     routes.DomainRoute('www.mememator.com', [
       Route('/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
+    ]),
+    routes.DomainRoute('www.inspirationmator.com', [
+      Route('/proxy', demos.mememator.handlers.ProxyHandler, 'demos/inspirationmator'),
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/inspirationmator'),
     ])
   ])

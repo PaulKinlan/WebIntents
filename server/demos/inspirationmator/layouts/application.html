@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/application.css">
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
+  <script src='//webintents.org/webintents.min.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+  {% block scripts %}{% endblock %}
+</head>
+<body>
+<header>
+<h1>{% block headline %}{% endblock %}<span class="tagline">Inspirin for generations</span></h1>
+</header>
+<section>
+{% block content %}{% endblock %}
+</section>
+<footer>
+</footer>
+</body>
+</html>
