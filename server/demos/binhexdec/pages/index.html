@@ -1,0 +1,96 @@
+{% extends "demos/cloudfilepicker/layouts/application.html" %}
+{% block title %}Bin Hex Dec{% endblock %}
+{% block headline %}Your favourite Binary file app{% endblock %}
+{% block scripts %}
+  <script src="//webintents.org/webintents.js"></script>
+  <script src="/javascripts/events.js"></script>
+  <script
+    src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug"></script>
+  <link rel=icon href="favicon.ico" />
+  <intent action="http://webintents.org/view"
+          type="*" />
+  <script type="text/javascript">
+
+   var Controller = new (function() {
+     var model;
+     var mode;
+
+     this.saveModel = function(data) {
+       model = data;
+     };
+
+     this.getModel = function() {
+       return model;
+     };
+
+     this.loadData = function(data) {
+       var output;
+
+       if(data instanceof ArrayBuffer) {
+         var builder = window.BlobBuilder || window.WebKitBlobBuilder;
+         var blob = new builder.append(data).getBlob();
+         this.saveModel(blob);
+       }
+       else if(data instanceof Blob) {
+         this.saveModel(data);
+       }
+       else if(data instanceof String) {
+         // This will make me cry
+       }      
+     };
+   })();
+
+   $(document).ready(function() {
+      if(window.intent) {
+        switch(window.intent.action) {
+          case "http://webintents.org/edit":
+            $("#save").show();
+            $("#done").hide();
+            $("#pick").show();
+            break;
+          case "http://webintents.org/view":
+            $("#save").show();
+            $("#done").hide();
+            $("#pick").show();
+            break;
+          default:
+            $("#save").hide();
+            $("#done").hide();
+            $("#pick").show();
+         }
+
+         Controller.loadData(window.intent.data);
+      } 
+    });
+  </script>
+  {% endblock %}
+  {% block content %}
+  <div id="banner">
+    <h2>Welcome</h2>
+    <p>
+      The binary, hexidecimal and decimal app.
+    </p>
+  </div>
+  <div id="app">
+    <div id="from">
+      <header>
+        <select>
+          <option value="binary">Binary</option>
+          <option value="hexadecimal">Hexadecimal</option>
+          <option value="decimal">Decimal</option>
+        </select>
+      </header>
+      <section>
+      </section>
+    </div>
+    <div id="raw">
+      <header>
+      </header>
+      <section>
+      </section>
+    </div>
+    <input type="button" class="btn" id="save" value="Save" />
+    <input type="button" class="btn" id="done" value="Done" />
+    <input type="button" class="btn" id="pick" value="Pick" />
+  </div>
+{% endblock %}
