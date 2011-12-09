@@ -39,6 +39,8 @@ var IntentController = new (function() {
     } 
   };
 
+  
+
   var launch = function(intent, disposition) { 
     return function(e) {
       if(!!e.preventDefault) 

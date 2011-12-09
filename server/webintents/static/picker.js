@@ -33,5 +33,8 @@ attachEventListener(window, "load", function() {
   // Send a message to itself, mainly for webkit. 
   window.postMessage(JSON.stringify(data), window.location.protocol + "//" + window.location.host);
 
+  var suggestions = document.getElementById("suggestions");
+  suggestions.src = "//registry.webintents.org/suggestions.html?action=" + intent.action + "&type=" + intent.type;
+
   window.resizeTo(300,300);
 }, false);

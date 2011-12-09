@@ -1,8 +1,112 @@
 <!doctype html>
 <html>
-  <body>
-    {% for intent in intents %}
+  <script src="/javascripts/events.js"></script>
+  <script src="/javascripts/json2.js"></script>
+  <script>
 
+    var intentData = {};
+    
+    attachEventListener(window, "load", function() {
+      /* We need to ask the parent for the data we are going to send
+      intent handler.
+      */
+      var links = document.querySelectorAll("a");
+      attachEventListener(links, "click", function(e) {
+        e.preventDefault();
+        var src = e.srcElement;
+
+        if(src.tagName != "a")
+          return false;
+
+        var href = src.href;
+        var dispostion = src.getAttribute("data-disposition");
+      
+        if(dispotition == "inline") {
+          var request = {
+            'request': "launch",
+            'data' : intentData
+          }; 
+
+          window.parent.postMessage(JSON.stringify(request), "http://webintents.org")
+        }
+        else {
+          window.open(href, intentData);
+        } 
+
+        return false;
+      });
+
+      if(window.parent) {
+        var request = {
+          "request": "data"
+        };
+        window.parent.postMessage(JSON.stringify(request), "http://webintents.org");
+      }
+    });
+
+    attachEventListener(window, "message", function(e) {
+      var data = JSON.parse(e.data);
+      switch(data.request) {
+        case "dataResponse": 
+          intentData = data.data;
+          break;
+      }
+    });
+  </script>
+  <style>
+      body, h1, h2, ul, li {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        box-sizing: content-box;
+        background-color: #e9eef2;
+      }
+
+      body {
+        box-sizing: content-box;
+        height: 100%;
+        font-family: Arial;
+        color: #6b5f6e;
+        background-color: #e9eef2;
+      }
+
+      ul {
+        border: solid 1px #ccc;
+        margin: 5px;
+      }
+     
+      li {
+        background-color: white;
+        padding: 5px;
+        font-size: 12px;
+        position: relative;
+      }
+
+      li .icon {
+        max-width: 64px;
+        max-height: 64px;
+        float: left;
+        margin: 2px;
+      }
+
+      li h2 {
+       font-size: 12px;
+      }
+  </style>
+  <body>
+    <ul>
+    {% for intent in intents %}
+      <li>
+      <a href="{{intent.href}}" data-disposition="{{intent.disposition}}" >
+        <img class="icon" src="{{intent.icon}}">
+        <h2>{{intent.title}}</h2>
+        <span class="domain">{{intent.domain}}</span>
+        <br style="clear:both;" />
+      </a>
+      </li>
     {% endfor %}
+    </ul>
   </body>
 </html>

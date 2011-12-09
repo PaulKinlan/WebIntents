@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Choose an activity</title>
+    <title>Choose an application</title>
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
     <script src="/webintents-server.js"></script>
     <script src="/base64.js"></script>
@@ -82,6 +82,20 @@
         background-color: "white";
         border: 0;
       }
+
+      #suggestions {
+        width: 100%;
+        border: none;
+      }
+
+      h2 {
+        font-size: 12px;
+        padding: 5px;
+      }
+
+      #header h2 {
+        padding: 0px;
+      }
     </style>
   </head>
   <body>
@@ -93,8 +107,9 @@
     <ul id="actions">
 
     </ul>
+    <h2>Suggested aplications</h2>
+    <iframe id="suggestions"> </iframe>
     <iframe id="inline" allowTransparency="false" style="background-color: white;">
-
     </iframe>
   </body>
 </html>

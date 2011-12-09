@@ -49,6 +49,7 @@ app = webapp2.WSGIApplication([
     ]),
     routes.DomainRoute('registry.webintents.org', [
       Route('/indexer.html', registry.handlers.IndexerHandler, 'registry'),
+      Route('/suggestions.html', registry.handlers.SuggestionsHandler, 'registry'),
       Route('/<:.*>', handlers_base.PageHandler, 'registry')
     ]),
     routes.DomainRoute('www.imagemator.com', [
