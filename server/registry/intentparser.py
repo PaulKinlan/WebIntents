@@ -3,6 +3,7 @@ import urlparse
 import re
 
 class IntentParser():
+  page_title_regex = "<title>(.*?)</title>"
   intent_regex = "<intent (.*?)/>"
   attribute_value_regex = "['\"]?([^>\'\"]+)['\"]?"
   type_regex = "type=" + attribute_value_regex
@@ -39,8 +40,12 @@ class IntentParser():
   def _parse_disposition(self, text):
     return self._get_value(IntentParser.disposition_regex, text)
 
+  def _parse_page_title(self, text):
+    return self._get_value(IntentParser.page_title_regex, text)
+
   def parse(self, text, base):
     intents = []
+    page_title = self._parse_page_title(text)
 
     for match in re.finditer(IntentParser.intent_regex, text, flags = re.I | re.M | re.S):
       result = match.groups(0)[0]
@@ -57,7 +62,7 @@ class IntentParser():
         type_major, type_minor = type.split("/")
 
       intent = {
-        "title": self._parse_title(result),
+        "title": self._parse_title(result) or page_title,
         "icon": favicon, 
         "action": self._parse_action(result),
         "href": urlparse.urljoin(base, self._parse_href(result)),
@@ -69,4 +74,6 @@ class IntentParser():
 
     return intents
 
-
+  @staticmethod
+  def create_key(intent):
+    return intent["href"] + intent["action"] + intent["type_major"] + intent["type_minor"]

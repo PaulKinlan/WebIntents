@@ -86,8 +86,8 @@ class ParseIntentTask(webapp2.RequestHandler):
     
     intents = parser.parse(history.content, history.final_url)
     for intent in intents:
-      key_name = intent.href + intent.action + intent.type
-      db.get_or_insert(Intent, key , **intent)
+      key_name = intent["href"] + intent["action"] + intent["type_major"] + intent["type_minor"]
+      new_intent = Intent.get_or_insert(key_name , **intent)
       new_intent.scan = history
       new_intent.put()
 
