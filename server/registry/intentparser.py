@@ -60,12 +60,15 @@ class IntentParser():
 
       if type:
         type_major, type_minor = type.split("/")
-
+      
+      href = urlparse.urljoin(base, self._parse_href(result))
+      parsed_url = urlparse.urlparse(href) 
       intent = {
         "title": self._parse_title(result) or page_title,
         "icon": favicon, 
         "action": self._parse_action(result),
-        "href": urlparse.urljoin(base, self._parse_href(result)),
+        "href": href,
+        "domain": parsed_url[1],
         "type_major": type_major,
         "type_minor": type_minor,
         "disposition": self._parse_disposition(result) or "window"

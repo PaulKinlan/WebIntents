@@ -8,17 +8,31 @@ class IntentParserTestFunction(unittest.TestCase):
 
   def test_basic(self):
     intentStr = "<intent type='image/*' action='http://webintents.org/test' />"
-    intents = self.parser.parse(intentStr, "http://webintents.org/")
+    intents = self.parser.parse(intentStr, "http://basedomain.org/")
 
     self.assertEqual(len(intents), 1)
     self.assertEqual(intents[0]["type_major"], "image")
     self.assertEqual(intents[0]["type_minor"], "*")
     self.assertEqual(intents[0]["action"], "http://webintents.org/test")
+    self.assertEqual(intents[0]["href"], "http://basedomain.org/")
+    self.assertEqual(intents[0]["domain"], "basedomain.org")
 
   def test_parse_page_title(self):
     title_string = "<html><head><title>Testing</title></head></html>"
     title = self.parser._parse_page_title(title_string)
     self.assertEqual(title, "Testing")
+
+  def test_href(self):
+    intentStr = "<intent type='image/*' action='http://webintents.org/test' href='http://paul.kinlan.me/index.html' />"
+    intents = self.parser.parse(intentStr, "http://webintents.org/")
+
+    self.assertEqual(intents[0]["href"], "http://paul.kinlan.me/index.html")
+
+  def test_domain(self):
+    intentStr = "<intent type='image/*' action='http://webintents.org/test' href='http://paul.kinlan.me/index.html' />"
+    intents = self.parser.parse(intentStr, "http://webintents.org/")
+
+    self.assertEqual(intents[0]["domain"], "paul.kinlan.me")
 
   def test_intent_page_title_default(self):
     intentStr = "<title>Test Title</title><intent type='image/*' action='http://webintents.org/test' />"
