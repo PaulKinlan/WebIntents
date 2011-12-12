@@ -16,3 +16,11 @@ indexes:
   - name: type_major
   - name: rank
     direction: desc
+
+- kind: Intent
+  properties:
+  - name: action
+  - name: type_major
+  - name: type_minor
+  - name: rank
+    direction: desc

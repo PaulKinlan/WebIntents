@@ -4,7 +4,7 @@ import re
 
 class IntentParser():
   page_title_regex = "<title>(.*?)</title>"
-  intent_regex = "<intent (.*?)/>"
+  intent_regex = "<intent(.*?)/>"
   attribute_value_regex = "['\"]?([^>\'\"]+)['\"]?"
   type_regex = "type=" + attribute_value_regex
   action_regex = "action=" + attribute_value_regex

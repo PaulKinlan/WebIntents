@@ -15,9 +15,20 @@
 */
 
 var IntentController = new (function() { 
+
+  var intent;
+
   var setText = function(obj, text) {
     obj.appendChild(document.createTextNode(text));
   };
+
+  this.setIntent = function(i) {
+    intent = i;
+  }
+
+  this.getIntent = function() {
+    return intent;
+  }
 
   this.renderActionContainer = function (action, root) {
     var header = document.createElement("h2");
@@ -38,8 +49,6 @@ var IntentController = new (function() {
       root.appendChild(actionElement); 
     } 
   };
-
-  
 
   var launch = function(intent, disposition) { 
     return function(e) {

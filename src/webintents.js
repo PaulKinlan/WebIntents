@@ -257,7 +257,7 @@
 
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
-
+   // console.log("name:" +  window.name)
     if(window.name != "") {
       // Verify the source of the intent data.
       var verified = false;

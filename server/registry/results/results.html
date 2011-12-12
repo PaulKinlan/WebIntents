@@ -3,6 +3,9 @@
   <script src="/javascripts/events.js"></script>
   <script src="/javascripts/json2.js"></script>
   <script>
+    var encodeNameTransport = function(data) {
+      return window.btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/=/g, "_");
+    };
 
     var intentData = {};
     
@@ -15,13 +18,13 @@
         e.preventDefault();
         var src = e.srcElement;
 
-        if(src.tagName != "a")
+        if(src.tagName != "A")
           return false;
 
         var href = src.href;
-        var dispostion = src.getAttribute("data-disposition");
+        var disposition = src.getAttribute("data-disposition");
       
-        if(dispotition == "inline") {
+        if(disposition == "inline") {
           var request = {
             'request': "launch",
             'data' : intentData
@@ -30,7 +33,7 @@
           window.parent.postMessage(JSON.stringify(request), "http://webintents.org")
         }
         else {
-          window.open(href, intentData);
+          window.open(href, encodeNameTransport(intentData));
         } 
 
         return false;
@@ -38,7 +41,7 @@
 
       if(window.parent) {
         var request = {
-          "request": "data"
+          "request": "requestData"
         };
         window.parent.postMessage(JSON.stringify(request), "http://webintents.org");
       }
@@ -82,6 +85,7 @@
         padding: 5px;
         font-size: 12px;
         position: relative;
+        list-style: none;
       }
 
       li .icon {
@@ -99,12 +103,10 @@
     <ul>
     {% for intent in intents %}
       <li>
-      <a href="{{intent.href}}" data-disposition="{{intent.disposition}}" >
         <img class="icon" src="{{intent.icon}}">
-        <h2>{{intent.title}}</h2>
+        <h2><a href="{{intent.href}}" data-disposition="{{intent.disposition}}">{{intent.title}}</a></h2>
         <span class="domain">{{intent.domain}}</span>
         <br style="clear:both;" />
-      </a>
       </li>
     {% endfor %}
     </ul>

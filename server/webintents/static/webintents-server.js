@@ -150,6 +150,7 @@ var MessageDispatcher = function() {
     };
 
     localStorage[data.intent._id] = JSON.stringify(intentData);
+    IntentController.setIntent(data.intent);
     IntentController.renderActions(actions, data.intent);
   };
 
@@ -189,6 +190,16 @@ var MessageDispatcher = function() {
     }
   };
 
+  this.requestData = function(data, timestamp, e) {
+    if(e.origin == "http://registry.webintents.org") {
+      var intentObj = IntentController.getIntent();
+      var response = {
+        request : "dataResponse",
+        data : intentObj
+      };
+      e.source.postMessage(JSON.stringify(response), e.origin);      
+    }
+  };
 
   /*
    * The service has sent a response, route it back to the correct frame.

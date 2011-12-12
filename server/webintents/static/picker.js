@@ -23,7 +23,8 @@ var decodeNameTransport = function(str) {
 };
 
 attachEventListener(window, "load", function() {
-  var intent = decodeNameTransport(window.name);   
+  var intent = decodeNameTransport(window.name);
+  window.name = "";
   
   data = {};
   data.request = "startActivity";
