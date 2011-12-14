@@ -104,8 +104,17 @@ class SuggestionsHandler(webapp2.RequestHandler):
     '''
     alt = self.request.get("alt", default_value = "html")
     action = self.request.get("action")
-    type = self.request.get("type")
-    type_major, type_minor = type.split("/")
+    type = self.request.get("type", default_value = "*")
+    type_info = type.split("/")
+    type_major,type_minor = (None, None)
+
+    if action == "undefined" or action is None:
+      return
+
+    if len(type_info) != 2:
+      type_major = "*"
+    else:
+      type_major, type_minor = type_info
 
     query = db.Query(Intent).filter("action =", action)
 
@@ -115,7 +124,7 @@ class SuggestionsHandler(webapp2.RequestHandler):
       query.filter("type_minor =", type_minor)
     
     query.order("-rank")
-    logging.info(query)
+
     results = query.fetch(5)
     
     path = os.path.join(os.path.dirname(__file__), "results", "results.%s" % alt)
