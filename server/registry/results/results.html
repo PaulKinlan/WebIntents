@@ -2,6 +2,7 @@
 <html>
   <script src="/javascripts/events.js"></script>
   <script src="/javascripts/json2.js"></script>
+  <script src="/javascripts/base64.js"></script>
   <script>
     var encodeNameTransport = function(data) {
       return window.btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/=/g, "_");
