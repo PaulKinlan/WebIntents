@@ -1,5 +1,5 @@
-{% extends "demos/mememator/layouts/application.html" %}
-{% block title %}Mememator: Pick an Image{% endblock %}
+{% extends "demos/inspirationmator/layouts/application.html" %}
+{% block title %}Inspirationmator: Pick an Image{% endblock %}
 {% block headline %}Pick an Image{% endblock %}
 {% block scripts %}
     <script src="//webintents.org/webintents.min.js"></script>
@@ -12,20 +12,7 @@
   title="Mememator"
   href="pick.html"/>
 <script src="scripts/memegen.js"></script>
-<script>    
-  $(function() {
-    $('#images img').click(function(e) {
-      if(!!window.intent == false) {
-        var i = new Intent("http://webintents.org/edit", "image/*", this.src);
-        window.navigator.startActivity(i);
-      }
-      else {
-        window.intent.postResult(this.src);
-        setTimeout(function() { window.close(); }, 1000);
-      }
-    });
-  });
-</script>
+<script src="scripts/pick.js"></script>
 {% endblock %}
 {% block content %}
 <div id="images">
