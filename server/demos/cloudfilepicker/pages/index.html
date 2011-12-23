@@ -9,7 +9,7 @@
   <link rel=icon href="favicon.ico" />
   <intent action="http://webintents.org/pick"
           type="image/*" />
-          
+
   <script type="text/javascript">
     google.setOnLoadCallback(createPicker);
     google.load('picker', '1');
@@ -17,13 +17,21 @@
     function createPicker() {
       if (!!window.intent) {
         var pickerBuilder = new google.picker.PickerBuilder();
-        if (window.intent.type.indexOf('image/') == 0) {
-          pickerBuilder.addViewGroup(
-            new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
+        if (window.intent.action == "http://webintents.org/pick") {
+          if (window.intent.type.indexOf('image/') == 0) {
+            pickerBuilder.addViewGroup(
+              new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
                 addView(new google.picker.PhotosView().
                 setType(google.picker.PhotosView.Type.UPLOADED)).
                 addView(new google.picker.PhotosView().
                 setType(google.picker.PhotosView.Type.FEATURED)));
+          }
+        }
+        else if (window.intent.action == "http://webintents.org/save") {
+          if (window.intent.type.indexOf('image/') == 0) {
+            pickerBuilder.addViewGroup(
+              new google.picker.ViewGroup(google.picker.ViewId.PHOTO_UPLOAD));
+          }
         }
         pickerBuilder.setCallback(pickerCallback);
         pickerBuilder.build().setVisible(true);
