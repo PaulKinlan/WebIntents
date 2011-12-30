@@ -1,8 +1,24 @@
 <!doctype html>
-<html>
+<html manifest="cache.manifest">
   <head>
-    <title>Installed Intents</title>
+    <title>Installed Applications</title>
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+    <style>
+     li {
+       clear:both;
+     }
+
+     li img {
+       width: 32px;
+       height: 32px;
+     }
+
+     li span {
+       display: block;
+       color: #888;
+       font-style: italic;
+     }
+    </style>
     <script src="/webintents-server.js"></script>
     <script src="/controller.js"></script>
     <script>

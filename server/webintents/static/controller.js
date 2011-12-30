@@ -44,7 +44,7 @@ var IntentController = new (function() {
   this.renderActions = function(actions, intent, root) {
     root = root || document.getElementById("actions");
     var action;
-    for(var i = 0; action = actions.actions[i]; i++) {
+    for(var i = 0; action = actions[i]; i++) {
       var actionElement = renderAction(action, intent);
       root.appendChild(actionElement); 
     } 

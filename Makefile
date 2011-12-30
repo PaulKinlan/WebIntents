@@ -1,7 +1,7 @@
 RELEASE := $(shell cat ./src/release.js)
 DEBUG := $(shell cat ./src/debug.js)
 
-all: server/webintents/cache.manifest.src production
+all: server/webintents/static/cache.manifest production
 
 release: ./src/webintents.js ./src/json2.js ./src/base64.js
 	cat ./src/webintents.js ./src/json2.js ./src/base64.js | sed 's|// __WEBINTENTS_ROOT|$(RELEASE)|' > webintents.js
@@ -20,7 +20,7 @@ production: server/webintents/static/cache.manifest release
 server/webintents/static/webintents.js:
 
 # Manifest depends on changes to other files, so include them in the dependency chain
-server/webintents/static/cache.manifest: server/webintents/cache.manifest.src server/webintents/static/picker.html server/webintents/static/picker.js server/webintents/static/webintents.js server/webintents/static/intents.html server/webintents/static/json2.js server/webintents/static/webintents-server.js server/webintents/static/controller.js server/webintents/static/base64.js
+server/webintents/static/cache.manifest: server/webintents/cache.manifest.src server/webintents/static/list.html server/webintents/static/picker.html server/webintents/static/picker.js server/webintents/static/webintents.js server/webintents/static/intents.html server/webintents/static/json2.js server/webintents/static/webintents-server.js server/webintents/static/controller.js server/webintents/static/base64.js
 	cat server/webintents/cache.manifest.src > server/webintents/static/cache.manifest
 	echo '#' `date` >> server/webintents/static/cache.manifest
 
