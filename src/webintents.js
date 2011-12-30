@@ -226,7 +226,7 @@
   };
 
   var parseIntentTag = function(intent) {
-    var title = intent.getAttribute("title") || document.title;
+    var title = intent.getAttribute("title") || document.title || window.location.host;
     var href = intent.getAttribute("href") || document.location.href;
     var action = intent.getAttribute("action");
     var type = intent.getAttribute("type");
