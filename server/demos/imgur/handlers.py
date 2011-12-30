@@ -1,5 +1,6 @@
 import webapp2
 from google.appengine.api import urlfetch
+import logging
 import urllib
 
 class SaveHandler(webapp2.RequestHandler):
