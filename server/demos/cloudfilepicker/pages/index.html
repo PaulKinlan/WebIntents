@@ -18,7 +18,7 @@
       if (!!window.intent) {
         var pickerBuilder = new google.picker.PickerBuilder();
         if (window.intent.action == "http://webintents.org/pick") {
-          if (window.intent.type.indexOf('image/') == 0) {
+          if (window.intent.type.indexOf('image/') == 0 || window.intent.type === "*") {
             pickerBuilder.addViewGroup(
               new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
                 addView(new google.picker.PhotosView().
