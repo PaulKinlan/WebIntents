@@ -261,6 +261,7 @@ var MessageDispatcher = function() {
 var MessageHandler = function() {
   var dispatcher = new MessageDispatcher();
   this.handler = function(e) {
+    console.log(e);
     var data;
     if(!!e.data) {
       data = JSON.parse(e.data);

@@ -23,7 +23,7 @@ file_types = {
 
 class PageHandler(webapp2.RequestHandler):
   def render_file(self, file, domain):
-    self.response.headers['X-Content-Security-Policy'] = "allow 'self'; img-src *; script-src www.google-analytics.com apis.google.com;"
+    self.response.headers['X-Content-Security-Policy'] = "allow 'self'; img-src * data:; script-src 'self' https://*.googleapis.com webintents.org unsafe-inline unsafe-eval; frame-src 'self' *.webintents.org; font-src *; style-src 'self' fonts.googleapis.com;"
     self.response.headers['Cache-Control'] = 'max-age=3600'
 
     if file is None or file == "":

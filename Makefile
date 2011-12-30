@@ -21,7 +21,7 @@ server/webintents/static/webintents.js:
 
 # Manifest depends on changes to other files, so include them in the dependency chain
 server/webintents/static/cache.manifest: server/webintents/cache.manifest.src server/webintents/static/picker.html server/webintents/static/picker.js server/webintents/static/webintents.js server/webintents/static/intents.html server/webintents/static/json2.js server/webintents/static/webintents-server.js server/webintents/static/controller.js server/webintents/static/base64.js
-	cat server/webintents/cache.manifest.src >> server/webintents/static/cache.manifest
+	cat server/webintents/cache.manifest.src > server/webintents/static/cache.manifest
 	echo '#' `date` >> server/webintents/static/cache.manifest
 
 clean:
