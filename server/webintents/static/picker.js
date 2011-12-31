@@ -23,6 +23,7 @@ var decodeNameTransport = function(str) {
 };
 
 attachEventListener(window, "load", function() {
+  console.log(window.name);
   var intent = decodeNameTransport(window.name);
   window.name = "";
   
@@ -31,9 +32,6 @@ attachEventListener(window, "load", function() {
   data.origin = window.name;
   data.intent = intent;
 
-  // Send a message to itself, mainly for webkit. 
-  // window.postMessage(JSON.stringify(data), window.location.protocol + "//" + window.location.host);
- 
   var timestamp = (new Date()).valueOf();
   var dispatcher = new MessageDispatcher();
   dispatcher.startActivity(data, timestamp); 

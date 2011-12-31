@@ -151,7 +151,7 @@ var MessageDispatcher = function() {
 
     localStorage[data.intent._id] = JSON.stringify(intentData);
     IntentController.setIntent(data.intent);
-    IntentController.renderActions(actions, data.intent);
+    IntentController.renderActions(actions.actions, data.intent);
   };
 
   this.registerCallback = function(data, timestamp, e) {
