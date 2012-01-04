@@ -60,7 +60,7 @@ var IntentController = new (function() {
       var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
 
       var href = (e.srcElement || e.target).href;
-      if(!!intent._callback == false) {
+      if(!!intent && !!intent._callback == false) {
         // There is no callback so remove any reference to the intent.
         localStorage.removeItem(intent._id);
       }
@@ -92,7 +92,10 @@ var IntentController = new (function() {
     actionLink.href = action.url;
     actionLink.target = "_blank";
     setText(actionLink, action.title);
-    attachEventListener(actionLink, "click", launch(intent, action.disposition), false);
+    
+    if(!!intent)
+      attachEventListener(actionLink, "click", launch(intent, action.disposition), false);
+    
     setText(domain, action.domain || "Unknown domain");
     
     actionElement.style.clear = "both";
