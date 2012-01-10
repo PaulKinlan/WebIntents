@@ -57,10 +57,8 @@ Node.js: http://nodejs.org/
 NPM: http://npmjs.org/
     uglify-js: npm -g install uglify-js
     
-
-
-
-run ./make
+    
+    run ./make
 
 This will build and minify both the server and client components.
 
