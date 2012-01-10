@@ -55,29 +55,27 @@ Building
 Prerequisites:
 Node.js: http://nodejs.org/
 NPM: http://npmjs.org/
-uglify-js: npm -g install uglify-js
+    uglify-js: npm -g install uglify-js
+    
 
-Then, run make.
 
-Examples
-========
 
-To run the examples:
+run ./make
 
-    ./run.sh start
+This will build and minify both the server and client components.
 
-Navigate to http://0.0.0.0:8000/
+Running
+=======
 
-To stop the example server:
+Prerequisites:
+AppEngine: http://appengine.google.com/
+nginx: http://nginx.org/en/
 
-    ./run.sh stop
+To run the server locally:
 
-Tests
-=====
+    ./server/run.sh
 
-To run the tests:
+The server will not be set up on port 80 or webintents.org so will need to do the following:
 
-    python -m SimpleHTTPServer
-
-Navigate to: http://0.0.0.0:8000/SpecRunner.html
-
+1) Edit /etc/hosts - add the following "127.0.0.1 webintents.org"
+2) Start nginx using using the configuration in https://github.com/PaulKinlan/WebIntents/tree/master/conf
