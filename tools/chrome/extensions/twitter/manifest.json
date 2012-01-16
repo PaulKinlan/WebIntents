@@ -1,0 +1,12 @@
+{
+  "name": "Share Link to Twitter",
+  "version": "1.0.0.0",
+  "intents": {
+    "http://webintents.org/share" : {
+      "type" : "text/uri-list",
+      "path" : "twitter_inline.html",
+      "title" : "Share link to Twitter",
+      "disposition" : "inline"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Cloud File Picker",
+  "version": "1.0.0.0",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://www.cloudfilepicker.com"],
+    "launch" : {
+      "web_url" : "http://www.cloudfilepicker.com/"
+    }
+  },
+  "intents": {
+    "http://webintents.org/pick" : {
+      "type" : ["image/*"],
+      "path" : "/",
+      "title" : "Pick file from CloudFilePicker.com"
+    }
+  }
+}

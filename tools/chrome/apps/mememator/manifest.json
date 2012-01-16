@@ -1,0 +1,25 @@
+{
+  "name": "Mememator",
+  "version": "1.0.0.0",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://www.mememator.com"],
+    "launch" : {
+      "web_url" : "http://www.mememator.com/"
+    }
+  },
+  "intents": {
+    "http://webintents.org/pick" : {
+      "type" : ["image/*"],
+      "path" : "/pick.html",
+      "title" : "Pick file from mememator.com"
+    },
+    "http://webintents.org/edit" : {
+      "type" : ["image/*"],
+      "path" : "/",
+      "title" : "Edit file in mememator.com"
+    }
+  }
+}
