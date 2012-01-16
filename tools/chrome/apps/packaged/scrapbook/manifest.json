@@ -1,0 +1,26 @@
+{
+  "name": "Scrapbook",
+  "version": "1.0.0.0",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "launch" : {
+      "launch_path" : "index.html"
+    }
+  },
+  "intents": {
+    "http://webintents.org/pick" : {
+      "type" : ["image/*"],
+      "path" : "/pick.html",
+      "disposition" : "inline",
+      "title" : "Pick file from Scrapbook"
+    },
+    "http://webintents.org/save" : {
+      "type": ["*"]
+      "path": "index.html",
+      "disposition" : "inline",
+      "title" : "Save to scrapbook"
+    }
+  }
+}

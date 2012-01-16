@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script src="libs/jquery.js"></script>
+    <script src="controller.js"></script>
+    <script src="intent-helper.js"></script>
+    <script>
+      $(document).ready(function() {
+        if(window.intent && window.intent.type == "http://webintents.org/save") {
+          /*
+            If window.intent.data == URL then fetch the data and store locally
+            If window.intent.data == Data Uri, convert to file and save locally
+            If window.intent.data == File, then save to file system locally
+            If window.intent.data == TypedArray then save to file-system locally
+            */
+            var data = window.intent.data;
+            var type = window.intent.type;
+            var objectType = IntentHelper.getObjectType(data);
+             
+
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Scrappy Save</h1>
+  </body>
+</html>
