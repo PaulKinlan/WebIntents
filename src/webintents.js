@@ -47,13 +47,13 @@
   /*
    * Starts an activity.
    */
-  Intents.prototype.startActivity = function (intent, onResult, onError) {
+  Intents.prototype.startActivity = function (intent, onResult, onFailure) {
     var id = "intent" + new Date().valueOf();
     var params = "directories=no,menubar=no,status=0,location=0,fullscreen=no,width=300,height=300";
     var iframe = document.getElementById("webintents_channel"); 
     intent._id = id;
     intent._callback = (onResult) ? true : false;
-    intent._error = (onError) ? true : false;
+    intent._error = (onFailure) ? true : false;
     intents[id] = { intent: intent }; 
 
     var w = window.open(pickerSource, encodeNameTransport(intent), params);
@@ -65,11 +65,11 @@
       intents[id].callback = onResult;
     }
 
-    if(onError) {
+    if(onFailure) {
       iframe.contentWindow.postMessage(
         _str({"request": "registerErrorCallback", "id": id }), 
         server );
-      intents[id].errorCallback = onError;
+      intents[id].errorCallback = onFailure;
     }
   };
 
@@ -170,7 +170,7 @@
       closed = true;
     };
 
-    this.postError = function(data) {
+    this.postFailure = function(data) {
       if(closed) return;
 
       var iframe = document.getElementById("webintents_channel");

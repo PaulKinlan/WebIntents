@@ -7,13 +7,22 @@
        info.mediaType == "video" ||
        info.mediaType == "audio") {
        var intent = new Intent("http://webintents.org/save", info.mediaType + "/*", info.srcUrl);
-       
-       chrome.tabs.sendRequest(tab.id, intent);
+       try {
+         var intent = new Intent("http://webintents.org/save", "text/uri-list", info.linkUrl);
+         window.navigator.startActivity(intent);
+       }
+       catch(e) {
+         console.log(e);
+       }
      }
      else if(!!info.linkUrl) {
-       var intent = new Intent("http://webintents.org/save", "text/uri-list", info.linkUrl);
-
-       chrome.tabs.sendRequest(tab.id, intent);
+       try {
+         var intent = new Intent("http://webintents.org/save", "text/uri-list", info.linkUrl);
+         window.navigator.startActivity(intent);
+       }
+       catch(e) {
+         console.log(e);
+       }
      }
   };
 

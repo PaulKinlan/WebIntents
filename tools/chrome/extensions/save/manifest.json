@@ -16,12 +16,6 @@
   "permissions" : [
      "http://*/*", "https://*/*", "contextMenus"
   ],
-  "content_scripts": [
-    {
-      "matches" : ["http://*/*", "https://*/*"],
-      "js" : ["webintents.js", "startActivity.js"]
-    }
-  ],
   "version": "0.0.0.2",
   "background_page": "background.html"
 }

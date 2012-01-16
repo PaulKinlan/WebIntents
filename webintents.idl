@@ -11,6 +11,7 @@ interface Intent {
   object data;
 
   void postResult(in object data);
+  void postFailure(in object data);
 }
 
 [NoInterfaceObject]
