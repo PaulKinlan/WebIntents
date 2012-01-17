@@ -1,6 +1,9 @@
 <html>
   <head>
-    <script src="libs/jquery.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <script src="lib/jquery.js"></script>
+    <script src="lib/filer.min.js"></script>
     <script src="controller.js"></script>
     <script src="intent-helper.js"></script>
     <script>
@@ -15,8 +18,8 @@
             var data = window.intent.data;
             var type = window.intent.type;
             var objectType = IntentHelper.getObjectType(data);
-             
-
+   
+            Scrappy.save(data);
         }
       });
     </script>

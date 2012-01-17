@@ -9,6 +9,7 @@
       "local_path" : "index.html"
     }
   },
+  "permissions" : ["unlimitedStorage"],
   "intents": {
     "http://webintents.org/pick" : {
       "type" : "image/*",
@@ -18,7 +19,7 @@
     },
     "http://webintents.org/save" : {
       "type": "*",
-      "path": "index.html",
+      "path": "save.html",
       "disposition" : "inline",
       "title" : "Save to scrapbook"
     }

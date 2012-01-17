@@ -39,7 +39,7 @@ header#titlebar {
  right: 0;
  top: -55px;
  box-shadow: 0px 0px 5px #000;
- -webkit-transition: top 1s ease-in-out;
+ -webkit-transition: top 0.5s ease-in-out;
 }
 
 header#titlebar:hover {
@@ -51,6 +51,7 @@ header#titlebar:hover {
   height: 100%;
   -webkit-box-flex: 1;
   box-sizing: border-box;
+  min-width: 280px;
 }
 
 #filelist > .padder {
@@ -69,6 +70,12 @@ header#titlebar:hover {
   color: white;
 }
 
+#filelist li {
+  color: white;
+  padding: 3px;
+  cursor: pointer;
+}
+
 #view {
   background-color: rgba(255,255,255,0.9);
   -webkit-box-flex: 4;
@@ -77,4 +84,5 @@ header#titlebar:hover {
   box-sizing: border-box;
   padding: 20px;
   box-shadow: 0px 0px 5px black;
+  overflow: hidden;
 }

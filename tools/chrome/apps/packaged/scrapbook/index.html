@@ -4,10 +4,28 @@
     <title>Scrappy</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/app.css" />
-    <script src="libs/jquery.js"></script>
-    <script src="libs/knockout-2.0.0.0.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="lib/filer.min.js"></script>
+    <script src="lib/knockout-2.0.0.js"></script>
+    <script src="controller.js"></script>
     <script>
       $(document).ready(function() {
+        $('input[type="file"]').change(function(e) {
+          var file = e.target.files[0];
+          Scrappy.save(file, file.name, file.type);
+        });
+
+        $("#save").click(function() {
+          Scrappy.startSave();
+        });
+       
+        $("#edit").click(function() {
+          Scrappy.startEdit();
+        });
+
+        $("#share").click(function() {
+          Scrappy.startShare();
+        });
       });
     </script>
   </head>
@@ -17,17 +35,22 @@
     </header>
     <div id="filelist">
       <div class="padder">
-        <h1>Files</h1>
+        <h1>Scraps</h1>
+        <input type="file" class="btn" value="Add" />
         <div id="files">
-
+          <ul data-bind="foreach: files">
+            <li>
+            <a data-bind="text: name, attr: { 'data-path': fullPath }, click: $parent.selectFile" href="#" class="file"></a> 
+            </li>
+          </ul>
         </div>
       </div>
     </div>
     <div id="view">
       <header>
-        <button class="btn">Edit</button>
-        <button class="btn">Save</button>
-        <button class="btn">Share</button>
+        <button class="btn" id="edit">Edit</button>
+        <button class="btn" id="save">Save</button>
+        <button class="btn" id="share">Share</button>
         <button class="btn danger">Delete</button>
       </header>
       <div>
