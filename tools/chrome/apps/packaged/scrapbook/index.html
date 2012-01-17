@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Scrappy</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/app.css" />
     <script src="libs/jquery.js"></script>
     <script src="libs/knockout-2.0.0.0.js"></script>
     <script>
@@ -10,6 +12,29 @@
     </script>
   </head>
   <body>
+    <header id="titlebar">
+      <p>Scrappy is a file studio that lets you collect files from around the web and do stuff with them.</p>
+    </header>
+    <div id="filelist">
+      <div class="padder">
+        <h1>Files</h1>
+        <div id="files">
 
+        </div>
+      </div>
+    </div>
+    <div id="view">
+      <header>
+        <button class="btn">Edit</button>
+        <button class="btn">Save</button>
+        <button class="btn">Share</button>
+        <button class="btn danger">Delete</button>
+      </header>
+      <div>
+        <img id="viewer" />
+        <audio id="audio"></audio>
+        <video id="video"></video> 
+      </div>
+    </div>
   </body>
 </html>
