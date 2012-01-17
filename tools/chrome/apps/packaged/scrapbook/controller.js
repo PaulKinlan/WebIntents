@@ -15,7 +15,7 @@ var Scrappy = new (function() {
 
   this.startSave = function() {
     var file = fileList.file;
-    var intent = new Intent("http://webintents.org/share", file.type, file);
+    var intent = new Intent("http://webintents.org/save", file.type, file);
     window.navigator.startActivity(intent);
   };
 
