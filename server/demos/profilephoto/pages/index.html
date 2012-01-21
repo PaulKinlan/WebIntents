@@ -1,0 +1,21 @@
+{% extends "demos/profilephoto/layouts/application.html" %}
+{% block title %}Profile Photo{% endblock %}
+{% block headline %}Profile Photo{% endblock %}
+{% block scripts %}
+<link rel=icon href="favicon.ico" />
+<script type="text/javascript" src="scripts/index.js"></script>
+<intent action="http://webintents.org/pick"
+        title="Take an image from your camera"
+        type="image/*" />
+  {% endblock %}
+{% block content %}
+<div id="container">
+  <video autoplay></video>
+  <canvas style="display:none"></canvas>
+</div>
+<div id="snaps">
+
+</div>
+<input type="button" class="btn primary" id="save" value="Save Photo" />
+<input type="button" class="btn primary" id="share" value="Share Photo" />
+{% endblock %}

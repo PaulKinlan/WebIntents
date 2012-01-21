@@ -1,0 +1,110 @@
+html {
+  background:
+    -webkit-radial-gradient(black 15%, transparent 16%) 0 0,
+    -webkit-radial-gradient(black 15%, transparent 16%) 8px 8px,
+    -webkit-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+    -webkit-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+  background-color:#282828;
+  background-size:16px 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: transparent;
+}
+
+header {
+  width: 100%;
+  background-color: black;
+  box-shadow: 0 0 20px #000;
+  margin-bottom: 20px;
+  position: absolute;
+  top: -50px;
+  -webkit-transition: top 0.2s ease-in-out;
+}
+
+header:hover {
+  top: 0px;
+}
+
+header h1 {
+  color: white;
+  padding: 10px;
+}
+
+section {
+  width: 640px;
+  border-radius: 20px;
+  background-color: rgba(0,0,0,0.5);
+  margin: auto;
+  box-shadow: 0 0 20px #000;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+footer {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+#container {
+  height: 480px;
+  width: 640px;
+  box-shadow: inset 0 0 10px #666;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+#done {
+  display: none;
+}
+
+#share {
+  display: none;
+}
+
+#save {
+  display: none;
+}
+
+#images img {
+  width: 128px;
+  border: solid 5px white;
+  cursor: pointer;
+}
+
+video, canvas {
+  width: 640px;
+  height: 480px;
+}
+
+#snaps {
+  margin: auto;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: white;
+  min-height: 96px;
+  box-shadow: inset 0px 0px 10px black;
+  text-align: center;
+  background-color: #444;
+}
+
+#snaps canvas {
+  width: 128px;
+  height: 96px;
+  margin: 5px;
+  box-shadow: 0px 0px 5px black;
+  -webkit-transition: all 0.2s ease-in-out;
+}
+
+#snaps canvas:hover {
+}
+
+#snaps canvas.selected {
+  zoom: 2;
+}

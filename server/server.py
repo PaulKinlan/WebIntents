@@ -25,6 +25,7 @@ demoRoutes = [
       Route('/instapaper/<:.*>', handlers_base.PageHandler, 'demos/instapaper'),
       Route('/imgur/save', demos.imgur.handlers.SaveHandler, 'demos/imgur'),
       Route('/imgur/<:.*>', handlers_base.PageHandler, 'demos/imgur'),
+      Route('/profilephoto/<:.*>', handlers_base.PageHandler, 'demos/profilephoto'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos')
 ]
 
