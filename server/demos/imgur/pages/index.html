@@ -10,5 +10,73 @@
   disposition="inline" />
 {% endblock %}
 {% block content %}
-<p>This is the registration page of the Imgur Image saving service</p>
+<h1>Imgur Registration Page</h1>
+<p>This is the registration page for Imgur Demo Service.</p>
+
+<h2>Try it out</h2>
+<p>This is a simple demo.  Save an image to Imgur.</p>
+<input id="imageToShare" type="file" />
+<input id="saveButton" type="button" value="Save" />
+
+<h2>Registration</h2>
+<p>
+  It is simple to set up an app to be able to handle incoming data.  
+  This Imgr bridge was written to let you save your images directly to Imgur.
+</p>
+<pre>&lt;intent action="http://webintents.org/save"
+  type="image/*"
+  href="save.html"
+  disposition="inline" /&gt;
+</pre>
+<p>
+  The above tag just needs to be placed on your page, with a "href" of the page you want to be opened and now
+  your page will be able to be launched via the Web Intent system when a user invokes the "<a href="http://webintents.org/save">save</a>" intent. 
+</p>
+<script>
+  var image = document.getElementById("imageToShare");
+  var imageUrl;
+  image.onchange = function(e) {
+    var file = e.target.files[0];
+    var fr = new FileReader();
+
+    fr.onload = function(frE) {
+      imageUrl = frE.target.result;
+    };
+    
+    fr.readAsDataURL(file);
+  };
+
+  var save = document.getElementById("saveButton");
+  save.addEventListener("click", function() {
+    if(!!imageUrl == false) alert("Please select a file first");
+
+    var intent = new Intent("http://webintents.org/save", "image/*", image);
+    window.navigator.startActivity(intent, function(data) {});
+  }, false);
+</script>
+<h2>How to save the image</h2>
+<p>The code for invoking the "save" intent is below.</p>
+<p>It is a little bit more complex, but we are simply encoding the file to an </p>
+<pre>
+  var image = document.getElementById("imageToShare");
+  var imageUrl;
+  image.onchange = function(e) {
+    var file = e.target.files[0];
+    var fr = new FileReader();
+
+    fr.onload = function(frE) {
+      imageUrl = frE.target.result;
+    };
+    
+    fr.readAsDataURL(file);
+  };
+
+  var save = document.getElementById("saveButton");
+  save.addEventListener("click", function() {
+    if(!!imageUrl == false) alert("Please select a file first");
+
+    var intent = new Intent("http://webintents.org/save", "image/*", image);
+    window.navigator.startActivity(intent, function(data) {});
+  }, false);
+</pre>
 {% endblock %}
