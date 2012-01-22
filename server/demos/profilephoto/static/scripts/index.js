@@ -16,9 +16,11 @@ $(function() {
   // Hook up the video camera.
   video = $("video")[0];
 
-  navigator.getUserMedia("video", function(s) {
-    video.src = URL.createObjectURL(s);
-  });
+  if(navigator.getUserMedia) {
+    navigator.getUserMedia("video", function(s) {
+      video.src = URL.createObjectURL(s);
+    });
+  }
 
   if (window.intent) {
     $('#snaps canvas').live('click', function() {
@@ -34,7 +36,7 @@ $(function() {
       $(this).addClass("selected")
     });
 
-    $('#container').click(function() {
+    $('#container video').click(function() {
        // Snap straight away.
        snapPicture();
     });
