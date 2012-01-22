@@ -59,6 +59,9 @@ app = webapp2.WSGIApplication([
     routes.DomainRoute('www.comicmator.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'demos/comicmator'),
     ]),
+    routes.DomainRoute('www.quicksnapr.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/profilephoto'),
+    ]),
     routes.DomainRoute('www.binhexdec.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'demos/binhexdec'),
     ]),
