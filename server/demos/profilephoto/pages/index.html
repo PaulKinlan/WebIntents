@@ -1,6 +1,6 @@
 {% extends "demos/profilephoto/layouts/application.html" %}
-{% block title %}Profile Photo{% endblock %}
-{% block headline %}Profile Photo{% endblock %}
+{% block title %}Take your profile photo using your webcam{% endblock %}
+{% block headline %}Quick Snapr{% endblock %}
 {% block scripts %}
 <link rel=icon href="favicon.ico" />
 <script type="text/javascript" src="scripts/index.js"></script>
@@ -10,7 +10,7 @@
   {% endblock %}
 {% block content %}
 <div id="container">
-  <video autoplay>
+  <video autoplay poster="nosupport.jpg">
     <source src="nosupport.mov" type='video/mp4;' />
     <source src="nosupport.webm" type='video/webm; codec="vp8"' />
   </video>
