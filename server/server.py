@@ -6,7 +6,6 @@ import handlers_base
 import registry.handlers
 import widgets.handlers
 import demos.mememator.handlers
-import demos.twitpic.handlers
 import demos.shortener.handlers
 import demos.instapaper.handlers
 import demos.imgur.handlers

@@ -10,7 +10,10 @@
   {% endblock %}
 {% block content %}
 <div id="container">
-  <video autoplay></video>
+  <video autoplay>
+    <source src="nosupport.mov" type='video/mp4; codex="vp8"' />
+    <source src="nosupport.webm" type='video/webm; codex="vp8"' />
+  </video>
   <canvas style="display:none"></canvas>
 </div>
 <div id="snaps">
