@@ -10,5 +10,46 @@
   disposition="inline" />
 {% endblock %}
 {% block content %}
-<p>This is the registration page for instapaper api</p>
+<h1>Instapaper Registration Page</h1>
+<p>This is the registration page for instapaper API.</p>
+
+<h2>Try it out</h2>
+<p>This is a simple demo.  Save this page to the Instapaper app.</p>
+<input id="linkToShare" type="text" value="http://paul.kinlan.me" />
+<input id="saveButton" type="button" value="Save" />
+
+<h2>Registration</h2>
+<p>
+  It is simple to set up an app to be able to handle incoming data.  
+  This Instapaper bridge was written to let you save your url's directly to instapaper.
+</p>
+<pre>&lt;intent action="http://webintents.org/save"
+  type="text/uri-list"
+  href="add.html"
+  disposition="inline" /&gt;
+</pre>
+<p>
+  The above tag just needs to be placed on your page, with a "href" of the page you want to be opened and now
+  your page will be able to be launched via the Web Intent system when a user invokes the "<a href="http://webintents.org/save">save</a>" intent. 
+</p>
+<script>
+  var link = document.getElementById("linkToShare");
+  var save = document.getElementById("saveButton");
+  save.addEventListener("click", function() {
+    var url = link.value;
+    var intent = new Intent("http://webintents.org/save", "text/uri-list", url);
+    window.navigator.startActivity(intent, function(data) {});
+  }, false);
+</script>
+<h2>How to save the link</h2>
+<p>The code for invoking the "save" intent is below.</p>
+<pre>
+  var link = document.getElementById("linkToShare");
+  var save = document.getElementById("saveButton");
+  save.addEventListener("click", function() {
+    var url = link.value;
+    var intent = new Intent("http://webintents.org/save", "text/uri-list", url);
+    window.navigator.startActivity(intent, function(data) {});
+  }, false);
+</pre>
 {% endblock %}

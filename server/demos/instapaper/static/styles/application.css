@@ -11,18 +11,6 @@ body {
   background-color: #eee;
 }
 
-header {
-
-}
-
-section {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-}
-
-footer {
-}
-
 #result {
   height: 600px;
   width: 800px;
