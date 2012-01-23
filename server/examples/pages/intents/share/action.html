@@ -1,7 +1,14 @@
-{% extends "examples/layouts/base.html" %}
-{% content scripts %}
+<!doctype html>
+<html>
+  <head>
   <script src="//webintents.org/webintents.min.js"></script>
   <script src="/javascripts/events.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
   <script>
     attachEventListener(window, "load", function() {
 
@@ -53,8 +60,8 @@
     }, false);
 
   </script>
-{% endblock %}
-{% block content %}
+</head>
+<body>
   <h2>Client App</h2>
   <p>This is an external app that needs to share links. It has no prior knowledge of any other sharing application.</p>
     <section>
@@ -79,5 +86,6 @@ window.navigator.startActivity(intent);</pre>
     [ imageData ]);
 
 window.navigator.startActivity(intent);</pre>
-      </section>
-{% endblock %}
+</section>
+</body>
+</html>

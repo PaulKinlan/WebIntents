@@ -14,12 +14,12 @@
   <intent 
     action="http://webintents.org/share" 
     type="image/*" 
-    href="share_image.html" 
+    href="image.html" 
     title="Kinlan's Image Share" />
   <intent 
     action="http://webintents.org/share" 
     type="text/uri-list" 
-    href="share_link.html" 
+    href="link.html" 
     disposition="inline"
     title="Kinlan's Link Share" />
 {% endblock %}
@@ -43,12 +43,13 @@
       <pre>&lt;intent 
   action="http://webintents.org/share" 
   type="image/*" 
-  href="shareimage.html" 
+  href="image.html" 
   title="Kinlan's Image Share" /&gt;
+
 &lt;intent 
   action="http://webintents.org/share" 
   type="text/uri-list" 
-  href="sharelink.html" 
+  href="link.html" 
   title="Kinlan's Link Share" /&gt;</pre>
       <p>Any application that launches a startActivity with an action of "http://webintents.org/share" will see these applications listed.</p>
     </div>
