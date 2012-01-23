@@ -1,6 +1,6 @@
-{% extends "examples/layouts/base.html" %}
-{% block title %}Intent: Pick{% endblock %}
-{% block scripts %}
+<!doctype html>
+<html>
+  <head>
   <script src="//webintents.org/webintents.min.js"></script>
   <script src="/javascripts/events.js"></script>
   <script>
@@ -23,23 +23,24 @@
       };
     }, false);
   </script>
-{% endblock %}
-{% block content %}
-<h2>Client App</h2>
-<p>Pick an image from a remote service to use in this application</p>
-<button id="pickImage">Pick an Image</button>
-<h3>Response will appear here:</h3>
-<img id="output" />
+  </head>
+  <body>
+  <h2>Client App</h2>
+  <p>Pick an image from a remote service to use in this application</p>
+  <button id="pickImage">Pick an Image</button>
+  <h3>Response will appear here:</h3>
+  <img id="output" />
 
-<h3>Code</h3>
-<pre>var intent = new Intent(
-    "http://webintents.org/pick",
-    "image/*");
+  <h3>Code</h3>
+  <pre>var intent = new Intent(
+  "http://webintents.org/pick",
+  "image/*");
 
 window.navigator.startActivity(intent, intentResponse);
 
 var intentResponse = function (data) {
-var output = document.getElementById("output");
-output.src = data[0];
+  var output = document.getElementById("output");
+  output.src = data[0];
 };</pre>
-{% endblock %}
+</body>
+</html>
