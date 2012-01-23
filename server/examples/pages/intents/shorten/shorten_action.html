@@ -5,11 +5,6 @@
   <script src="//webintents.org/webintents.min.js"></script>
   <script src="/javascripts/events.js"></script>
   <script src="/javascripts/common.js"></script>
-  <intent
-    action="http://webintents.org/shorten"
-    type="text/uri-list"
-    href="shorten.html"
-    title="Kinlan's Link Shortener" />
   <style>
     iframe {
       float:left;
@@ -24,7 +19,7 @@
       intent.postResult("http://kin.ly/A");
     }, false);
   </script>
-  {% endblock %}
+{% endblock %}
 {% block content %}
 <section>
 <p>The data that is passed to this application will appear below. We also send it back to
@@ -32,9 +27,9 @@ the calling application</p>
   <div id="output"></div>
   <h3>The code</h3>
   <pre>attachEventListener(window, "load", function() {
-var output = document.getElementById("output");
-setText(output, intent.data);
-intent.postResult("http://kin.ly/A");
+  var output = document.getElementById("output");
+  setText(output, intent.data);
+  intent.postResult("http://kin.ly/A");
 }, false);</pre>
-  </section>
+</section>
 {% endblock %}

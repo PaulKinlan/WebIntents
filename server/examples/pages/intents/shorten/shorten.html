@@ -22,7 +22,7 @@
   <intent
     action="http://webintents.org/shorten"
     type="text/uri-list"
-    href="shorten.html"
+    href="shorten_action.html"
     title="Kinlan's Link Shortener" />
   <script>
     attachEventListener(window, "load", function() {
@@ -50,7 +50,32 @@
 {% endblock %}
 {% block content %}
 <section>
-  <p>Applications often have to </p>
+  <p>Applications often have to shorten content.  The shorten intent is designed to let users make URL's or content smaller.</p>
+  <h2>Share Intent Registration</h2>
+  <pre>&lt;intent
+  action="http://webintents.org/shorten"
+  type="text/uri-list"
+  href="shorten_action.html"
+  title="Kinlan's Link Shortener" /></pre>
+  <h2>Share Intent invocation</h2>
+  <pre>var shareLink = document.getElementById("shortenLink");
+attachEventListener(shareLink, "click", function() {
+  var url = document.getElementById("url").value;
+
+  var intent = new Intent(
+    "http://webintents.org/shorten",
+    "text/uri-list",
+    url);
+
+  window.navigator.startActivity(intent, intentResponse);
+
+  var intentResponse = function (data) {
+    var output = document.getElementById("output");
+    setText(output, data);
+    focus();
+  };
+};</pre>
+  <h2>Live Demo</h2>
   <div>
     <input id="url" name="url" type="url" value="http://paul.kinlan.me" />
     <button id="shortenLink">Shorten link</button>
