@@ -10,32 +10,3 @@ body {
   border-top-right-radius: 20px;
   background-color: #eee;
 }
-
-header {
-
-}
-
-section {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-}
-
-footer {
-}
-
-#result {
-  height: 600px;
-  width: 800px;
-  box-shadow: inset 0 0 10px #666;
-}
-
-#steps {
-  margin: 0 10px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-}
-
-#steps input {
-  display: block;
-  margin: 0 5px 5px 5px;
-}
