@@ -50,7 +50,7 @@
   save.addEventListener("click", function() {
     if(!!imageUrl == false) alert("Please select a file first");
 
-    var intent = new Intent("http://webintents.org/save", "image/*", image);
+    var intent = new Intent("http://webintents.org/save", "image/*", imageUrl);
     window.navigator.startActivity(intent, function(data) {});
   }, false);
 </script>
@@ -75,7 +75,7 @@
   save.addEventListener("click", function() {
     if(!!imageUrl == false) alert("Please select a file first");
 
-    var intent = new Intent("http://webintents.org/save", "image/*", image);
+    var intent = new Intent("http://webintents.org/save", "image/*", imageUrl);
     window.navigator.startActivity(intent, function(data) {});
   }, false);
 </pre>
