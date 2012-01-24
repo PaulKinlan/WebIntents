@@ -86,3 +86,17 @@ header#titlebar:hover {
   box-shadow: 0px 0px 5px black;
   overflow: hidden;
 }
+
+
+input[type=file] {
+  display: inline-block;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  display:none;
+}
+
+input[type=file]:before {
+  content: 'Select file';
+  -webkit-appearance: square-button;
+}
