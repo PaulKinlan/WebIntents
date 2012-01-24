@@ -1,0 +1,56 @@
+{% extends "demos/twitter/layouts/application.html" %}
+{% block title %}Web Intents: Twitter Demo{% endblock %}
+{% block headline %}Web Intents: Twitter Demos{% endblock %}
+{% block scripts %}
+<script src="//webintents.org/webintents.min.js"></script>
+<intent action="http://webintents.org/share"
+        type="text/uri-list"
+        href="/twitter/twitter_inline.html"
+        disposition="inline"
+        title="Twitter Demo"
+        icon="http://twitter.com/favicon.ico" />
+{% endblock %}
+{% block content %}
+<section>
+<h2>Try it out</h2>
+<p>This is a simple demo.  Share this page to Twitter</p>
+<input id="linkToShare" type="text" value="http://paul.kinlan.me" />
+<input id="shareButton" type="button" value="Share" class="btn primary" />
+
+<h2>Registration</h2>
+<p>
+  It is simple to set up an app to be able to handle incoming data.  
+  This Twitter  bridge was written to let you share your url's directly to Twitter.
+</p>
+<pre>&lt;intent action="http://webintents.org/share"
+  type="text/uri-list"
+  href="twitter_inline.html"
+  disposition="inline" /&gt;
+</pre>
+<p>
+  The above tag just needs to be placed on your page, with a "href" of the page you want to be opened and now
+  your page will be able to be launched via the Web Intent system when a user invokes the "<a href="http://webintents.org/share">share</a>" intent. 
+</p>
+<script>
+  var link = document.getElementById("linkToShare");
+  var share = document.getElementById("shareButton");
+  share.addEventListener("click", function() {
+    var url = link.value;
+    var intent = new Intent("http://webintents.org/share", "text/uri-list", url);
+    window.navigator.startActivity(intent, function(data) {});
+  }, false);
+</script>
+<h2>How to share the link</h2>
+<p>The code for invoking the "share" intent is below.</p>
+<pre>
+  var link = document.getElementById("linkToShare");
+  var share = document.getElementById("shareButton");
+  share.addEventListener("click", function() {
+    var url = link.value;
+    var intent = new Intent("http://webintents.org/share", "text/uri-list", url);
+    window.navigator.startActivity(intent, function(data) {});
+  }, false);
+</pre>
+{
+</section>
+{% endblock %}
