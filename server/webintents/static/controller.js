@@ -50,7 +50,7 @@ var IntentController = new (function() {
     } 
   };
 
-  var launch = function(intent, disposition) { 
+  var launch = function(intent, disposition, href) { 
     return function(e) {
       if(!!e.preventDefault) 
         e.preventDefault();
@@ -59,7 +59,6 @@ var IntentController = new (function() {
 
       var intentStr = window.btoa(unescape(encodeURIComponent(JSON.stringify(intent)))).replace(/=/g, "_");
 
-      var href = (e.srcElement || e.target).href;
       if(!!intent && !!intent._callback == false) {
         // There is no callback so remove any reference to the intent.
         localStorage.removeItem(intent._id);
@@ -94,7 +93,7 @@ var IntentController = new (function() {
     setText(actionLink, action.title);
     
     if(!!intent)
-      attachEventListener(actionLink, "click", launch(intent, action.disposition), false);
+      attachEventListener(actionElement, "click", launch(intent, action.disposition, action.url), false);
     
     setText(domain, action.domain || "Unknown domain");
     

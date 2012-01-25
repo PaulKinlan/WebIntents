@@ -58,46 +58,94 @@
     });
   </script>
   <style>
-      body, h1, h2, ul, li {
+     body, h1, h2, ul, li {
         margin: 0;
         padding: 0;
+        font-size: 13px;
       }
 
       html {
         box-sizing: content-box;
-        background-color: #e9eef2;
+        height: 100%;
       }
 
       body {
         box-sizing: content-box;
         height: 100%;
         font-family: Arial;
-        color: #6b5f6e;
-        background-color: #e9eef2;
       }
 
       ul {
-        border: solid 1px #ccc;
         margin: 5px;
       }
      
       li {
-        background-color: white;
-        padding: 5px;
-        font-size: 12px;
+        clear: both; list-style-type: none; list-style-position: initial; list-style-image: initial; 
+        margin: 2px 0 2px 0;
+        font-size: 13px;
         position: relative;
-        list-style: none;
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+        cursor: pointer;
+        border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        padding: 5px 14px 6px;
+        background-color: #E6E6E6;
+        background-repeat: repeat-x
+        color: #333;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        -webkit-transition: 0.1s linear all;
+        background-repeat: no-repeat;
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), color-stop(25%, white), to(#E6E6E6));
+        background-image: -webkit-linear-gradient(white, white 25%, #E6E6E6);
+        background-image: -moz-linear-gradient(top, white, white 25%, #E6E6E6);
+        background-image: -ms-linear-gradient(white, white 25%, #E6E6E6);
+        background-image: -o-linear-gradient(white, white 25%, #E6E6E6);
+        background-image: linear-gradient(white, white 25%, #E6E6E6);
       }
 
-      li .icon {
+      li span {
+        -webkit-transition: none;
+      }
+
+      li:hover span {
+        color: white;
+      }
+
+      li:hover {
+        background-color: #0064CD;
+        background-repeat: repeat-x;
+        background-image: -khtml-gradient(linear, left top, left bottom, from(#049CDB), to(#0064CD));
+        background-image: -moz-linear-gradient(top, #049CDB, #0064CD);
+        background-image: -ms-linear-gradient(top, #049CDB, #0064CD);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049CDB), color-stop(100%, #0064CD));
+        background-image: -webkit-linear-gradient(top, #049CDB, #0064CD);
+        background-image: -o-linear-gradient(top, #049CDB, #0064CD);
+        background-image: linear-gradient(top, #049CDB, #0064CD);
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+        border-color: #0064CD #0064CD #003F81;
+        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      }
+
+      li img {
+        margin-right: 5px;
         max-width: 64px;
+        float:left;
         max-height: 64px;
-        float: left;
-        margin: 2px;
       }
 
-      li h2 {
-       font-size: 12px;
+      li a {
+        color: #333;
+      }
+
+      li span {
+        display:block;
+      }
+
+      li:hover a {
+        color: white;
       }
   </style>
   <body>
@@ -105,7 +153,7 @@
     {% for intent in intents %}
       <li>
         <img class="icon" src="{{intent.icon}}">
-        <h2><a href="{{intent.href}}" data-disposition="{{intent.disposition}}">{{intent.title}}</a></h2>
+        <a href="{{intent.href}}" data-disposition="{{intent.disposition}}">{{intent.title}}</a>
         <span class="domain">{{intent.domain}}</span>
         <br style="clear:both;" />
       </li>
