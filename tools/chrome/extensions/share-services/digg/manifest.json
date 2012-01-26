@@ -1,0 +1,14 @@
+{
+  "name": "Share to Digg",
+  "version": "0.0.0.1",
+  "icons" : {
+    "16" : "favicon.ico"
+  },
+  "intents" : {
+    "http://webintents.org/share" : {
+       "type" : ["text/uri-list"],
+       "title" : "Share to Digg",
+       "path" : "/launch.html"
+    }
+  }
+}
