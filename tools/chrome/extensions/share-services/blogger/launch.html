@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      if(window.intent) {
+        if(window.intent.type == "text/uri-list") {
+          document.location = "http://www.blogger.com/blog_this.pyra?n=" + encodeURIComponent(window.intent.data);
+        }
+      }
+    }); 
+  </script>
+  <body> 
+    Test
+  </body>
+</html>
