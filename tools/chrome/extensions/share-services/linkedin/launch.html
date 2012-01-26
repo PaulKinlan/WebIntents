@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      if(window.intent) {
+        if(window.intent.type == "text/uri-list") {
+          var encodedUrl = encodeURIComponent(window.intent.data);
+          document.location = "http://www.linkedin.com/shareArticle?mini=true&url=" + encodedUrl + "&title=" + encodedUrl + "&source=Google%20Toolbar";
+        }
+      }
+    }); 
+  </script>
+</html>
