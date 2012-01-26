@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      if(window.intent) {
+        if(window.intent.type == "text/uri-list") {
+          var encodedUrl = encodeURIComponent(window.intent.data);
+          document.location = "http://del.icio.us/save?&url=" + encodedUrl + "&title=" + encodedUrl + "&share=yes&jump=close";
+        }
+      }
+    }); 
+  </script>
+  <body></body>
+</html>
