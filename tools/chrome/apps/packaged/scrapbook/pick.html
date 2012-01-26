@@ -1,0 +1,28 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/app.css" />
+    <script src="lib/jquery.js"></script>
+    <script src="lib/filer.min.js"></script>
+    <script src="controller.js"></script>
+    <script src="intent-helper.js"></script>
+    <script>
+      $(document).ready(function() {
+        if(window.intent && window.intent.type == "http://webintents.org/pick") {
+          /*
+            If window.intent.data == URL then fetch the data and store locally
+            If window.intent.data == Data Uri, convert to file and save locally
+            If window.intent.data == File, then save to file system locally
+            If window.intent.data == TypedArray then save to file-system locally
+            */
+            var type = window.intent.type;
+   
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Scrappy Pick</h1>
+  </body>
+</html>
