@@ -14,7 +14,7 @@
       /* We need to ask the parent for the data we are going to send
       intent handler.
       */
-      var links = document.querySelectorAll("a");
+      var links = document.querySelectorAll("li");
       attachEventListener(links, "click", function(e) {
         e.preventDefault();
         var src = e.srcElement;
@@ -22,7 +22,7 @@
         if(src.tagName != "A")
           return false;
 
-        var href = src.href;
+        var href = src.getAttribute("data-href");
         var disposition = src.getAttribute("data-disposition");
       
         if(disposition == "inline") {
@@ -151,9 +151,9 @@
   <body>
     <ul>
     {% for intent in intents %}
-      <li>
+    <li data-disposition="{{intent.disposition}}" data-href="{{intent.href}}" >
         <img class="icon" src="{{intent.icon}}">
-        <a href="{{intent.href}}" data-disposition="{{intent.disposition}}">{{intent.title}}</a>
+        <a href="#">{{intent.title}}</a>
         <span class="domain">{{intent.domain}}</span>
         <br style="clear:both;" />
       </li>
