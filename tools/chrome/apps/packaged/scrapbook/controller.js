@@ -24,6 +24,11 @@ var Scrappy = new (function() {
     var intent = new Intent("http://webintents.org/edit", file.type, file);
     window.navigator.startActivity(intent);
   };
+
+  this.startPick = function(callback) {
+    var intent = new Intent("http://webintents.org/pick", "*");
+    window.navigator.startActivity(intent, callback);
+  };
 })();
 
 var FileListModel = function(files) {

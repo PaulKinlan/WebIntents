@@ -17,12 +17,21 @@
             If window.intent.data == TypedArray then save to file-system locally
             */
             var type = window.intent.type;
-   
-        }
+                    }
       });
     </script>
   </head>
   <body>
     <h1>Scrappy Pick</h1>
+
+    <div id="files">
+      <ul data-bind="foreach: file">
+        <li>
+          <a data-bind="text: name, attr: { 'data-path': fullPath }"
+         </li>
+      </ul>
+   </div>
+   
+
   </body>
 </html>

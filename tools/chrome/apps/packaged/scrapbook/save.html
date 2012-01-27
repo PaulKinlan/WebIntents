@@ -18,8 +18,14 @@
             var data = window.intent.data;
             var type = window.intent.type;
             var objectType = IntentHelper.getObjectType(data);
-   
-            Scrappy.save(data);
+            
+            if(data instanceof Array) {
+              var item;
+              for(var i = 0; item = data[i]; i++) Scrappy.save(item);
+            }
+            else {
+              Scrappy.save(data);
+            }
         }
       });
     </script>

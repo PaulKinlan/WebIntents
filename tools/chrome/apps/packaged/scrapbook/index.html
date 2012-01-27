@@ -26,6 +26,14 @@
         $("#share").click(function() {
           Scrappy.startShare();
         });
+
+        $("#pick").click(function() {
+          Scrappy.startPick(function(data) {
+            var filename = "";
+            // try and work out the file name.
+            Scrappy.save(data);
+          });
+        });
       });
     </script>
   </head>
@@ -37,6 +45,7 @@
       <div class="padder">
         <h1>Scraps</h1>
         <input type="file" class="btn" value="Add" />
+        <button class="btn primary">Pick</button>
         <div id="files">
           <ul data-bind="foreach: files">
             <li>
