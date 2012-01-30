@@ -1,11 +1,11 @@
 {
   "name": "Mememator",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "icons" : {
     "128" : "128.png"
   },
   "app" : {
-    "urls" : ["http://www.mememator.com"],
+    "urls" : ["http://www.mememator.com/"],
     "launch" : {
       "web_url" : "http://www.mememator.com/"
     }
