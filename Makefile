@@ -43,10 +43,12 @@ extensions: all
 	./packcrx.sh tools/chrome/extensions/share-services/linkedin tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/instapaper tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/save-services/instapaper tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/save-services/box tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/save tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/desktop tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/edit tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/save tools/chrome/key.pem
+
 
 clean:
 	rm -f webintents.js
