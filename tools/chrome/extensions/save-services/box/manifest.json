@@ -1,0 +1,15 @@
+{
+  "name": "Save to Box",
+  "version": "1.0.0.0",
+  "icons" : {
+    "16": "favicon.ico"
+  },
+  "permissions": ["http://demos.webintents.org/"],
+  "intents": {
+    "http://webintents.org/save" : {
+      "type" : ["text/uri-list"],
+      "path" : "box.html",
+      "title" : "Save to Instapaper"
+    }
+  }
+}

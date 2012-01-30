@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+      if(window.intent) {
+        if(window.intent.type.indexOf("text/") == 0) {
+          var href = "https://www.box.net/api/1.0/import?url=" +
+              encodeURI(window.intent.data) + "&import_as=file";
+          window.location = href;
+        }
+      }
+    </script>
+  </head>
+</html>
