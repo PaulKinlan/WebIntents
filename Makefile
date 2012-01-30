@@ -36,7 +36,11 @@ apps: all
 	./packcrx.sh tools/chrome/apps/packaged/scrapbook tools/chrome/key.pem
 
 extensions: all
-	./packcrx.sh tools/chrome/extensions/twitter tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/twitter tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/blogger tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/digg tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/gmail tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/linkedin tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/instapaper tools/chrome/key.pem

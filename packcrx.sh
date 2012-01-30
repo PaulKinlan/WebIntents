@@ -18,7 +18,7 @@ trap 'rm -f "$pub" "$sig" "$zip"' EXIT
 
 # zip up the crx dir
 cwd=$(pwd -P)
-(cd "$dir" && zip -qr -9 -X "$cwd/$zip" .)
+( cd "$dir" && zip -qr -9 -X "$cwd/$zip" . && cp "$cwd/$zip" ..)
 
 # signature
 openssl sha1 -sha1 -binary -sign "$key" < "$zip" > "$sig"
