@@ -4,12 +4,11 @@
   "icons" : {
     "16": "favicon.ico"
   },
-  "permissions": ["http://demos.webintents.org/"],
   "intents": {
     "http://webintents.org/save" : {
       "type" : ["text/uri-list"],
       "path" : "box.html",
-      "title" : "Save to Instapaper"
+      "title" : "Save to Box"
     }
   }
 }
