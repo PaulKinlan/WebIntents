@@ -1,11 +1,11 @@
 {
   "name": "Cloud File Picker",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "icons" : {
     "128" : "128.png"
   },
   "app" : {
-    "urls" : ["http://www.cloudfilepicker.com"],
+    "urls" : ["http://www.cloudfilepicker.com/"],
     "launch" : {
       "web_url" : "http://www.cloudfilepicker.com/"
     }

@@ -33,6 +33,7 @@ apps: all
 	./packcrx.sh tools/chrome/apps/hosted/imagemator tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/hosted/inspirationmator tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/hosted/mememator tools/chrome/key.pem
+	./packcrx.sh tools/chrome/apps/hosted/quicksnapr tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/packaged/scrapbook tools/chrome/key.pem
 
 extensions: all
@@ -48,7 +49,6 @@ extensions: all
 	./packcrx.sh tools/chrome/extensions/save tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/desktop tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/edit tools/chrome/key.pem
-
 
 clean:
 	rm -f webintents.js

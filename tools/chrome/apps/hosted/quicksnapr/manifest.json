@@ -1,0 +1,20 @@
+{
+  "name": "QuickSnapr",
+  "version": "1.0.0.1",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://www.quicksnapr.com/"],
+    "launch" : {
+      "web_url" : "http://www.quicksnapr.com/"
+    }
+  },
+  "intents": {
+    "http://webintents.org/pick" : {
+      "type" : ["image/*"],
+      "path" : "/",
+      "title" : "Snap an image from your WebCam"
+    }
+  }
+}

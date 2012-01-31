@@ -5,16 +5,9 @@
     "128" : "128.png"
   },
   "app" : {
-    "urls" : ["http://www.imagemator.com"],
+    "urls" : ["http://www.imagemator.com/"],
     "launch" : {
       "web_url" : "http://www.imagemator.com/"
-    }
-  },
-  "intents": {
-    "http://webintents.org/pick" : {
-      "type" : ["image/*"],
-      "path" : "/pick.html",
-      "title" : "Pick file from imagemator.com"
     }
   }
 }
