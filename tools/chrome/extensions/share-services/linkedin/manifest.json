@@ -1,8 +1,9 @@
 {
   "name": "Share to LinkedIn™",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "icons" : {
-    "16" : "favicon.ico"
+    "16" : "favicon.ico",
+    "128" : "128.png"
   },
   "intents" : {
     "http://webintents.org/share" : {

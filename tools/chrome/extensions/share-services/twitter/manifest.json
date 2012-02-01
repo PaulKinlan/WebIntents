@@ -1,8 +1,9 @@
 {
   "name": "Share Link to Twitter™",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "icons" : {
-    "16": "favicon.ico"
+    "16": "favicon.ico",
+    "128" : "128.png"
   },
   "intents": {
     "http://webintents.org/share" : {
