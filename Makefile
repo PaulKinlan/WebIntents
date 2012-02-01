@@ -38,9 +38,11 @@ apps: all
 
 extensions: all
 	./packcrx.sh tools/chrome/extensions/share-services/twitter tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/tumblr tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/blogger tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/digg tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/gmail tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/delicious tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/linkedin tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
