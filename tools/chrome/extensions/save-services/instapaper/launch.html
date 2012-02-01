@@ -5,8 +5,9 @@
     <script>
       if(window.intent) {
         if(window.intent.type.indexOf("text/") == 0) {
-          var href = "https://twitter.com/intent/tweet?url=" +
-              encodeURI(window.intent.data);
+          var now = new Date().getTime();
+          var href = "https://www.instapaper.com/j/?t=" + now + "&u="+
+              encodeURIComponent(window.intent.data);
           window.location = href;
         }
       }

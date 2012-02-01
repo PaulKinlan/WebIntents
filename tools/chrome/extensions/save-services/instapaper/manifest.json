@@ -1,16 +1,15 @@
 {
-  "name": "Save Link to Instapaper",
-  "version": "1.0.0.0",
+  "name": "Save to Instapaper",
+  "version": "1.0.0.1",
   "icons" : {
-    "16": "favicon.ico"
+    "16": "favicon.ico",
+    "128" :  "128.png"
   },
-  "permissions": ["http://demos.webintents.org/"],
   "intents": {
     "http://webintents.org/save" : {
       "type" : ["text/uri-list"],
-      "path" : "instapaper.html",
-      "title" : "Share link to Instapaper",
-      "disposition" : "inline"
+      "path" : "launch.html",
+      "title" : "Save to Instapaper"
     }
   }
 }
