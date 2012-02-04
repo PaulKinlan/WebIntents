@@ -1,12 +1,55 @@
 <!doctype html>
 <html>
-  <script>
-    window.addEventListener("load", function() {
-      if(window.intent) {
-        if(window.intent.type == "text/uri-list") {
-          document.location = "http://digg.com/submit?phase=2&url="+ encodeURIComponent(window.intent.data);
+  <head>
+    <script src="http://webintents.org/webintents.min.js"></script>
+    <script>
+      var shortUrl;
+      var fetchData = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4 && xhr.status == 200) {
+            var result = JSON.parse(xhr.responseText);
+            var resDiv = document.getElementById("result");
+            var shortDiv = document.getElementById("short");
+            var longDiv = document.getElementById("long");
+
+            shortUrl = result.id;
+            shortDiv.innerText = shortUrl;
+            shortDiv.href = shortUrl;
+
+            longDiv.innerText = window.intent.data;
+            resDiv.style.display = "block";
+          } 
+        };
+
+        xhr.open("POST", "http://demos.webintents.org/shortener/shorten?url=" + window.intent.data);
+        xhr.send();
+      };
+        
+      window.addEventListener("DOMContentLoaded", function() {
+        if(window.intent) {
+          fetchData();
         }
+
+        var retButton = document.getElementById("return");
+        retButton.addEventListener("click", function() {
+          window.intent.postResult(shortUrl);
+          window.close();
+        });
+      }, false);
+    </script>
+    <style>
+      #short, #long {
+        font-weight: bold;
       }
-    }); 
-  </script>
+    </style>
+  </head>
+  <body>
+    <h1 id="state">Processing</h1>
+    <div id="result" style="display:none">
+      Shortening <span id="long"></span>
+      to <a id="short"></a>.
+      <button id="return">Return</button>
+    </div>
+  </body>
 </html>

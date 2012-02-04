@@ -6,7 +6,7 @@
       if(window.intent) {
         if(window.intent.type.indexOf("text/") == 0) {
           var now = new Date().getTime();
-          var href = "https://www.instapaper.com/j/?t=" + now + "&u="+
+          var href = "http://www.instapaper.com/hello2?url=" + 
               encodeURIComponent(window.intent.data);
           window.location = href;
         }
