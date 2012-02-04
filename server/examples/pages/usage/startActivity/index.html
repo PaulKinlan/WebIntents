@@ -8,7 +8,7 @@
       var startButton = document.getElementById("startActivity");
       startButton.addEventListener("click", function() {
         var intent = new Intent(
-            "http://webintents.org/share");
+            "http://webintents.org/share", "text/uri-list", location.href);
 
         window.navigator.startActivity(intent);
       }, false);
@@ -17,9 +17,19 @@
   {% endblock %}
   {% block content %}
   <section>
-<pre>var intent = new Intent("http://webintents.org/share");
+  <h2>Explanation</h2>
+  <p>
+    It is simple to invoke an action:
+  </p>
+  <ol>
+    <li>Instantiate an Intent object with an action, data type and the data you want to send</li>
+    <li>Call window.naviagator.startActivity with the intente object and option success and failure callbacks</li>
+  </ol>
+  <h2>Code</h2>
+<pre>var intent = new Intent("http://webintents.org/share", "text/uri-list", location.href);
 
-window.navigator.startActivity(intent);</pre>
+window.navigator.startActivity(intent, function(data) { /* on success */ });</pre>
+  <h2>Example</h2>
   <div> 
     <button id="startActivity">Click to Start Activity</button>
   </div>
