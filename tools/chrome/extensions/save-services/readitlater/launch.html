@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+      if(window.intent) {
+        if(window.intent.type.indexOf("text/") == 0) {
+          var href = "http://www.readitlaterlist.com/save?url=" + window.intent.data;
+          window.location = href;
+        }
+      }
+    </script>
+  </head>
+</html>

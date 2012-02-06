@@ -44,11 +44,13 @@ extensions: all
 	./packcrx.sh tools/chrome/extensions/share-services/gmail tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/delicious tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/linkedin tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/share-services/reddit tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten-services/bit.ly tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten-services/goo.gl tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/save-services/instapaper tools/chrome/key.pem
+	./packcrx.sh tools/chrome/extensions/save-services/readitlater tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/save-services/box tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/save tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/desktop tools/chrome/key.pem

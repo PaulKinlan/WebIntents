@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      if(window.intent) {
+        if(window.intent.type == "text/uri-list") {
+          var encodedUrl = encodeURIComponent(window.intent.data);
+          document.location = "http://www.reddit.com/submit?url" + encodedUrl;
+        }
+      }
+    }); 
+  </script>
+</html>
