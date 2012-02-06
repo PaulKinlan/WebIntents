@@ -87,7 +87,7 @@
          data.request &&
          data.request == "response") {
 
-        intents[data.intent._id].callback(data.intent.data);
+        intents[data.intent._id].callback(data.intent.data, data.intent.extras);
       }
       else if(!!data.intent == true &&
               !!intents[data.intent._id] == true &&
@@ -111,6 +111,7 @@
     intent.action = data.action;
     intent.type = data.type;
     intent.data = data.data;
+    intent.extras = data.extras;
     // This will recieve the intent data.
     window.intent = intent;
   };
@@ -143,14 +144,15 @@
       server);
   };
 
-  var Intent = function(action, type, data) {
+  var Intent = function(action, type, data, extras) {
     var me = this;
     var closed = false;
     this.action = action;
     this.type = type;
     this.data = data;
+    this.extras = extras;
 
-    this.postResult = function (data) {
+    this.postResult = function (data, extras) {
       if(closed) return;
 
       var iframe = document.getElementById("webintents_channel"); 
@@ -158,6 +160,7 @@
       returnIntent._id = me._id;
       returnIntent.action = me.action;
       returnIntent.data = data;
+      returnIntent.extras = extras;
       setTimeout(function() { 
       iframe.contentWindow.postMessage(
         _str({
