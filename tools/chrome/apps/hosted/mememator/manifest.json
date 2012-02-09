@@ -13,12 +13,12 @@
   "intents": {
     "http://webintents.org/pick" : {
       "type" : ["image/*"],
-      "path" : "/pick.html",
+      "path" : "http://www.mememator.com/pick.html",
       "title" : "Pick file from mememator.com"
     },
     "http://webintents.org/edit" : {
       "type" : ["image/*"],
-      "path" : "/",
+      "path" : "http://www.mememator.com/",
       "title" : "Edit file in mememator.com"
     }
   }
