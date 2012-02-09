@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.js"></script>
+    <script>
+      var renderRecent = function(bookmarks) {
+        var recentBookmarks = $("#recentBookmarks");
+        var renderBookmark = function(bookmark) {
+          var el = $("<a></a>");
+          el.href = bookmark.url;
+          el.innerText = bookmark.title;
+          recentBookmarks.append(el) 
+        };
+
+        bookmarks.forEach(renderBookmark);
+      };
+
+      $(document).ready(function() {
+        chrome.bookmarks.getRecent(10, renderRecent); 
+      });
+    </script>
+    <style>
+    </style>
+  </head>
+  <body>
+    <h1>Recent</h1>
+    <div id="recentBookmarks">
+
+    </div>
+    <h1>Seach</h1>
+    <div id="searchResults">
+
+    </div>
+  </body>
+</html>
