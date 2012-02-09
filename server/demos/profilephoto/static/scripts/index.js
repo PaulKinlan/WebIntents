@@ -27,6 +27,11 @@ $(function() {
         window.intent.postResult(this.toDataURL());
         window.setTimeout(function() { window.close(); }, 1000);
     });
+
+    $('#container video').click(function() {
+       // Snap straight away.
+       snapPicture();
+    });
   }
   else {
     $('#snaps canvas').live('click', function() {
