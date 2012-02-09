@@ -28,7 +28,7 @@ tools: chrome
 
 chrome: extensions apps
 
-apps: all
+apps:
 	./packcrx.sh tools/chrome/apps/hosted/cloudfilepicker tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/hosted/imagemator tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/hosted/inspirationmator tools/chrome/key.pem

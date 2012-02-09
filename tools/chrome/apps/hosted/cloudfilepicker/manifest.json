@@ -13,7 +13,7 @@
   "intents": {
     "http://webintents.org/pick" : {
       "type" : ["image/*"],
-      "path" : "/index.html",
+      "path" : "http://www.cloudfilepicker.com/index.html",
       "title" : "Pick file from CloudFilePicker.com"
     }
   }

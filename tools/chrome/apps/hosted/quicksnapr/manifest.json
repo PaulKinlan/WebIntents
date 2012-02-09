@@ -13,7 +13,7 @@
   "intents": {
     "http://webintents.org/pick" : {
       "type" : ["image/*"],
-      "path" : "/",
+      "path" : "http://www.quicksnapr.com/",
       "title" : "Snap an image from your WebCam"
     }
   }
