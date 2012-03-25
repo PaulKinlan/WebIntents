@@ -9,9 +9,8 @@
   "intents" : {
     "http://webintents.org/pick" : {
        "type" : ["text/uri-list"],
-       "title" : "Pick URL from Bookmarks or History",
-       "path" : "/pick.html",
-       "disposition" : "inline"
+       "title" : "Pick URL from Bookmarks",
+       "path" : "/pick.html"
     }
   }
 }

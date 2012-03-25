@@ -1,15 +1,15 @@
 {
   "name": "Shorten with Bit.ly",
-  "version": "0.0.0.2",
+  "version": "0.0.0.4",
   "icons" : {
     "16" : "favicon.ico",
     "128" : "128.png"
   },
   "intents" : {
-    "http://webintents.org/shorten" : {
+    "http://webintents.org/shorten" : [{
        "type" : ["text/uri-list"],
        "title" : "Shorten with Bit.ly",
-       "path" : "/launch.html"
-    }
+       "href" : "/launch.html"
+    }]
   }
 }

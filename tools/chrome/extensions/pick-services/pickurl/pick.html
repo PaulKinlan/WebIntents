@@ -7,30 +7,56 @@
       var renderRecent = function(bookmarks) {
         var recentBookmarks = $("#recentBookmarks");
         var renderBookmark = function(bookmark) {
-          var el = $("<a></a>");
-          el.href = bookmark.url;
-          el.innerText = bookmark.title;
+          var el = $("<li><a></a></li>")[0];
+          var li = el.children[0];
+          li.href = bookmark.url;
+          li.innerText = bookmark.title;
           recentBookmarks.append(el) 
         };
 
         bookmarks.forEach(renderBookmark);
       };
 
+      var renderSearch = function(bookmarks) {
+        var searchResults = $("#searchResults");
+        var renderBookmark = function(bookmark) {
+          var el = $("<li><a></a></li>")[0];
+          var li = el.children[0];
+          li.href = bookmark.url;
+          li.innerText = bookmark.title;
+          searchResults.append(el) 
+        };
+
+        bookmarks.forEach(renderBookmark);
+      };
+
       $(document).ready(function() {
-        chrome.bookmarks.getRecent(10, renderRecent); 
+        chrome.bookmarks.getRecent(10, renderRecent);
+        var searchResults = $("#searchResults");
+
+        $("#search").keyup(function(e) {
+          var searchString = e.target.value;
+          searchResults.empty();
+          chrome.bookmarks.search(searchString, renderSearch); 
+        });
+      });
+
+      $("a").live('click', function(e) {
+        window.intent.postResult(e.target.href);
+        return false;
       });
     </script>
     <style>
+      a {
+        display: block;
+      }
     </style>
   </head>
   <body>
-    <h1>Recent</h1>
-    <div id="recentBookmarks">
-
-    </div>
-    <h1>Seach</h1>
-    <div id="searchResults">
-
-    </div>
+    <h2>Recent</h2>
+    <ul id="recentBookmarks"></ul>
+    <h2>Search</h2>
+    <input type="text" placeholder="Search" id="search" />
+    <ul id="searchResults"></ul>
   </body>
 </html>

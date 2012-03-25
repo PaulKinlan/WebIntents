@@ -36,7 +36,7 @@ apps:
 	./packcrx.sh tools/chrome/apps/hosted/quicksnapr tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/packaged/scrapbook tools/chrome/key.pem
 
-extensions: all
+extensions:
 	./packcrx.sh tools/chrome/extensions/share-services/twitter tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/tumblr tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/share-services/blogger tools/chrome/key.pem

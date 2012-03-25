@@ -1,6 +1,6 @@
 {
   "name": "Mememator",
-  "version": "1.0.0.2",
+  "version": "1.0.0.5",
   "icons" : {
     "128" : "128.png"
   },
@@ -11,15 +11,15 @@
     }
   },
   "intents": {
-    "http://webintents.org/pick" : {
-      "type" : ["image/*"],
-      "path" : "http://www.mememator.com/pick.html",
+    "http://webintents.org/pick" : [{
+      "type" : ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
+      "href" : "http://www.mememator.com/pick.html",
       "title" : "Pick file from mememator.com"
-    },
-    "http://webintents.org/edit" : {
-      "type" : ["image/*"],
-      "path" : "http://www.mememator.com/",
+    }],
+    "http://webintents.org/edit" : [{
+      "type" : ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
+      "href" : "http://www.mememator.com/",
       "title" : "Edit file in mememator.com"
-    }
+    }]
   }
 }

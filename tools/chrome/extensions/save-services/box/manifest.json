@@ -1,14 +1,14 @@
 {
   "name": "Save to Box",
-  "version": "1.0.0.0",
+  "version": "1.0.0.2",
   "icons" : {
     "16": "favicon.ico"
   },
   "intents": {
-    "http://webintents.org/save" : {
+    "http://webintents.org/save" : [{
       "type" : ["text/uri-list"],
-      "path" : "box.html",
+      "href" : "/box.html",
       "title" : "Save to Box"
-    }
+    }]
   }
 }

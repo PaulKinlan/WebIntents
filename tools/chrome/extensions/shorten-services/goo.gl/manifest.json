@@ -1,16 +1,17 @@
 {
   "name": "Shorten with Goo.gl",
-  "version": "0.0.0.3",
+  "version": "0.0.0.5",
   "icons" : {
     "16" : "favicon.ico",
     "128" : "128.png"
   },
   "permissions" : ["http://demos.webintents.org/"],
   "intents" : {
-    "http://webintents.org/shorten" : {
+    "http://webintents.org/shorten" : [{
        "type" : ["text/uri-list"],
        "title" : "Shorten with Goo.gl",
-       "path" : "/launch.html"
-    }
+       "disposition" : "inline",
+       "href" : "/launch.html"
+    }]
   }
 }

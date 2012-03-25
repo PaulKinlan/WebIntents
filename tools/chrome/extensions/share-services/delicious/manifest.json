@@ -1,15 +1,17 @@
 {
   "name": "Share to Delicious™",
-  "version": "0.0.0.2",
+  "version": "0.0.0.4",
   "icons" : {
     "16" : "favicon.ico",
     "128" : "128.png"
   },
   "intents" : {
-    "http://webintents.org/share" : {
-       "type" : ["text/uri-list"],
-       "title" : "Share to Delicious",
-       "path" : "/launch.html"
-    }
+    "http://webintents.org/share" : [
+      {
+        "type" : ["text/uri-list"],
+        "title" : "Share to Delicious",
+        "href" : "/launch.html"
+      }
+    ]
   }
 }

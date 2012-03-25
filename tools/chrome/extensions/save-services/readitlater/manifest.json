@@ -1,15 +1,15 @@
 {
   "name": "Save to ReadItLater",
-  "version": "1.0.0.3",
+  "version": "1.0.0.5",
   "icons" : {
     "16": "favicon.ico",
     "128" :  "128.png"
   },
   "intents": {
-    "http://webintents.org/save" : {
+    "http://webintents.org/save" : [{
       "type" : ["text/uri-list"],
-      "path" : "launch.html",
+      "href" : "/launch.html",
       "title" : "Save to ReadItLater"
-    }
+    }]
   }
 }

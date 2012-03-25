@@ -1,6 +1,6 @@
 {
   "name": "QuickSnapr",
-  "version": "1.0.0.2",
+  "version": "1.0.0.6",
   "icons" : {
     "128" : "128.png"
   },
@@ -11,10 +11,10 @@
     }
   },
   "intents": {
-    "http://webintents.org/pick" : {
-      "type" : ["image/*"],
-      "path" : "http://www.quicksnapr.com/",
+    "http://webintents.org/pick" : [{
+      "type" : ["image/png"],
+      "href" : "http://www.quicksnapr.com/",
       "title" : "Snap an image from your WebCam"
-    }
+    }]
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "Inspirationmator",
-  "version": "1.0.0.2",
+  "version": "1.0.0.5",
   "icons" : {
     "128" : "128.png"
   },
@@ -11,15 +11,15 @@
     }
   },
   "intents": {
-    "http://webintents.org/pick" : {
-      "type" : ["image/*"],
-      "path" : "http://www.inspirationmator.com/pick.html",
+    "http://webintents.org/pick" : [{
+      "type" : ["image/jpeg", "image/png", "image/jpg", "image/bmp"],
+      "href" : "http://www.inspirationmator.com/pick.html",
       "title" : "Pick file from inspirationmator.com"
-    },
-    "http://webintents.org/edit" : {
-      "type" : ["image/*"],
-      "path" : "http://www.inspirationmator.com/",
+    }],
+    "http://webintents.org/edit" : [{
+      "type" : ["image/jpeg", "image/png", "image/jpg", "image/bmp"],
+      "href" : "http://www.inspirationmator.com/",
       "title" : "Edit file in inspirationmator.com"
-    }
+    }]
   }
 }

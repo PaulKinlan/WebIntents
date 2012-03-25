@@ -1,6 +1,6 @@
 {
   "name": "Cloud File Picker",
-  "version": "1.0.0.2",
+  "version": "1.0.0.6",
   "icons" : {
     "128" : "128.png"
   },
@@ -11,10 +11,10 @@
     }
   },
   "intents": {
-    "http://webintents.org/pick" : {
-      "type" : ["image/*"],
-      "path" : "http://www.cloudfilepicker.com/index.html",
+    "http://webintents.org/pick" : [{
+      "type" : ["image/png", "image/jpg", "image/jpeg", "image/bmp"],
+      "href" : "http://www.cloudfilepicker.com/index.html",
       "title" : "Pick file from CloudFilePicker.com"
-    }
+    }]
   }
 }
