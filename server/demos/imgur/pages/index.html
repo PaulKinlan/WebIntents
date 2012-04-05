@@ -33,6 +33,9 @@
   your page will be able to be launched via the Web Intent system when a user invokes the "<a href="http://webintents.org/save">save</a>" intent. 
 </p>
 <script>
+  var Intent = window.Intent || window.WebKitIntent;
+  var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+
   var image = document.getElementById("imageToShare");
   var imageUrl;
   image.onchange = function(e) {
@@ -51,7 +54,7 @@
     if(!!imageUrl == false) alert("Please select a file first");
 
     var intent = new Intent("http://webintents.org/save", "image/*", imageUrl);
-    window.navigator.startActivity(intent, function(data) {});
+    startActivity.call(window.navigator, intent, function(data) {});
   }, false);
 </script>
 <h2>How to save the image</h2>

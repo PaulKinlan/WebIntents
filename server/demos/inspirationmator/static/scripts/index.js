@@ -1,3 +1,9 @@
+var Intent = window.Intent || window.WebkitIntent;
+var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+window.intent = window.intent || window.webkitIntent;
+
+
+
 var context;
 var canvas;
 var draw = function(topline, bottomline) {
@@ -92,7 +98,7 @@ $(function() {
        $('#done').hide();
 
        var i = new Intent("http://webintents.org/pick", "image/*");
-       window.navigator.startActivity(i, function(data) {
+       startActivity.call(window.navigator, i, function(data) {
          updateImage(data); 
        });
     });
@@ -100,12 +106,12 @@ $(function() {
       
   $('#save').click(function() {
     var i = new Intent("http://webintents.org/save", "image/*", canvas.toDataURL());
-    window.navigator.startActivity(i);
+    startActivity.call(window.navigator);
   });
       
   $('#share').click(function() {
     var i = new Intent("http://webintents.org/share", "image/*", canvas.toDataURL());
-    window.navigator.startActivity(i);
+    startActivity.call(window.navigator, i);
   });
 
   $('#top').change(textChanged);

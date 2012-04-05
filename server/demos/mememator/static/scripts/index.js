@@ -1,10 +1,14 @@
+var Intent = window.Intent || window.WebkitIntent;
+var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+window.intent = window.intent || window.webkitIntent;
+
 var context;
 var canvas;
 function textChanged() {
   if (context) {
     topText = $('#top').val();
     bottomText = $('#bottom').val();
-     var image = $('#image')
+    var image = $('#image')
     var width = image.width();
     var height = image.height();
     context.drawImage(image.get()[0], 0, 0);
@@ -20,7 +24,33 @@ function textChanged() {
     context.strokeText(bottomText, width * 0.5, height * 0.95, width * 0.9);
   }
 }
-  
+
+var createNewImage = function(c) {
+  var data = c.toDataURL('image/png');
+  // Create an image.
+  $.ajax({
+    type: 'POST', 
+    url: '/image',
+    data: {image: data},
+    success: function(e) {
+      // Get the id.
+
+    } 
+  });
+};
+
+var updateImageData = function(id, c) {
+  var data = c.toDataURL('image/png');
+  $.ajax({
+    type: 'POST', 
+    url: '/image/' + id,
+    data: { image: data },
+    success: function(e) {
+
+    } 
+  });
+};
+
 var updateImage = function(data) {
   var url = $.isArray(data) ? data[0] : data;
   var img = $('#image');
@@ -38,6 +68,9 @@ var updateImage = function(data) {
     canvas.height = image.height();
     context = canvas.getContext('2d');
     context.drawImage(image.get()[0], 0, 0);
+
+    createNewImage(canvas);
+
     if(window.intent) {
       $('#done').show();
     }
@@ -68,7 +101,7 @@ $(function() {
        $('#done').hide();
 
        var i = new Intent("http://webintents.org/pick", "image/*");
-       window.navigator.startActivity(i, function(data) {
+       startActivity.call(window.navigator, i, function(data) {
          updateImage(data); 
        });
     });
@@ -76,12 +109,12 @@ $(function() {
       
   $('#save').click(function() {
     var i = new Intent("http://webintents.org/save", "image/*", canvas.toDataURL());
-    window.navigator.startActivity(i);
+    startActivity.call(window.navigatorm, i);
   });
       
   $('#share').click(function() {
     var i = new Intent("http://webintents.org/share", "image/*", canvas.toDataURL());
-    window.navigator.startActivity(i);
+    startActivity.call(window.navigator, i);
   });
 
   $('#top').change(textChanged);

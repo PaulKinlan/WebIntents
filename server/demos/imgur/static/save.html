@@ -3,6 +3,8 @@
   <head>
     <script src="//webintents.org/webintents.min.js"></script>
     <script>
+      window.intent = window.intent || window.webkitIntent;
+      
       var shortUrl;
       var fetchData = function() {
         var xhr = new XMLHttpRequest();

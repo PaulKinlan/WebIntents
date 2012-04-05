@@ -3,6 +3,7 @@
   <head>
     <script src="//webintents.org/webintents.min.js"></script>
     <script>
+      window.intent = window.intent || window.webkitIntent; 
       var addedUrl;
       var username = localStorage["Instapaperusername"];
       var password = localStorage["Instapaperpassword"];

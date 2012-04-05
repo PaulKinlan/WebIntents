@@ -2,7 +2,7 @@ $(function() {
   $('#images img').click(function(e) {
     if(!!window.intent == false) {
       var i = new Intent("http://webintents.org/edit", "image/*", this.src);
-      window.navigator.startActivity(i);
+      startActivity.call(window.navigator, i);
     }
     else {
       window.intent.postResult(this.src);

@@ -35,10 +35,11 @@
 <script>
   var link = document.getElementById("linkToShare");
   var save = document.getElementById("saveButton");
+  var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
   save.addEventListener("click", function() {
     var url = link.value;
     var intent = new Intent("http://webintents.org/save", "text/uri-list", url);
-    window.navigator.startActivity(intent, function(data) {});
+    startActivity.call(window.navigator, intent);
   }, false);
 </script>
 <h2>How to save the link</h2>

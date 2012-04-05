@@ -1,4 +1,7 @@
 var video;
+var Intent = window.Intent || window.WebkitIntent;
+var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+window.intent = window.intent || window.webkitIntent;
 
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
 window.URL = window.URL || window.webkitURL;
@@ -50,12 +53,12 @@ $(function() {
   $('#save').click(function() {
     var canvas = $("#snaps canvas.selected")[0];
     var i = new Intent("http://webintents.org/save", "image/*", canvas.toDataURL());
-    window.navigator.startActivity(i);
+    startActivity.call(window.navigator, i);
   });
       
   $('#share').click(function() {
     var canvas = $("#snaps canvas.selected")[0];
     var i = new Intent("http://webintents.org/share", "image/*", canvas.toDataURL());
-    window.navigator.startActivity(i);
+    startActivity.call(window.navigator, i);
   });
 });
