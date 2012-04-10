@@ -1,4 +1,4 @@
-var Intent = window.Intent || window.WebkitIntent;
+var Intent = window.Intent || window.WebKitIntent;
 var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
 window.intent = window.intent || window.webkitIntent;
 

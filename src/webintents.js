@@ -14,7 +14,7 @@
    limitations under the License.
 */
 (function() {
-  if(!!window.Intent) return;
+  if(!!window.Intent || !!window.WebKitIntent) return;
 
   var addEventListener = function(obj, type, func, capture) {
     if(!!window.addEventListener) {
