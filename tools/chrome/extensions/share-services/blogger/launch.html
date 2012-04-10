@@ -2,9 +2,10 @@
 <html>
   <script>
     window.addEventListener("load", function() {
-      if(window.intent) {
-        if(window.intent.type == "text/uri-list") {
-          document.location = "http://www.blogger.com/blog_this.pyra?n=" + encodeURIComponent(window.intent.data);
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          document.location = "http://www.blogger.com/blog_this.pyra?n=" + encodeURIComponent(intent.data);
         }
       }
     }); 

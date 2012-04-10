@@ -3,11 +3,12 @@
   <head>
     <script src="//webintents.org/webintents.min.js"></script>
     <script>
-      if(window.intent) {
-        if(window.intent.type.indexOf("text/") == 0) {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type.indexOf("text/") == 0) {
           var now = new Date().getTime();
           var href = "http://www.instapaper.com/hello2?url=" + 
-              encodeURIComponent(window.intent.data);
+              encodeURIComponent(intent.data);
           window.location = href;
         }
       }

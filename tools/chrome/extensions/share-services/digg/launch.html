@@ -2,9 +2,10 @@
 <html>
   <script>
     window.addEventListener("load", function() {
-      if(window.intent) {
-        if(window.intent.type == "text/uri-list") {
-          document.location = "http://digg.com/submit?phase=2&url="+ encodeURIComponent(window.intent.data);
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          document.location = "http://digg.com/submit?phase=2&url="+ encodeURIComponent(intent.data);
         }
       }
     }); 

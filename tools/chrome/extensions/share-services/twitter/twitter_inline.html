@@ -2,10 +2,11 @@
 <html>
   <head>
     <script>
-      if(window.intent) {
-        if(window.intent.type.indexOf("text/") == 0) {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type.indexOf("text/uri-list") == 0) {
           var href = "https://twitter.com/intent/tweet?url=" +
-              encodeURI(window.intent.data);
+              encodeURI(intent.data);
           window.location = href;
         }
       }

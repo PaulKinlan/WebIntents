@@ -42,7 +42,8 @@
       });
 
       $("a").live('click', function(e) {
-        window.intent.postResult(e.target.href);
+        var intent = window.intent || window.webkitIntent;
+        intent.postResult(e.target.href);
         return false;
       });
     </script>

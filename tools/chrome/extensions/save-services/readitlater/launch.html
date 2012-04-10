@@ -2,9 +2,10 @@
 <html>
   <head>
     <script>
-      if(window.intent) {
-        if(window.intent.type.indexOf("text/") == 0) {
-          var href = "http://www.readitlaterlist.com/save?url=" + window.intent.data;
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type.indexOf("text/") == 0) {
+          var href = "http://www.readitlaterlist.com/save?url=" + intent.data;
           window.location = href;
         }
       }

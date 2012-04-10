@@ -2,9 +2,10 @@
 <html>
   <script>
     window.addEventListener("load", function() {
-      if(window.intent) {
-        if(window.intent.type == "text/uri-list") {
-          document.location = "https://bitly.com/?v=3&u="+ encodeURIComponent(window.intent.data);
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          document.location = "https://bitly.com/?v=3&u="+ encodeURIComponent(intent.data);
         }
       }
     }); 

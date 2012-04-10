@@ -2,10 +2,11 @@
 <html>
   <head>
     <script>
-      if(window.intent) {
-        if(window.intent.type.indexOf("text/") == 0) {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type.indexOf("text/") == 0) {
           var href = "https://www.box.com/api/1.0/import?url=" +
-              encodeURI(window.intent.data) + "&import_as=file";
+              encodeURI(intent.data) + "&import_as=file";
           window.location = href;
         }
       }

@@ -2,9 +2,10 @@
 <html>
   <script>
     window.addEventListener("load", function() {
-      if(window.intent) {
-        if(window.intent.type == "text/uri-list") {
-          var encodedUrl = encodeURIComponent(window.intent.data);
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          var encodedUrl = encodeURIComponent(intent.data);
           document.location = "http://del.icio.us/save?&url=" + encodedUrl + "&title=" + encodedUrl + "&share=yes&jump=close";
         }
       }
