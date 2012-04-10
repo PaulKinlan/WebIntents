@@ -1,3 +1,7 @@
+var Intent = window.Intent || window.WebKitIntent;
+var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+window.intent = window.intent || window.webkitIntent;
+
 $(function() {
   $('#images img').click(function(e) {
     if(!!window.intent == false) {

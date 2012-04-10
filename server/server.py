@@ -13,6 +13,8 @@ import demos.imgur.handlers
 exampleRoutes = [ Route('/<:.*>', handlers_base.PageHandler, 'examples')]
 demoRoutes = [
       Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
+      Route('/mememator/image', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
+      Route('/mememator/image/<:.*>', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
       Route('/mememator/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
       Route('/imagestudio/<:.*>', handlers_base.PageHandler, 'demos/imagestudio'),
       Route('/shortener/shorten', demos.shortener.handlers.ShortenHandler, 'demos/shortener'),
@@ -67,6 +69,8 @@ app = webapp2.WSGIApplication([
     ]),
     routes.DomainRoute('www.mememator.com', [
       Route('/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
+      Route('/image', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
+      Route('/image/<:.*>', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
     ]),
     routes.DomainRoute('www.inspirationmator.com', [

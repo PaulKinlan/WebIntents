@@ -4,6 +4,9 @@ window.intent = window.intent || window.webkitIntent;
 
 var context;
 var canvas;
+var imageID;
+var permissionKey;
+
 function textChanged() {
   if (context) {
     topText = $('#top').val();
@@ -22,6 +25,11 @@ function textChanged() {
         
     context.fillText(bottomText, width * 0.5, height * 0.95, width * 0.9);
     context.strokeText(bottomText, width * 0.5, height * 0.95, width * 0.9);
+
+    if(imageID) {
+      updateImageData(imageID, canvas);
+      // set a timeout to check for when an image becomes available.
+    }
   }
 }
 
@@ -32,9 +40,9 @@ var createNewImage = function(c) {
     type: 'POST', 
     url: '/image',
     data: {image: data},
-    success: function(e) {
-      // Get the id.
-
+    success: function(data) {
+      imageID = data.id;
+      permissionKey = data.permissionKey;
     } 
   });
 };
@@ -42,11 +50,11 @@ var createNewImage = function(c) {
 var updateImageData = function(id, c) {
   var data = c.toDataURL('image/png');
   $.ajax({
-    type: 'POST', 
+    type: 'PUT', 
     url: '/image/' + id,
-    data: { image: data },
-    success: function(e) {
-
+    data: { image: data, permissionKey: permissionKey },
+    success: function(data) {
+      console.log(data);
     } 
   });
 };
@@ -83,16 +91,27 @@ var updateImage = function(data) {
 }; 
     
 $(function() {
-  if (window.intent) {
+  var idLocation = window.location.search.indexOf("id=");
+  
+  if (window.intent || idLocation > -1)   {
     $('#done').show();
     $('#done').click(function() {
       if (canvas) {
-        window.intent.postResult(canvas.toDataURL());
-        window.setTimeout(function() { window.close(); }, 1000);
+        var url = "http://www.mememator.com/image/" + imageID; 
+        window.intent.postResult(url);
       }
     });
-
-    updateImage(window.intent.data);
+    if(window.intent) {
+      updateImage(window.intent.data);
+    }
+    else {
+      // This will open the image and then upload it again, this is fine as it is a new edit sequence.
+      imageIDMatch = window.location.search.match(/id=(\d+)/);
+      if(imageIDMatch.length == 2) {
+        var newImageID = imageIDMatch[1];
+        updateImage("http://www.mememator.com/image/" + newImageID);
+      }
+    }
   }
   else {
     $('#container').click(function() {
@@ -108,12 +127,20 @@ $(function() {
   }
       
   $('#save').click(function() {
-    var i = new Intent("http://webintents.org/save", "image/*", canvas.toDataURL());
+    var url = "http://www.mememator.com/?id=" + imageID; 
+    var i = new Intent("http://webintents.org/save", "image/*", url);
     startActivity.call(window.navigatorm, i);
   });
       
   $('#share').click(function() {
-    var i = new Intent("http://webintents.org/share", "image/*", canvas.toDataURL());
+    var url = "http://www.mememator.com/image/" + imageID; 
+    var i = new Intent("http://webintents.org/share", "image/*", url);
+    startActivity.call(window.navigator, i);
+  });
+ 
+  $('#sharelink').click(function() {
+    var url = "http://www.mememator.com/?id=" + imageID; 
+    var i = new Intent("http://webintents.org/share", "text/uri-list", url);
     startActivity.call(window.navigator, i);
   });
 

@@ -1,16 +1,8 @@
-RELEASE := $(shell cat ./src/release.js)
-DEBU := $(shell cat ./src/debug.js)
-
 all: server/webintents/static/cache.manifest production
 
 release: ./src/webintents.js ./src/json2.js ./src/base64.js
-	cat ./src/webintents.js ./src/json2.js ./src/base64.js | sed 's|// __WEBINTENTS_ROOT|$(RELEASE)|' > webintents.js
+	cat ./src/webintents.js ./src/json2.js ./src/base64.js > webintents.js
 	cp webintents.js server/webintents/static/webintents.js
-	cp webintents.js server/webintents/static/webintents.js
-	cp webintents.js tools/chrome/extensions/share/webintents.js
-
-debug: ./src/webintents.js ./src/debug.js ./src/json2.js ./src/base64.js
-	cat ./src/debug.js ./src/webintents.js ./src/json2.js ./src/base64.js | sed 's|// __WEBINTENTS_ROOT|$(DEBUG)|' | sed 's|//DEBUG(|DEBUG(|' > webintents.js
 	cp webintents.js server/webintents/static/webintents.js
 	cp webintents.js tools/chrome/extensions/share/webintents.js
 
