@@ -74,7 +74,7 @@ class ImageHandler(webapp2.RequestHandler):
     Create a new image.
     """
     image_data = self.request.get('image')
-    permission_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(36))  
+    permission_key = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for x in range(36))  
 
     image_model = Image()
     image_model.image = self.decode_image(image_data)
