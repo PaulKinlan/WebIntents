@@ -53,12 +53,14 @@ app = webapp2.WSGIApplication([
       Route('/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
       Route('/image', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
       Route('/image/<:.*>', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
+      Route('/view.html',   demos.mememator.handlers.ViewHandler, 'demos/mememator'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
     ]),
     routes.DomainRoute('www.inspirationmator.com', [
       Route('/proxy', demos.inspirationmator.handlers.ProxyHandler, 'demos/inspirationmator'),
       Route('/image', demos.inspirationmator.handlers.ImageHandler, 'demos/inspirationmator'),
       Route('/image/<:.*>', demos.inspirationmator.handlers.ImageHandler, 'demos/inspirationmator'),
+      Route('/view.html',   demos.inspirationmator.handlers.ViewHandler, 'demos/inspirationmator'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos/inspirationmator'),
     ])
   ])

@@ -1,0 +1,15 @@
+{
+  "name": "Save to Instapaper",
+  "version": "2012.104.111.10639",
+  "icons" : {
+    "16": "favicon.ico",
+    "128" :  "128.png"
+  },
+  "intents": {
+    "http://webintents.org/save" : [{
+      "type" : ["text/uri-list"],
+      "href" : "/launch.html",
+      "title" : "Save to Instapaper"
+    }]
+  }
+}

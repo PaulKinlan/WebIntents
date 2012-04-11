@@ -1,4 +1,4 @@
-NOW = $(shell date "+%Y.1%m.1%d.%H%M")
+NOW = $(shell date "+%Y.1%m.1%d.1%H%M")
 
 all: server/webintents/static/cache.manifest production
 
@@ -30,7 +30,7 @@ apps:
 	./packcrx.sh tools/chrome/apps/hosted/quicksnapr tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/packaged/scrapbook tools/chrome/key.pem
 
-extensions: tools/chrome/extensions/share-services/twitter.crx tools/chrome/extensions/share-services/blogger.crx tools/chrome/extensions/share-services/tumblr.crx tools/chrome/extensions/share-services/digg.crx tools/chrome/extensions/share-services/linkedin.crx tools/chrome/extensions/share-services/delicious.crx tools/chrome/extensions/share-services/reddit.crx tools/chrome/extensions/share-services/gmail.crx tools/chrome/extensions/shorten-services/bit.ly.crx  tools/chrome/extensions/shorten-services/goo.gl.crx tools/chrome/extensions/save-services/box.crx tools/chrome/extensions/save-services/readitlater tools/chrome/extensions/save-services/instapaper
+extensions: tools/chrome/extensions/share-services/twitter.crx tools/chrome/extensions/share-services/blogger.crx tools/chrome/extensions/share-services/tumblr.crx tools/chrome/extensions/share-services/digg.crx tools/chrome/extensions/share-services/linkedin.crx tools/chrome/extensions/share-services/delicious.crx tools/chrome/extensions/share-services/reddit.crx tools/chrome/extensions/share-services/gmail.crx tools/chrome/extensions/shorten-services/bit.ly.crx  tools/chrome/extensions/shorten-services/goo.gl.crx tools/chrome/extensions/save-services/box.crx tools/chrome/extensions/save-services/readitlater.crx tools/chrome/extensions/save-services/instapaper.crx
 	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/desktop tools/chrome/key.pem
@@ -45,7 +45,7 @@ tools/chrome/extensions/save-services/instapaper.crx: tools/chrome/extensions/sa
 tools/chrome/extensions/save-services/readitlater/manifest.json:
 	cat ./tools/chrome/extensions/save-services/readitlater-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/save-services/readitlater/manifest.json 
 
-tools/chrome/extensions/save-services/readitlater.crx: tools/chrome/extensions/save-services/readitlater/manifest.json tools/chrome/extensions/share-services/readitlater/launch.html
+tools/chrome/extensions/save-services/readitlater.crx: tools/chrome/extensions/save-services/readitlater/manifest.json tools/chrome/extensions/save-services/readitlater/launch.html
 	./packcrx.sh tools/chrome/extensions/save-services/readitlater tools/chrome/key.pem
 
 tools/chrome/extensions/save-services/box/manifest.json:
@@ -129,3 +129,9 @@ clean:
 	rm -f tools/chrome/extensions/share-services/digg/manifest.json
 	rm -f tools/chrome/extensions/share-services/reddit/manifest.json
 	rm -f tools/chrome/extensions/share-services/delicious/manifest.json
+	rm -f tools/chrome/extensions/shorten-services/goo.gl/manifest.json
+	rm -f tools/chrome/extensions/shorten-services/bit.ly/manifest.json
+	rm -f tools/chrome/extensions/save-services/box/manifest.json
+	rm -f tools/chrome/extensions/save-services/readitlater/manifest.json
+	rm -f tools/chrome/extensions/save-services/instapaper/manifest.json
+	

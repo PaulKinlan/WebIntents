@@ -22,7 +22,7 @@ file_types = {
 } 
 
 class PageHandler(webapp2.RequestHandler):
-  def render_file(self, file, domain):
+  def render_file(self, file, domain, data):
     self.response.headers['X-Content-Security-Policy'] = "allow 'self'; img-src * data:; script-src 'self' https://*.googleapis.com webintents.org unsafe-inline unsafe-eval; frame-src 'self' *.webintents.org; font-src *; style-src 'self' fonts.googleapis.com;"
     self.response.headers['Cache-Control'] = 'max-age=3600'
 
@@ -51,9 +51,9 @@ class PageHandler(webapp2.RequestHandler):
     path = os.path.join(os.path.dirname(__file__), template_path) 
     if os.path.exists(path):
       template = jinja_environment.get_template(template_path)
-      self.response.out.write(template.render())
+      self.response.out.write(template.render(data))
     else:
       self.error(404)
 
   def get(self, file):
-    self.render_file(file, self.request.route.name)
+    self.render_file(file, self.request.route.name, {})
