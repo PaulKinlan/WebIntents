@@ -21,15 +21,22 @@ file_types = {
   '.cache' : 'text/manifest'
 } 
 
+def get_content_type(extension):
+  return file_types.get(extension, "application/octet-stream")
+
+def parse_filename(file):
+  name, extension  = os.path.splitext(file)
+  return (name, extension)
+
 class PageHandler(webapp2.RequestHandler):
   def render_file(self, file, domain, data):
     self.response.headers['X-Content-Security-Policy'] = "allow 'self'; img-src * data:; script-src 'self' https://*.googleapis.com webintents.org unsafe-inline unsafe-eval; frame-src 'self' *.webintents.org; font-src *; style-src 'self' fonts.googleapis.com;"
-    self.response.headers['Cache-Control'] = 'max-age=3600'
-
+    self.response.headers['Cache-Control'] = 'max-age=3600, public, must-revalidate'
+ 
     if file is None or file == "":
       file = "index.html"
 
-    name, extension  = os.path.splitext(file)
+    name, extension = parse_filename(file)
 
     content_type = file_types.get(extension, "text/html")
     # Only display known file types

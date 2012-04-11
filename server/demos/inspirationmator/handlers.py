@@ -28,7 +28,7 @@ def run_as(ns = ""):
     return decorated_func
   return generate
 
-class Image(db.Model):
+class InspriationmatorImage(db.Model):
   created_on = db.DateTimeProperty(auto_now = True)
   image = db.BlobProperty()
   permission_key = db.StringProperty()
@@ -49,7 +49,7 @@ class ImageHandler(webapp2.RequestHandler):
 
   @run_as(ns = 'inspirationmator')
   def get(self, id):
-    image_model = Image.get_by_id(int(id))
+    image_model = InspirationmatorImage.get_by_id(int(id))
     
     self.response.headers['Content-type'] = 'image/png'
     self.response.out.write(image_model.image)
@@ -62,7 +62,7 @@ class ImageHandler(webapp2.RequestHandler):
     image_data = self.request.get('image')
     permission_key = self.request.get("permissionKey")
 
-    image_model = Image.get_by_id(int(id))
+    image_model = InspirationmatorImage.get_by_id(int(id))
 
     if image_model.permission_key != permission_key:
       self.response.set_status(401)
@@ -82,7 +82,7 @@ class ImageHandler(webapp2.RequestHandler):
     image_data = self.request.get('image')
     permission_key = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for x in range(36))  
 
-    image_model = Image()
+    image_model = InspirationmatorImage()
     image_model.image = self.decode_image(image_data)
     image_model.permission_key = permission_key
     image_model.put()

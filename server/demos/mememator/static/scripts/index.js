@@ -27,7 +27,7 @@ function textChanged() {
     context.strokeText(bottomText, width * 0.5, height * 0.95, width * 0.9);
 
     if(imageID) {
-      updateImageData(imageID, canvas);
+      updateImageData(imageID, canvas, topText, bottomText);
       // set a timeout to check for when an image becomes available.
     }
   }
@@ -47,14 +47,13 @@ var createNewImage = function(c) {
   });
 };
 
-var updateImageData = function(id, c) {
+var updateImageData = function(id, c, textTop, textBottom) {
   var data = c.toDataURL('image/png');
   $.ajax({
     type: 'PUT', 
     url: '/image/' + id,
-    data: { image: data, permissionKey: permissionKey },
+    data: { image: data, permissionKey: permissionKey, textTop: textTop, textBottom: textBottom },
     success: function(data) {
-      console.log(data);
     } 
   });
 };
@@ -98,7 +97,7 @@ $(function() {
     $('#done').show();
     $('#done').click(function() {
       if (canvas) {
-        var url = "http://www.mememator.com/image/" + imageID; 
+        var url = "http://www.mememator.com/image/" + imageID + ".png"; 
         window.intent.postResult(url);
       }
     });
@@ -110,7 +109,7 @@ $(function() {
       var imageIDMatch = window.location.search.match(/id=(\d+)/);
       if(imageIDMatch.length == 2) {
         var newImageID = imageIDMatch[1];
-        updateImage("http://www.mememator.com/image/" + newImageID);
+        updateImage("http://www.mememator.com/image/" + newImageID + ".png");
       }
     }
   }
@@ -129,19 +128,19 @@ $(function() {
   }
       
   $('#save').click(function() {
-    var url = "http://www.mememator.com/?id=" + imageID; 
+    var url = "http://www.mememator.com/image/" + imageID + ".png"; 
     var i = new Intent("http://webintents.org/save", "image/*", url);
-    startActivity.call(window.navigatorm, i);
+    startActivity.call(window.navigator, i);
   });
       
   $('#share').click(function() {
-    var url = "http://www.mememator.com/image/" + imageID; 
+    var url = "http://www.mememator.com/image/" + imageID + ".png"; 
     var i = new Intent("http://webintents.org/share", "image/*", url);
     startActivity.call(window.navigator, i);
   });
  
   $('#sharelink').click(function() {
-    var url = "http://www.mememator.com/?id=" + imageID; 
+    var url = "http://www.mememator.com/image/" + imageID + ".html";
     var i = new Intent("http://webintents.org/share", "text/uri-list", url);
     startActivity.call(window.navigator, i);
   });

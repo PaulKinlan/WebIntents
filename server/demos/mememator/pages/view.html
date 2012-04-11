@@ -2,22 +2,20 @@
 {% block title %}Mememator{% endblock %}
 {% block headline %}Mememator{% endblock %}
 {% block scripts %}
-<link rel=icon href="favicon.ico" />
-<script type="text/javascript" src="scripts/memegen.js"></script>
-<script type="text/javascript" src="scripts/view.js"></script>
-<intent action="http://webintents.org/edit"
-  type="image/*"
-  href="index.html" />
-
-<intent action="http://webintents.org/pick"
-  type="image/*"
-  href="pick.html" />
-  {% endblock %}
+<link rel=icon href="/favicon.ico" />
+<script type="text/javascript" src="/scripts/memegen.js"></script>
+<script type="text/javascript" src="/scripts/view.js"></script>
+{% endblock %}
 {% block content %}
-<div id="container">
-  <img id="image" src="{{url}}"/>
+<div id="container" itemscope itemtype="http://schema.org/Thing">
+  <h1 itemprop="name">Mememator: Image {{title}}</h1>
+  <p itemprop="description">{{text_bottom}} - {{text_top}}</p>
+  <img id="image" itemprop="image" src="{{url}}"/>
 </div>
 <input type="button" class="btn primary" id="save" value="Save Meme" style="display: inline-block"/>
 <input type="button" class="btn primary" id="share" value="Share Image" style="display: inline-block"/>
 <input type="button" class="btn primary" id="sharelink" value="Share Link" style="display: inline-block"/>
+<intent action="http://webintents.org/edit"
+  type="image/*"
+  href="index.html" />
 {% endblock %}
