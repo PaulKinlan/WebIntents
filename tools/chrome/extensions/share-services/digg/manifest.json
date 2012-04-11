@@ -1,0 +1,17 @@
+{
+  "name": "Share to Digg™",
+  "version": "2012.104.110.2005",
+  "icons" : {
+    "16" : "favicon.ico",
+    "128" : "128.png"
+  },
+  "intents" : {
+    "http://webintents.org/share" : [
+      {
+        "type" : ["text/uri-list"],
+        "title" : "Share to Digg",
+        "href" : "/launch.html"
+      }
+    ]
+  }
+}

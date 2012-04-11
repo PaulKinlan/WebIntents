@@ -1,14 +1,14 @@
 {
-  "name": "Shorten with Bit.ly",
-  "version": "2012.104.111.0615",
+  "name": "Share to Tumblr™",
+  "version": "2012.104.110.2005",
   "icons" : {
     "16" : "favicon.ico",
     "128" : "128.png"
   },
   "intents" : {
-    "http://webintents.org/shorten" : [{
+    "http://webintents.org/share" : [{
        "type" : ["text/uri-list"],
-       "title" : "Shorten with Bit.ly",
+       "title" : "Share to Tumblr",
        "href" : "/launch.html"
     }]
   }

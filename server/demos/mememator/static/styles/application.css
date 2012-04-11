@@ -72,15 +72,7 @@ footer {
   cursor: pointer;
 }
 
-#done {
-  display: none;
-}
-
-#share {
-  display: none;
-}
-
-#save {
+#save, #sharelink, #share, #done {
   display: none;
 }
 

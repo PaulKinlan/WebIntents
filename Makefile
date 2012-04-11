@@ -1,3 +1,5 @@
+NOW = $(shell date "+%Y.1%m.1%d.%H%M")
+
 all: server/webintents/static/cache.manifest production
 
 release: ./src/webintents.js ./src/json2.js ./src/base64.js
@@ -28,25 +30,89 @@ apps:
 	./packcrx.sh tools/chrome/apps/hosted/quicksnapr tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/packaged/scrapbook tools/chrome/key.pem
 
-extensions:
-	./packcrx.sh tools/chrome/extensions/share-services/twitter tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/share-services/tumblr tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/share-services/blogger tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/share-services/digg tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/share-services/gmail tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/share-services/delicious tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/share-services/linkedin tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/share-services/reddit tools/chrome/key.pem
+extensions: tools/chrome/extensions/share-services/twitter.crx tools/chrome/extensions/share-services/blogger.crx tools/chrome/extensions/share-services/tumblr.crx tools/chrome/extensions/share-services/digg.crx tools/chrome/extensions/share-services/linkedin.crx tools/chrome/extensions/share-services/delicious.crx tools/chrome/extensions/share-services/reddit.crx tools/chrome/extensions/share-services/gmail.crx tools/chrome/extensions/shorten-services/bit.ly.crx  tools/chrome/extensions/shorten-services/goo.gl.crx tools/chrome/extensions/save-services/box.crx tools/chrome/extensions/save-services/readitlater tools/chrome/extensions/save-services/instapaper
 	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/shorten-services/bit.ly tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/shorten-services/goo.gl tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/save-services/instapaper tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/save-services/readitlater tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/save-services/box tools/chrome/key.pem
-	./packcrx.sh tools/chrome/extensions/save tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/desktop tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/edit tools/chrome/key.pem
+
+tools/chrome/extensions/save-services/instapaper/manifest.json:
+	cat ./tools/chrome/extensions/save-services/instapaper-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/save-services/instapaper/manifest.json 
+
+tools/chrome/extensions/save-services/instapaper.crx: tools/chrome/extensions/save-services/instapaper/manifest.json tools/chrome/extensions/save-services/instapaper/launch.html
+	./packcrx.sh tools/chrome/extensions/save-services/instapaper tools/chrome/key.pem
+
+tools/chrome/extensions/save-services/readitlater/manifest.json:
+	cat ./tools/chrome/extensions/save-services/readitlater-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/save-services/readitlater/manifest.json 
+
+tools/chrome/extensions/save-services/readitlater.crx: tools/chrome/extensions/save-services/readitlater/manifest.json tools/chrome/extensions/share-services/readitlater/launch.html
+	./packcrx.sh tools/chrome/extensions/save-services/readitlater tools/chrome/key.pem
+
+tools/chrome/extensions/save-services/box/manifest.json:
+	cat ./tools/chrome/extensions/save-services/box-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/save-services/box/manifest.json 
+
+tools/chrome/extensions/save-services/box.crx: tools/chrome/extensions/save-services/box/manifest.json tools/chrome/extensions/save-services/box/box.html
+	./packcrx.sh tools/chrome/extensions/save-services/box tools/chrome/key.pem
+
+tools/chrome/extensions/shorten-services/bit.ly/manifest.json:
+	cat ./tools/chrome/extensions/shorten-services/bit.ly-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/shorten-services/bit.ly/manifest.json 
+
+tools/chrome/extensions/shorten-services/bit.ly.crx: tools/chrome/extensions/shorten-services/bit.ly/manifest.json tools/chrome/extensions/shorten-services/bit.ly/launch.html
+	./packcrx.sh tools/chrome/extensions/shorten-services/bit.ly tools/chrome/key.pem
+
+tools/chrome/extensions/shorten-services/goo.gl/manifest.json:
+	cat ./tools/chrome/extensions/shorten-services/goo.gl-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/shorten-services/goo.gl/manifest.json 
+
+tools/chrome/extensions/shorten-services/goo.gl.crx: tools/chrome/extensions/shorten-services/goo.gl/manifest.json tools/chrome/extensions/shorten-services/goo.gl/launch.html
+	./packcrx.sh tools/chrome/extensions/shorten-services/goo.gl tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/twitter.crx: tools/chrome/extensions/share-services/twitter/manifest.json tools/chrome/extensions/share-services/twitter/twitter_inline.html
+	./packcrx.sh tools/chrome/extensions/share-services/twitter tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/twitter/manifest.json:
+	cat ./tools/chrome/extensions/share-services/twitter-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/twitter/manifest.json 
+
+tools/chrome/extensions/share-services/tumblr/manifest.json:
+	cat ./tools/chrome/extensions/share-services/tumblr-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/tumblr/manifest.json 
+
+tools/chrome/extensions/share-services/tumblr.crx: tools/chrome/extensions/share-services/tumblr/manifest.json
+	./packcrx.sh tools/chrome/extensions/share-services/tumblr tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/blogger/manifest.json:
+	cat ./tools/chrome/extensions/share-services/blogger-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/blogger/manifest.json 
+
+tools/chrome/extensions/share-services/blogger.crx: tools/chrome/extensions/share-services/blogger/manifest.json
+	./packcrx.sh tools/chrome/extensions/share-services/blogger tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/digg/manifest.json:
+	cat ./tools/chrome/extensions/share-services/digg-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/digg/manifest.json 
+
+tools/chrome/extensions/share-services/digg.crx: tools/chrome/extensions/share-services/digg/manifest.json
+	./packcrx.sh tools/chrome/extensions/share-services/digg tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/gmail/manifest.json:
+	cat ./tools/chrome/extensions/share-services/gmail-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/gmail/manifest.json 
+
+tools/chrome/extensions/share-services/gmail.crx: tools/chrome/extensions/share-services/gmail/manifest.json
+	./packcrx.sh tools/chrome/extensions/share-services/gmail tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/delicious/manifest.json:
+	cat ./tools/chrome/extensions/share-services/delicious-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/delicious/manifest.json 
+
+tools/chrome/extensions/share-services/delicious.crx: tools/chrome/extensions/share-services/delicious/manifest.json
+	./packcrx.sh tools/chrome/extensions/share-services/delicious tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/linkedin/manifest.json:
+	cat ./tools/chrome/extensions/share-services/linkedin-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/linkedin/manifest.json 
+
+tools/chrome/extensions/share-services/linkedin.crx: tools/chrome/extensions/share-services/linkedin/manifest.json
+	./packcrx.sh tools/chrome/extensions/share-services/linkedin tools/chrome/key.pem
+
+tools/chrome/extensions/share-services/reddit/manifest.json:
+	cat ./tools/chrome/extensions/share-services/reddit-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/reddit/manifest.json 
+
+tools/chrome/extensions/share-services/reddit.crx: tools/chrome/extensions/share-services/reddit/manifest.json
+	./packcrx.sh tools/chrome/extensions/share-services/reddit tools/chrome/key.pem
 
 clean:
 	rm -f webintents.js
@@ -55,3 +121,11 @@ clean:
 	rm -f server/webintents/static/webintents.min.gz
 	rm -f server/webintents/static/cache.manifest
 	rm -f tools/chrome/extensions/share/webintents.js
+	rm -f tools/chrome/extensions/share-services/twitter/manifest.json
+	rm -f tools/chrome/extensions/share-services/blogger/manifest.json
+	rm -f tools/chrome/extensions/share-services/linkedin/manifest.json
+	rm -f tools/chrome/extensions/share-services/gmail/manifest.json
+	rm -f tools/chrome/extensions/share-services/tumblr/manifest.json
+	rm -f tools/chrome/extensions/share-services/digg/manifest.json
+	rm -f tools/chrome/extensions/share-services/reddit/manifest.json
+	rm -f tools/chrome/extensions/share-services/delicious/manifest.json

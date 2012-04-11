@@ -85,6 +85,7 @@ var updateImage = function(data) {
     else {
       $('#save').show();
       $('#share').show();
+      $('#sharelink').show();
     }
   });
   loadImage(img, url);
@@ -106,7 +107,7 @@ $(function() {
     }
     else {
       // This will open the image and then upload it again, this is fine as it is a new edit sequence.
-      imageIDMatch = window.location.search.match(/id=(\d+)/);
+      var imageIDMatch = window.location.search.match(/id=(\d+)/);
       if(imageIDMatch.length == 2) {
         var newImageID = imageIDMatch[1];
         updateImage("http://www.mememator.com/image/" + newImageID);
@@ -117,6 +118,7 @@ $(function() {
     $('#container').click(function() {
        $('#save').hide();
        $('#share').hide();
+       $('#sharelink').hide();
        $('#done').hide();
 
        var i = new Intent("http://webintents.org/pick", "image/*");

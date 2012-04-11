@@ -42,7 +42,6 @@ header h1 .tagline {
 section {
   min-width: 800px;
   width: 50%;
-  min-height: 600px;
   border-radius: 20px;
   background-color: rgba(0,0,0,0.5);
   margin: auto;

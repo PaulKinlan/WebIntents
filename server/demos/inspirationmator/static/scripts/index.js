@@ -4,6 +4,9 @@ window.intent = window.intent || window.webkitIntent;
 
 var context;
 var canvas;
+var imageID;
+var permissionKey;
+
 var draw = function(topline, bottomline) {
   var image = $("#image");
   var width = image.width();
@@ -41,6 +44,10 @@ var draw = function(topline, bottomline) {
       context.fillText(bottomline, canvasWidth * 0.5, height + 150, canvasWidth * 0.9);
     context.restore();
    context.restore();
+
+   if(imageID) {
+     updateImageData(imageID, canvas);
+    }
 };
 
 function textChanged() {
@@ -145,7 +152,7 @@ $(function() {
   }
       
   $('#save').click(function() {
-    var url = "http://www.inspirationmator.com/?id=" + imageID; 
+    var url = "http://www.inspirationmator.com/image/" + imageID; 
     var i = new Intent("http://webintents.org/save", "image/*", url);
     startActivity.call(window.navigatorm, i);
   });
@@ -157,7 +164,7 @@ $(function() {
   });
 
   $('#sharelink').click(function() {
-    var url = "http://www.inspirationmator.com/?id=" + imageID; 
+    var url = "http://www.inspirationmator.com/view.html?id=" + imageID; 
     var i = new Intent("http://webintents.org/share", "text/uri-list", url);
     startActivity.call(window.navigator, i);
   });

@@ -4,7 +4,7 @@
 {% block scripts %}
 <link rel=icon href="favicon.ico" />
 <script type="text/javascript" src="scripts/common.js"></script>
-<script type="text/javascript" src="scripts/index.js"></script>
+<script type="text/javascript" src="scripts/view.js"></script>
 <intent action="http://webintents.org/edit"
   type="image/*"
   href="index.html" />
@@ -15,8 +15,9 @@
   {% endblock %}
 {% block content %}
 <div id="container">
-  <img id="image" style="display:none;"/>
+  <img id="image" />
 </div>
-<input type="button" class="btn primary" id="save" value="Save Inspiration" />
-<input type="button" class="btn primary" id="share" value="Share Inspriation" />
+<input type="button" class="btn primary" id="save" value="Save Inspiration" style="display: inline-block;" />
+<input type="button" class="btn primary" id="share" value="Share Inspriation" style="display: inline-block;" />
+<input type="button" class="btn primary" id="sharelink" value="Share Page" style="display: inline-block;" />
 {% endblock %}

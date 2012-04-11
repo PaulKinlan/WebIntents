@@ -9,24 +9,9 @@ import demos.mememator.handlers
 import demos.shortener.handlers
 import demos.instapaper.handlers
 import demos.imgur.handlers
+import demos.inspirationmator.handlers
 
 exampleRoutes = [ Route('/<:.*>', handlers_base.PageHandler, 'examples')]
-demoRoutes = [
-      Route('/mememator/proxy', demos.mememator.handlers.ProxyHandler, 'demos/mememator'),
-      Route('/mememator/image', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
-      Route('/mememator/image/<:.*>', demos.mememator.handlers.ImageHandler, 'demos/mememator'),
-      Route('/mememator/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
-      Route('/imagestudio/<:.*>', handlers_base.PageHandler, 'demos/imagestudio'),
-      Route('/shortener/shorten', demos.shortener.handlers.ShortenHandler, 'demos/shortener'),
-      Route('/shortener/<:.*>', handlers_base.PageHandler, 'demos/shortener'),
-      Route('/instapaper/add', demos.instapaper.handlers.AddHandler, 'demos/instapaper'),
-      Route('/instapaper/<:.*>', handlers_base.PageHandler, 'demos/instapaper'),
-      Route('/imgur/save', demos.imgur.handlers.SaveHandler, 'demos/imgur'),
-      Route('/imgur/<:.*>', handlers_base.PageHandler, 'demos/imgur'),
-      Route('/twitter/<:.*>', handlers_base.PageHandler, 'demos/twitter'),
-      Route('/profilephoto/<:.*>', handlers_base.PageHandler, 'demos/profilephoto'),
-      Route('/<:.*>', handlers_base.PageHandler, 'demos')
-]
 
 app = webapp2.WSGIApplication([
     Route('/tasks/crawl', registry.handlers.CrawlerTask),
@@ -37,10 +22,7 @@ app = webapp2.WSGIApplication([
     routes.DomainRoute('webintents.org', [
       Route('/<:.*>', handlers_base.PageHandler, 'webintents')
     ]),
-    routes.DomainRoute('examples.webintents-org.appspot.com', exampleRoutes),
     routes.DomainRoute('examples.webintents.org', exampleRoutes),
-    routes.DomainRoute('demos.webintents-org.appspot.com', demoRoutes ),
-    routes.DomainRoute('demos.webintents.org', demoRoutes),
     routes.DomainRoute('registry.webintents-org.appspot.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'registry')
     ]),
@@ -74,7 +56,9 @@ app = webapp2.WSGIApplication([
       Route('/<:.*>', handlers_base.PageHandler, 'demos/mememator'),
     ]),
     routes.DomainRoute('www.inspirationmator.com', [
-      Route('/proxy', demos.mememator.handlers.ProxyHandler, 'demos/inspirationmator'),
+      Route('/proxy', demos.inspirationmator.handlers.ProxyHandler, 'demos/inspirationmator'),
+      Route('/image', demos.inspirationmator.handlers.ImageHandler, 'demos/inspirationmator'),
+      Route('/image/<:.*>', demos.inspirationmator.handlers.ImageHandler, 'demos/inspirationmator'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos/inspirationmator'),
     ])
   ])
