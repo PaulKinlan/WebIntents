@@ -4,7 +4,7 @@
 {% block scripts %}
 <link rel=icon href="favicon.ico" />
 <script type="text/javascript" src="scripts/memegen.js"></script>
-<script type="text/javascript" src="scripts/index.js"></script>
+<script type="text/javascript" src="scripts/view.js"></script>
 <intent action="http://webintents.org/edit"
   type="image/*"
   href="index.html" />
@@ -15,7 +15,7 @@
   {% endblock %}
 {% block content %}
 <div id="container">
-  <img id="image" style="display:none;"/>
+  <img id="image" src="{{url}}"/>
 </div>
 <input type="button" class="btn primary" id="save" value="Save Meme" />
 <input type="button" class="btn primary" id="share" value="Share Image" />

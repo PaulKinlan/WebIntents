@@ -79,7 +79,6 @@ var updateImageData = function(id, c) {
     url: '/image/' + id,
     data: { image: data, permissionKey: permissionKey },
     success: function(data) {
-      console.log(data);
     } 
   });
 };

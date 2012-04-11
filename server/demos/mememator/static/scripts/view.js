@@ -20,24 +20,24 @@ $(function() {
     var imageIDMatch = window.location.search.match(/id=(\d+)/);
     if(imageIDMatch.length == 2) {
       imageID = imageIDMatch[1];
-      updateImage("http://www.inspirationmator.com/image/" + imageID);
+      updateImage("http://www.mememator.com/image/" + imageID);
     }
   }
-
+  
   $('#save').click(function() {
-    var url = "http://www.inspirationmator.com/image/" + imageID; 
+    var url = "http://www.mememator.com/image/" + imageID; 
     var i = new Intent("http://webintents.org/save", "image/*", url);
     startActivity.call(window.navigator, i);
   });
 
   $('#share').click(function() {
-    var url = "http://www.inspirationmator.com/image/" + imageID; 
+    var url = "http://www.mememator.com/image/" + imageID; 
     var i = new Intent("http://webintents.org/share", "image/*", url);
     startActivity.call(window.navigator, i);
   });
 
   $('#sharelink').click(function() {
-    var url = "http://www.inspirationmator.com/?id=" + imageID; 
+    var url = "http://www.mememator.com/?id=" + imageID; 
     var i = new Intent("http://webintents.org/share", "text/uri-list", url);
     startActivity.call(window.navigator, i);
   });

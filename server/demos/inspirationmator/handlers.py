@@ -3,6 +3,7 @@ import functools
 import base64
 import re
 import random
+import handlers_base
 
 from google.appengine.api import urlfetch
 from google.appengine.api import namespace_manager
@@ -31,6 +32,11 @@ class Image(db.Model):
   created_on = db.DateTimeProperty(auto_now = True)
   image = db.BlobProperty()
   permission_key = db.StringProperty()
+
+class ViewHandler(handlers_base.PageHandler):
+  def get(self):
+    url = "http://www.inspirationmator.com/image/%s" % (self.request.get("id"))
+    self.render_file("view.html", self.request.route.name, {"url": url })
 
 class ImageHandler(webapp2.RequestHandler):
   # Homage to http://stackoverflow.com/questions/1590965/uploading-canvas-image-data-to-the-server
