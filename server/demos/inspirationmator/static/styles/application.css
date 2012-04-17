@@ -61,6 +61,7 @@ footer {
   box-shadow: inset 0 0 10px #666;
   background-color: #ddd;
   cursor: pointer;
+  text-align: center;
 }
 
 #save, #sharelink, #share, #done {

@@ -67,7 +67,6 @@ class ImageHandler(handlers_base.PageHandler):
     """
     Update an existing image.
     """
-    logging.info("PUT")
     image_data = self.request.get('image')
     permission_key = self.request.get("permissionKey")
     text_top = self.request.get("textTop")
@@ -79,18 +78,11 @@ class ImageHandler(handlers_base.PageHandler):
       self.response.set_status(401)
       return
 
-    logging.info(image_model)
-
     image_model.image = self.decode_image(image_data)
     image_model.text_top = text_top
     image_model.text_bottom = text_bottom
     image_model.put()
 
-    logging.info(image_model)
-
-    logging.info(text_top)
-    logging.info(text_bottom)
-    
     self.response.headers['Content-type'] = 'application/json'
     self.response.out.write({})
 
@@ -99,7 +91,6 @@ class ImageHandler(handlers_base.PageHandler):
     """
     Create a new image.
     """
-    logging.info("POST")
     image_data = self.request.get('image')
     permission_key = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for x in range(36))  
 

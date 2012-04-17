@@ -5,6 +5,7 @@ import re
 import random
 import handlers_base
 
+
 from google.appengine.api import urlfetch
 from google.appengine.api import namespace_manager
 from google.appengine.ext import db
@@ -28,17 +29,15 @@ def run_as(ns = ""):
     return decorated_func
   return generate
 
-class InspriationmatorImage(db.Model):
-  created_on = db.DateTimeProperty(auto_now = True)
+class InspirationmatorImage(db.Model):
+  created_on = db.DateTimeProperty(auto_now_add = True)
+  updated_on = db.DateTimeProperty(auto_now = True)
+  text_top = db.StringProperty(default = "")
+  text_bottom = db.StringProperty(default = "")
   image = db.BlobProperty()
   permission_key = db.StringProperty()
 
-class ViewHandler(handlers_base.PageHandler):
-  def get(self):
-    url = "http://www.inspirationmator.com/image/%s" % (self.request.get("id"))
-    self.render_file("view.html", self.request.route.name, {"url": url })
-
-class ImageHandler(webapp2.RequestHandler):
+class ImageHandler(handlers_base.PageHandler):
   # Homage to http://stackoverflow.com/questions/1590965/uploading-canvas-image-data-to-the-server
   data_url_pattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
 
@@ -48,11 +47,20 @@ class ImageHandler(webapp2.RequestHandler):
       return db.Blob(base64.b64decode(image))
 
   @run_as(ns = 'inspirationmator')
-  def get(self, id):
+  def get(self, file):
+    id, extension = handlers_base.parse_filename(file)
+    
     image_model = InspirationmatorImage.get_by_id(int(id))
     
-    self.response.headers['Content-type'] = 'image/png'
-    self.response.out.write(image_model.image)
+    content_type = handlers_base.get_content_type(extension)
+    self.response.headers['Content-Type'] = content_type 
+    self.response.headers['Cache-Control'] = 'max-age=3600, public, must-revalidate'
+    
+    if content_type == "text/html":
+      url = "/image/%s.png" % (id)
+      self.render_file("view.html", self.request.route.name, {"url": url, "title": id, "text_top": image_model.text_top, "text_bottom": image_model.text_bottom })
+    else:
+      self.response.out.write(image_model.image)
 
   @run_as(ns = 'inspirationmator')
   def put(self, id):
@@ -61,6 +69,8 @@ class ImageHandler(webapp2.RequestHandler):
     """
     image_data = self.request.get('image')
     permission_key = self.request.get("permissionKey")
+    text_top = self.request.get("textTop")
+    text_bottom = self.request.get("textBottom")
 
     image_model = InspirationmatorImage.get_by_id(int(id))
 
@@ -69,8 +79,10 @@ class ImageHandler(webapp2.RequestHandler):
       return
 
     image_model.image = self.decode_image(image_data)
+    image_model.text_top = text_top
+    image_model.text_bottom = text_bottom
     image_model.put()
-    
+  
     self.response.headers['Content-type'] = 'image/png'
     self.response.out.write(image_model.image)
 

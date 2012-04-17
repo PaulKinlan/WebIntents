@@ -15,8 +15,8 @@ var draw = function(topline, bottomline) {
   var canvasHeight = height + 200; 
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
-  canvas.parentElement.parentElement.style.height = canvasHeight + "px";
-  canvas.parentElement.parentElement.style.width = canvasWidth + "px";
+  //canvas.parentElement.parentElement.style.height = canvasHeight + "px";
+  //canvas.parentElement.parentElement.style.width = canvasWidth + "px";
   context = canvas.getContext('2d');
   context.save();
     context.fillStyle = "rgb(0,0,0)";
@@ -46,8 +46,8 @@ var draw = function(topline, bottomline) {
    context.restore();
 
    if(imageID) {
-     updateImageData(imageID, canvas);
-    }
+     updateImageData(imageID, canvas, topline, bottomline);
+   }
 };
 
 function textChanged() {
@@ -72,12 +72,12 @@ var createNewImage = function(c) {
   });
 };
 
-var updateImageData = function(id, c) {
+var updateImageData = function(id, c, textTop, textBottom) {
   var data = c.toDataURL('image/png');
   $.ajax({
     type: 'PUT', 
     url: '/image/' + id,
-    data: { image: data, permissionKey: permissionKey },
+    data: { image: data, permissionKey: permissionKey, textTop: textTop, textBottom: textBottom },
     success: function(data) {
     } 
   });
@@ -120,7 +120,7 @@ $(function() {
     $('#done').show();
     $('#done').click(function() {
       if (canvas) {
-        var url = "http://www.inspirationmator.com/image/" + imageID; 
+        var url = "http://www.inspirationmator.com/image/" + imageID + ".png"; 
         window.intent.postResult(canvas.toDataURL());
       }
     });
@@ -132,7 +132,7 @@ $(function() {
       var imageIDMatch = window.location.search.match(/id=(\d+)/);
       if(imageIDMatch.length == 2) {
         var newImageID = imageIDMatch[1];
-        updateImage("http://www.inspirationmator.com/image/" + newImageID);
+        updateImage("http://www.inspirationmator.com/image/" + newImageID + ".png");
       }
     }
   }
@@ -151,19 +151,19 @@ $(function() {
   }
       
   $('#save').click(function() {
-    var url = "http://www.inspirationmator.com/image/" + imageID; 
+    var url = "http://www.inspirationmator.com/image/" + imageID + ".png"; 
     var i = new Intent("http://webintents.org/save", "image/*", url);
-    startActivity.call(window.navigatorm, i);
+    startActivity.call(window.navigator, i);
   });
       
   $('#share').click(function() {
-    var url = "http://www.inspirationmator.com/image/" + imageID; 
+    var url = "http://www.inspirationmator.com/image/" + imageID + ".png"; 
     var i = new Intent("http://webintents.org/share", "image/*", url);
     startActivity.call(window.navigator, i);
   });
 
   $('#sharelink').click(function() {
-    var url = "http://www.inspirationmator.com/view.html?id=" + imageID; 
+    var url = "http://www.inspirationmator.com/image/" + imageID + ".html"; 
     var i = new Intent("http://webintents.org/share", "text/uri-list", url);
     startActivity.call(window.navigator, i);
   });
