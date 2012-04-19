@@ -2,9 +2,10 @@ NOW = $(shell date "+%Y.1%m.1%d.1%H%M")
 
 all: server/webintents/static/cache.manifest production
 
-release: ./src/webintents.js ./src/json2.js ./src/base64.js
+release: ./src/webintents.js ./src/json2.js ./src/base64.js ./src/webintents-prefix.js
 	cat ./src/webintents.js ./src/json2.js ./src/base64.js > webintents.js
 	cp webintents.js server/webintents/static/webintents.js
+	cp ./src/webintents-prefix.js server/webintents/static/webintents-prefix.js
 	cp webintents.js server/webintents/static/webintents.js
 	cp webintents.js tools/chrome/extensions/share/webintents.js
 
