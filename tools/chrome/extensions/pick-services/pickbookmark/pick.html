@@ -7,10 +7,13 @@
       var renderRecent = function(bookmarks) {
         var recentBookmarks = $("#recentBookmarks");
         var renderBookmark = function(bookmark) {
-          var el = $("<li><a></a></li>")[0];
-          var li = el.children[0];
+          var el = $("<li><a><img /><span></span></a></li>")[0];
+          var li = el.children[0].children[1];
           li.href = bookmark.url;
-          li.innerText = bookmark.title;
+          li.innerText = bookmark.title || bookmark.url;
+          var img = el.children[0].children[0];
+          img.src = "chrome://" ;
+
           recentBookmarks.append(el) 
         };
 
@@ -20,10 +23,13 @@
       var renderSearch = function(bookmarks) {
         var searchResults = $("#searchResults");
         var renderBookmark = function(bookmark) {
-          var el = $("<li><a></a></li>")[0];
-          var li = el.children[0];
+          var el = $("<li><a><img /><span></span></a></li>")[0];
+          var li = el.children[0].children[1];
           li.href = bookmark.url;
-          li.innerText = bookmark.title;
+          li.innerText = bookmark.title || bookmark.url;
+          var img = el.children[0].children[0];
+          img.src = "chrome://" ;
+          
           searchResults.append(el) 
         };
 
@@ -50,6 +56,11 @@
     <style>
       a {
         display: block;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
       }
     </style>
   </head>

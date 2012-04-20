@@ -7,10 +7,11 @@
   },
   "permissions" : ["bookmarks"],
   "intents" : {
-    "http://webintents.org/pick" : {
+    "http://webintents.org/pick" : [{
        "type" : ["text/uri-list"],
        "title" : "Pick URL from Bookmarks",
-       "path" : "/pick.html"
-    }
+       "href" : "/pick.html",
+       "disposition": "inline"
+    }]
   }
 }

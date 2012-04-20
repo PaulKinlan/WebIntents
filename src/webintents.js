@@ -25,9 +25,7 @@
     }
   };
 
-  // __WEBINTENTS_ROOT
- 
-  var server = __WEBINTENTS_ROOT; 
+  var server = "http://webintents.org/"; 
   var serverSource = server + "intents.html";
   var pickerSource = server + "picker.html";
   var channels = {};
