@@ -128,11 +128,14 @@ var Intents = new (function() {
   };
 })();
 
-if(window.parent.opener && window.parent.opener.Intents) {
-  verified = window.parent.opener.Intents.verify();
-  // The picker has said it is legit. (TODO), so close the window.
-  if(verified) window.parent.opener.close();
+try {
+  if(window.parent.opener && window.parent.opener.Intents) {
+    verified = window.parent.opener.Intents.verify();
+    // The picker has said it is legit. (TODO), so close the window.
+    if(verified) window.parent.opener.close();
+  }
 }
+catch(e) { console.log(e);}
 
 var MessageDispatcher = function() {
 
