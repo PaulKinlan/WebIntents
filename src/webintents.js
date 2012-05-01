@@ -97,7 +97,7 @@
         parseIntentsDocument();
       }
     } catch (err) {
-      console.log(err);
+      if(!!console && !!console.log) console.log(err);
     }
   };
 
@@ -133,7 +133,6 @@
       }
     }
 
-    console.log("Attempting to register");
     iframe.contentWindow.postMessage(
       _str({
         request: "register", 
@@ -258,7 +257,7 @@
 
     window.Intent = Intent;
     window.navigator.startActivity = intents.startActivity;
-   // console.log("name:" +  window.name)
+    
     if(window.name != "") {
       // Verify the source of the intent data.
       var verified = false;
