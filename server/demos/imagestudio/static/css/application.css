@@ -9,48 +9,54 @@ body {
   position: absolute;
 }
 
-header {
+header, #steps {
+  width: 100%;
+  position: absolute;
   background-color: #232323;
   color: white;
   border-bottom: solid 1px #232323;
   box-shadow: 0px 0px 4px #000;
-  margin-bottom: 25px;
+  cursor: pointer;
 }
 
 header h1 {
   color: white;
   font-family: 'Bitter';
-  padding: 25px 25px 10px 25px;
+  margin: 0;
+  padding: 5px;
+  height: 
   text-shadow: 1px 0 1px #ccc;
 }
 
 section {
-  display: -webkit-box;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -webkit-box-orient: horizontal;
+  padding-top: 46px;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: block;
+  text-align: center;
 }
 
 footer {
+  display:none;
 }
 
 #result {
-  height: 600px;
-  width: 800px;
-  -webkit-box-shadow: inset 0 0 10px #666;
-  -moz-box-shadow: inset 0 0 10px #666;
-  box-shadow: inset 0 0 10px #666;
+  height: 200px;
+  width: 200px;
+  margin-top: 10px;
+  -webkit-box-shadow: 0 0 10px #666;
+  -moz-box-shadow: 0 0 10px #666;
+  box-shadow: 0 0 10px #666;
+  cursor: pointer;
+  background-image: url(/images/click.png);
 }
 
 #steps {
-  margin: 0 10px;
-  display: -webkit-box;
-  display: -moz-box;
-  -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
+  bottom: 0px;
+  padding: 10px 0;
+  background-color: rgba(0,0,0, 1);
 }
 
 #steps input {
-  display: block;
-  margin: 0 5px 5px 5px;
 }

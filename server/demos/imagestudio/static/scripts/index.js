@@ -14,7 +14,7 @@ $(function() {
      loadImage(window.intent.data);
    }
 
-   $('#choose').click(function(e) {
+   $('#result').click(function(e) {
      var intent = new Intent( 'http://webintents.org/pick', 'image/*');
      startActivity.call(window.navigator, intent, function(data) {
        loadImage(data);
