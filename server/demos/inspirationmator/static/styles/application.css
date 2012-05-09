@@ -63,6 +63,7 @@ footer {
   background-color: #ddd;
   cursor: pointer;
   text-align: center;
+  background-image: url(/pick.png);
 }
 
 #save, #sharelink, #share, #done {

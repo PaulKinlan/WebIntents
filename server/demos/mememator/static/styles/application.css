@@ -70,6 +70,7 @@ footer {
   background-color: #ddd;
   cursor: pointer;
   text-align: center;
+  background-image: url(/pick.png);
 }
 
 #save, #sharelink, #share, #done {
@@ -105,4 +106,5 @@ input[type=text]::-webkit-input-placeholder {
   width: 128px;
   border: solid 5px white;
   cursor: pointer;
+
 }
