@@ -23,6 +23,7 @@ header h1 {
   font-family: 'Josefin Slab';
   color: white;
   padding: 10px;
+  margin-bottom: 0;
 }
 
 header h1 .tagline:before {
@@ -75,11 +76,15 @@ input[type=text] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 20px;
+  height: 2em;
   width: 100%;
   margin: 5px 0px 5px 0px;
   color: white;
   background-color: black;
+}
+
+input[type=text]::-webkit-input-placeholder {
+  padding-top: 5px;
 }
 
 #images img {

@@ -79,11 +79,11 @@ footer {
 input[type=text] {
   display: block;
   font-size: 2em;
+  height: 2em;
   font-family: 'Sigmar One';
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 20px;
   width: 100%;
   margin: 5px 0px 5px 0px;
   color: white;
@@ -95,6 +95,10 @@ input[type=text] {
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+
+input[type=text]::-webkit-input-placeholder {
+  padding-top: 5px;
 }
 
 #images img {
