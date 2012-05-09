@@ -24,6 +24,8 @@ header h1 {
   font-family: 'Sigmar One';
   color: white;
   padding: 10px;
+  font-size: 4em;
+  font-weight: lighter;
   -webkit-text-stroke: 1px black;
   text-shadow:
     3px 3px 0 #000,
@@ -31,6 +33,10 @@ header h1 {
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+
+header h1 a:hover {
+  color: white;
 }
 
 header h1 .tagline:before {
@@ -100,7 +106,7 @@ input[type=text] {
 }
 
 input[type=text]::-webkit-input-placeholder {
-  padding-top: 5px;
+  padding-top: 10px;
   font-weight: bold;
 }
 
