@@ -81,6 +81,7 @@ input[type=text] {
   display: block;
   font-size: 2em;
   height: 2em;
+  font-weight: bold;
   font-family: 'Sigmar One';
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -100,6 +101,7 @@ input[type=text] {
 
 input[type=text]::-webkit-input-placeholder {
   padding-top: 5px;
+  font-weight: bold;
 }
 
 #images img {
