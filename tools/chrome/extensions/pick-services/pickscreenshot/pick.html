@@ -7,6 +7,8 @@
       var renderTabs = function(tabs) {
         var _tabs = $("#tabs");
         var renderTab = function(tab) {
+          if(tab.url.substr(8) == "chrome://") return;
+
           var el = $("<li><a><img /><span></span></a></li>")[0];
           var li = el.children[0].children[1];
           li.href = tab.url;
