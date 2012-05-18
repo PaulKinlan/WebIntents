@@ -1,0 +1,17 @@
+{
+  "name": "Capture browser screen",
+  "version": "0.0.0.3",
+  "icons" : {
+    "16" : "favicon.ico",
+    "128" : "128.png"
+  },
+  "permissions" : ["tabs", "http://*/", "https://*/"],
+  "intents" : {
+    "http://webintents.org/pick" : [{
+       "type" : ["image/jpeg", "image/png"],
+       "title" : "Capture browser screen ",
+       "href" : "/pick.html",
+       "disposition": "inline"
+    }]
+  }
+}
