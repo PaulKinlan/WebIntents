@@ -1,12 +1,19 @@
 body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 }
 
 header {
   padding: 10px;
-  background-color: #F1F1F1;
+  background-color: #444444;
   border-bottom: 1px solid #E2E2E2;
   margin-bottom: 10px;
   padding-top: 15px;
+  color: white;
+}
+
+header  a {
+  color: #aaa;
 }
 
 header > * {

@@ -1,0 +1,78 @@
+{% extends "demos/cloudfilepicker/layouts/application.html" %}
+{% block title %}Cloud File Picker{% endblock %}
+{% block headline %}Cloud File Picker{% endblock %}
+{% block scripts %}
+  <script src="//webintents.org/webintents.js"></script>
+  <script src="/javascripts/events.js"></script>
+  <script
+    src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug"></script>
+  <link rel=icon href="favicon.ico" />
+  <intent action="http://webintents.org/pick"
+          type="image/*" />
+
+  <script type="text/javascript">
+    var Intent = window.Intent || window.WebKitIntent;
+    var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+    window.intent = window.intent || window.webkitIntent;
+
+    google.setOnLoadCallback(createPicker);
+    google.load('picker', '1');
+    
+    function createPicker() {
+      if (!!window.intent) {
+        var pickerBuilder = new google.picker.PickerBuilder();
+        if (window.intent.action == "http://webintents.org/pick") {
+          if (window.intent.type.indexOf('image/') == 0 || window.intent.type === "*") {
+            pickerBuilder.addViewGroup(
+              new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
+                addView(new google.picker.PhotosView().
+                setType(google.picker.PhotosView.Type.UPLOADED)).
+                addView(new google.picker.PhotosView().
+                setType(google.picker.PhotosView.Type.FEATURED)));
+          }
+        }
+        else if (window.intent.action == "http://webintents.org/save") {
+          if (window.intent.type.indexOf('image/') == 0) {
+            pickerBuilder.addViewGroup(
+              new google.picker.ViewGroup(google.picker.ViewId.PHOTO_UPLOAD));
+          }
+        }
+        pickerBuilder.setCallback(pickerCallback);
+        pickerBuilder.build().setVisible(true);
+      }
+    }
+
+    function returnImage (e) {
+      if(!!window.intent) {
+        window.intent.postResult([e]);
+        setTimeout(function() { window.close();}, 500);
+      }
+    }
+
+    function pickerCallback(data) {
+      if (data.action == google.picker.Action.PICKED) {
+        returnImage(data.docs[0].thumbnails[data.docs[0].thumbnails.length > 4 ? 4 : 3].url);
+      }
+    }
+  </script>
+  {% endblock %}
+  {% block content %}
+  <div id="contents">
+    <h2>Welcome</h2>
+    <p>
+    This Cloud File Picker app gives you access to your files held in your Google account for
+    use in your favourite applications.
+    </p>
+    <p>
+      Apps won't be able to access your information without your consent, so you are in 
+      control of how applications can access your data.
+    </p>
+    <p>Try some of our favourite apps to see the integration in action:</p>
+    <ul>
+      <li><a href="http://www.mememator.com/index.html">Mememator</a></li>
+      <li><a href="http://www.imagemator.com/index.html">Imagemator</a></li>
+    </ul>
+  </div>
+
+  <a href="http://www.colourlovers.com/lover/sugar%21/loveNote" id="credits">Background by sugar!</a>
+{% endblock %}

@@ -23,7 +23,7 @@ tools: chrome
 
 chrome: extensions apps
 
-apps:
+apps: tools/chrome/apps/hosted/picksomeipsum.crx
 	./packcrx.sh tools/chrome/apps/hosted/cloudfilepicker tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/hosted/imagemator tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/hosted/inspirationmator tools/chrome/key.pem
@@ -31,7 +31,13 @@ apps:
 	./packcrx.sh tools/chrome/apps/hosted/quicksnapr tools/chrome/key.pem
 	./packcrx.sh tools/chrome/apps/packaged/scrapbook tools/chrome/key.pem
 
-extensions: tools/chrome/extensions/share-services/twitter.crx tools/chrome/extensions/share-services/blogger.crx tools/chrome/extensions/share-services/tumblr.crx tools/chrome/extensions/share-services/digg.crx tools/chrome/extensions/share-services/linkedin.crx tools/chrome/extensions/share-services/delicious.crx tools/chrome/extensions/share-services/reddit.crx tools/chrome/extensions/share-services/gmail.crx tools/chrome/extensions/shorten-services/bit.ly.crx  tools/chrome/extensions/shorten-services/goo.gl.crx tools/chrome/extensions/save-services/box.crx tools/chrome/extensions/save-services/readitlater.crx tools/chrome/extensions/save-services/instapaper.crx
+tools/chrome/apps/hosted/picksomeipsum/manifest.json: tools/chrome/apps/hosted/picksomeipsum-manifest.json
+	cat ./tools/chrome/apps/hosted/picksomeipsum-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/apps/hosted/picksomeipsum/manifest.json 
+
+tools/chrome/apps/hosted/picksomeipsum.crx: tools/chrome/apps/hosted/picksomeipsum/manifest.json tools/chrome/apps/hosted/picksomeipsum/128.png
+	./packcrx.sh tools/chrome/apps/hosted/picksomeipsum tools/chrome/key.pem
+
+extensions: tools/chrome/extensions/share-services/twitter.crx tools/chrome/extensions/share-services/blogger.crx tools/chrome/extensions/share-services/tumblr.crx tools/chrome/extensions/share-services/digg.crx tools/chrome/extensions/share-services/linkedin.crx tools/chrome/extensions/share-services/delicious.crx tools/chrome/extensions/share-services/reddit.crx tools/chrome/extensions/share-services/gmail.crx tools/chrome/extensions/shorten-services/bit.ly.crx  tools/chrome/extensions/shorten-services/goo.gl.crx tools/chrome/extensions/save-services/box.crx tools/chrome/extensions/save-services/readitlater.crx tools/chrome/extensions/save-services/instapaper.crx tools/chrome/extensions/pick-services/pickhtml.crx tools/chrome/extensions/pick-services/pickbookmark.crx tools/chrome/extensions/pick-services/pickscreenshot.crx
 	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/desktop tools/chrome/key.pem
@@ -70,7 +76,7 @@ tools/chrome/extensions/shorten-services/goo.gl.crx: tools/chrome/extensions/sho
 tools/chrome/extensions/share-services/twitter.crx: tools/chrome/extensions/share-services/twitter/manifest.json tools/chrome/extensions/share-services/twitter/twitter_inline.html
 	./packcrx.sh tools/chrome/extensions/share-services/twitter tools/chrome/key.pem
 
-tools/chrome/extensions/share-services/twitter/manifest.json:
+tools/chrome/extensions/share-services/twitter/manifest.json: tools/chrome/extensions/share-services/twitter-manifest.json
 	cat ./tools/chrome/extensions/share-services/twitter-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/twitter/manifest.json 
 
 tools/chrome/extensions/share-services/tumblr/manifest.json:
@@ -114,6 +120,24 @@ tools/chrome/extensions/share-services/reddit/manifest.json:
 
 tools/chrome/extensions/share-services/reddit.crx: tools/chrome/extensions/share-services/reddit/manifest.json
 	./packcrx.sh tools/chrome/extensions/share-services/reddit tools/chrome/key.pem
+
+tools/chrome/extensions/pick-services/pickhtml/manifest.json:
+	cat ./tools/chrome/extensions/pick-services/pickhtml-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/pick-services/pickhtml/manifest.json 
+
+tools/chrome/extensions/pick-services/pickhtml.crx: tools/chrome/extensions/pick-services/pickhtml/manifest.json
+	./packcrx.sh tools/chrome/extensions/pick-services/pickhtml tools/chrome/key.pem
+
+tools/chrome/extensions/pick-services/pickbookmark/manifest.json:
+	cat ./tools/chrome/extensions/pick-services/pickbookmark-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/pick-services/pickbookmark/manifest.json 
+
+tools/chrome/extensions/pick-services/pickbookmark.crx: tools/chrome/extensions/pick-services/pickbookmark/manifest.json
+	./packcrx.sh tools/chrome/extensions/pick-services/pickbookmark tools/chrome/key.pem
+
+tools/chrome/extensions/pick-services/pickscreenshot/manifest.json:
+	cat ./tools/chrome/extensions/pick-services/pickscreenshot-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/pick-services/pickscreenshot/manifest.json 
+
+tools/chrome/extensions/pick-services/pickscreenshot.crx: tools/chrome/extensions/pick-services/pickscreenshot/manifest.json
+	./packcrx.sh tools/chrome/extensions/pick-services/pickscreenshot tools/chrome/key.pem
 
 clean:
 	rm -f webintents.js

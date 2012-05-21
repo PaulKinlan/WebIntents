@@ -1,0 +1,62 @@
+html {
+  background-color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  color: black;
+}
+
+header {
+  width: 100%;
+  box-shadow: 0 0 20px #000;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  padding: 10px;
+  font-family: 'Henny Penny', Arial, serif; font-weight: 400; 
+}
+
+header h1 .tagline {
+}
+
+section {
+  min-width: 800px;
+  width: 50%;
+  margin: auto;
+}
+
+#controls, #actions {
+  text-align: right;
+}
+
+section p {
+  font-family: 'Sorts Mill Goudy', serif;
+  font-size: 1.6em;
+  line-height: 1.6em;
+}
+
+footer {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+#container {
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px black;
+  padding: 5px;
+  margin: 5px 0 5px 0;
+}
+
+
+
+#save, #share, #done {
+  display: none;
+}

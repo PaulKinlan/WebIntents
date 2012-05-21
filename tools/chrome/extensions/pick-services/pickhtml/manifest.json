@@ -1,0 +1,17 @@
+{
+  "name": "Pick HTML from open tab",
+  "version": "2012.105.118.11525",
+  "icons" : {
+    "16" : "favicon.ico",
+    "128" : "128.png"
+  },
+  "permissions" : ["tabs", "pageCapture"],
+  "intents" : {
+    "http://webintents.org/pick" : [{
+       "type" : ["text/html", "multipart/related", "text/uri-list"],
+       "title" : "Pick HTML from open tab",
+       "href" : "/pick.html",
+       "disposition": "inline"
+    }]
+  }
+}

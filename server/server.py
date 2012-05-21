@@ -51,6 +51,9 @@ app = webapp2.WSGIApplication([
       Route('/suggestions.html', registry.handlers.SuggestionsHandler, 'registry'),
       Route('/<:.*>', handlers_base.PageHandler, 'registry')
     ]),
+    routes.DomainRoute('www.picksomeipsum.com', [
+      Route('/<:.*>', handlers_base.PageHandler, 'demos/picksomeipsum'),
+    ]),
     routes.DomainRoute('www.imagemator.com', [
       Route('/<:.*>', handlers_base.PageHandler, 'demos/imagestudio'),
     ]),

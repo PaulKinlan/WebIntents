@@ -1,0 +1,17 @@
+{
+  "name": "Pick URL from Bookmarks",
+  "version": "2012.105.118.11525",
+  "icons" : {
+    "16" : "favicon.ico",
+    "128" : "128.png"
+  },
+  "permissions" : ["bookmarks"],
+  "intents" : {
+    "http://webintents.org/pick" : [{
+       "type" : ["text/uri-list"],
+       "title" : "Pick URL from Bookmarks",
+       "href" : "/pick.html",
+       "disposition": "inline"
+    }]
+  }
+}

@@ -2,19 +2,28 @@
 {% block title %}Web Intents{% endblock %}
 {% block headline %}Web Intents{% endblock %}
 {% block head %}
-  <nav class="sub">
-  <span>Page: </span>
+ 
+{% endblock %}
+{% block content %}
+<section>
+  <ul class="sub">
+  <span><strong>Quick Links:</strong></span>
   <a href="#introduction">Introduction</a>
   <a href="#specification">Specification</a>
   <a href="#api">API</a>
+  <a href="#support">Browser Support</a>
   <a href="#defaultintents">Default Intents</a>
   <a href="#extending">Extending</a>
   <a href="#javascriptshim">JavaScript Shim</a>
   <a href="#contributing">Contributing</a>
   </nav>
-{% endblock %}
-{% block content %}
-<section>
+
+  <p>
+  This page is a high-level overview of the project and provides
+  guidence on how to implement the intents in your applications 
+  without the need for the you to understand the 
+  <a href="http://dvcs.w3.org/hg/web-intents/raw-file/tip/spec/Overview.html">entire spec</a>. 
+  </p>
 <h2 id="introduction">Introduction</h2>
 <p>
 Users use many different services on the web to handle their day to day
@@ -54,11 +63,22 @@ the <a href="http://lists.w3.org/Archives/Public/public-web-intents">public-inte
 </p>
 <h2 id="api">API</h2>
 <p>
+  <dl>
+    <dt>Client</dt>
+    <dd>An application that requests features and functionality from Services.</dd>
+    <dt>Service</dt>
+    <dd>An application that provides it services to other applications.</dd>
+  </dl>
+</p>
+<p>
 The Web Intent API is simple to use. Service developers define the 
 intent they intend to support and what to do with the data they receive.
 Client applications simply initiate a new action with the given parameters.
 </p>
 <h3 id="intentregistration">Intent Registration</h3>
+<p>
+  The <strong>proposed</strong> method of intent registration is via the intent tag.
+</p>
 <pre>&lt;intent
   <a href="#action">action</a>="http://webintents.org/share" 
   <a href="#type">type</a>="image/*" 
@@ -80,7 +100,11 @@ Client applications simply initiate a new action with the given parameters.
     the service page will be opened in the same context as the picker.  A
     value of "window" will open the service in a new context.
     </dd>
-</dl>
+  </dl>
+<p>
+  The current mechanism for intent registration in Chrome is 
+  <a href="http://code.google.com/chrome/extensions/manifest.html#intents">via manifest</a>.
+</p>
 
 <h3 id="invocation">Invocation</h3>
 <pre>var intent = new Intent("http://webintents.org/share", 
@@ -103,6 +127,12 @@ window.navigator.startActivity(intent);</pre>
   <li><a href="/subscribe">Subscribe</a></li>
   <li><a href="/save">Save</a></li>
 </ul>
+<h2 id="support">Browser Support</h2>
+<p>
+  <ul>
+    <li>Chrome: M19 Native support, registration <a href="http://code.google.com/chrome/extensions/manifest.html#intents">via manifest</a>.</li>
+  </ul>
+</p>
 
 <h2 id="javascriptshim">JavaScript Shim</h2>
 <p>
@@ -119,6 +149,12 @@ window.navigator.startActivity(intent);</pre>
 </p>
 
 <pre>&lt;script src="http://webintents.org/webintents.min.js"&gt;&lt;/script&gt;</pre>
+
+<p>
+  The shim is not 100% compatible with the native API.  The native API uses Blob's to 
+  transfer data between applications and this feature is not directly supported on IE
+  and earlier versions of Firefox.
+</p>
 
 <h2 id="contributing">Contributing</h2>
 <p>

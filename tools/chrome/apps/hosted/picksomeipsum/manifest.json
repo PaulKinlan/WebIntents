@@ -1,0 +1,20 @@
+{
+  "name": "Pick some ipsum",
+  "version": "2012.105.120.12102",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://www.picksomeipsum.com/"],
+    "launch" : {
+      "web_url" : "http://www.picksomeipsum.com/"
+    }
+  },
+  "intents": {
+    "http://webintents.org/pick" : [{
+      "type" : ["text/plain"],
+      "href" : "http://www.picksomeipsum.com/index.html",
+      "title" : "Pick some ipsum"
+    }]
+  }
+}

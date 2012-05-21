@@ -1,6 +1,35 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <style>
+      body {
+        position: absolute;
+        padding: 5px;
+        color: white;
+      }
+
+      .stripes {
+        width: 100%;
+        height: 100%; 
+                                      
+        -webkit-background-size: 50px 50px;
+        -moz-background-size: 50px 50px;
+        background-size: 50px 50px; /* Controls the size of the stripes */
+     }
+
+     .horizontal {
+       background-color: #0ae;
+       background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.5, transparent), to(transparent));
+       -webkit-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: -moz-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: -ms-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: -o-linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+       background-image: linear-gradient(rgba(255, 255, 255, .2) 50%, transparent 50%, transparent);
+     }
+
+     h1 { color: white; }
+    </style>
     <script src="//webintents.org/webintents.min.js"></script>
     <script>
       window.intent = window.intent || window.webkitIntent;
@@ -43,7 +72,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="stripes horizontal">
     <h1 id="state">Processing</h1>
     <div id="result" style="display:none">
       Shortening <span id="long"></span>
