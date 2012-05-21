@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type === "text/uri-list") {
+          var title = intent.getExtra("title");
+          var href = "https://news.ycombinator.com/submitlink?u=" +
+            encodeURI(intent.data) + "&t=" +
+            encodeURI(title);
+          window.location = href;
+        }
+      }
+    </script>
+  </head>
+</html>
