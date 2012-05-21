@@ -1,6 +1,6 @@
 var Scrappy = new (function() {
   this.save = function(data, name, type) {
-    filer.init({persistent: true, size: size}, function(fs) {
+    filer.init({persistent: false, size: size}, function(fs) {
       filer.write(name, {data: data, type: type}, function(fileEntry) {
         fileList.addFile(fileEntry);
       }, function(e) {console.log(e)});
@@ -9,25 +9,25 @@ var Scrappy = new (function() {
 
   this.startShare = function() {
     var file = fileList.file;
-    var intent = new Intent("http://webintents.org/share", file.type, file);
-    window.navigator.startActivity(intent);
+    var intent = new WebKitIntent("http://webintents.org/share", file.type, file);
+    window.navigator.webkitStartActivity(intent);
   };
 
   this.startSave = function() {
     var file = fileList.file;
-    var intent = new Intent("http://webintents.org/save", file.type, file);
-    window.navigator.startActivity(intent);
+    var intent = new WebKitIntent("http://webintents.org/save", file.type, file);
+    window.navigator.webkitStartActivity(intent);
   };
 
   this.startEdit = function() {
     var file = fileList.file;
-    var intent = new Intent("http://webintents.org/edit", file.type, file);
-    window.navigator.startActivity(intent);
+    var intent = new WebKitIntent("http://webintents.org/edit", file.type, file);
+    window.navigator.webkitStartActivity(intent);
   };
 
   this.startPick = function(callback) {
-    var intent = new Intent("http://webintents.org/pick", "*");
-    window.navigator.startActivity(intent, callback);
+    var intent = new WebKitIntent("http://webintents.org/pick", "*");
+    window.navigator.webkitStartActivity(intent, callback);
   };
 })();
 
@@ -53,11 +53,9 @@ var FileListModel = function(files) {
 var fileList;
 var filer = new Filer();
 var size = 1024 * 1024 * 1204;
-filer.init({persistent: true, size: size}, function(fs) {
+filer.init({persistent: false, size: size}, function(fs) {
   filer.ls('/', function(entries) {
     fileList = new FileListModel(entries);
     ko.applyBindings(fileList);
   });
 });
-
-

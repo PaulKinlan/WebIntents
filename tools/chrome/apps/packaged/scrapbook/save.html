@@ -6,17 +6,20 @@
     <script src="lib/filer.min.js"></script>
     <script src="controller.js"></script>
     <script src="intent-helper.js"></script>
+    <style>
+      h1 { color: white; text-shadow: 0px 0px 5px black; }
+    </style>
     <script>
       $(document).ready(function() {
-        if(window.intent && window.intent.type == "http://webintents.org/save") {
+        if(window.webkitIntent && window.webkitIntent.type == "http://webintents.org/save") {
           /*
             If window.intent.data == URL then fetch the data and store locally
             If window.intent.data == Data Uri, convert to file and save locally
             If window.intent.data == File, then save to file system locally
             If window.intent.data == TypedArray then save to file-system locally
             */
-            var data = window.intent.data;
-            var type = window.intent.type;
+            var data = window.webkitIntent.data;
+            var type = window.webkitIntent.type;
             var objectType = IntentHelper.getObjectType(data);
             
             if(data instanceof Array) {

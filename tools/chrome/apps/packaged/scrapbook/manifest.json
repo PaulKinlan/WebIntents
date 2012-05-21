@@ -13,17 +13,17 @@
   },
   "permissions" : ["unlimitedStorage"],
   "intents": {
-    "http://webintents.org/pick" : {
+    "http://webintents.org/pick" : [{
       "type" : ["image/*"],
       "path" : "/pick.html",
       "disposition" : "inline",
       "title" : "Pick file from Scrapbook"
-    },
-    "http://webintents.org/save" : {
+    }],
+    "http://webintents.org/save" : [{
       "type": ["*"],
       "path": "save.html",
       "disposition" : "inline",
       "title" : "Save to scrapbook"
-    }
+    }]
   }
 }
