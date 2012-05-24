@@ -47,6 +47,11 @@ var createNewImage = function(c) {
   });
 };
 
+var createBlobFromCanvas = function(c) {
+  var data = c.toDateURL('image/png');
+  return dataURLToBlob(data);
+};
+
 var updateImageData = function(id, c, textTop, textBottom) {
   var data = c.toDataURL('image/png');
   $.ajax({
@@ -60,6 +65,10 @@ var updateImageData = function(id, c, textTop, textBottom) {
 
 var updateImage = function(data) {
   var url = $.isArray(data) ? data[0] : data;
+  if(data.constructor.name == "Blob" || data instanceof Blob) {
+    url = webkitURL.createObjectURL(data);
+  }
+  
   var img = $('#image');
   img.load(function() {
     var image = $('#image');
@@ -128,14 +137,16 @@ $(function() {
   }
       
   $('#save').click(function() {
-    var url = "http://www.mememator.com/image/" + imageID + ".png"; 
-    var i = new Intent("http://webintents.org/save", "image/*", url);
+    var canvas = $('#container canvas')[0];
+    var data = createBlobFromCanvas(canvas.getContext("2d")); 
+    var i = new Intent("http://webintents.org/save", "image/png", data);
     startActivity.call(window.navigator, i);
   });
       
   $('#share').click(function() {
-    var url = "http://www.mememator.com/image/" + imageID + ".png"; 
-    var i = new Intent("http://webintents.org/share", "image/*", url);
+    var canvas = $('#container canvas')[0];
+    var data = createBlobFromCanvas(canvas.getContext("2d")); 
+    var i = new Intent("http://webintents.org/share", "image/png", data);
     startActivity.call(window.navigator, i);
   });
  
@@ -148,4 +159,27 @@ $(function() {
   $('#top').change(textChanged);
   $('#bottom').change(textChanged);
 });
- 
+
+// taken from filer.js by Eric Bidelman
+var dataURLToBlob = function(dataURL) {
+  var BASE64_MARKER = ';base64,';
+  if (dataURL.indexOf(BASE64_MARKER) == -1) {
+     var parts = dataURL.split(',');
+     var contentType = parts[0].split(':')[1];
+     var raw = parts[1];
+     var bb = new WebKitBlobBuilder();
+     bb.append(raw);
+     return bb.getBlob(contentType);
+   }
+   var parts = dataURL.split(BASE64_MARKER);
+   var contentType = parts[0].split(':')[1];
+   var raw = window.atob(parts[1]);
+   var rawLength = raw.length;
+   var uInt8Array = new Uint8Array(rawLength);
+   for (var i = 0; i < rawLength; ++i) {
+     uInt8Array[i] = raw.charCodeAt(i);
+   }
+   var bb = new WebKitBlobBuilder();
+   bb.append(uInt8Array.buffer);
+   return bb.getBlob(contentType);
+ }
