@@ -48,7 +48,7 @@ var createNewImage = function(c) {
 };
 
 var createBlobFromCanvas = function(c) {
-  var data = c.toDateURL('image/png');
+  var data = c.toDataURL('image/png');
   return dataURLToBlob(data);
 };
 
@@ -138,14 +138,14 @@ $(function() {
       
   $('#save').click(function() {
     var canvas = $('#container canvas')[0];
-    var data = createBlobFromCanvas(canvas.getContext("2d")); 
+    var data = createBlobFromCanvas(canvas); 
     var i = new Intent("http://webintents.org/save", "image/png", data);
     startActivity.call(window.navigator, i);
   });
       
   $('#share').click(function() {
     var canvas = $('#container canvas')[0];
-    var data = createBlobFromCanvas(canvas.getContext("2d")); 
+    var data = createBlobFromCanvas(canvas); 
     var i = new Intent("http://webintents.org/share", "image/png", data);
     startActivity.call(window.navigator, i);
   });
