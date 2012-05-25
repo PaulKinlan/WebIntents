@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <script>
+    window.addEventListener("load", function() {
+      var intent = window.intent || window.webkitIntent;
+      if(intent) {
+        if(intent.type == "text/uri-list") {
+          var encodedUrl = encodeURIComponent(intent.data);
+          document.location = "https://plus.google.com/share?url=" + encodedUrl;
+        }
+      }
+    }); 
+  </script>
+  <body></body>
+</html>

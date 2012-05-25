@@ -1,0 +1,17 @@
+{
+  "name": "Share to Google+",
+  "version": "0.0.1",
+  "icons" : {
+    "16" : "favicon.ico",
+    "128" : "128.png"
+  },
+  "intents" : {
+    "http://webintents.org/share" : [
+      {
+        "type" : ["text/uri-list"],
+        "title" : "Share to Google+",
+        "href" : "/launch.html"
+      }
+    ]
+  }
+}
