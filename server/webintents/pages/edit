@@ -31,18 +31,37 @@
 window.navigator.startActivity(intent);</pre>
 
 <h3>Try it!</h3>
+<div>
+<img src="/images/webintents.png" id="wilogo" style="height:256px; width: 256px; box-shadow: 0px 0px 5px black;"/>
+</div>
 <script>
+window.addEventListener("load", function() {
+  var canvas = document.getElementById("canvas");
+  var context = canvas.getContext("2d");
+  var wilogo = document.getElementById("wilogo");
+  context.drawImage(wilogo, 0, 0);
+}, false);
+
 function invoke() {
-    var intent = new WebKitIntent("http://webintents.org/edit", "image/jpeg", "");
+  var canvas = document.getElementById("canvas");
+  var intent = new WebKitIntent("http://webintents.org/edit", "image/png", canvas.toDataURL("image/png") );
 
-    var onSuccess = function(data) { /* woot */ };
-    var onError = function(data) { /* boooo */ };
+  var onSuccess = function(data) { 
+    var logo = document.getElementById("wilogo");
+    if(data instanceof Blob || data.constructor.name === "Blob") {
+      logo.src = webkitURL.createObjectURL(data);
+    }
+    else {
+      logo.src = data;
+    }
+  };
+  var onError = function(data) { /* boooo */ };
 
-    window.navigator.webkitStartActivity(intent, onSuccess, onError);
+  window.navigator.webkitStartActivity(intent, onSuccess, onError);
 }
 </script>
+<canvas id="canvas" style="display: none;" width="256" height="256"></canvas>
 <p><button onclick="invoke()">Edit</button></p>
-
 
 <h2>Data Formats</h2>
 <p>Clients and services can only interact with each other if the both support the same intent AND the same data type. Data-types can be any arbitary string, but it is expected that client and service will pass the same data if they both agree to support the protocol.</p>
