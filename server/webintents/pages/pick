@@ -29,6 +29,20 @@
 <h2>Invocation</h2>
 <pre>var intent = new Intent("http://webintents.org/pick");
 window.navigator.startActivity(intent);</pre>
+
+<h3>Try it!</h3>
+<script>
+function invoke() {
+    var intent = new WebKitIntent("http://webintents.org/pick", "image/jpeg", "");
+
+    var onSuccess = function(data) { /* woot */ };
+    var onError = function(data) { /* boooo */ };
+
+    window.navigator.webkitStartActivity(intent, onSuccess, onError);
+}
+</script>
+<p><button onclick="invoke()">Pick</button></p>
+
 <h2>Data Formats</h2>
 <p>Clients and services can only interact with each other if the both support the same intent AND the same data type. Data-types can be any arbitary string, but it is expected that client and service will pass the same data if they both agree to support the protocol.</p>
 <p>Advisory data-schemes are described below based off <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">MIME-Types</a> or <a href="http://activitystrea.ms/head/activity-schema.html#object-types" target="_blank">Activity Streams</a></p>
