@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
 <section>
-  <ul class="sub">
+  <nav class="sub">
   <span><strong>Quick Links:</strong></span>
   <a href="#introduction">Introduction</a>
   <a href="#specification">Specification</a>
@@ -112,13 +112,25 @@ Client applications simply initiate a new action with the given parameters.
   "http://news.bbc.co.uk");
 
 window.navigator.startActivity(intent);</pre>
+<p>
+  Try it now: <button id="shareBtn">Share</button>
+</p>
+<script>
+  var shareBtn = document.getElementById("shareBtn");
+  shareBtn.addEventListener("click", function() {
+    var intent = new Intent("http://webintents.org/share", "text/uri-list", location.href);
+    window.navigator.startActivity(intent);
+  }, false);
+</script>
+
+
 <h2 id="defaultintents">Default Intents</h2>
 <p>
   We are collating a suite of default intents that we believe the majority
   of applications and services will use.  The schema URL used to define an
   intent is designed to be self documenting.
 </p> 
-<ul>
+ <ul>
   <li><a href="/discover">Discover</a></li>
   <li><a href="/share">Share</a></li>
   <li><a href="/edit">Edit</a></li>
@@ -158,8 +170,8 @@ window.navigator.startActivity(intent);</pre>
 
 <h2 id="contributing">Contributing</h2>
 <p>
-  If you want to host the Shim yourself, simply visit 
-  <a href="http://github.com/PaulKinlan/WebIntents">the code repository</a>.
+More information about contributing to the shim and this site can be found on
+ <a href="http://webintents.org/updating.html">http://webintents.org/updating.html</a>
 </p>
 <p>
   If you want to particpate in the discussion please join our 

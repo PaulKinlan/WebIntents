@@ -1,0 +1,88 @@
+{% extends "webintents/layouts/base.html" %}
+{% block title %}Web Intents{% endblock %}
+{% block headline %}Updating webintents.org{% endblock %}
+{% block head %}
+ 
+{% endblock %}
+{% block content %}
+<section>
+  <nav class="sub">
+    <span><strong>Quick Links:</strong></span>
+    <a href="#introduction">Introduction</a>
+    <a href="#shim">Updating the shim</a>
+    <a href="#updatingintents">Updating Intents</a>
+    <a href="#addingintents">Adding Intents</a>
+  </nav>
+
+  <h2 id="introduction">Introduction</h2>
+  <p>
+  This page is a guide to how you can help and contribute to the Web Intents project.
+  </p>
+  <p>
+  All the code for this project is open and hosted on <a href="http://github.com/">Github</a>.
+  </p>
+  <p>
+    We gladly accept and encourage patches to the project.  You can contribute by
+    <a href="https://github.com/PaulKinlan/WebIntents/fork_select">forking the project.</a>
+    and then following the guides below for the area that you want to edit.
+  </p>
+
+  <h2 id="shim">Updating the Shim</h2>
+  <p>
+  The shim is the implementation of webintents for browsers that don't natively support
+  the API.
+  </p>
+  <p>
+    The client code resides at <a href="https://github.com/PaulKinlan/WebIntents/tree/master/src">
+      https://github.com/PaulKinlan/WebIntents/tree/master/src</a>.
+  </p>
+  <p>
+    The service code is the code that displays the picker and routes the messages between apps
+    is located at <a href="https://github.com/PaulKinlan/WebIntents/tree/master/server/webintents/static">
+      https://github.com/PaulKinlan/WebIntents/tree/master/server/webintents/static</a>.
+    <ul>
+      <li>webintents-server.js - the core logic for </li>
+      <li>intents.html - the single html file that is embedded into clients and services</li>
+      <li>picker.js - the logic for the picker</li>
+      <li>picker.html - the UI for the service picker</li>
+    </ul>
+  </p> 
+
+  <h2 id="updatingintents">Updating Intents</h2>
+  <p>
+  Each intent supported under the webintents.org prefix lives in the root directory.  Updating intents is easy, and is
+  just a case of forking the project and issuing a "pull request" to get the changes reviewed and merged into the project.
+  </p>
+  <p>
+    The code for each intent is located in <a href="https://github.com/PaulKinlan/WebIntents/tree/master/server/webintents/pages">
+      https://github.com/PaulKinlan/WebIntents/tree/master/server/webintents/pages</a> and has
+    no file extension.
+  </p>
+  <p>
+    Each intent page MUST include the textual documentation for the intent AND code examples for invokation,
+    and service handling.  It should also include documentation and code examples for each major data type.
+  </p>
+
+  <h2 id="addingintents">Adding Intents</h2>
+  <p>
+  Each intent supported under the webintents.org prefix lives in the root directory.</p>
+  <p>
+  Adding new intents is procedurally little more complicated. First fork the project, add the intent documentation as described below
+  , issue a pull request and then send the proposal for discussion of a new intent to 
+  the <a href="http://groups.google.com/group/webintents-discuss">webintents-discuss</a> group.  
+  </p>
+  <p>
+  Once there is consensus, the pull request will be merged in to the main project.
+  </p>
+  <p>
+    The code for each intent is located in <a href="https://github.com/PaulKinlan/WebIntents/tree/master/server/webintents/pages">
+      https://github.com/PaulKinlan/WebIntents/tree/master/server/webintents/pages</a> and has
+    no file extension.
+  </p>
+  <p>
+    Each intent page MUST include the textual documentation for the intent AND code examples for invokation,
+    and service handling.  It should also include documentation and code examples for each major data type.
+  </p>
+
+</section>
+{% endblock %}
