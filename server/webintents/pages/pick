@@ -20,7 +20,7 @@
   /&gt;</pre>
 <dl>
   <dt id="action">action</dt>
-    <dd>Required. Must be http://webintents.org</dd>
+    <dd>Required. Must be http://webintents.org/pick</dd>
   <dt id="type">type</dt>
     <dd>Optional. Types are a filter</dd> 
   <dt id="href">href</dt>
