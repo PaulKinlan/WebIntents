@@ -20,19 +20,28 @@
  /&gt;</pre>
 <dl>
   <dt id="action">action</dt>
-    <dd>Required. Must be http://webintents.org</dd>
+    <dd>Required. Must be http://webintents.org/edit</dd>
   <dt id="type">type</dt>
     <dd>Optional. Types are a filter</dd> 
   <dt id="href">href</dt>
     <dd>Optional. If specified, it will point to the action that is loaded when the user chooses the service.  If undefined, use the current page.</dd> 
 </dl>
 <h2>Invocation</h2>
-<pre>var intent = new Intent("http://webintents.org/edit");
-window.navigator.startActivity(intent);</pre>
+<pre>var data = /* Parse the data from canvas or somewhere else */;
+var intent = new Intent("http://webintents.org/edit", "image/png", data);
+
+/* Set up the callback that recieves the data */
+var onsuccess = function(data) {
+  // Add the new data to the image.
+  var logo = document.getElementById("wilogo");
+  logo.src = data;
+};
+
+window.navigator.startActivity(intent, onsuccess);</pre>
 
 <h3>Try it!</h3>
 <div>
-<img src="/images/webintents.png" id="wilogo" style="height:256px; width: 256px; box-shadow: 0px 0px 5px black;"/>
+  <img src="/images/webintents.png" id="wilogo" style="height:256px; width: 256px; box-shadow: 0px 0px 5px black;"/>
 </div>
 <script>
 window.addEventListener("load", function() {
@@ -68,13 +77,13 @@ function invoke() {
 <p>Advisory data-schemes are described below based off <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">MIME-Types</a> or <a href="http://activitystrea.ms/head/activity-schema.html#object-types" target="_blank">Activity Streams</a></p>
 <dl id="dataformats">
   <dt>image/*</dt>
-  <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
+  <dd><pre>[<i>Blob</i>] || [<i>Data URI</i>] || <i>Blob</i> || <i>Data URI</i></pre></dd>
   <dt>audio/*</dt>
-  <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
+  <dd><pre>[<i>Blob</i>] || [<i>Data URI</i>] || <i>Blob</i> || <i>Data URI</i></pre></dd>
   <dt>video/*</dt>
-  <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
+  <dd><pre>[<i>Blob</i>] || [<i>Data URI</i>] || <i>Blob</i> || <i>Data URI</i></pre></dd>
   <dt>text/uri-list</dt>
-  <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
-  </dl>
-  </section>
+  <dd><pre>[<i>uri</i>] || <i>uri</i></pre></dd>
+</dl>
+</section>
 {% endblock %}
