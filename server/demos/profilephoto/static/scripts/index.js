@@ -8,6 +8,7 @@ window.URL = window.URL || window.webkitURL;
 
 var createBlobFromCanvas = function(c) {
   var data = c.toDataURL('image/png');
+  return data; // until blob issue fixed.
   return dataURLToBlob(data);
 };
 
@@ -33,7 +34,7 @@ var dataURLToBlob = function(dataURL) {
    var bb = new WebKitBlobBuilder();
    bb.append(uInt8Array.buffer);
    return bb.getBlob(contentType);
- }
+};
 
 var snapPicture = function() {
   var newcanvas = document.createElement("canvas");

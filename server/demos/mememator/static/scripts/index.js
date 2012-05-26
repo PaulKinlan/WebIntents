@@ -49,6 +49,7 @@ var createNewImage = function(c) {
 
 var createBlobFromCanvas = function(c) {
   var data = c.toDataURL('image/png');
+  return data; // until blob issue fixed
   return dataURLToBlob(data);
 };
 
