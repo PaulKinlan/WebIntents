@@ -1,0 +1,23 @@
+CACHE MANIFEST
+#v1
+/rpc_relay.html
+/background.png 
+/favicon.ico
+/scripts/proxy.js
+/css/application.css
+/css/bootstrap.min.css
+/javascripts/events.js
+
+# external
+http://www.google-analytics.com/ga.js
+https://www.google.com/uds/?file=picker&v=1
+https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug
+http://webintents.org/webintents.min.js
+https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js
+http://fonts.googleapis.com/css?family=Bitter
+http://themes.googleusercontent.com/static/fonts/bitter/v4/2PcBT6-VmYhQCus-O11S5-vvDin1pK8aKteLpeZ5c0A.woff
+
+
+NETWORK:
+/proxy
+*
