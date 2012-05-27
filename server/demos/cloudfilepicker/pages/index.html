@@ -53,6 +53,10 @@
       if (data.action == google.picker.Action.PICKED) {
         returnImage(data.docs[0].thumbnails[data.docs[0].thumbnails.length > 4 ? 4 : 3].url);
       }
+      else {
+        // Tell the calling app the user cancelled.
+        window.intent.postFailure();
+      }
     }
   </script>
   {% endblock %}
