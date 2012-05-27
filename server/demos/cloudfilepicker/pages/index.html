@@ -4,6 +4,7 @@
 {% block scripts %}
   <script src="//webintents.org/webintents.js"></script>
   <script src="/javascripts/events.js"></script>
+  <script src="/scripts/proxy.js"></script>
   <script
     src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug"></script>
   <link rel=icon href="favicon.ico" />
@@ -23,6 +24,7 @@
         var pickerBuilder = new google.picker.PickerBuilder();
         if (window.intent.action == "http://webintents.org/pick") {
           if (window.intent.type.indexOf('image/') == 0 || window.intent.type === "*") {
+            // TODO. View.setMimeTypes(string). to limit it to specifc types.
             pickerBuilder.addViewGroup(
               new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
                 addView(new google.picker.PhotosView().
@@ -38,13 +40,17 @@
           }
         }
         pickerBuilder.setCallback(pickerCallback);
-        pickerBuilder.build().setVisible(true);
+        pickerBuilder.setRelayUrl("http://www.cloudfilepicker.com/rpc_relay.html").build().setVisible(true);
       }
     }
 
     function returnImage (e) {
       if(!!window.intent) {
-        window.intent.postResult([e]);
+        // Load the image via a proxy
+        loadImage(e, function(data) {
+          window.intent.postResult(data);             
+        });
+ 
         setTimeout(function() { window.close();}, 500);
       }
     }
@@ -53,9 +59,9 @@
       if (data.action == google.picker.Action.PICKED) {
         returnImage(data.docs[0].thumbnails[data.docs[0].thumbnails.length > 4 ? 4 : 3].url);
       }
-      else {
+      else if(data.action == google.picker.Action.CANCEL) {
         // Tell the calling app the user cancelled.
-        window.intent.postFailure();
+        window.intent.postFailure({});
       }
     }
   </script>
