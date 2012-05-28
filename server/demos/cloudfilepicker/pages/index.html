@@ -28,9 +28,13 @@
             pickerBuilder.addViewGroup(
               new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
                 addView(new google.picker.PhotosView().
-                setType(google.picker.PhotosView.Type.UPLOADED)).
-                addView(new google.picker.PhotosView().
-                setType(google.picker.PhotosView.Type.FEATURED)));
+                  setType(google.picker.PhotosView.Type.UPLOADED)));
+            pickerBuilder.enableFeature(google.picker.Feature.NAV_HIDDEN);
+          }
+          else if(window.intent.type.indexIf('video') == 0) {
+            pickerBuilder.addViewGroup(
+                new google.picker.ViewGroup(google.picker.ViewId.WEBCAM).
+                  setType(google.picker.WebCamView.Type.VIDEOS));
           }
         }
         else if (window.intent.action == "http://webintents.org/save") {
