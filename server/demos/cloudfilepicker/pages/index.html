@@ -49,9 +49,8 @@
         // Load the image via a proxy
         loadImage(e, function(data) {
           window.intent.postResult(data);             
+          setTimeout(function() { window.close();}, 500);
         });
- 
-        setTimeout(function() { window.close();}, 500);
       }
     }
 
