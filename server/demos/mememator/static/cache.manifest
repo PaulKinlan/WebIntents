@@ -4,7 +4,18 @@ CACHE MANIFEST
 /favicon.ico
 /styles/bootstrap.min.css
 /styles/application.css
+/kitten.jpeg
+/pick.png
+/scripts/memegen.js
+/scripts/index.js
+/scripts/view.js
+/scripts/pick.js
 
 # external resources
 http://webintents.org/webintents.min.js
 https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js
+http://www.google-analytics.com/ga.js
+http://fonts.googleapis.com/css?family=Sigmar+One
+
+NETWORK:
+*

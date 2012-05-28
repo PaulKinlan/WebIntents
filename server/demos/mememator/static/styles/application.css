@@ -54,13 +54,24 @@ header h1 .tagline {
 }
 
 section {
-  min-width: 800px;
-  width: 50%;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+#app {
   border-radius: 20px;
   background-color: rgba(0,0,0,0.5);
-  margin: auto;
   box-shadow: 0 0 20px #000;
   padding: 20px;
+  min-width: 128px;
+  display: inline-block;
+  line-height: 0;
+}
+
+#container {
+  min-width: 128px;
+  min-height: 128px;
 }
 
 footer {
@@ -70,13 +81,10 @@ footer {
 }
 
 #container {
-  min-height: 480px;
-  width: 100%;
   box-shadow: inset 0 0 10px #666;
   background-color: #ddd;
   cursor: pointer;
   text-align: center;
-  background-image: url(/pick.png);
 }
 
 #save, #sharelink, #share, #done {
