@@ -11,11 +11,6 @@
     }
   },
   "intents": {
-    "http://webintents.org/pick" : [{
-      "type" : ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
-      "href" : "http://www.mememator.com/pick.html",
-      "title" : "Pick file from mememator.com"
-    }],
     "http://webintents.org/edit" : [{
       "type" : ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
       "href" : "http://www.mememator.com/",

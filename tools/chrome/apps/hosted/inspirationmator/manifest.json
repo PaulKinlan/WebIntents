@@ -11,11 +11,6 @@
     }
   },
   "intents": {
-    "http://webintents.org/pick" : [{
-      "type" : ["image/jpeg", "image/png", "image/jpg", "image/bmp"],
-      "href" : "http://www.inspirationmator.com/pick.html",
-      "title" : "Pick file from inspirationmator.com"
-    }],
     "http://webintents.org/edit" : [{
       "type" : ["image/jpeg", "image/png", "image/jpg", "image/bmp"],
       "href" : "http://www.inspirationmator.com/",
