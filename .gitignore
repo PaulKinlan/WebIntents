@@ -1,5 +1,6 @@
 .DS_Store
 *.zip
+*.crx
 *.pid
 *.bpkg
 *.log
