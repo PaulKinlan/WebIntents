@@ -2,17 +2,13 @@
 {% block title %}Mememator{% endblock %}
 {% block headline %}Mememator{% endblock %}
 {% block scripts %}
-<link rel=icon href="favicon.ico" />
-<script type="text/javascript" src="scripts/memegen.js"></script>
-<script type="text/javascript" src="scripts/index.js"></script>
-<intent action="http://webintents.org/edit"
-  type="image/*"
-  href="index.html" />
-
-<intent action="http://webintents.org/pick"
-  type="image/*"
-  href="pick.html" />
-  {% endblock %}
+  <link rel=icon href="favicon.ico" />
+  <script type="text/javascript" src="scripts/memegen.js"></script>
+  <script type="text/javascript" src="scripts/index.js"></script>
+  <intent action="http://webintents.org/edit"
+    type="image/*"
+    href="index.html" />
+{% endblock %}
 {% block content %}
 <input type="text" id="top" placeholder="Headline" />
 <div id="container">
