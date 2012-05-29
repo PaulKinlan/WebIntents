@@ -4,6 +4,7 @@ $(function() {
    window.intent = window.intent || window.webkitIntent;
    
    var imageBlob;
+   var url;
 
    var createBlobFromCanvas = function(c) {
      var data = c.toDataURL('image/png');
@@ -36,7 +37,7 @@ $(function() {
    };
 
    var loadImage = function(data) {
-     var url = $.isArray(data) ? data[0] : data; 
+     url = $.isArray(data) ? data[0] : data; 
      if(data.constructor.name == "Blob" || data instanceof Blob) {
        imageBlob = data;
        /*
