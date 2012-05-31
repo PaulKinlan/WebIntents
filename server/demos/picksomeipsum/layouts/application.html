@@ -4,16 +4,43 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="/styles/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/application.css">
-  <script src='//webintents.org/webintents.min.js'></script>
-  <link href='http://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Henny+Penny' rel='stylesheet' type='text/css'>
+ 	<link rel="stylesheet" href="styles_new/application_new.css">   	
+ 	<link rel="stylesheet" href="styles_new/css-buttons.css">
+ 	<link href='http://fonts.googleapis.com/css?family=PT+Sans|Poiret+One|Londrina+Sketch|Comfortaa|Reenie+Beanie|Droid+Sans' rel='stylesheet' type='text/css'>  	
+ 	<link rel="stylesheet" href="styles_new_fonts_roboto/roboto.css"> <!-- Android Ice Cream Sandwich font--> 
+  
+	<link rel=icon href="favicon.ico" />
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+	<script type="text/javascript" src="scripts/index.js"></script>
+	<script type="text/javascript" src="scripts/jquery.jspath.js"></script>
+	<script type="text/javascript" src="scripts/jquery.loremipsum.js"></script>
+  <script src='//webintents.org/webintents.min.js'></script>
+
+ 	<script>
+		 $(document).ready(function(){		
+		 	   
+			var height = $(window).height();		   
+			
+			if (height>768) {
+				$('#container').css({'height':'500px'});
+			}else if (height<=600) {
+				$('#container').css({'height':'290px'});
+			}else {
+				$('#container').css({'height':'350px'});
+			}
+		   
+		 });		
+	</script>	
+
   {% block scripts %}{% endblock %}
 </head>
 <body>
-<header>
-<h1><a href="http://www.picksomeipsum.com">{% block headline %}{% endblock %}<span class="tagline"></span></a></h1>
+  <header>
+    <div class="header_inner">
+	  	<div class="min-width">
+	  	 	<h1><a class="logo" href="http://www.picksomeipsum.com">{% block headline %}{% endblock %}</a></h1>
+	  	</div>		
+	  </div>
 </header>
 <section>
 {% block content %}{% endblock %}

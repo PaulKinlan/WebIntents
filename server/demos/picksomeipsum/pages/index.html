@@ -1,26 +1,22 @@
 {% extends "demos/picksomeipsum/layouts/application.html" %}
 {% block title %}Pick some Ipsum{% endblock %}
-{% block headline %}Pick some Ipsum{% endblock %}
+{% block headline %}<span id="logo-image"></span>Pick <span id="logo-some">some</span> Ipsum{% endblock %}
 
 {% block scripts %}
-<link rel=icon href="favicon.ico" />
-<script type="text/javascript" src="scripts/index.js"></script>
-<script type="text/javascript" src="scripts/jquery.jspath.js"></script>
-<script type="text/javascript" src="scripts/jquery.loremipsum.js"></script>
 <intent action="http://webintents.org/pick"
   type="text/plain" />
   {% endblock %}
   {% block content %}
 <div id="controls">
-  <input type="button" class="btn primary" id="more" value="More Ipsum" />
-  <input type="button" class="btn primary" id="less" value="Less Ipsum" />
+  <input type="button" class="btn tall button download" id="more" value="More Ipsum" />
+  <input type="button" class="btn tall button download" id="less" value="Less Ipsum" />
 </div>
 <div id="container">
   <div id="ipsum"></div>
 </div>
 <div id="actions">
 <input type="button" class="btn primary" id="done" value="Done" />
-<input type="button" class="btn primary" id="save" value="Save Ipsum" />
-<input type="button" class="btn primary" id="share" value="Share Ipsum" />
+<input type="button" class="btn tall button download" id="save" value="Save Ipsum" />
+<input type="button" class="btn tall button download orange" id="share" value="Share Ipsum" />
 </div>
 {% endblock %}

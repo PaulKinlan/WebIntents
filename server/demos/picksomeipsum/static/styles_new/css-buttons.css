@@ -1,0 +1,177 @@
+
+/*--------------------------------------------------------------------------------------------
+General Button Styles, Cascades Down To Every Button
+-------------------------------------------------------------------------------------------- */
+.button {
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+-moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.50);
+-webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.50);
+box-shadow:0 1px 3px rgba(0, 0, 0, 0.50);
+background:#222222 url(../images/../images/button-images/button-overlay.png) repeat-x;
+border:1px solid rgba(0, 0, 0, 0.25);
+color:#FFFFFF !important;
+cursor:pointer;
+display:inline-block;
+font-size:13px;
+font-weight:bold;
+line-height:1;
+overflow:visible;
+padding:5px 15px 6px;
+position:relative;
+text-decoration:none;
+text-shadow:0 -1px 1px rgba(0, 0, 0, 0.25);
+width:auto;
+text-align:center;
+}
+.button:hover {
+background:#111111;
+color:#FFFFFF;
+}
+.button:active {
+background:#242424;
+}
+.green.button {
+background-color:#91BD09;
+}
+.green.button:hover {
+background-color:#749A02;
+}
+.green.button:active {
+background-color:#a4d50b;
+}
+.blue.button {
+background-color:#0E59AE;
+}
+.blue.button:hover {
+background-color:#063468;
+}
+.blue.button:active {
+background-color:#1169cc;
+}
+.purple.button {
+background-color:#660099;
+}
+.purple.button:hover {
+background-color:#330066;
+}
+.purple.button:active {
+background-color:#7f02bd;
+}
+.breen.button {
+background-color:#2DAEBF;
+}
+.breen.button:hover {
+background-color:#007D9A;
+}
+.breen.button:active {
+background-color:#36cbdf;
+}
+.red.button {
+background-color:#CC0000;
+}
+.red.button:hover {
+background-color:#990000;
+}
+.red.button:active {
+background-color:#ea0202;
+}
+.magenta.button {
+background-color:#A9014B;
+}
+.magenta.button:hover {
+background-color:#630030;
+}
+.magenta.button:active {
+background-color:#ce025c;
+}
+.orange.button {
+background-color:#FF5C00;
+}
+.orange.button:hover {
+background-color:#D45500;
+}
+.orange.button:active {
+background-color:#fd762a;
+}
+.yellow.button {
+background-color:#FFE115;
+}
+.yellow.button:hover {
+background-color:#E4C913;
+}
+.yellow.button:active {
+background-color:#fee539;
+}
+.white.button {
+background-color:#FFFFFF;
+border:1px solid #CCCCCC;
+color:#666666 !important;
+font-weight:normal;
+text-shadow:0 1px 1px #FFFFFF;
+}
+.white.button:hover {
+background-color:#EEEEEE;
+}
+.white.button:active {
+background-color:#ffffff;
+}
+.gray.button {
+-moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.50);
+background:#FFFFFF url(../images/button-images/button-overlay-black.png) repeat-x;
+border:1px solid #BBBBBB;
+color:#555555 !important;
+text-shadow:0 1px 1px rgba(255, 255, 255, 0.5);
+}
+.gray.button:hover {
+background-color:#EEEEEE;
+border-color:#999999;
+color:#444444 !important;
+}
+.gray.button:active {
+background-color:#ffffff;
+}
+
+/*--------------------------------------------------------------------------------------------
+Large Buttons
+-------------------------------------------------------------------------------------------- */
+.large.button {
+font-size:14px;
+padding:8px 19px 9px;
+background-image:url(../images/button-images/large-button-overlay.png);
+}
+input[type="submit"].large.button, .large.button.input {
+padding:6px 16px 6px;
+}
+input[type="button"].large.button, button.large.button {
+padding:7px 16px;
+}
+/*--------------------------------------------------------------------------------------------
+Tall Buttons
+-------------------------------------------------------------------------------------------- */
+.tall.button {
+font-size:14px;
+padding:8px 19px 9px;
+background-image:url(../images/button-images/tall-button-overlay.png);
+}
+.tall.gray.button {
+background-color:#FFFFFF;
+background-image: url(../images/button-images/tall-black.png);
+background-repeat:repeat-x;
+}
+.tall.gray.button:hover {
+background-color:#EEEEEE!important;
+border-color:#999999;
+color:#444444 !important;
+}
+.tall.gray.button:active {
+background-color:#FFFFFF!important;
+}
+.tall.button em {
+font-size:11.5px;
+font-style:normal;
+display:block;
+margin-top:5px;
+}
+
