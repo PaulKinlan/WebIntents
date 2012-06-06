@@ -1,16 +1,33 @@
 <!doctype html>
 <html>
   <head>
+    <script src="http://platform.twitter.com/anywhere.js?id=aB60A3n7LHJq9AM214Vzw" type="text/javascript"></script> 
     <script src="//webintents.org/webintents.min.js"></script>
-    <script>
-      window.intent = window.intent || window.webkitIntent;
-      if(window.intent) {
-        if(window.intent.type.indexOf("text/") == 0) {
-          var href = "https://twitter.com/intent/tweet?url=" +
-              encodeURI(window.intent.data);
-          window.location = href;
-        }
-      }
-    </script>
+    <script src="//webintents.org/webintents-prefix.js"></script>
   </head>
+  <body>
+    <span id="login"></span>
+    <script type="text/javascript">
+      twttr.anywhere(function (T) {
+        T("#login").connectButton();
+      });
+    </script>
+    <div id="tbox"></div>
+  </body>
+  <script>
+    if(window.intent) {
+      if(window.intent.type.indexOf("text/") == 0) {
+        twttr.anywhere(function (T) {
+          T("#tbox").tweetBox({
+            height: 100,
+            width: 400,
+            defaultContent: window.intent.data
+          });
+        });
+      }
+      else if(window.intent.type.indexOf("image/") === 0) {
+
+      }
+    }
+  </script>
 </html>

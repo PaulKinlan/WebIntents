@@ -8,6 +8,7 @@ import widgets.handlers
 import demos.mememator.handlers
 import demos.shortener.handlers
 import demos.instapaper.handlers
+import demos.cloudfilepicker.handlers
 import demos.imgur.handlers
 import demos.inspirationmator.handlers
 
@@ -67,6 +68,7 @@ app = webapp2.WSGIApplication([
       Route('/<:.*>', handlers_base.PageHandler, 'demos/binhexdec'),
     ]),
     routes.DomainRoute('www.cloudfilepicker.com', [
+      Route('/proxy', demos.cloudfilepicker.handlers.ProxyHandler, 'demos/cloudfilepicker'),
       Route('/<:.*>', handlers_base.PageHandler, 'demos/cloudfilepicker'),
     ]),
     routes.DomainRoute('www.mememator.com', [

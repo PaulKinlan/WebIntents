@@ -1,0 +1,28 @@
+{
+  "name": "To Twitter",
+  "version": "1.0.0.5",
+  "icons" : {
+    "128" : "128.png"
+  },
+  "app" : {
+    "urls" : ["http://demos.webintents.org/twitter/"],
+    "launch" : {
+      "web_url" : "http://demos.webintents.org/twitter/twitter_inline.html"
+    }
+  },
+  "intents": {
+    "http://webintents.org/share" : [{
+      "type" : ["image/jpeg", "image/jpg", "image/png", "image/bmp"],
+      "title" : "Share image with Twitter"
+    },
+    {
+      "type" : ["text/uri-list"],
+      "title" : "Share link with Twitter"
+    },
+    {
+      "type" : ["text/*"],
+      "title" : "Share text with Twitter"
+    }
+    ]
+  }
+}

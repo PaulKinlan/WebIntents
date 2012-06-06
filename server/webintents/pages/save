@@ -45,17 +45,37 @@ function invoke() {
 
 
   <h2>Data Formats</h2>
-  <p>Clients and services can only interact with each other if the both support the same intent AND the same data type. Data-types can be any arbitary string, but it is expected that client and service will pass the same data if they both agree to support the protocol.</p>
+  <p>Clients and services can only interact with each other if they both support the same intent AND the same data type. Data-types can be any arbitary string, but it is expected that client and service will pass the same data if they both agree to support the protocol.</p>
   <p>Advisory data-schemes are described below based off <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">MIME-Types</a> or <a href="http://activitystrea.ms/head/activity-schema.html#object-types" target="_blank">Activity Streams</a></p>
   <dl id="dataformats">
     <dt>image/*</dt>
-    <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
+    <dd>
+      <p>Client and Service should expect to recieve data in any of the following formats:</p>
+      <ul>
+        <li>Blob
+        <li>DataURI
+        <li>URL
+      </ul>
+      <h3>Managing Blobs</h3>
+      <h4>Client application</h4>
+      <script src="https://gist.github.com/2853817.js?file=gistfile1.js"></script>
+      <h4>Service application</h4>
+      <script src="https://gist.github.com/2853874.js"> </script>
+      <h3>Managing URI's</h3>
+      <h4>Client application</h4>
+      <script src="https://gist.github.com/2853982.js"> </script>
+    </dd>
     <dt>audio/*</dt>
     <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
     <dt>video/*</dt>
     <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
-    <dt>text/uri-list</dt>
+    <dt>text/*</dt>
     <dd><pre>[ <i>string uri</i> ] || <i>string uri</i></pre></dd>
+    <dt>text/uri-list</dt>
+    <dd>
+     <p>Client and Service should expect to recieve data in the form of a string containing a fully formed URI</p>
+     <h3>Saving a URI</h3>
+     <script src="https://gist.github.com/2854138.js"> </script>
   </dl>
   </section>
 {% endblock %}

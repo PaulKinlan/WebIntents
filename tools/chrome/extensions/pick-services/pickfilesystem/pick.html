@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.js"></script>
+    <script>
+
+      $(document).ready(function() {
+        var filer = $("#filer");
+        // set the accepts if the user is asking for a very specific data-type.
+        filer.change(function() {
+          if(this.files.length == 0) return;
+
+          var file = this.files[0];
+          // Load in to a blob.
+          var reader = new FileReader();
+
+          reader.onerror = function(e) {
+            console.log("Error", e);
+          };
+
+          reader.onload = function(e) {
+            var data = e.target.result;
+            window.webkitIntent.postResult(data);
+          };
+
+          reader.readAsArrayBuffer(file);
+
+        });
+      });
+    </script>
+    <style>
+      a {
+        display: block;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" id="filer" />
+  </body>
+</html>

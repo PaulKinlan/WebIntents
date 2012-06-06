@@ -69,6 +69,12 @@ var updateImage = function(data) {
   if(data.constructor.name == "Blob" || data instanceof Blob) {
     url = webkitURL.createObjectURL(data);
   }
+  else if(data.constructor.name == "ArrayBuffer" || data instanceof ArrayBuffer) {
+    var bb = new WebKitBlobBuilder();
+    bb.append(data);
+    var blobData = bb.getBlob();
+    url = webkitURL.createObjectURL(blobData);
+  }
   
   var img = $('#image');
   img.load(function() {
