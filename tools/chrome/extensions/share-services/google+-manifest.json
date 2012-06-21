@@ -10,7 +10,8 @@
       {
         "type" : ["text/uri-list"],
         "title" : "Share to Google+",
-        "href" : "/launch.html"
+        "href" : "/launch.html",
+        "disposition": "inline"
       }
     ]
   }

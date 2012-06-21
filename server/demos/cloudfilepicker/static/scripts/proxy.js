@@ -8,8 +8,13 @@ function loadImage(url, callback) {
     // convert array buffer to blob.
     var bb = new BlobBuilder();
     bb.append(xhr.response);
-    
-    callback(bb.getBlob());
+    // convert blob to a base64
+    var fileReader = new FileReader();
+    fileReader.onload = function(e) {
+      var data = e.target.result;
+      callback(data);
+    };
+    fileReader.readAsDataURL(bb.getBlob()); 
   };
   xhr.responseType = 'arraybuffer';
   xhr.open("GET", "proxy?url=" + encodeURIComponent(url));

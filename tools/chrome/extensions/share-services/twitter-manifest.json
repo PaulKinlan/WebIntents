@@ -9,7 +9,8 @@
     "http://webintents.org/share" : [{
       "type" : ["text/uri-list", "text/plain"],
       "href" : "/twitter_inline.html",
-      "title" : "Share link to Twitter"
+      "title" : "Share link to Twitter",
+      "disposition": "inline"
     }]
   }
 }
