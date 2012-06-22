@@ -15,8 +15,6 @@ var draw = function(topline, bottomline) {
   var canvasHeight = height + 200; 
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
-  //canvas.parentElement.parentElement.style.height = canvasHeight + "px";
-  //canvas.parentElement.parentElement.style.width = canvasWidth + "px";
   context = canvas.getContext('2d');
   context.save();
     context.fillStyle = "rgb(0,0,0)";
@@ -28,26 +26,31 @@ var draw = function(topline, bottomline) {
     context.restore();
     context.drawImage(image.get()[0], 50, 50);
     context.save();
-      context.font = "62px Josefin Slab";
+      context.font = "62px Georgia";
       context.textAlign = "center";
       context.fillStyle = "white";
       context.strokeStyle = "white";
       context.lineWidth = 2;
-      context.fillText(topline, canvasWidth * 0.5, height + 105, canvasWidth * 0.9);
+      context.fillText(topline, canvasWidth * 0.5, height + 125, canvasWidth * 0.9);
     context.restore();
     context.save();
-      context.font = "24px Josefin Slab";
+      context.font = "24px Georgia";
       context.textAlign = "center";
       context.fillStyle = "white";
       context.strokeStyle = "white";
       context.lineWidth = 2;
-      context.fillText(bottomline, canvasWidth * 0.5, height + 150, canvasWidth * 0.9);
+      context.fillText(bottomline, canvasWidth * 0.5, height + 160, canvasWidth * 0.9);
     context.restore();
    context.restore();
 
    if(imageID) {
      updateImageData(imageID, canvas, topline, bottomline);
    }
+   $('#container').find('h2').hide();
+   $('#container').addClass('loaded');
+   $('#words').show();
+   $('#help').hide();
+   $('#top').focus();
 };
 
 function textChanged() {
@@ -102,12 +105,14 @@ var updateImage = function(data) {
 
     if(window.intent) {
       $('#done').show();
+      $('#actions').show();
     }
     else {
       $('#done').hide();
       $('#save').show();
       $('#share').show();
       $('#sharelink').show();
+      $('#actions').show();
     }
   });
   loadImage(img, url);
@@ -117,6 +122,7 @@ $(function() {
   var idLocation = window.location.search.indexOf("id=");
   
   if (window.intent || idLocation > -1)   {
+  	$('#actions').show();
     $('#done').show();
     $('#done').click(function() {
       if (canvas) {
@@ -142,6 +148,7 @@ $(function() {
        $('#share').hide();
        $('#sharelink').hide();
        $('#done').hide();
+       $('#actions').hide();
 
        var i = new Intent("http://webintents.org/pick", "image/*");
        startActivity.call(window.navigator, i, function(data) {
@@ -170,4 +177,23 @@ $(function() {
 
   $('#top').change(textChanged);
   $('#bottom').change(textChanged);
+  
+	var top = $('#top');
+	var bot = $('#bottom');
+	var help = $('#help');
+	help.on('click',function(){
+		$(this).fadeOut(180);
+	});
+	
+	var btnh = $('#actions').find('.btn');
+	var btn = btnh.find('.icon');
+	
+	btnh.hover(
+	function(){
+		$(this).find(btn).addClass('ani');
+	},
+	function(){
+		$(this).find(btn).removeClass('ani');
+	});
+  
 });

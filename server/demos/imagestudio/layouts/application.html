@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/application.css">
-  <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
-  <script src='//webintents.org/webintents.min.js'></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
-  {% block scripts %}{% endblock %}
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="styles/application.css">
+	<link rel=icon href="favicon.ico" />
+	<intent action="http://webintents.org/view" type="image/*" />
 </head>
-<body>
-<header>
-<h1>{% block headline %}{% endblock %}</h1>
-</header>
-<section>
-{% block content %}{% endblock %}
-</section>
-<footer>
-</footer>
+<body onload="show_image()">
+	<table>
+		<tr>
+			<td>
+				<section class="cf">
+					<header>	
+						<h1>{% block headline %}{% endblock %}
+							<span aria-hidden="true" data-icon="P"></span>
+						</h1>
+					</header>
+					{% block content %}{% endblock %}
+				</section>
+			</td>
+		</tr>
+	</table>
+	<footer>{% block footer %}{% endblock %}</footer>
 </body>
+<!-- scripts -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+{% block scripts %}{% endblock %}
+<script>
+// show page stuff delayed on load
+function show_image() {
+	setTimeout(function(){
+		$('header').fadeIn(500);
+		$('#result').fadeIn(800);
+		$('h2').fadeIn(1000);
+	}, 10);
+}
+</script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-28536959-3']);

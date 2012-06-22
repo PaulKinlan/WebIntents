@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="styles/bootstrap.min.css">
-  <link rel="stylesheet" href="styles/application.css">
-  <link href='http://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
-  <script src='//webintents.org/webintents.min.js'></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
-  {% block scripts %}{% endblock %}
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="styles/application.css">
+	<link rel=icon href="favicon.ico" />
+	<intent action="http://webintents.org/pick" title="Take an image from your camera" type="image/*" />
 </head>
 <body>
-<header>
-<h1>{% block headline %}{% endblock %}<span class="tagline"></span></h1>
-</header>
-<section>
-{% block content %}{% endblock %}
-</section>
-<footer>
-</footer>
+	<header>
+		<h1>
+			<em>{% block headline %}{% endblock %}</em>
+			<img src="images/camera.png" alt="quicksnapr Logo" />
+		</h1>
+	</header>
+	<section class="cf">
+	{% block content %}{% endblock %}
+	</section>
+	<footer>{% block footer %}{% endblock %}</footer>
 </body>
+<!-- scripts -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+{% block scripts %}{% endblock %}
 <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-28536959-8']);

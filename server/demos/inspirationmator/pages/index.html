@@ -2,25 +2,25 @@
 {% block title %}Inspriationmator{% endblock %}
 {% block headline %}Inspriationmator{% endblock %}
 {% block scripts %}
-<link rel=icon href="favicon.ico" />
+<script src="//webintents.org/webintents.min.js"></script>
 <script type="text/javascript" src="scripts/common.js"></script>
 <script type="text/javascript" src="scripts/index.js"></script>
-<intent action="http://webintents.org/edit"
-  type="image/*"
-  href="index.html" />
-
-<intent action="http://webintents.org/pick"
-  type="image/*"
-  href="pick.html" />
-  {% endblock %}
-{% block content %}
-<div id="container">
-  <img id="image" style="display:none;"/>
-</div>
-<input type="text" id="top" placeholder="Add some wisdom" />
-<input type="text" id="bottom" placeholder="Now add some sage advice" />
-<input type="button" class="btn primary" id="done" value="Ready to Inspire" />
-<input type="button" class="btn primary" id="save" value="Save Inspiration" />
-<input type="button" class="btn primary" id="share" value="Share Inspriation" />
-<input type="button" class="btn primary" id="sharelink" value="Share Page" />
 {% endblock %}
+{% block content %}
+							<div class="holder">
+								<div id="container">
+									<img id="image" style="display:none;"/>
+									<h2>Click to create your own<br />inspirational image.</h2>
+								</div>
+							</div>
+							<div id="words">
+								<input type="text" id="top" placeholder="Add some wisdom" tabindex="1" />
+								<input type="text" id="bottom" placeholder="Add some advice" tabindex="2" />
+							</div>
+							<div id="actions">
+								<div class="btn-h"><span id="save" class="btn">Save <span aria-hidden="true" data-icon="c" class="icon"></span></span></div>
+								<div class="btn-h"><span id="share" class="btn">Share <span aria-hidden="true" data-icon="R" class="icon"></span></span></div>
+								<div class="btn-h"><span id="sharelink" class="btn dbl">Share Page <span aria-hidden="true" data-icon="R" class="icon"></span></span></div>
+							</div>
+{% endblock %}
+{% block footer %}Made by Google{% endblock %}
