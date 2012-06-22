@@ -37,15 +37,47 @@ var dataURLToBlob = function(dataURL) {
 };
 
 var snapPicture = function() {
-  var newcanvas = document.createElement("canvas");
-  var newContext = newcanvas.getContext("2d");
-  newcanvas.width = 640;
-  newcanvas.height = 480;
-  newContext.drawImage(video, 0, 0, 640, 480);
-  $("#snaps").append(newcanvas);
+	var wrapper = document.createElement('figure');
+	var newcanvas = document.createElement('canvas');
+	var newContext = newcanvas.getContext('2d');
+	newcanvas.width = 640;
+	newcanvas.height = 480;
+	newContext.drawImage(video, 0, 0, 640, 480);
+	$('article').hide(320);
+	wrapper.appendChild(newcanvas);
+	wrapper.className = 'ease-in';
+	$('#snaps').append(wrapper);
 };
 
 $(function() {
+
+	var buttons = $('footer').find('.btn');
+	var snap = $('#snaps');
+	var active = snap.find('figure.selected');
+	var head = $('header');
+
+	var actions = $('#actions');
+	var figs = snap.find('figure');
+
+	snap.on('click','figure',function(){
+		snap.find('figure').removeClass('selected').addClass('non');
+		snap.find('figure div').detach();
+		snap.addClass('pad');
+		head.addClass('pad');
+		$(this).removeClass('non').addClass('selected');
+		actions.fadeIn(320);
+	});
+	
+	actions.on('click','#delete',function(){
+		snap.find('figure.selected').removeClass('ease-in active non').addClass('ease-out');
+		setTimeout(function() {
+			snap.find('figure.ease-out').remove();
+			actions.hide();
+			snap.removeClass('pad');
+			head.removeClass('pad');
+		}, 800);
+	});
+	
   // Hook up the video camera.
   video = $("video")[0];
 
@@ -56,7 +88,7 @@ $(function() {
   }
 
   if (window.intent) {
-    $('#snaps canvas').live('click', function() {
+    $('#snaps canvas').on('click', function() {
         window.intent.postResult(this.toDataURL());
         window.setTimeout(function() { window.close(); }, 1000);
     });
@@ -67,12 +99,12 @@ $(function() {
     });
   }
   else {
-    $('#snaps canvas').live('click', function() {
+    /*$('#snaps canvas').on('click', function() {
       $("#save").show();
       $("#share").show();
       $("#snaps canvas").removeClass("selected");
       $(this).addClass("selected")
-    });
+    });*/
 
     $('#container video').click(function() {
        // Snap straight away.
@@ -81,13 +113,13 @@ $(function() {
   }
       
   $('#save').click(function() {
-    var canvas = $("#snaps canvas.selected")[0];
+    var canvas = $("#snaps figure.selected canvas")[0];
     var i = new Intent("http://webintents.org/save", "image/png", createBlobFromCanvas(canvas));
     startActivity.call(window.navigator, i);
   });
       
   $('#share').click(function() {
-    var canvas = $("#snaps canvas.selected")[0];
+    var canvas = $("#snaps figure.selected canvas")[0];
     var i = new Intent("http://webintents.org/share", "image/png", createBlobFromCanvas(canvas));
     startActivity.call(window.navigator, i);
   });

@@ -1,24 +1,25 @@
 {% extends "demos/mememator/layouts/application.html" %}
-{% block title %}Mememator{% endblock %}
-{% block headline %}Mememator{% endblock %}
+{% block title %}mememator{% endblock %}
+{% block headline %}<span class="ani">m</span><span class="ani">e</span><span class="ani">m</span><span class="ani">e</span><span class="ani">m</span><span class="more dbl ani">a</span><span class="more ani">t</span><span class="more ani">o</span><span class="ani">r</span>{% endblock %}
 {% block scripts %}
-  <link rel=icon href="favicon.ico" />
-  <script type="text/javascript" src="scripts/memegen.js"></script>
-  <script type="text/javascript" src="scripts/index.js"></script>
-  <intent action="http://webintents.org/edit"
-    type="image/*"
-    href="index.html" />
+<script src='//webintents.org/webintents.min.js'></script>
+<script type="text/javascript" src="scripts/memegen.js"></script>
+<script type="text/javascript" src="scripts/index.js"></script>
 {% endblock %}
 {% block content %}
-<div id="app">
-  <input type="text" id="top" placeholder="Headline" />
-  <div id="container">
-    <img id="image" style="display:none;"></img>
-  </div>
-  <input type="text" id="bottom" placeholder="Footer" />
-  <input type="button" class="btn primary" id="done" value="Done Editing" />
-  <input type="button" class="btn primary" id="save" value="Save Meme" />
-  <input type="button" class="btn primary" id="share" value="Share Image" />
-  <input type="button" class="btn primary" id="sharelink" value="Share Link" />
-</div>
+					<div id="app">
+						<input type="text" id="top" placeholder="Headline, ex. This Kitten" />
+						<div id="container">
+							<h2>Choose an image to Meme:</h2>
+							<img id="image" style="display:none; max-width:600px;" />
+						</div>
+						<input type="text" id="bottom" placeholder="Footer, ex. Eats Souls." />
+						<div id="actions" class="cf">
+							<span id="done" class="btn">Done Editing</span>
+							<span id="save" class="btn">Save Meme</span>
+							<span id="share" class="btn">Share Image</span>
+							<span id="sharelink" class="btn">Share Link</span>
+						</div>
+					</div>
 {% endblock %}
+{% block footer %}Made by Google{% endblock %}

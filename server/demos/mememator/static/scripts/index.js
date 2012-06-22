@@ -15,7 +15,7 @@ function textChanged() {
     var width = image.width();
     var height = image.height();
     context.drawImage(image.get()[0], 0, 0);
-    context.font = "36px Sigmar One";
+    context.font = "36px Impact";
     context.textAlign = "center";
     context.fillStyle = "white";
     context.strokeStyle = "black";
@@ -96,11 +96,15 @@ var updateImage = function(data) {
 
     if(window.intent) {
       $('#done').show();
+      $('input').show();
+      $('h2').hide();
     }
     else {
       $('#save').show();
       $('#share').show();
       $('#sharelink').show();
+      $('input').show();
+      $('h2').hide();
     }
   });
   loadImage(img, url);
@@ -108,6 +112,13 @@ var updateImage = function(data) {
     
 $(function() {
   var idLocation = window.location.search.indexOf("id=");
+  
+  var h3 = $('h3');
+  var header = $('h1').find('span');
+  h3.on('click',function(){
+  	header.toggleClass('ani');
+  	$(this).text($(this).text() == 'Stop logoness?' ? 'Start logoness?' : 'Stop logoness?');
+  });
   
   if (window.intent || idLocation > -1)   {
     $('#done').show();

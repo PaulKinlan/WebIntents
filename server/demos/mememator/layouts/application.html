@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="/styles/bootstrap.min.css">
-  <link rel="stylesheet" href="/styles/application.css">
-  <link href='http://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
-  <script src='//webintents.org/webintents.min.js'></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
-  {% block scripts %}{% endblock %}
-  <style>
-    a { color: white; }
-    a:hover { text-decoration: none; }
-  </style>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="styles/application.css">
+	<link rel=icon href="favicon.ico" />
+	<intent action="http://webintents.org/pick" title="Take an image from your camera" type="image/*" />
 </head>
 <body>
-<header>
-<h1><a href="http://www.mememator.com">{% block headline %}{% endblock %}<span class="tagline">creatin teh memes since 1177</span></a></h1>
-</header>
-<section>
-{% block content %}{% endblock %}
-</section>
-<footer>
-</footer>
+	<div class="wrapper">
+	<table>
+			<tr>
+				<td>
+				<header>
+					<h1>
+						{% block headline %}{% endblock %}
+					</h1>
+				</header>
+				<section>
+					{% block content %}{% endblock %}
+				</section>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<footer>{% block footer %}{% endblock %}</footer>
+	<h3>Stop logoness?</h3>
 </body>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28536959-4']);
-    _gaq.push(['_trackPageview']);
+<!-- scripts -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+{% block scripts %}{% endblock %}
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-28536959-4']);
+_gaq.push(['_trackPageview']);
 
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>  
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>  
 </html>

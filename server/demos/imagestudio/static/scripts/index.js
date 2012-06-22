@@ -50,9 +50,10 @@ $(function() {
        url = webkitURL.createObjectURL(imageBlob);
      }
     
-     $("#result").attr('src', url).css({ "width": "auto", "height": "auto"});
-     $("#edit, #share, #save").removeClass("disabled")
-                              .removeAttr('disabled');
+     $("img").attr('src', url).css({ "width": "auto", "height": "auto"}).addClass('border');
+     $('h2').hide();
+     $('#step-wrap').show();
+     $("#edit, #share, #save").removeClass("disabled").removeAttr('disabled');
    };
 
    if(window.intent) {
@@ -61,6 +62,13 @@ $(function() {
 
    $('#result').click(function(e) {
      var intent = new Intent( 'http://webintents.org/pick', 'image/*');
+     startActivity.call(window.navigator, intent, function(data) {
+       loadImage(data);
+     });
+   });
+   
+   $('h2').click(function(e){
+   	var intent = new Intent( 'http://webintents.org/pick', 'image/*');
      startActivity.call(window.navigator, intent, function(data) {
        loadImage(data);
      });
@@ -83,4 +91,3 @@ $(function() {
      startActivity.call(window.navigator, intent);
    });
  });
- 
