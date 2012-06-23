@@ -2,16 +2,16 @@
 {% block title %}Inspriationmator{% endblock %}
 {% block headline %}Inspriationmator{% endblock %}
 {% block scripts %}
-<link rel=icon href="/favicon.ico" />
-<script type="text/javascript" src="/scripts/common.js"></script>
-<script type="text/javascript" src="/scripts/view.js"></script>
-<intent action="http://webintents.org/edit"
-  type="image/*"
-  href="index.html" />
-
-<intent action="http://webintents.org/pick"
-  type="image/*"
-  href="pick.html" />
+<script src="//webintents.org/webintents.min.js"></script>
+<script src="scripts/memegen.js"></script>
+<script src="scripts/pick.js"></script>
+<script type="text/javascript">
+function show_box_load() {
+	setTimeout(function(){
+		$('body, header, section').fadeIn(500);
+	}, 10);
+}
+</script>
   {% endblock %}
 {% block content %}
 <div id="container">
@@ -23,3 +23,4 @@
 <input type="button" class="btn primary" id="share" value="Share Inspriation" style="display: inline-block;" />
 <input type="button" class="btn primary" id="sharelink" value="Share Page" style="display: inline-block;" />
 {% endblock %}
+{% block footer %}Made by Google{% endblock %}

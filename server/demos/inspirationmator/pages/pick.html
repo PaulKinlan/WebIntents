@@ -5,9 +5,17 @@
 <script src="//webintents.org/webintents.min.js"></script>
 <script src="scripts/memegen.js"></script>
 <script src="scripts/pick.js"></script>
+<script type="text/javascript">
+function show_box_load() {
+	setTimeout(function(){
+		$('body, header, section').fadeIn(500);
+	}, 10);
+}
+</script>
 {% endblock %}
 {% block content %}
 <div id="images">
   <img src="lonely_paul.jpeg"/>
 </div>
 {% endblock %}
+{% block footer %}Made by Google{% endblock %}
