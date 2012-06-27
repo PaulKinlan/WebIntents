@@ -8,9 +8,9 @@ var imageID;
 var permissionKey;
 
 var draw = function(topline, bottomline) {
-  var image = $("#image");
-  var width = image.width();
-  var height = image.height();
+  var image = $("#image")[0];
+  var width = image.width;
+  var height = image.height;
   var canvasWidth = width + 100;
   var canvasHeight = height + 200; 
   canvas.width = canvasWidth;
@@ -24,7 +24,7 @@ var draw = function(topline, bottomline) {
       context.lineWidth = 2;
       context.strokeRect(46, 46, width + 8, height + 8);
     context.restore();
-    context.drawImage(image.get()[0], 50, 50);
+    context.drawImage(image, 50, 50);
     context.save();
       context.font = "62px Georgia";
       context.textAlign = "center";
@@ -123,10 +123,13 @@ $(function() {
   
   if (window.intent || idLocation > -1)   {
   	$('#actions').show();
+    $('#share').hide();
+    $('#save').hide();
+    $('#sharelink').hide();
+
     $('#done').show();
     $('#done').click(function() {
       if (canvas) {
-        var url = "http://www.inspirationmator.com/image/" + imageID + ".png"; 
         window.intent.postResult(canvas.toDataURL());
       }
     });

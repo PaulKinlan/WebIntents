@@ -14,20 +14,21 @@ function show_box_load() {
 </script>
 {% endblock %}
 {% block content %}
-							<div class="holder">
-								<div id="container">
-									<img id="image" style="display:none;"/>
-									<h2>Click to create your own<br />inspirational image.</h2>
-								</div>
-							</div>
-							<div id="words">
-								<input type="text" id="top" placeholder="Add some wisdom" tabindex="1" />
-								<input type="text" id="bottom" placeholder="Add some advice" tabindex="2" />
-							</div>
-							<div id="actions">
-								<div class="btn-h"><span id="save" class="btn">Save <span aria-hidden="true" data-icon="c" class="icon"></span></span></div>
-								<div class="btn-h"><span id="share" class="btn">Share <span aria-hidden="true" data-icon="R" class="icon"></span></span></div>
-								<div class="btn-h"><span id="sharelink" class="btn dbl">Share Page <span aria-hidden="true" data-icon="R" class="icon"></span></span></div>
-							</div>
+	<div class="holder">
+		<div id="container">
+			<img id="image" style="display:none;"/>
+			<h2>Click to create your own<br />inspirational image.</h2>
+		</div>
+	</div>
+	<div id="words">
+			<input type="text" id="top" placeholder="Add some wisdom" tabindex="1" />
+			<input type="text" id="bottom" placeholder="Add some advice" tabindex="2" />
+	</div>
+	<div id="actions">
+			<div class="btn-h"><span id="save" class="btn">Save <span aria-hidden="true" data-icon="c" class="icon"></span></span></div>
+			<div class="btn-h"><span id="share" class="btn">Share <span aria-hidden="true" data-icon="R" class="icon"></span></span></div>
+			<div class="btn-h"><span id="sharelink" class="btn dbl">Share Page <span aria-hidden="true" data-icon="R" class="icon"></span></span></div>
+			<div class="btn-h"><span id="done" class="btn dbl" style="display:none">Done<span aria-hidden="true" data-icon="R" class="icon"></span></span></div>
+	</div>
 {% endblock %}
 {% block footer %}Made by Google{% endblock %}

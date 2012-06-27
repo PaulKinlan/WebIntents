@@ -7,15 +7,19 @@
 <script type="text/javascript" src="/scripts/view.js"></script>
 {% endblock %}
 {% block content %}
-<div id="container" itemscope itemtype="http://schema.org/Thing">
-  <h1 itemprop="name">Mememator: Image {{title}}</h1>
-  <p itemprop="description">{{text_top}} - {{text_bottom}}</p>
-  <img id="image" itemprop="image" src="{{url}}"/>
+<div id="app">
+  <input type="text" id="top" placeholder="Headline, ex. This Kitten" />
+	<div id="container" itemscope itemtype="http://schema.org/Thing">
+    <h1 itemprop="name">Mememator: Image {{title}}</h1>
+    <p itemprop="description">{{text_top}} - {{text_bottom}}</p>
+    <img id="image" itemprop="image" src="{{url}}" style="display:none; max-width:600px;" />
+	</div>
+	<input type="text" id="bottom" placeholder="Footer, ex. Eats Souls." />
+	<div id="actions" class="cf">
+		<span id="save" class="btn">Save Meme</span>
+		<span id="share" class="btn">Share Image</span>
+		<span id="sharelink" class="btn">Share Link</span>
+	</div>
 </div>
-<input type="button" class="btn primary" id="save" value="Save Meme" style="display: inline-block"/>
-<input type="button" class="btn primary" id="share" value="Share Image" style="display: inline-block"/>
-<input type="button" class="btn primary" id="sharelink" value="Share Link" style="display: inline-block"/>
-<intent action="http://webintents.org/edit"
-  type="image/*"
-  href="index.html" />
 {% endblock %}
+{% block footer %}Made by Google{% endblock %}

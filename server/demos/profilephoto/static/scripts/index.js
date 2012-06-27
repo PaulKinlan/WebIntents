@@ -67,6 +67,14 @@ $(function() {
 		$(this).removeClass('non').addClass('selected');
 		actions.fadeIn(320);
 	});
+
+
+  snap.on("click", "figure.selected canvas", function() { 
+    if(window.intent) {
+      window.intent.postResult(this.toDataURL());
+      window.setTimeout(function() { window.close(); }, 1000);
+    }
+  });
 	
 	actions.on('click','#delete',function(){
 		snap.find('figure.selected').removeClass('ease-in active non').addClass('ease-out');
@@ -87,32 +95,12 @@ $(function() {
     });
   }
 
-  if (window.intent) {
-    $('#snaps canvas').on('click', function() {
-        window.intent.postResult(this.toDataURL());
-        window.setTimeout(function() { window.close(); }, 1000);
-    });
-
-    $('#container video').click(function() {
-       // Snap straight away.
-       snapPicture();
-    });
-  }
-  else {
-    /*$('#snaps canvas').on('click', function() {
-      $("#save").show();
-      $("#share").show();
-      $("#snaps canvas").removeClass("selected");
-      $(this).addClass("selected")
-    });*/
-
-    $('#container video').click(function() {
-       // Snap straight away.
-       snapPicture();
-    });
-  }
-      
-  $('#save').click(function() {
+  $('#container video').click(function() {
+     // Snap straight away.
+     snapPicture();
+  });
+ 
+    $('#save').click(function() {
     var canvas = $("#snaps figure.selected canvas")[0];
     var i = new Intent("http://webintents.org/save", "image/png", createBlobFromCanvas(canvas));
     startActivity.call(window.navigator, i);

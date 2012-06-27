@@ -5,6 +5,7 @@
     "16" : "favicon.ico",
     "128" : "128.png"
   },
+  "permissions": ["http://demos.webintents.org/"],
   "intents" : {
     "http://webintents.org/share" : [
       {

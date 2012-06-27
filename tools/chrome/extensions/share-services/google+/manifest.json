@@ -1,6 +1,6 @@
 {
   "name": "Share to Google+",
-  "version": "2012.106.120.11824",
+  "version": "2012.106.126.11912",
   "icons" : {
     "16" : "favicon.ico",
     "128" : "128.png"
@@ -10,8 +10,7 @@
       {
         "type" : ["text/uri-list"],
         "title" : "Share to Google+",
-        "href" : "/launch.html",
-        "disposition": "inline"
+        "href" : "/launch.html"
       }
     ]
   }

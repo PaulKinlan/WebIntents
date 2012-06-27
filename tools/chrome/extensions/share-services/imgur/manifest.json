@@ -1,16 +1,17 @@
 {
   "name": "Share to Imgur",
-  "version": "2012.106.106.12219",
+  "version": "2012.106.126.12322",
   "icons" : {
     "16" : "favicon.ico",
     "128" : "128.png"
   },
-  "permissions": ["http://demos.webintents.org/imgur/save"],
+  "permissions": ["http://demos.webintents.org/"],
   "intents" : {
     "http://webintents.org/share" : [
       {
         "type" : ["image/*"],
         "title" : "Share to imgur",
+        "disposition": "inline",
         "href" : "/launch.html"
       }
     ]

@@ -66,10 +66,10 @@ var updateImageData = function(id, c, textTop, textBottom) {
 
 var updateImage = function(data) {
   var url = $.isArray(data) ? data[0] : data;
-  if(data.constructor.name == "Blob" || data instanceof Blob) {
+  if(data && (data.constructor.name == "Blob" || data instanceof Blob)) {
     url = webkitURL.createObjectURL(data);
   }
-  else if(data.constructor.name == "ArrayBuffer" || data instanceof ArrayBuffer) {
+  else if(data && (data.constructor.name == "ArrayBuffer" || data instanceof ArrayBuffer)) {
     var bb = new WebKitBlobBuilder();
     bb.append(data);
     var blobData = bb.getBlob();
@@ -77,7 +77,7 @@ var updateImage = function(data) {
   }
   
   var img = $('#image');
-  img.load(function() {
+  img[0].onload = function() {
     var image = $('#image');
     canvas = $('#container canvas');
     if(canvas.length == 0) {
@@ -106,7 +106,8 @@ var updateImage = function(data) {
       $('input').show();
       $('h2').hide();
     }
-  });
+  };
+
   loadImage(img, url);
 }; 
     
