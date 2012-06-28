@@ -125,8 +125,7 @@ $(function() {
     $('#done').show();
     $('#done').click(function() {
       if (canvas) {
-        var url = "http://www.mememator.com/image/" + imageID + ".png"; 
-        window.intent.postResult(url);
+        window.intent.postResult(canvas.toDataURL());
       }
     });
     if(window.intent) {

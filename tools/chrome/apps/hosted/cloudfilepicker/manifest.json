@@ -1,9 +1,11 @@
 {
   "name": "Cloud File Picker",
-  "version": "1.0.0.6",
+  "version": "1.0.0.10",
   "icons" : {
     "128" : "128.png"
   },
+  "container" : "GOOGLE_DRIVE",
+  "api_console_project_id" : "464627085914",
   "app" : {
     "urls" : ["http://www.cloudfilepicker.com/"],
     "launch" : {
@@ -15,6 +17,11 @@
       "type" : ["image/png", "image/jpg", "image/jpeg", "image/bmp"],
       "href" : "http://www.cloudfilepicker.com/index.html",
       "title" : "Pick file from CloudFilePicker.com"
+    }], 
+    "http://webintents.org/save" : [{
+      "type" : ["image/png", "image/jpg", "image/jpeg", "image/bmp"],
+      "href" : "http://www.cloudfilepicker.com/save.html",
+      "title" : "Save file to CloudFilePicker.com"
     }]
   }
 }

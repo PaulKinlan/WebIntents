@@ -3,6 +3,7 @@ CACHE MANIFEST
 /background.png 
 /favicon.ico
 /scripts/proxy.js
+/scripts/save.js
 /css/application.css
 /css/bootstrap.min.css
 /javascripts/events.js

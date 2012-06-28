@@ -1,0 +1,29 @@
+{% extends "demos/cloudfilepicker/layouts/application.html" %}
+{% block title %}Cloud File Picker{% endblock %}
+{% block headline %}Cloud File Picker{% endblock %}
+{% block scripts %}
+  <script src="//webintents.org/webintents.js"></script>
+  <script src="/javascripts/events.js"></script>
+  <script src="/scripts/proxy.js"></script>
+  <script src="/scripts/save.js"></script>
+  <script
+    src="https://www.google.com/jsapi?key=ABQIAAAAFTbNNpUTYWRw9jdG-0kTfRS5zkozs6sQsOJ2dExE7jTK_xtuGxSV9o6iOAEZOe200o8gHTMinin9ug"></script>
+  <link rel=icon href="favicon.ico" />
+  <intent action="http://webintents.org/pick"
+          type="image/*" />
+
+  <script type="text/javascript">
+    var Intent = window.Intent || window.WebKitIntent;
+    var startActivity = window.navigator.startActivity || window.navigator.webkitStartActivity;
+    window.intent = window.intent || window.webkitIntent;
+  </script>
+  {% endblock %}
+  {% block content %}
+  <div id="contents">
+    <a href='#' id='authorize-button' onclick='handleAuthClick();'>Login</a>
+    <img id="save-img"/>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+  </div>
+
+  <a href="http://www.colourlovers.com/lover/sugar%21/loveNote" id="credits">Background by sugar!</a>
+{% endblock %}
