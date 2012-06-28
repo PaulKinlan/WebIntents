@@ -20,7 +20,10 @@
   {% endblock %}
   {% block content %}
   <div id="contents">
-    <a href='#' id='authorize-button' onclick='handleAuthClick();'>Login</a>
+    <div>
+      <a href='#' id='authorize-button' onclick='handleAuthClick();'>Login</a>
+      <h1 id="success" style="display:none;">Success! <a href="http://drive.google.com"  target="_blank">[View]</a></h1>
+    </div>
     <img id="save-img"/>
     <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
   </div>

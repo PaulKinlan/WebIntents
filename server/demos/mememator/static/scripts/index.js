@@ -82,6 +82,7 @@ var updateImage = function(data) {
     canvas = $('#container canvas');
     if(canvas.length == 0) {
       canvas = document.createElement('canvas');
+      canvas.style.width = "100%";
       $('#container').append(canvas);
     }
     else

@@ -27,13 +27,19 @@
         gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
         return false;
       }
+
+      function processResponse(data) {
+        var success = document.getElementById("success");
+        var url  = document.getElementById("url");
+        success.style.display = "block";
+      }
       
       function makeApiCall(authResult) {
         gapi.client.load('drive', 'v1', function() {
           if(window.webkitIntent) {
             var data = window.webkitIntent.data;
             if(data.constructor.name == "Blob") {
-              insertFileData(data, authResult);
+              insertFileData(data, authResult, processResponse);
             }
             else if(typeof(data) == "string" ) {
               var saveImg = document.getElementById("save-img");
@@ -42,7 +48,7 @@
                 'title': "Test Image " + (new Date()).toJSON(),
                 'mimeType': window.webkitIntent.type
               };
-              insertBase64Data(data.replace("data:image/png;base64,",""), window.webkitIntent.type, meta, authResult, function() {} );
+              insertBase64Data(data.replace("data:image/png;base64,",""), window.webkitIntent.type, meta, authResult, processResponse);
             }
           }
         });
