@@ -48,7 +48,7 @@
                 'title': "Test Image " + (new Date()).toJSON(),
                 'mimeType': window.webkitIntent.type
               };
-              insertBase64Data(data.replace("data:image/png;base64,",""), window.webkitIntent.type, meta, authResult, processResponse);
+              insertBase64Data(data.replace(/data:image\/([^;]*);base64,/,""), window.webkitIntent.type, meta, authResult, processResponse);
             }
           }
         });

@@ -14,7 +14,8 @@ function loadImage(url, callback) {
       var data = e.target.result;
       callback(data);
     };
-    fileReader.readAsDataURL(bb.getBlob()); 
+    var contentType = xhr.getResponseHeader("Content-type");
+    fileReader.readAsDataURL(bb.getBlob(contentType)); 
   };
   xhr.responseType = 'arraybuffer';
   xhr.open("GET", "proxy?url=" + encodeURIComponent(url));

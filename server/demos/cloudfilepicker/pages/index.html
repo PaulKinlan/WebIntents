@@ -20,9 +20,12 @@
     google.setOnLoadCallback(createPicker);
     google.load('picker', '1');
     
+    var clientId = '464627085914-lfj4ile380lp6nd6ikttbsgtrclq3m56.apps.googleusercontent.com';
+    
     function createPicker() {
+      var pickerBuilder = new google.picker.PickerBuilder();
+      
       if (!!window.intent) {
-        var pickerBuilder = new google.picker.PickerBuilder();
         if (window.intent.action == "http://webintents.org/pick") {
           if (window.intent.type.indexOf('image/') == 0 || window.intent.type === "*") {
             // TODO. View.setMimeTypes(string). to limit it to specifc types.
@@ -32,21 +35,25 @@
                   setType(google.picker.PhotosView.Type.UPLOADED)));
             pickerBuilder.enableFeature(google.picker.Feature.NAV_HIDDEN);
           }
-          else if(window.intent.type.indexIf('video') == 0) {
+          else if(window.intent.type.indexOf('video') == 0) {
             pickerBuilder.addViewGroup(
                 new google.picker.ViewGroup(google.picker.ViewId.WEBCAM).
                   setType(google.picker.WebCamView.Type.VIDEOS));
           }
         }
-        else if (window.intent.action == "http://webintents.org/save") {
-          if (window.intent.type.indexOf('image/') == 0) {
-            pickerBuilder.addViewGroup(
-              new google.picker.ViewGroup(google.picker.ViewId.PHOTO_UPLOAD));
-          }
-        }
-        pickerBuilder.setCallback(pickerCallback);
-        pickerBuilder.build().setVisible(true);
       }
+      else {
+        var view = new google.picker.DocsView(google.picker.ViewId.DOCS_IMAGES_AND_VIDEO);
+        view.setMode(google.picker.DocsViewMode.GRID);
+        pickerBuilder.addView(view);
+        pickerBuilder.addView(new google.picker.ImageSearchView());
+        pickerBuilder.addView(new google.picker.PhotosView().setType(google.picker.PhotosView.Type.UPLOADED));
+        pickerBuilder.addView(new google.picker.View(google.picker.ViewId.PDFS));
+      }
+
+      pickerBuilder.setAppId(clientId); 
+      pickerBuilder.setCallback(pickerCallback);
+      pickerBuilder.build().setVisible(true);
     }
 
     function returnImage (e) {
@@ -74,18 +81,13 @@
   <div id="contents">
     <h2>Welcome</h2>
     <p>
-    This Cloud File Picker app gives you access to your files held in your Google account for
-    use in your favourite applications.
+      This Cloud File Picker app gives you access to your files held in your Google account for
+      use in your favourite applications.
     </p>
     <p>
       Apps won't be able to access your information without your consent, so you are in 
       control of how applications can access your data.
     </p>
-    <p>Try some of our favourite apps to see the integration in action:</p>
-    <ul>
-      <li><a href="http://www.mememator.com/index.html">Mememator</a></li>
-      <li><a href="http://www.imagemator.com/index.html">Imagemator</a></li>
-    </ul>
   </div>
 
   <a href="http://www.colourlovers.com/lover/sugar%21/loveNote" id="credits">Background by sugar!</a>
