@@ -15,7 +15,6 @@ $(function() {
      url = $.isArray(data) ? data[0] : data; 
      if(data.constructor.name == "Blob" || data instanceof Blob) {
        imageBlob = data;
-
        url = webkitURL.createObjectURL(imageBlob);
      }
     
