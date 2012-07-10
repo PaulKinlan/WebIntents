@@ -19,7 +19,11 @@ file_types = {
   '.jpeg' : 'image/jpeg',
   '.txt' : 'text/plain',
   '.cache' : 'text/manifest'
-} 
+}
+
+status_codes = {
+  'webintents/discover': 410
+}
 
 def get_content_type(extension):
   return file_types.get(extension, "application/octet-stream")
@@ -37,6 +41,10 @@ class PageHandler(webapp2.RequestHandler):
       file = "index.html"
 
     name, extension = parse_filename(file)
+
+    if domain + '/' + file in status_codes :
+      self.error(status_codes[domain + '/' + file])
+      return
 
     content_type = file_types.get(extension, "text/html")
     # Only display known file types
