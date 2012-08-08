@@ -46,7 +46,7 @@
         var view = new google.picker.DocsView(google.picker.ViewId.DOCS_IMAGES_AND_VIDEO);
         view.setMode(google.picker.DocsViewMode.GRID);
         pickerBuilder.addView(view);
-        pickerBuilder.addView(new google.picker.ImageSearchView());
+        pickerBuilder.addView(new google.picker.ImageSearchView().setLicence(google.picker.ImageSearchView.Licence.None));
         pickerBuilder.addView(new google.picker.PhotosView().setType(google.picker.PhotosView.Type.UPLOADED));
         pickerBuilder.addView(new google.picker.View(google.picker.ViewId.PDFS));
       }
