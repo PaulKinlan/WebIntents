@@ -77,6 +77,7 @@ var updateImage = function(data) {
   }
   
   var img = $('#image');
+  var container = $("#container")[0];
   img[0].onload = function() {
     var image = $('#image');
     canvas = $('#container canvas');
@@ -90,6 +91,8 @@ var updateImage = function(data) {
 
     canvas.width = image.width();
     canvas.height = image.height();
+    container.style.minHeight = image.height() + "px";
+
     context = canvas.getContext('2d');
     context.drawImage(image.get()[0], 0, 0);
 
@@ -116,12 +119,45 @@ $(function() {
   var idLocation = window.location.search.indexOf("id=");
   
   var h3 = $('h3');
+  var container = document.getElementById('container');
   var header = $('h1').find('span');
   h3.on('click',function(){
   	header.toggleClass('ani');
   	$(this).text($(this).text() == 'Stop logoness?' ? 'Start logoness?' : 'Stop logoness?');
   });
-  
+
+  var dragenter = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+       
+  var dragover = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
+  var drop = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+      
+    var files = e.dataTransfer.files;
+    if(files.length > 0) {
+      // find the first image file
+      var file;
+      for(var f = 0; file = files[f]; f++) {
+        if(file.type.indexOf("image/") == 0) {
+          updateImage(file);
+          break;
+        }
+      }
+    }
+  };
+
+  container.addEventListener("dragenter", dragenter, false);
+  container.addEventListener("dragover", dragover, false);
+  container.addEventListener("drop", drop, false);
+
+
   if (window.intent || idLocation > -1)   {
     $('#done').show();
     $('#done').click(function() {

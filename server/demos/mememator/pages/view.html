@@ -5,16 +5,19 @@
 <link rel=icon href="/favicon.ico" />
 <script type="text/javascript" src="/scripts/memegen.js"></script>
 <script type="text/javascript" src="/scripts/view.js"></script>
+<style>
+  #container { background: inherit; background-color: yellow; min-height: inherit; }
+  #container h4 { color: white; background-color: black; padding: 3px; margin: 0; }
+  #container p { color: white; background-color: black; padding: 3px; margin:0;}
+</style>
 {% endblock %}
 {% block content %}
 <div id="app">
-  <input type="text" id="top" placeholder="Headline, ex. This Kitten" />
 	<div id="container" itemscope itemtype="http://schema.org/Thing">
-    <h1 itemprop="name">Mememator: Image {{title}}</h1>
+    <h4 itemprop="name">Image {{title}}</h4>
     <p itemprop="description">{{text_top}} - {{text_bottom}}</p>
-    <img id="image" itemprop="image" src="{{url}}" style="display:none; max-width:600px;" />
+    <img id="image" itemprop="image" src="{{url}}" style="display:block;" />
 	</div>
-	<input type="text" id="bottom" placeholder="Footer, ex. Eats Souls." />
 	<div id="actions" class="cf">
 		<span id="save" class="btn">Save Meme</span>
 		<span id="share" class="btn">Share Image</span>
