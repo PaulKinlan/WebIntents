@@ -32,8 +32,10 @@
             pickerBuilder.addViewGroup(
               new google.picker.ViewGroup(google.picker.ViewId.PHOTOS).
                 addView(new google.picker.PhotosView().
-                  setType(google.picker.PhotosView.Type.UPLOADED)));
-            pickerBuilder.enableFeature(google.picker.Feature.NAV_HIDDEN);
+                  setType(google.picker.PhotosView.Type.UPLOADED)).
+                addView(new google.picker.ImageSearchView().
+                  setLicense(google.picker.ImageSearchView.License.None))
+                );
           }
           else if(window.intent.type.indexOf('video') == 0) {
             pickerBuilder.addViewGroup(
@@ -68,7 +70,7 @@
 
     function pickerCallback(data) {
       if (data.action == google.picker.Action.PICKED) {
-        returnImage(data.docs[0].thumbnails[data.docs[0].thumbnails.length > 4 ? 4 : 3].url);
+        returnImage(data.docs[0].thumbnails[data.docs[0].thumbnails.length  - 1].url);
       }
       else if(data.action == google.picker.Action.CANCEL) {
         // Tell the calling app the user cancelled.
