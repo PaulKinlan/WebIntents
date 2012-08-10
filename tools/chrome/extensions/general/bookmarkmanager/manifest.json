@@ -12,6 +12,12 @@
        "title" : "Pick URL from Bookmarks",
        "href" : "/pick.html",
        "disposition": "inline"
+    }],
+    "http://webintents.org/save" : [{
+       "type" : ["text/uri-list"],
+       "title" : "Save URL to Bookmarks",
+       "href" : "/save.html",
+       "disposition": "inline"
     }]
   }
 }

@@ -57,10 +57,30 @@ Node.js: http://nodejs.org/
 NPM: http://npmjs.org/
     uglify-js: npm -g install uglify-js
     
-    
-    run ./make
+    ./make all
 
 This will build and minify both the server and client components.
+
+Building Tools
+--------------
+
+The tools are a collection of all the apps and extensions that are currently live and available on the web.
+
+    ./make tools
+
+Building Apps
+-------------
+
+The apps are a subset of tools, are fully formed, live web apps such as cloudfilepicker.com
+
+    ./make apps
+
+Building Extensions
+-------------------
+
+The extensions are a subset of tools and are fully formed extensions for browsers that support intents.
+
+    ./make extensions
 
 Running
 =======

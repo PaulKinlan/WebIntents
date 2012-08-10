@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.js"></script>
+    <script>
+      $("a").live('click', function(e) {
+        var intent = window.intent || window.webkitIntent;
+        intent.postResult(e.target.href);
+        return false;
+      });
+    </script>
+    <style>
+      a {
+        display: block;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Bookmarks</h2>
+  </body>
+</html>
