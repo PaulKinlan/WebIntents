@@ -7,7 +7,6 @@ release: ./src/webintents.js ./src/json2.js ./src/base64.js ./src/webintents-pre
 	cp webintents.js server/webintents/static/webintents.js
 	cp ./src/webintents-prefix.js server/webintents/static/webintents-prefix.js
 	cp webintents.js server/webintents/static/webintents.js
-	cp webintents.js tools/chrome/extensions/share/webintents.js
 
 production: server/webintents/static/cache.manifest release
 	uglifyjs webintents.js > server/webintents/static/webintents.min.js
@@ -163,7 +162,6 @@ clean:
 	rm -f server/webintents/static/webintents.min.js
 	rm -f server/webintents/static/webintents.min.gz
 	rm -f server/webintents/static/cache.manifest
-	rm -f tools/chrome/extensions/share/webintents.js
 	rm -f tools/chrome/extensions/share-services/twitter/manifest.json
 	rm -f tools/chrome/extensions/share-services/blogger/manifest.json
 	rm -f tools/chrome/extensions/share-services/linkedin/manifest.json
