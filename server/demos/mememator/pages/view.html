@@ -9,6 +9,7 @@
   #container { background: inherit; background-color: yellow; min-height: inherit; }
   #container h4 { color: white; background-color: black; padding: 3px; margin: 0; }
   #container p { color: white; background-color: black; padding: 3px; margin:0;}
+  #actions .btn { display: block; }
 </style>
 {% endblock %}
 {% block content %}
@@ -19,8 +20,6 @@
     <img id="image" itemprop="image" src="{{url}}" style="display:block;" />
 	</div>
 	<div id="actions" class="cf">
-		<span id="save" class="btn">Save Meme</span>
-		<span id="share" class="btn">Share Image</span>
 		<span id="sharelink" class="btn">Share Link</span>
 	</div>
 </div>
