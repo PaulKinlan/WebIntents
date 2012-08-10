@@ -1,28 +1,15 @@
-<!doctype html>
-<script src="webintents.js"></script>
-<intent 
-  action="http://webintents.org/share"
-  type="text/uri-list"
-  href="handlers/twitter.html"
-  title="Twitter"
-  />
 <script>
-
   function clickHandler(info, tab) {
-    console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
        info.mediaType == "audio") {
-       var i = new Intent("http://webintents.org/share", info.mediaType + "/*", info.srcUrl);
-       
+      
+       var i = new WebKitIntent({"action": "http://webintents.org/share", "type": info.mediaType + "/*", "data": info.srcUrl});
        window.navigator.startActivty(i);
-       //chrome.tabs.sendRequest(tab.id, intent);
      }
      else if(!!info.linkUrl) {
-       var i = new WebKitIntent("http://webintents.org/share", "text/uri-list", info.linkUrl);
-
+       var i = new WebKitIntent({"action": "http://webintents.org/share", "type": "text/uri-list", "data": info.linkUrl });
        window.navigator.webkitStartActivity(i, function() {}, function() {});
-       //chrome.tabs.sendRequest(tab.id, intent);
      }
   };
 

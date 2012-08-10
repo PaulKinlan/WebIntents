@@ -1,15 +1,15 @@
-<!doctype html>
-<script src="webintents.js"></script>
 <script>
-
   function clickHandler(info, tab) {
-    console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
        info.mediaType == "audio") {
-       var intent = new Intent( "http://webintents.org/edit", info.mediaType + "/*", info.srcUrl);
+       var i = new WebKitIntent({"action": "http://webintents.org/edit", "type": info.mediaType + "/*", "data": info.linkUrl });
        
-       chrome.tabs.sendRequest(tab.id, intent);
+       chrome.tabs.sendRequest(tab.id, i);
+     }
+     else if(!!info.linkUrl) {
+       var i = new WebKitIntent({"action": "http://webintents.org/edit", "type": "text/uri-list", "data": info.linkUrl });
+       window.navigator.webkitStartActivity(i, function() {}, function() {});
      }
   };
 

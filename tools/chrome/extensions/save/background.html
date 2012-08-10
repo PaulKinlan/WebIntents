@@ -1,28 +1,14 @@
-<!doctype html>
-<script src="webintents.js"></script>
 <script>
   function clickHandler(info, tab) {
-    console.log(info);
     if(info.mediaType == "image" ||
        info.mediaType == "video" ||
        info.mediaType == "audio") {
-       var intent = new Intent("http://webintents.org/save", info.mediaType + "/*", info.srcUrl);
-       try {
-         var intent = new Intent("http://webintents.org/save", "text/uri-list", info.linkUrl);
-         window.navigator.startActivity(intent);
-       }
-       catch(e) {
-         console.log(e);
-       }
+       var i = new WebKitIntent({"action": "http://webintents.org/save", "type": info.mediaType + "/*", "data": info.srcUrl});
+       window.navigator.startActivty(i);
      }
      else if(!!info.linkUrl) {
-       try {
-         var intent = new Intent("http://webintents.org/save", "text/uri-list", info.linkUrl);
-         window.navigator.startActivity(intent);
-       }
-       catch(e) {
-         console.log(e);
-       }
+       var i = new WebKitIntent({"action": "http://webintents.org/save", "type": "text/uri-list", "data": info.linkUrl });
+       window.navigator.webkitStartActivity(i, function() {}, function() {});
      }
   };
 
