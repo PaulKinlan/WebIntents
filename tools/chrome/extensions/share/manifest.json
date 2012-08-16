@@ -1,6 +1,7 @@
 {
   "name": "Share",
   "description" : "Share images, and links",
+  "manifest_version": 2,
   "permissions": [
     "contextMenus"
   ],
@@ -14,14 +15,11 @@
     "default_title": "Share this page"
   },
   "permissions" : [
-     "http://*/*", "https://*/*", "contextMenus"
-  ],
-  "content_scripts": [
-    {
-      "matches" : ["http://*/*", "https://*/*"],
-      "js" : ["webintents.js", "startActivity.js"]
-    }
+    "contextMenus"
   ],
   "version": "0.0.0.2",
-  "background_page": "background.html"
+  "minimum_chrome_version": "23.0.0.0",
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
