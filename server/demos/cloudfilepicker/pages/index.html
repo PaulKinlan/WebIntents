@@ -65,7 +65,7 @@
     function returnImage (e) {
       if(!!window.intent) {
         // Load the image via a proxy
-        loadImage(e, function(data) {
+        loadFile(e, function(data) {
           window.intent.postResult(data);             
           setTimeout(function() { window.close();}, 500);
         });

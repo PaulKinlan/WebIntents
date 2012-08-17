@@ -2,7 +2,7 @@
 
 var BlobBuilder = window.BlobBuilder || window.MozBlobBuilder || window.WebKitBlobBuilder;
 
-function loadImage(url, callback) {
+function loadFile(url, callback, asBlob) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
     // convert array buffer to blob.
@@ -15,7 +15,13 @@ function loadImage(url, callback) {
       callback(data);
     };
     var contentType = xhr.getResponseHeader("Content-type");
-    fileReader.readAsDataURL(bb.getBlob(contentType)); 
+    var blob = bb.getBlob(contentType);
+    if(asBlob) {
+      callback(blob);
+    }
+    else {
+      fileReader.readAsDataURL(blob); 
+    }
   };
   xhr.responseType = 'arraybuffer';
   xhr.open("GET", "proxy?url=" + encodeURIComponent(url));

@@ -42,13 +42,21 @@
               insertFileData(data, authResult, processResponse);
             }
             else if(typeof(data) == "string" ) {
-              var saveImg = document.getElementById("save-img");
-              saveImg.src = window.webkitIntent.data;
-              var meta = {
-                'title': "Test Image " + (new Date()).toJSON(),
-                'mimeType': window.webkitIntent.type
-              };
+              if(data.indexOf("http") == 0) {
+                // Data is at a URL so fetch it.
+                loadFile(data, function(fileData) {
+                  insertFileData(fileData, authResult, processResponse);
+                }, true);
+              }
+              else {
+                var saveImg = document.getElementById("save-img");
+                saveImg.src = window.webkitIntent.data;
+                var meta = {
+                  'title': "Test Image " + (new Date()).toJSON(),
+                  'mimeType': window.webkitIntent.type
+                };
               insertBase64Data(data.replace(/data:image\/([^;]*);base64,/,""), window.webkitIntent.type, meta, authResult, processResponse);
+              }
             }
           }
         });
@@ -95,7 +103,7 @@
           // TODO: how to set the correct values to these fields?
           var contentType = fileData.type || 'application/octet-stream';
           var metadata = {
-            'title': fileData.fileName,
+            'title': fileData.fileName || "Test Image " + (new Date()).toJSON(),
             'mimeType': contentType
           };
     
