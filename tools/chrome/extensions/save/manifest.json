@@ -16,7 +16,7 @@
   "permissions" : [
     "contextMenus"
   ],
-  "version": "0.0.0.3",
+  "version": "0.0.0.4",
   "manifest_version": 2,
   "minimum_chrome_version": "23.0.0.0",
   "background": {

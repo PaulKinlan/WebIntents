@@ -3,7 +3,7 @@ function clickHandler(info, tab) {
      info.mediaType == "video" ||
      info.mediaType == "audio") {
      var i = new WebKitIntent({"action": "http://webintents.org/save", "type": info.mediaType + "/*", "data": info.srcUrl});
-     window.navigator.webkitStartActivty(i);
+     window.navigator.webkitStartActivity(i);
    }
    else if(!!info.linkUrl) {
      var i = new WebKitIntent({"action": "http://webintents.org/save", "type": "text/uri-list", "data": info.linkUrl });
