@@ -4,7 +4,7 @@ function clickHandler(info, tab) {
      info.mediaType == "audio") {
     
      var i = new WebKitIntent({"action": "http://webintents.org/share", "type": info.mediaType + "/*", "data": info.srcUrl});
-     window.navigator.startActivty(i);
+     window.navigator.webkitStartActivity(i);
    }
    else if(!!info.linkUrl) {
      var i = new WebKitIntent({"action": "http://webintents.org/share", "type": "text/uri-list", "data": info.linkUrl });
