@@ -41,6 +41,7 @@
         bottom: 0;
         top: 0;
         margin: 2em 0;
+        padding: 5px;
         border-top: 2px white solid;
         border-left: 2px white solid;
         border-bottom: 2px white solid;
@@ -48,6 +49,19 @@
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
         -webkit-transition: all 0.2s ease-in-out;
+        width: 128px;
+        display: -webkit-flex;
+        -webkit-flex-direction: column;
+      }
+     
+      #apps #container {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 80px;
+        bottom: 0;
       }
 
       #actions {
@@ -61,6 +75,10 @@
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         -webkit-transition: all 0.2s ease-in-out;
+      }
+
+      #apps .app {
+        cursor: pointer;
       }
 
       #actions h2, #apps h2 {
@@ -188,8 +206,8 @@
              reader.onload = function(er) {
                objects.push(er.target.result);
                if(objects.length == fileCount) {
-                 var i = new Intent(e.target.dataset["action"], fileType, objects);
-                 window.navigator.startActivity(i);
+                 var i = new WebKitIntent({action: e.target.dataset["action"], type: fileType, data: objects});
+                 window.navigator.webkitStartActivity(i);
                }
 
              };
@@ -249,10 +267,10 @@
          var save  = document.getElementById("save");
 
          var pickHandler = function (e) {
-           var i = new Intent("http://webintents.org/pick", "*");
-           window.navigator.startActivity(i, function(data) {
-             var newI = new Intent(e.target.dataset["action"], "*", data);
-             window.navigator.startActivity(newI);  
+           var i = new WebKitIntent({action: "http://webintents.org/pick", type: "*"});
+           window.navigator.webkitStartActivity(i, function(data) {
+             var newI = new WebKitIntent(e.target.dataset["action"], "*", data);
+             window.navigator.webkitStartActivity(newI);  
            });
          };
 
@@ -274,8 +292,8 @@
            e.stopPropagation();
            e.preventDefault();
 
-           var i = new Intent("http://webintents.org/pick", "image/*");
-           window.navigator.startActivity(i, function(data) {
+           var i = new WebKitIntent({action:"http://webintents.org/pick", type: "image/*"});
+           window.navigator.webkitStartActivity(i, function(data) {
              localStorage['background-image'] = data; 
              document.body.style.backgroundImage = data;
            });
@@ -288,7 +306,7 @@
 
      <script>
       var getAllCallback = function(list) {
-        var apps = document.getElementById("apps");
+        var apps = document.getElementById("container");
         var counter = 0;
         for (var i in list) {
             // we don't want to do anything with extensions yet.
@@ -340,6 +358,8 @@
     </div>
     <div id="apps">
       <h2>Apps</h2>
+      <div id="container">
+      </div>
     </div>
   </body>
 </html>
