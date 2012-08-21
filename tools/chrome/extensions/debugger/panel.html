@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <script src="intent.js"></script>
+    <style>
+      table {
+        border-spacing: 0;
+      }
+
+      th {
+        background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#D9D9D9));
+        border-bottom: 1px solid #A3A3A3;
+        height: 30px;
+        font-family: Lucida Grande, sans-serif;
+        font-size: 11px;
+        font-weight: bold;    
+        border-spacing: 0;
+      }
+
+      td.key, th.key {
+        font-family: Lucida Grande, sans-serif;
+        font-size: 11px;
+        font-weight: bold;    
+        border-right: solid 1px #ccc;
+      }
+
+      td.value {
+        font-family: Lucida Grande, sans-serif;
+        font-size: 11px;
+      }
+
+      thead {
+        border-spacing: 0;
+      }
+
+      table {
+        width: 100%;
+        margin: 0;
+      }
+
+      #nodata, #intent {
+        display: none
+      }
+
+      #nodata {
+        font-family: Lucida Grande, sans-serif;
+        font-size: 18px;
+        font-weight: bold;    
+        padding: 50px;
+        color: black;
+        margin: 10px;
+        box-shadow: 0 0 5px black; 
+        background-color: #eee;
+      }
+
+      body { margin: 0; padding: 0 }
+    </style>
+  </head>
+  <body>
+    <div id="nodata">There is no intent data available.</div>
+    <table id="intent">
+      <colgroup style="width: 150px; border-right: 1px solid #ccc;"></colgroup>
+      <colgroup style=""></colgroup>
+      <thead>
+        <tr>
+          <th class="key"></th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="key">Action</td><td id="action"></td></tr>
+        <tr><td class="key">Type</td><td id="type"></td></tr>
+        <tr><td class="key">Data</td><td id="data"></td></tr>
+      <tbody>
+    </table>
+  </body>
+</html>

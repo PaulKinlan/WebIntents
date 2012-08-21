@@ -1,0 +1,12 @@
+{
+  "name": "Intents Debugger",
+  "description" : "Debugger Panel for Chrome",
+  "devtools_page": "devtools.html",
+  "icons": {
+    "16": "webintents16.png",
+    "48": "webintents48.png",
+    "128": "webintents128.png"
+  },
+  "version": "0.0.0.4",
+  "manifest_version": 2
+}
