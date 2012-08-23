@@ -5,8 +5,16 @@
       var intent = window.intent || window.webkitIntent;
       if(intent) {
         if(intent.type === "text/uri-list") {
-          var href = "https://twitter.com/intent/tweet?url=" +
-              encodeURI(intent.data);
+          var url;
+          if(intent.data instanceof String) {
+            url = intent.data;
+          }
+          else {
+            url = intent.data.url;
+          }
+
+          var href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url);
+
           window.location = href;
         }
         else if(intent.type === "text/plain") {
