@@ -1,24 +1,50 @@
 function clickHandler(info, tab) {
-  if(info.mediaType == "image" ||
-     info.mediaType == "video" ||
-     info.mediaType == "audio") {
-    
-     var i = new WebKitIntent({"action": "http://webintents.org/share", "type": info.mediaType + "/*", "data": info.srcUrl});
-     window.navigator.webkitStartActivity(i);
-   }
-   else if(!!info.linkUrl) {
-     var i = new WebKitIntent({"action": "http://webintents.org/share", "type": "text/uri-list", "data": info.linkUrl });
-     window.navigator.webkitStartActivity(i, function() {}, function() {});
-   }
+  var type = (info.mediaType) ? info.mediaType + "/*" : "text/uri-list" ;
+  var data = {
+    "via": "Chrome Share extension",
+    "url": info.linkUrl,
+  };
+
+  var i = new WebKitIntent({"action": "http://webintents.org/share", "type": type, "data": data });
+  window.navigator.webkitStartActivity(i, function() {}, function() {});
 };
 
 chrome.browserAction.onClicked.addListener(function(tab) {
   clickHandler({linkUrl: tab.url}, tab);
 });
 
+
 chrome.contextMenus.create({
-  "title" : "Share",
+  "title" : "Share Link",
   "type" : "normal",
-  "contexts" : ["link", "image", "page", "video", "audio"],
+  "contexts" : ["link"],
+  "onclick" : clickHandler 
+}); 
+
+chrome.contextMenus.create({
+  "title" : "Share Image",
+  "type" : "normal",
+  "contexts" : ["image"],
+  "onclick" : clickHandler 
+}); 
+
+chrome.contextMenus.create({
+  "title" : "Share Page",
+  "type" : "normal",
+  "contexts" : ["page"],
+  "onclick" : clickHandler 
+}); 
+
+chrome.contextMenus.create({
+  "title" : "Share Video",
+  "type" : "normal",
+  "contexts" : ["video"],
+  "onclick" : clickHandler 
+}); 
+
+chrome.contextMenus.create({
+  "title" : "Share Audio",
+  "type" : "normal",
+  "contexts" : ["audio"],
   "onclick" : clickHandler 
 }); 
