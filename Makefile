@@ -36,11 +36,16 @@ tools/chrome/apps/hosted/picksomeipsum/manifest.json: tools/chrome/apps/hosted/p
 tools/chrome/apps/hosted/picksomeipsum.crx: tools/chrome/apps/hosted/picksomeipsum/manifest.json tools/chrome/apps/hosted/picksomeipsum/128.png
 	./packcrx.sh tools/chrome/apps/hosted/picksomeipsum tools/chrome/key.pem
 
-extensions: tools/chrome/extensions/share-services/imgur.crx tools/chrome/extensions/share-services/google+.crx tools/chrome/extensions/share-services/twitter.crx tools/chrome/extensions/share-services/blogger.crx tools/chrome/extensions/share-services/tumblr.crx tools/chrome/extensions/share-services/digg.crx tools/chrome/extensions/share-services/linkedin.crx tools/chrome/extensions/share-services/delicious.crx tools/chrome/extensions/share-services/reddit.crx tools/chrome/extensions/share-services/gmail.crx tools/chrome/extensions/share-services/hackernews.crx tools/chrome/extensions/shorten-services/bit.ly.crx  tools/chrome/extensions/shorten-services/goo.gl.crx tools/chrome/extensions/save-services/box.crx tools/chrome/extensions/save-services/readitlater.crx tools/chrome/extensions/save-services/instapaper.crx tools/chrome/extensions/pick-services/pickhtml.crx tools/chrome/extensions/pick-services/pickbookmark.crx tools/chrome/extensions/pick-services/pickscreenshot.crx
-	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
+extensions: tools/chrome/extensions/share.crx tools/chrome/extensions/share-services/imgur.crx tools/chrome/extensions/share-services/google+.crx tools/chrome/extensions/share-services/twitter.crx tools/chrome/extensions/share-services/blogger.crx tools/chrome/extensions/share-services/tumblr.crx tools/chrome/extensions/share-services/digg.crx tools/chrome/extensions/share-services/linkedin.crx tools/chrome/extensions/share-services/delicious.crx tools/chrome/extensions/share-services/reddit.crx tools/chrome/extensions/share-services/gmail.crx tools/chrome/extensions/share-services/hackernews.crx tools/chrome/extensions/shorten-services/bit.ly.crx  tools/chrome/extensions/shorten-services/goo.gl.crx tools/chrome/extensions/save-services/box.crx tools/chrome/extensions/save-services/readitlater.crx tools/chrome/extensions/save-services/instapaper.crx tools/chrome/extensions/pick-services/pickhtml.crx tools/chrome/extensions/pick-services/pickbookmark.crx tools/chrome/extensions/pick-services/pickscreenshot.crx
 	./packcrx.sh tools/chrome/extensions/shorten tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/desktop tools/chrome/key.pem
 	./packcrx.sh tools/chrome/extensions/edit tools/chrome/key.pem
+
+tools/chrome/extensions/share/manifest.json: tools/chrome/extensions/share-manifest.json
+	cat ./tools/chrome/extensions/share-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share/manifest.json 
+
+tools/chrome/extensions/share.crx: tools/chrome/extensions/share/manifest.json tools/chrome/extensions/share/background.js
+	./packcrx.sh tools/chrome/extensions/share tools/chrome/key.pem
 
 tools/chrome/extensions/share-services/imgur/manifest.json: tools/chrome/extensions/share-services/imgur-manifest.json
 	cat ./tools/chrome/extensions/share-services/imgur-manifest.json | sed 's|"version":.*|"version": "$(NOW)",|' > ./tools/chrome/extensions/share-services/imgur/manifest.json 

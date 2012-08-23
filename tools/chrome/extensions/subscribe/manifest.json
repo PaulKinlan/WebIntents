@@ -1,0 +1,25 @@
+{
+  "name": "Save",
+  "description" : "Saves images, and links",
+  "permissions": [
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "save16.png",
+    "48": "save48.png",
+    "128": "save128.png"
+  },
+  "browser_action": {
+    "default_icon": "save16.png",
+    "default_title": "Save this page"
+  },
+  "permissions" : [
+    "contextMenus"
+  ],
+  "version": "0.0.0.4",
+  "manifest_version": 2,
+  "minimum_chrome_version": "23.0.0.0",
+  "background": {
+    "scripts": ["background.js"]
+  }
+}
