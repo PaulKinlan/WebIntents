@@ -52,6 +52,16 @@
         background-color: #eee;
       }
 
+      #image, #audio, #video {
+        display: none;
+        width: 256px;
+      }
+
+
+      #data.image, #data.audio, #data.video {
+        display: block;
+      }
+
       body { margin: 0; padding: 0 }
     </style>
   </head>
@@ -69,7 +79,15 @@
       <tbody>
         <tr><td class="key">Action</td><td id="action"></td></tr>
         <tr><td class="key">Type</td><td id="type"></td></tr>
-        <tr><td class="key">Data</td><td id="data"></td></tr>
+        <tr>
+          <td class="key">Data</td>
+          <td id="data">
+            <span id="txt"></span>
+            <img id="image"/>
+            <video id="video"></video>
+            <audio id="audio"></audio>
+          </td>
+        </tr>
       <tbody>
     </table>
   </body>
