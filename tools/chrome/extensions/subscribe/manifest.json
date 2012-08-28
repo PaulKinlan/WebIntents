@@ -7,7 +7,7 @@
   "icons": {
     "16": "subscribe16.png",
     "48": "subscribe48.png",
-    "128": "subscrib128.png"
+    "128": "subscribe128.png"
   },
   "browser_action": {
     "default_icon": "subscribe16.png",
