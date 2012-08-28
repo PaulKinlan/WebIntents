@@ -1,21 +1,18 @@
 {
-  "name": "Save",
-  "description" : "Saves images, and links",
+  "name": "Subscribe",
+  "description" : "Subscribes to content on the web",
   "permissions": [
     "contextMenus"
   ],
   "icons": {
-    "16": "save16.png",
-    "48": "save48.png",
-    "128": "save128.png"
+    "16": "subscribe16.png",
+    "48": "subscribe48.png",
+    "128": "subscrib128.png"
   },
   "browser_action": {
-    "default_icon": "save16.png",
-    "default_title": "Save this page"
+    "default_icon": "subscribe16.png",
+    "default_title": "Subscribe this page"
   },
-  "permissions" : [
-    "contextMenus"
-  ],
   "version": "0.0.0.4",
   "manifest_version": 2,
   "minimum_chrome_version": "23.0.0.0",
