@@ -1,13 +1,14 @@
 {
   "name": "Share Link to Twitter™",
   "version": "2012.106.126.11912",
+  "manifest_version": 2,
   "icons" : {
     "16": "favicon.ico",
     "128" : "128.png"
   },
   "intents": {
     "http://webintents.org/share" : [{
-      "type" : ["text/uri-list", "text/plain"],
+      "type" : ["text/uri-list", "text/plain", "text/html"],
       "href" : "/twitter_inline.html",
       "title" : "Share link to Twitter"
     }]

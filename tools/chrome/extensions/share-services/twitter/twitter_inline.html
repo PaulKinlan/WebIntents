@@ -4,24 +4,17 @@
     <script>
       var intent = window.intent || window.webkitIntent;
       if(intent) {
-        if(intent.type === "text/uri-list") {
-          var url;
-          if(intent.data instanceof String) {
-            url = intent.data;
-          }
-          else {
-            url = intent.data.url;
-          }
-
-          var href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url);
-
-          window.location = href;
+        var url;
+        if(intent.data instanceof String) {
+          url = intent.data;
         }
-        else if(intent.type === "text/plain") {
-          var href = "https://twitter.com/intent/tweet?text=" +
-              encodeURIComponent(intent.data);
-          window.location = href;
+        else {
+          url = intent.data.url;
         }
+
+        var href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url);
+
+        window.location = href;
       }
     </script>
   </head>

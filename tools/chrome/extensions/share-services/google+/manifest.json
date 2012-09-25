@@ -1,5 +1,6 @@
 {
   "name": "Share to Google+",
+  "manifest_version": 2,
   "version": "2012.106.126.11912",
   "icons" : {
     "16" : "favicon.ico",
@@ -8,7 +9,7 @@
   "intents" : {
     "http://webintents.org/share" : [
       {
-        "type" : ["text/uri-list"],
+        "type" : ["text/*"],
         "title" : "Share to Google+",
         "href" : "/launch.html",
         "disposition": "inline"

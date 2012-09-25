@@ -1,6 +1,7 @@
 {
   "name": "Share Link to Twitter™",
   "version": "1.0.0.3",
+  "manifest_version": 2,
   "icons" : {
     "16": "favicon.ico",
     "128" : "128.png"
