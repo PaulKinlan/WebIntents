@@ -108,7 +108,6 @@ var updateImage = function(data) {
     else {
       $('#save').show();
       $('#share').show();
-      $('#sharelink').show();
       $('input').show();
       $('h2').hide();
     }
@@ -186,7 +185,6 @@ $(function() {
     $('#container').click(function() {
        $('#save').hide();
        $('#share').hide();
-       $('#sharelink').hide();
        $('#done').hide();
 
        var i = new Intent("http://webintents.org/pick", "image/*");
@@ -218,12 +216,6 @@ $(function() {
 
     var i = new Intent(params);
 
-    startActivity.call(window.navigator, i);
-  });
- 
-  $('#sharelink').click(function() {
-    var url = "http://www.mememator.com/image/" + imageID + ".html";
-    var i = new Intent("http://webintents.org/share", "text/uri-list", url);
     startActivity.call(window.navigator, i);
   });
 
