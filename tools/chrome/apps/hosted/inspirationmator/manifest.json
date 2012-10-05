@@ -1,6 +1,6 @@
 {
   "name": "Inspirationmator",
-  "version": "1.0.0.5",
+  "version": "1.0.0.6",
   "icons" : {
     "128" : "128.png"
   },
@@ -14,7 +14,7 @@
     "http://webintents.org/edit" : [{
       "type" : ["image/jpeg", "image/png", "image/jpg", "image/bmp"],
       "href" : "http://www.inspirationmator.com/",
-      "title" : "Edit file in inspirationmator.com"
+      "title" : "Inspirationmator"
     }]
   }
 }
