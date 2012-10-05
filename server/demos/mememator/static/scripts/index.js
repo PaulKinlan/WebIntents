@@ -206,7 +206,18 @@ $(function() {
   $('#share').click(function() {
     var canvas = $('#container canvas')[0];
     var data = createBlobFromCanvas(canvas); 
-    var i = new Intent("http://webintents.org/share", "image/png", data);
+    var url = "http://www.mememator.com/image/" + imageID + ".png"
+    var params = {
+      "action": "http://webintents.org/share",
+      "type": type,
+      "data": {
+        "url": url,
+        "blob": data
+      }
+    };
+
+    var i = new Intent(params);
+
     startActivity.call(window.navigator, i);
   });
  
