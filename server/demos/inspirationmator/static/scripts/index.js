@@ -111,7 +111,6 @@ var updateImage = function(data) {
       $('#done').hide();
       $('#save').show();
       $('#share').show();
-      $('#sharelink').show();
       $('#actions').show();
     }
   });
@@ -125,7 +124,6 @@ $(function() {
   	$('#actions').show();
     $('#share').hide();
     $('#save').hide();
-    $('#sharelink').hide();
 
     $('#done').show();
     $('#done').click(function() {
@@ -149,7 +147,6 @@ $(function() {
     $('#container').click(function() {
        $('#save').hide();
        $('#share').hide();
-       $('#sharelink').hide();
        $('#done').hide();
        $('#actions').hide();
 
@@ -168,13 +165,16 @@ $(function() {
       
   $('#share').click(function() {
     var url = "http://www.inspirationmator.com/image/" + imageID + ".png"; 
-    var i = new Intent("http://webintents.org/share", "image/*", url);
-    startActivity.call(window.navigator, i);
-  });
+    var params = {
+      "action": "http://webintents.org/share",
+      "type": "image/png",
+      "data": {
+        "url": url,
+        "blob": data
+      }
+    };
 
-  $('#sharelink').click(function() {
-    var url = "http://www.inspirationmator.com/image/" + imageID + ".html"; 
-    var i = new Intent("http://webintents.org/share", "text/uri-list", url);
+    var i = new Intent(params);
     startActivity.call(window.navigator, i);
   });
 
