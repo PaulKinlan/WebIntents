@@ -5,6 +5,7 @@ $(function() {
    
    var imageBlob;
    var url;
+   var type = "image/*";
 
    var createBlobFromCanvas = function(c) {
      var data = c.toDataURL('image/png');
@@ -25,6 +26,7 @@ $(function() {
    };
 
    if(window.intent) {
+     type = window.intent.type;
      loadImage(window.intent.data);
    }
 
@@ -55,7 +57,16 @@ $(function() {
    });
 
    $('#share').click(function() {
-     var intent = new Intent( 'http://webintents.org/share', 'image/*', imageBlob || url);
+     var params = {
+       "action": "http://webintents.org/share",
+       "type": type,
+       "data": {
+         "url": url,
+         "blob": imageBlob
+       }
+     };
+
+     var intent = new Intent(params);
      startActivity.call(window.navigator, intent);
    });
  });
