@@ -7,7 +7,9 @@ var canvas;
 var imageID;
 var permissionKey;
 
-function textChanged() {
+function redrawImage(callback) {
+  var callback = callback || function() {};
+  
   if (context) {
     topText = $('#top').val();
     bottomText = $('#bottom').val();
@@ -27,7 +29,7 @@ function textChanged() {
     context.strokeText(bottomText, width * 0.5, height * 0.95, width * 0.9);
 
     if(imageID) {
-      updateImageData(imageID, canvas, topText, bottomText);
+      updateImageData(imageID, canvas, topText, bottomText, callback);
       // set a timeout to check for when an image becomes available.
     }
   }
@@ -53,14 +55,14 @@ var createBlobFromCanvas = function(c) {
   return dataURLToBlob(data);
 };
 
-var updateImageData = function(id, c, textTop, textBottom) {
+var updateImageData = function(id, c, textTop, textBottom, callback) {
+  var callback = callback || function() {};
   var data = c.toDataURL('image/png');
   $.ajax({
     type: 'PUT', 
     url: '/image/' + id,
     data: { image: data, permissionKey: permissionKey, textTop: textTop, textBottom: textBottom },
-    success: function(data) {
-    } 
+    success: callback 
   });
 };
 
@@ -162,7 +164,10 @@ $(function() {
     $('#done').show();
     $('#done').click(function() {
       if (canvas) {
-        window.intent.postResult(canvas.toDataURL());
+        //always save the image prior to sending back.
+        redrawImage(function() {
+          window.intent.postResult(canvas.toDataURL());
+        });
       }
     });
     if(window.intent) {
@@ -211,8 +216,8 @@ $(function() {
     startActivity.call(window.navigator, i);
   });
 
-  $('#top').change(textChanged);
-  $('#bottom').change(textChanged);
+  $('#top').change(function() { redrawImage(); });
+  $('#bottom').change(function() { redrawImage(); });
 });
 
 // taken from filer.js by Eric Bidelman
